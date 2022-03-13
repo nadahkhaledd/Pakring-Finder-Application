@@ -20,9 +20,6 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'parking locator',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
         home: start(),
       ),
     );
@@ -37,8 +34,8 @@ class start extends StatelessWidget {
       navigateAfterSeconds: new search(),
       image: new Image.asset('assets/images/car.png'),
       photoSize: 70.0,
-      loaderColor: Colors.red,
-      backgroundColor: Colors.white12,
+      loaderColor: Colors.grey,
+      backgroundColor: Colors.white24,
     );
   }
 }

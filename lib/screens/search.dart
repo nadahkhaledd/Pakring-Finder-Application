@@ -29,7 +29,7 @@ class _searchState extends State<search> {
                   child: GoogleMap(
                     initialCameraPosition: (currentLocation != null) ? (CameraPosition(target:
                     LatLng(currentLocation.latitude, currentLocation.longitude), zoom: 20.0))
-                    : (CameraPosition(target: LatLng(30.0313, 31.2107), zoom: 15.0)),
+                    : (CameraPosition(target: LatLng(30.0313, 31.2107), zoom: 18.0)),
 
                     zoomGesturesEnabled: true,
                     zoomControlsEnabled: true,
