@@ -4,6 +4,7 @@ import 'package:park_locator/screens/search.dart';
 import 'package:park_locator/services/geoLocator.dart';
 import 'package:provider/provider.dart';
 
+
 void main() {
   runApp(MyApp());
 }
@@ -30,10 +31,10 @@ class start extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SplashScreen(
-      seconds: 6,
+      seconds: 8,
       navigateAfterSeconds: new search(),
       image: new Image.asset('assets/images/car.png'),
-      photoSize: 70.0,
+      photoSize: 80.0,
       loaderColor: Colors.grey,
       backgroundColor: Colors.white24,
     );

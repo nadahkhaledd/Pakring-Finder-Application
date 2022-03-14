@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:park_locator/widgets/GoogleSearch.dart';
 import 'package:park_locator/widgets/searchBar.dart';
+import 'package:search_map_location/search_map_location.dart';
 import 'package:provider/provider.dart';
 
 
@@ -42,7 +44,7 @@ class _searchState extends State<search> {
                 ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: searchBar(),
+                    child: GoogleSearch(),
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
