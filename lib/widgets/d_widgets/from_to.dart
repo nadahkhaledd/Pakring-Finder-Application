@@ -4,24 +4,22 @@ class from_to extends StatelessWidget
 {
   @override
   Widget build(BuildContext context) {
-    final isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
-
     return Container(
       color: Colors.white,
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.only(top:45.0,right: 0.0),
-            width: 80,
+            width: 70,
             child: Column(
               children: [
                 Container(
 
-                  child:Icon(Icons.ac_unit),
+                  child:Icon(Icons.my_location,color:Colors.blue),
                 ),
                  Container(
                     padding: const EdgeInsets.only(top:20.0,right: 0.0),
-                    child:Icon(Icons.icecream_outlined),
+                    child:Icon(Icons.location_on,color:Colors.blue),
                   ),
 
               ],
@@ -38,8 +36,7 @@ class from_to extends StatelessWidget
                   child: TextField(
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Enter Name Here',
-                      hintText: 'Enter Name Here',
+                      hintText: 'Your Location',
                     ),
                     autofocus: false,
                   ),
@@ -53,8 +50,7 @@ class from_to extends StatelessWidget
                   child: TextField(
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Enter Name Here',
-                      hintText: 'Enter Name Here',
+                      hintText: 'Park Location',
                     ),
                     autofocus: false,
                   ),

@@ -4,8 +4,9 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/services/directions.dart';
 import 'package:park_locator/services/directionsModel.dart';
-import 'package:park_locator/widgets/from_to.dart';
+import 'package:park_locator/widgets/d_widgets/from_to.dart';
 import 'package:park_locator/widgets/searchBar.dart';
+import 'package:park_locator/widgets/d_widgets/time.dart';
 import 'package:provider/provider.dart';
 
 
@@ -41,18 +42,15 @@ class _searchState extends State<direction_screen> {
     final currentLocation = Provider.of<Position>(context);
     return Scaffold(
       body: Column(
-        children: [
-          Expanded(
-            child: Stack(
               children: [
                 Container(
-                  height: MediaQuery.of(context).size.height*0.3,
+                  height: MediaQuery.of(context).size.height*0.22,
                   width: MediaQuery.of(context).size.width,
                   child: from_to(),
                 ),
                 Container(
-                  padding: const EdgeInsets.only(left: 0.0,top:140,right: 0.0),
-                  height: MediaQuery.of(context).size.height*0.8,
+                  //padding: const EdgeInsets.only(left: 0.0,top:140,right: 0.0),
+                  height: MediaQuery.of(context).size.height*0.6,
                   width: MediaQuery.of(context).size.width,
                   child: GoogleMap(
                     initialCameraPosition: (currentLocation != null) ? (CameraPosition(target:
@@ -64,7 +62,7 @@ class _searchState extends State<direction_screen> {
                     rotateGesturesEnabled: true,
                     myLocationButtonEnabled: true,
                     myLocationEnabled: true,
-                    padding: EdgeInsets.only(top: 270.0,),
+                    padding: EdgeInsets.only(top: 200.0,),
 
                     markers:{ _destination},
 
@@ -83,12 +81,14 @@ class _searchState extends State<direction_screen> {
 
                   ),
                 ),
+                Container(
+                  //padding: const EdgeInsets.only(left: 0.0,top:140,right: 0.0),
+                  height: MediaQuery.of(context).size.height*0.18,
+                  width: MediaQuery.of(context).size.width,
+                  child: time()),
 
               ],
             ),
-          )
-        ],
-      ),
     );
 
   }
