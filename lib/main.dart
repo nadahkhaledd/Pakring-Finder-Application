@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:park_locator/screens/direction_screen.dart';
 import 'package:park_locator/screens/search.dart';
 import 'package:park_locator/services/geoLocator.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: search(),
+        home: direction_screen(),
       ),
     );
   }
