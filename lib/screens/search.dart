@@ -38,7 +38,7 @@ class _searchState extends State<search> {
                     rotateGesturesEnabled: true,
                     myLocationButtonEnabled: true,
                     myLocationEnabled: true,
-                    padding: EdgeInsets.only(top: 480.0,),
+                    padding: EdgeInsets.only(top: 470.0,),
 
                   ),
                 ),

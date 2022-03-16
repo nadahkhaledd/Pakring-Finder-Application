@@ -6,12 +6,13 @@ import 'package:search_map_location/utils/google_search/place.dart';
 
 class GoogleSearch extends StatelessWidget
 {
+  var coordinates;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SearchLocation(
-        apiKey: 'YOUR_API_KEY',
+        apiKey: 'AIzaSyCzbqSGIBhYBESRpmRClVzksek58sJjcjo',
         // The language of the autocompletion
         language: 'en',
         placeholder: 'Search location',
@@ -24,6 +25,7 @@ class GoogleSearch extends StatelessWidget
           // Will animate the GoogleMap camera, taking us to the selected position with an appropriate zoom
           GoogleMapController mapController;
           mapController.animateCamera(CameraUpdate.newLatLng(geolocation.coordinates));
+          coordinates = geolocation.coordinates;
           //controller.animateCamera(CameraUpdate.newLatLngBounds(, 0));
         },
       ),
