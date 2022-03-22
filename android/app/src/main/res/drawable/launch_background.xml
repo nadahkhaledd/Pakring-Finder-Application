@@ -4,9 +4,10 @@
     <item android:drawable="@android:color/white" />
 
     <!-- You can insert your own image assets here -->
-    <!-- <item>
+    <item>
         <bitmap
-            android:gravity="center"
-            android:src="@mipmap/launch_image" />
-    </item> -->
+                android:gravity="center"
+                android:src="@drawable/car" />
+        <!-- bg is asset image for splash screen -->
+    </item>
 </layer-list>

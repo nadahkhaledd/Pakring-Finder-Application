@@ -25,6 +25,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  splashscreen:
   google_maps_flutter: ^0.5.25
   geolocator: ^5.3.0
   provider: ^4.0.4
@@ -34,6 +35,8 @@ dependencies:
   dio: ^4.0.0
   flutter_polyline_points: ^1.0.0
   material_floating_search_bar: ^0.3.6
+  search_map_location: ^0.0.5
+
 
 
 
@@ -58,8 +61,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
