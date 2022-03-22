@@ -17,22 +17,22 @@ class search extends StatelessWidget{
             child: Stack(
               children: [
                 Container(
-                height: MediaQuery.of(context).size.height*2/3,
-                width: MediaQuery.of(context).size.width,
-                child: GoogleMap(
-                  initialCameraPosition: (currentLocation != null) ? (CameraPosition(target:
-                  LatLng(currentLocation.latitude, currentLocation.longitude), zoom: 20.0))
-                  : (CameraPosition(target: LatLng(30.0313, 31.2107), zoom: 9.0)),
+                  height: MediaQuery.of(context).size.height*2/3,
+                  width: MediaQuery.of(context).size.width,
+                  child: GoogleMap(
+                    initialCameraPosition: (currentLocation != null) ? (CameraPosition(target:
+                    LatLng(currentLocation.latitude, currentLocation.longitude), zoom: 20.0))
+                        : (CameraPosition(target: LatLng(30.0313, 31.2107), zoom: 9.0)),
 
-                  zoomGesturesEnabled: true,
-                  zoomControlsEnabled: true,
-                  rotateGesturesEnabled: true,
-                  myLocationButtonEnabled: true,
-                  myLocationEnabled: true,
-                  padding: EdgeInsets.only(top: 270.0,),
+                    zoomGesturesEnabled: true,
+                    zoomControlsEnabled: true,
+                    rotateGesturesEnabled: true,
+                    myLocationButtonEnabled: true,
+                    myLocationEnabled: true,
+                    padding: EdgeInsets.only(top: 270.0,),
 
+                  ),
                 ),
-              ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: searchBar(),
