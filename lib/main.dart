@@ -34,12 +34,14 @@ class start extends StatelessWidget {
     return SplashScreen(
       seconds: 8,
       navigateAfterSeconds: new search(),
-      image: new Image.asset('assets/images/car.png'),
-      photoSize: 80.0,
-      loaderColor: Colors.grey,
-      backgroundColor: Colors.white24,
+      image: new Image.asset('assets/images/logo.PNG'),
+      photoSize: 100.0,
+      loaderColor: Colors.red,
+      backgroundColor: Colors.white,
     );
   }
 }
+
+
 
 
