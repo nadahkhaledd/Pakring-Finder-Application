@@ -10,9 +10,7 @@ Set<Marker> addMarkers( List<LocationDetails> loc )
       markerId: MarkerId(loc[i].name),
       position: LatLng(loc[i].location.lat, loc[i].location.lng),
       icon: BitmapDescriptor.defaultMarker,
-
-
-      //Icon for Marker
+//Icon for Marker
     ));
   }
   return markers;

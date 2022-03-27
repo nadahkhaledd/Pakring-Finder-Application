@@ -3,9 +3,11 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
-import '../Model/LocationDetails.dart';
-import '../Shared/Components.dart';
-import '../Shared/Constants.dart';
+import '../../Model/LocationDetails.dart';
+import '../../Shared/Components.dart';
+import '../../Shared/Constants.dart';
+import '../direction_screen.dart';
+
 
 class MarkedPlaces extends StatelessWidget {
   @override
@@ -95,7 +97,8 @@ class MarkedPlaces extends StatelessWidget {
                                 subtitle: Text(locs[index].capacity+" Spots"),
                                 trailing: IconButton(
                                   icon: Icon(Icons.directions,color: Colors.blue,size: 35,),
-                                  onPressed: () {},
+                                  onPressed: (){navigateTo(context, direction_screen());},
+
 
                                 ),
                               )),

@@ -2,10 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:park_locator/Shared/Components.dart';
 import 'package:park_locator/widgets/GoogleSearch.dart';
 import 'package:park_locator/widgets/searchBar.dart';
 import 'package:search_map_location/search_map_location.dart';
 import 'package:provider/provider.dart';
+
+import 'marked/MarkedPlaces.dart';
 
 
 class search extends StatefulWidget{
@@ -54,10 +57,7 @@ class _searchState extends State<search> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: FloatingActionButton.extended(
-                            onPressed: () {
-                              setState(() {
-                              });
-                            },
+                            onPressed: (){navigateTo(context, MarkedPlaces());},
                             isExtended: true,
                             label: Text("    Find    ", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                             backgroundColor: Colors.red,
