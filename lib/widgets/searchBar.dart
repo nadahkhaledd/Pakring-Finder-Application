@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+import 'package:search_map_location/search_map_location.dart';
+
 class searchBar extends StatelessWidget
 {
   @override
@@ -23,9 +25,9 @@ class searchBar extends StatelessWidget
       },
       actions: [
         FloatingSearchBarAction(
-          showIfOpened: false,
-          child: CircularButton(icon: Icon(Icons.place),
-            onPressed: null,)
+            showIfOpened: false,
+            child: CircularButton(icon: Icon(Icons.place),
+              onPressed: null,)
         ),
         FloatingSearchBarAction.searchToClear(
           showIfClosed: false,
