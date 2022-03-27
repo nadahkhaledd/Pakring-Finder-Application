@@ -32,7 +32,7 @@ class start extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SplashScreen(
-      seconds: 8,
+      seconds: 5,
       navigateAfterSeconds: new search(),
       image: new Image.asset('assets/images/logo.PNG'),
       photoSize: 100.0,

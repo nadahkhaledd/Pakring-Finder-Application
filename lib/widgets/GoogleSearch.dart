@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:search_map_location/search_map_location.dart';
 import 'package:search_map_location/utils/google_search/place.dart';
 
 
-class GoogleSearch extends StatelessWidget
+class GoogleSearch extends StatefulWidget
 {
   var coordinates;
+  @override
+  State<GoogleSearch> createState() => _GoogleSearchState();
+}
+
+class _GoogleSearchState extends State<GoogleSearch> {
+
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,14 +31,12 @@ class GoogleSearch extends StatelessWidget
         country: 'EG',
         onSelected: (Place place) async {
           final geolocation = await place.geolocation;
-          // Will animate the GoogleMap camera, taking us to the selected position with an appropriate zoom
-          GoogleMapController mapController;
-          mapController.animateCamera(CameraUpdate.newLatLng(geolocation.coordinates));
-          coordinates = geolocation.coordinates;
-          //controller.animateCamera(CameraUpdate.newLatLngBounds(, 0));
+          setState(() {
+            widget.coordinates = LatLng(geolocation?.coordinates?.latitude,geolocation?.coordinates?.longitude);
+
+          });
         },
       ),
     );
   }
-
 }

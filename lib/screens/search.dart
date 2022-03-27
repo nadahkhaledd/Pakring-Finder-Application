@@ -17,9 +17,13 @@ class search extends StatefulWidget{
 
 class _searchState extends State<search> {
 
+
   @override
   Widget build(BuildContext context) {
     final currentLocation = Provider.of<Position>(context);
+    var location = currentLocation;
+
+
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -32,7 +36,7 @@ class _searchState extends State<search> {
                   width: MediaQuery.of(context).size.width,
                   child: GoogleMap(
                     initialCameraPosition: (currentLocation != null) ? (CameraPosition(target:
-                    LatLng(currentLocation.latitude, currentLocation.longitude), zoom: 20.0))
+                    LatLng(location.latitude, location.longitude), zoom: 20.0))
                     : (CameraPosition(target: LatLng(30.0313, 31.2107), zoom: 18.0)),
 
                     zoomGesturesEnabled: true,
