@@ -12,7 +12,7 @@ class GoogleSearch extends StatelessWidget
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SearchLocation(
-        apiKey: 'AIzaSyCzbqSGIBhYBESRpmRClVzksek58sJjcjo',
+        apiKey: 'AIzaSyANNie-WxuIW_ibDpFjNPO5fICFWFfEk3w',
         // The language of the autocompletion
         language: 'en',
         placeholder: 'Search location',

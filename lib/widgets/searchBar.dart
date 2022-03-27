@@ -25,9 +25,9 @@ class searchBar extends StatelessWidget
       },
       actions: [
         FloatingSearchBarAction(
-          showIfOpened: false,
-          child: CircularButton(icon: Icon(Icons.place),
-            onPressed: null,)
+            showIfOpened: false,
+            child: CircularButton(icon: Icon(Icons.place),
+              onPressed: null,)
         ),
         FloatingSearchBarAction.searchToClear(
           showIfClosed: false,

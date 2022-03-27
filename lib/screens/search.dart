@@ -4,7 +4,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/Shared/Components.dart';
 import 'package:park_locator/widgets/GoogleSearch.dart';
-import 'package:park_locator/widgets/searchBar.dart';
 import 'package:search_map_location/search_map_location.dart';
 import 'package:provider/provider.dart';
 
