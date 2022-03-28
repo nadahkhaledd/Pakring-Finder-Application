@@ -73,22 +73,7 @@ class _searchState extends State<search> {
                 ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SearchLocation(
-                        apiKey: 'AIzaSyANNie-WxuIW_ibDpFjNPO5fICFWFfEk3w',
-                        language: 'en',
-                        placeholder: 'Search location',
-                        iconColor: Colors.red,
-                        darkMode: true,
-                        country: 'EG',
-                        onSelected: (Place place ) async {
-                          final geolocation = await place.geolocation;
-                          var location = LatLng(geolocation?.coordinates?.latitude,geolocation?.coordinates?.longitude);
-                          _mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: location, zoom: 15.0)));
-                        },
-                      ),
-                    ),
+                    child: GoogleSearch(_mapController),
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,

@@ -9,6 +9,8 @@ import 'package:search_map_location/utils/google_search/place.dart';
 class GoogleSearch extends StatefulWidget
 {
   var coordinates;
+  GoogleMapController _mapController;
+  GoogleSearch(this._mapController);
   @override
   State<GoogleSearch> createState() => _GoogleSearchState();
 }
@@ -29,12 +31,10 @@ class _GoogleSearchState extends State<GoogleSearch> {
         darkMode: true,
         //Search only work for this specific country
         country: 'EG',
-        onSelected: (Place place) async {
+        onSelected: (Place place ) async {
           final geolocation = await place.geolocation;
-          setState(() {
-            widget.coordinates = LatLng(geolocation?.coordinates?.latitude,geolocation?.coordinates?.longitude);
-
-          });
+          var location = LatLng(geolocation?.coordinates?.latitude,geolocation?.coordinates?.longitude);
+          widget._mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: location, zoom: 15.0)));
         },
       ),
     );
