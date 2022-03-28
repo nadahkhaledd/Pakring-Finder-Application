@@ -109,6 +109,8 @@ class _MarkedPlacesState extends State<MarkedPlaces> {
                                 trailing: IconButton(
                                   icon: Icon(Icons.directions,color: Colors.blue,size: 35,),
                                   onPressed: (){navigateTo(context, direction_screen());},
+
+
                                 ),
                               )),
                         ),
