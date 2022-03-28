@@ -32,7 +32,8 @@ class _GoogleSearchState extends State<GoogleSearch> {
         onSelected: (Place place ) async {
           final geolocation = await place.geolocation;
           var location = LatLng(geolocation?.coordinates?.latitude,geolocation?.coordinates?.longitude);
-          widget._mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: location, zoom: 15.0)));
+          widget._mapController.animateCamera(CameraUpdate.newCameraPosition(
+              CameraPosition(target: location, zoom: 18.0, bearing: -5.0, tilt: 45.0)));
         },
       ),
     );

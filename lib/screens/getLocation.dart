@@ -19,8 +19,8 @@ class getLocation extends StatefulWidget{
 }
 
 class _getLocationState extends State<getLocation> {
-
   GoogleMapController _mapController;
+
 
 
   void initState() {
