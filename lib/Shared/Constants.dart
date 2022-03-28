@@ -20,33 +20,19 @@ Set<Marker> addMarkers( List<LocationDetails> loc )
   }
   return markers;
 }
- Future<Set<DT>>  getDistanceAndTime(
+
+
+final List<DT> dt= [];
+
+void getDistanceAndTime(
     List<LocationDetails> loc,
     Location home,
     ) async {
-  final Set<DT> dt=new Set();
   for(int i=0;i<loc.length;i++)
-    {
-      final directions = await DirectionsRepository()
-          .getDirections(origin: LatLng(home.lat, home.lng), destination:LatLng(loc[i].location.lat, loc[i].location.lng) );
+  {
+    final directions = await DirectionsRepository()
+        .getDirections(origin: LatLng(home.lat, home.lng), destination:LatLng(loc[i].location.lat, loc[i].location.lng) );
     DT dtt=new DT (directions.totalDistance,directions.totalDuration);
     dt.add(dtt);
-    }
-  return dt;
-}
-
-
-Future <String> getDistance(
-    Location loc,
-    Location home,
-    ) async {
-  /*final Set<DT> dt=new Set();
-  for(int i=0;i<loc.length;i++)
-  {*/
-    final directions = await DirectionsRepository()
-        .getDirections(origin: LatLng(home.lat, home.lng), destination:LatLng(loc.lat, loc.lng) );
-    DT dtt=new DT (directions.totalDistance,directions.totalDuration);
-    //dt.add(dtt);
-  //}
-  return directions.totalDistance;
+  }
 }

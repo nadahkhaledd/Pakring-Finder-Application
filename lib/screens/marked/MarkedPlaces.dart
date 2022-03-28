@@ -11,13 +11,18 @@ import '../../Shared/Constants.dart';
 import '../direction_screen.dart';
 
 
-class MarkedPlaces extends StatelessWidget {
+class MarkedPlaces extends StatefulWidget {
+  @override
+  State<MarkedPlaces> createState() => _MarkedPlacesState();
+}
+
+class _MarkedPlacesState extends State<MarkedPlaces> {
   @override
   Widget build(BuildContext context) {
     final currentLocation = Provider.of<Position>(context);
     Location home=new Location(lng: 30.0395,lat:31.2025);
     final Set<Marker> markers = addMarkers(locs);
-  //  final Set<DT> dt =  getDistanceAndTime(locs,home);
+    getDistanceAndTime(locs,home);
     return  Scaffold(
       body: SafeArea(
             child: Container(
@@ -90,12 +95,13 @@ class MarkedPlaces extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     child: Text(
-                                         getDistance(locs[index].location,home) .toString(),
+                                         dt[index].distance.toString(),
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 15
                                       ),
+                                      textAlign: TextAlign.center,
                                     ),
                                 ),
                                 title: Text(locs[index].name),
@@ -103,8 +109,6 @@ class MarkedPlaces extends StatelessWidget {
                                 trailing: IconButton(
                                   icon: Icon(Icons.directions,color: Colors.blue,size: 35,),
                                   onPressed: (){navigateTo(context, direction_screen());},
-
-
                                 ),
                               )),
                         ),
@@ -118,5 +122,4 @@ class MarkedPlaces extends StatelessWidget {
             ),
           ));
         }
-
 }
