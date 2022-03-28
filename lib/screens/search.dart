@@ -19,19 +19,11 @@ class search extends StatefulWidget{
 }
 
 class _searchState extends State<search> {
-  StreamSubscription _locationSubscription;
 
   void initState() {
     super.initState();
   }
 
-  @override
-  void dispose() {
-    if (_locationSubscription != null) {
-      _locationSubscription.cancel();
-    }
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,20 +76,34 @@ class _searchState extends State<search> {
                         iconColor: Colors.red,
                         darkMode: true,
                         country: 'EG',
+                        onSearch: (Place place ) async {
+                          final geolocation = await place.geolocation;
+                          final GoogleMapController mapController = await _controller.future;
+                          setState(() {
+                            var location = LatLng(geolocation?.coordinates?.latitude,geolocation?.coordinates?.longitude);
+                            _position = CameraPosition(target: LatLng(location.latitude, location.longitude));
+                            mapController.animateCamera(CameraUpdate.newLatLngZoom(location, 17));
+                            // mapController.animateCamera(CameraUpdate.newLatLng(location));
+                            // mapController.animateCamera(CameraUpdate.newCameraPosition(
+                            //     CameraPosition(target: LatLng(location.latitude, location.longitude))));
+                            // mapController.moveCamera(CameraUpdate.newCameraPosition(
+                            //     CameraPosition(target: LatLng(location.latitude, location.longitude))));
+
+                          });
+
+                        },
                         onSelected: (Place place ) async {
                           final geolocation = await place.geolocation;
                           final GoogleMapController mapController = await _controller.future;
                           setState(() {
                             var location = LatLng(geolocation?.coordinates?.latitude,geolocation?.coordinates?.longitude);
-
-                            if (_locationSubscription != null) {
-                              _locationSubscription.cancel();
-                            }
-
                             _position = CameraPosition(target: LatLng(location.latitude, location.longitude));
-                            mapController.animateCamera(CameraUpdate.newLatLng(location));
-                            mapController.animateCamera(CameraUpdate.newCameraPosition(_position));
-                            mapController.moveCamera(CameraUpdate.newCameraPosition(_position));
+                            mapController.animateCamera(CameraUpdate.newLatLngZoom(location, 17));
+                            // mapController.animateCamera(CameraUpdate.newLatLng(location));
+                            // mapController.animateCamera(CameraUpdate.newCameraPosition(
+                            //     CameraPosition(target: LatLng(location.latitude, location.longitude))));
+                            // mapController.moveCamera(CameraUpdate.newCameraPosition(
+                            //     CameraPosition(target: LatLng(location.latitude, location.longitude))));
 
                           });
 
