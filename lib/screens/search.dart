@@ -20,14 +20,22 @@ class search extends StatefulWidget{
 
 class _searchState extends State<search> {
 
+  GoogleMapController _mapController;
+
+
   void initState() {
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _mapController.dispose();
+    super.dispose();
   }
 
 
   @override
   Widget build(BuildContext context) {
-    Completer<GoogleMapController> _controller = Completer();
     final currentLocation = Provider.of<Position>(context);
     CameraPosition _position = (currentLocation != null) ?  (CameraPosition(target:
     LatLng(currentLocation.latitude, currentLocation.longitude), zoom: 20.0))
@@ -58,9 +66,7 @@ class _searchState extends State<search> {
                     padding: EdgeInsets.only(top: 470.0,),
 
                     onMapCreated: (GoogleMapController controller) async{
-                      setState(() {
-                        _controller.complete(controller);
-                      });
+                        _mapController = controller;
                     },
 
                   ),
@@ -76,37 +82,10 @@ class _searchState extends State<search> {
                         iconColor: Colors.red,
                         darkMode: true,
                         country: 'EG',
-                        onSearch: (Place place ) async {
-                          final geolocation = await place.geolocation;
-                          final GoogleMapController mapController = await _controller.future;
-                          setState(() {
-                            var location = LatLng(geolocation?.coordinates?.latitude,geolocation?.coordinates?.longitude);
-                            _position = CameraPosition(target: LatLng(location.latitude, location.longitude));
-                            mapController.animateCamera(CameraUpdate.newLatLngZoom(location, 17));
-                            // mapController.animateCamera(CameraUpdate.newLatLng(location));
-                            // mapController.animateCamera(CameraUpdate.newCameraPosition(
-                            //     CameraPosition(target: LatLng(location.latitude, location.longitude))));
-                            // mapController.moveCamera(CameraUpdate.newCameraPosition(
-                            //     CameraPosition(target: LatLng(location.latitude, location.longitude))));
-
-                          });
-
-                        },
                         onSelected: (Place place ) async {
                           final geolocation = await place.geolocation;
-                          final GoogleMapController mapController = await _controller.future;
-                          setState(() {
-                            var location = LatLng(geolocation?.coordinates?.latitude,geolocation?.coordinates?.longitude);
-                            _position = CameraPosition(target: LatLng(location.latitude, location.longitude));
-                            mapController.animateCamera(CameraUpdate.newLatLngZoom(location, 17));
-                            // mapController.animateCamera(CameraUpdate.newLatLng(location));
-                            // mapController.animateCamera(CameraUpdate.newCameraPosition(
-                            //     CameraPosition(target: LatLng(location.latitude, location.longitude))));
-                            // mapController.moveCamera(CameraUpdate.newCameraPosition(
-                            //     CameraPosition(target: LatLng(location.latitude, location.longitude))));
-
-                          });
-
+                          var location = LatLng(geolocation?.coordinates?.latitude,geolocation?.coordinates?.longitude);
+                          _mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: location, zoom: 15.0)));
                         },
                       ),
                     ),
