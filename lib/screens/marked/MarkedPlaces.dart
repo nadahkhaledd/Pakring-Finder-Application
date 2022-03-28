@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:park_locator/Model/Location.dart';
 import 'package:provider/provider.dart';
 
+import '../../Model/DateTime.dart';
 import '../../Model/LocationDetails.dart';
 import '../../Shared/Components.dart';
 import '../../Shared/Constants.dart';
@@ -13,7 +15,9 @@ class MarkedPlaces extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currentLocation = Provider.of<Position>(context);
+    Location home=new Location(lng: 30.0395,lat:31.2025);
     final Set<Marker> markers = addMarkers(locs);
+  //  final Set<DT> dt =  getDistanceAndTime(locs,home);
     return  Scaffold(
       body: SafeArea(
             child: Container(
@@ -74,6 +78,7 @@ class MarkedPlaces extends StatelessWidget {
                             ],
                           ),
                           child: ListView.builder(
+
                               itemCount: locs.length,
                               itemBuilder: (context, index) => ListTile(
                                 leading: Container(
@@ -85,7 +90,7 @@ class MarkedPlaces extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     child: Text(
-                                      locs[index].time + " m",
+                                         getDistance(locs[index].location,home) .toString(),
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,

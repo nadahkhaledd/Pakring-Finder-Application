@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'parking locator',
-        home: direction_screen(),
+        home: start(),
       ),
     );
   }
