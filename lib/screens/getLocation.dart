@@ -13,12 +13,12 @@ import 'package:search_map_location/utils/google_search/place.dart';
 import 'marked/MarkedPlaces.dart';
 
 
-class search extends StatefulWidget{
+class getLocation extends StatefulWidget{
   @override
-  State<search> createState() => _searchState();
+  State<getLocation> createState() => _getLocationState();
 }
 
-class _searchState extends State<search> {
+class _getLocationState extends State<getLocation> {
 
   GoogleMapController _mapController;
 

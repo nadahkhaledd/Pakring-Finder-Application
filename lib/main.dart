@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:park_locator/Network/Remote/Dio_helper.dart';
 import 'package:splashscreen/splashscreen.dart';
-import 'package:park_locator/screens/search.dart';
+import 'package:park_locator/screens/getLocation.dart';
 import 'package:park_locator/services/geoLocator.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +33,7 @@ class start extends StatelessWidget {
   Widget build(BuildContext context) {
     return SplashScreen(
       seconds: 5,
-      navigateAfterSeconds: new search(),
+      navigateAfterSeconds: new getLocation(),
       image: new Image.asset('assets/images/logo.PNG'),
       photoSize: 100.0,
       loaderColor: Colors.red,

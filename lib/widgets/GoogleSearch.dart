@@ -24,12 +24,10 @@ class _GoogleSearchState extends State<GoogleSearch> {
       padding: const EdgeInsets.all(8.0),
       child: SearchLocation(
         apiKey: 'AIzaSyANNie-WxuIW_ibDpFjNPO5fICFWFfEk3w',
-        // The language of the autocompletion
         language: 'en',
         placeholder: 'Search location',
         iconColor: Colors.red,
         darkMode: true,
-        //Search only work for this specific country
         country: 'EG',
         onSelected: (Place place ) async {
           final geolocation = await place.geolocation;
