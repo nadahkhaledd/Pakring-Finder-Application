@@ -19,9 +19,18 @@ class search extends StatefulWidget{
 }
 
 class _searchState extends State<search> {
+  StreamSubscription _locationSubscription;
 
   void initState() {
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    if (_locationSubscription != null) {
+      _locationSubscription.cancel();
+    }
+    super.dispose();
   }
 
   @override
@@ -40,6 +49,7 @@ class _searchState extends State<search> {
             Expanded(
               child: Stack(
                 children: [
+
                   Container(
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
@@ -74,11 +84,16 @@ class _searchState extends State<search> {
                         iconColor: Colors.red,
                         darkMode: true,
                         country: 'EG',
-                        onSelected: (Place place) async {
+                        onSelected: (Place place ) async {
                           final geolocation = await place.geolocation;
                           final GoogleMapController mapController = await _controller.future;
                           setState(() {
                             var location = LatLng(geolocation?.coordinates?.latitude,geolocation?.coordinates?.longitude);
+
+                            if (_locationSubscription != null) {
+                              _locationSubscription.cancel();
+                            }
+
                             _position = CameraPosition(target: LatLng(location.latitude, location.longitude));
                             mapController.animateCamera(CameraUpdate.newLatLng(location));
                             mapController.animateCamera(CameraUpdate.newCameraPosition(_position));
