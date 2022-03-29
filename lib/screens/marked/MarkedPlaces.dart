@@ -15,6 +15,8 @@ import '../../Shared/Constants.dart';
 import '../direction_screen.dart';
 
 class MarkedPlaces extends StatelessWidget {
+ @required Position currentLocation;
+  MarkedPlaces(this.currentLocation);
   @override
 
   Widget build(BuildContext context) {
@@ -42,14 +44,9 @@ class MarkedPlaces extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         child: GoogleMap(
                           markers: markers,
-                          initialCameraPosition: (locs[0] !=
-                                  null)
-                              ? (CameraPosition(
-                                  target: LatLng(locs[0].location.lat, locs[0].location.lng),
-                                  zoom: 13.0))
-                              : (CameraPosition(
-                                  target: LatLng(30.0395, 31.2025),
-                                  zoom: 13.0)),
+                          initialCameraPosition: (currentLocation != null) ?  (CameraPosition(target:
+                          LatLng(currentLocation.latitude, currentLocation.longitude),zoom: 13))
+                              : (CameraPosition(target: LatLng(30.0313, 31.2107), zoom:20.0)),
                           zoomGesturesEnabled: true,
                           zoomControlsEnabled: true,
                           rotateGesturesEnabled: true,

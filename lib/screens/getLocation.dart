@@ -38,8 +38,8 @@ class _getLocationState extends State<getLocation> {
   Widget build(BuildContext context) {
     final currentLocation = Provider.of<Position>(context);
     CameraPosition _position = (currentLocation != null) ?  (CameraPosition(target:
-    LatLng(currentLocation.latitude, currentLocation.longitude), zoom: 20.0))
-        : (CameraPosition(target: LatLng(30.0313, 31.2107), zoom: 18.0));
+    LatLng(currentLocation.latitude, currentLocation.longitude),zoom: 13))
+        : (CameraPosition(target: LatLng(30.0313, 31.2107), zoom:20.0));
 
 
     return SafeArea(
@@ -83,7 +83,7 @@ class _getLocationState extends State<getLocation> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: FloatingActionButton.extended(
-                            onPressed: (){navigateTo(context, MarkedPlaces());},
+                            onPressed: (){navigateTo(context, MarkedPlaces(currentLocation));},
                             isExtended: true,
                             label: Text("    Find    ", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                             backgroundColor: Colors.red,

@@ -22,15 +22,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return  MaterialApp(
-
+    return FutureProvider(
+      create: (context) => geoLocatorService.getCurrentLocation(),
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'parking locator',
-       home: start(),
+        home: start(),
+      ),
     );
   }
 }
-
 class start extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

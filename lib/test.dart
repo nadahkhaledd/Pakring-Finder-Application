@@ -20,7 +20,7 @@ class test extends StatelessWidget {
       builder: (context,state){
         return Center(
         child: ElevatedButton(child: Text("F"),onPressed: (){
-          navigateTo(context, MarkedPlaces());
+         // navigateTo(context, MarkedPlaces());
   },),
         );
   }
