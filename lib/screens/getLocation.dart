@@ -51,26 +51,26 @@ class _getLocationState extends State<getLocation> {
                 children: [
 
                   Container(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
-                  child: GoogleMap(
-                    initialCameraPosition: _position,
-                    compassEnabled: true,
-                    mapToolbarEnabled: true,
-                    zoomGesturesEnabled: true,
-                    zoomControlsEnabled: true,
-                    rotateGesturesEnabled: true,
-                    trafficEnabled: false,
-                    myLocationButtonEnabled: true,
-                    myLocationEnabled: true,
-                    padding: EdgeInsets.only(top: 470.0,),
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    child: GoogleMap(
+                      initialCameraPosition: _position,
+                      compassEnabled: true,
+                      mapToolbarEnabled: true,
+                      zoomGesturesEnabled: true,
+                      zoomControlsEnabled: true,
+                      rotateGesturesEnabled: true,
+                      trafficEnabled: false,
+                      myLocationButtonEnabled: true,
+                      myLocationEnabled: true,
+                      padding: EdgeInsets.only(top: 470.0,),
 
-                    onMapCreated: (GoogleMapController controller) async{
+                      onMapCreated: (GoogleMapController controller) async{
                         _mapController = controller;
-                    },
+                      },
 
+                    ),
                   ),
-                ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: GoogleSearch(_mapController),

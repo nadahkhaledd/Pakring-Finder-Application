@@ -6,24 +6,11 @@ import '../Model/DateTime.dart';
 import '../Model/LocationDetails.dart';
 import '../services/directions_repository.dart';
 
-Set<Marker> addMarkers( List<LocationDetails> loc )
-{
-  final Set<Marker> markers = new Set();
-  for(int i=0;i<loc.length;i++)
-  {
-    markers.add(Marker( //add first marker
-      markerId: MarkerId(loc[i].name),
-      position: LatLng(loc[i].location.lat, loc[i].location.lng),
-      icon: BitmapDescriptor.defaultMarker,
-//Icon for Marker
-    ));
-  }
-  return markers;
-}
 
 
-final List<DT> dt= [];
 
+//final List<DT> dt= [];
+/*
 void getDistanceAndTime(
     List<LocationDetails> loc,
     Location home,
@@ -35,4 +22,4 @@ void getDistanceAndTime(
     DT dtt=new DT (directions.totalDistance,directions.totalDuration);
     dt.add(dtt);
   }
-}
+}*/

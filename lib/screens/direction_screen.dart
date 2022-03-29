@@ -18,9 +18,14 @@ class direction_screen extends StatefulWidget{
   _searchState createState() => _searchState();
 
 
+
 }
 
 class _searchState extends State<direction_screen> {
+  void initState() {
+    super.initState();
+    _createPolylines(home.latitude,home.longitude,mall_egypt.latitude,mall_egypt.longitude);
+  }
   var currentLocation;
   var mall_egypt=LatLng(29.976253314162836, 31.01812820881605);
   var home=LatLng(29.96452052837998, 31.102888360619545);
@@ -31,9 +36,7 @@ class _searchState extends State<direction_screen> {
   PolylinePoints polylinePoints;
   Map<PolylineId, Polyline> polylines = {};
   List<LatLng> polylineCoordinates = [];
-  void initState() {
-    _createPolylines(home.latitude,home.longitude,mall_egypt.latitude,mall_egypt.longitude);
-  }
+
   void _createPolylines(
       double startLatitude,
       double startLongitude,
