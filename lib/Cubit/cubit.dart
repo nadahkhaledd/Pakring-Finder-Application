@@ -29,9 +29,10 @@ class parkingLocatorCubit extends Cubit<parkingLocatorSates>
       final directions = await DirectionsRepository()
           .getDirections(origin: LatLng(30.0313, 31.2107),
           destination:LatLng(loc[i].location.lat, loc[i].location.lng) );
-      DT dtt=new DT (directions.totalDistance,directions.totalDuration);
-      dt.add(dtt);
-    }
+      locs[i].distance=directions.totalDistance;
+      locs[i].time=directions.totalDuration;
+
+    }print("SS");
      emit(parkingDTSates());
     // return dt;
   }

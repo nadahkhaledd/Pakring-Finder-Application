@@ -6,8 +6,8 @@ class LocationDetails
 {
  @required final String capacity;
   final String name;
-  final double distance;
-  final String time;
+   String distance;
+   String time;
   final Location location;
 
   LocationDetails(this.capacity, this.name, this.distance, this.time, this.location);
@@ -17,8 +17,8 @@ class LocationDetails
 
 
 List <LocationDetails> locs=[
- LocationDetails("2", "Mohandsen", 5.5, "7", Location(lat:30.0480,lng:31.1997 )),
- LocationDetails("3", "Dokki", 5.5, "8", Location(lat:30.0395,lng: 31.2025 )),
- LocationDetails("3", "Agouza", 5.5, "8", Location(lat:30.0566,lng: 31.1968 )),
+ LocationDetails("2", "Mohandsen", '0', "7", Location(lat:30.0480,lng:31.1997 )),
+ LocationDetails("3", "Dokki", '0', "8", Location(lat:30.0395,lng: 31.2025 )),
+ LocationDetails("3", "Agouza", '0', "8", Location(lat:30.0566,lng: 31.1968 )),
 ];
 

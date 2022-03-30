@@ -112,7 +112,7 @@ class _MarkedPlacesState extends State<MarkedPlaces> {
                                           color: Colors.red,
                                         ):
                                         Text(
-                                          parkingLocatorCubit.get(context).dt[index].distance,
+                                          dt[index].time,
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,

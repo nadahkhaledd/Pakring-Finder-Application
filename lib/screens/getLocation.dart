@@ -28,6 +28,7 @@ class _getLocationState extends State<getLocation> {
 
   void initState() {
     super.initState();
+    getDistanceAndTime(locs);
   }
 
   @override
@@ -89,10 +90,10 @@ class _getLocationState extends State<getLocation> {
                             onPressed: ()
                               {
                                 setState(() {
-                                 // getDistanceAndTime(locs);
+                                  getDistanceAndTime(locs);
                                 });
 
-                              navigateTo(context, test());},
+                              navigateTo(context, MarkedPlaces(currentLocation));},
                             isExtended: true,
                             label: Text("    Find    ", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                             backgroundColor: Colors.red,

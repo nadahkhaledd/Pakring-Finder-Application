@@ -11,31 +11,26 @@ import 'Model/LocationDetails.dart';
 import 'Shared/Constants.dart';
 
 
-class test extends StatefulWidget {
-  @override
-  State<test> createState() => _testState();
-}
-
-class _testState extends State<test> {
+class test extends StatelessWidget {
   @required Position current;
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();
-    parkingLocatorCubit.get(context). getDistanceAndTime(locs);
+
   }
   @override
 
   Widget build(BuildContext context) {
 
           return BlocProvider(
-            create: (BuildContext context) => parkingLocatorCubit(),
+              create: (BuildContext context) => parkingLocatorCubit(),
               child: BlocConsumer<parkingLocatorCubit, parkingLocatorSates>(
               listener: (context, state) {
-          },
-       builder: (context, state) {
+                parkingLocatorCubit.get(context). getDistanceAndTime(locs);
 
-                return   Scaffold(
+    },
+       builder: (context, state) {
+       return   Scaffold(
             body: Column(
               children: [
 
@@ -46,7 +41,7 @@ class _testState extends State<test> {
 
                       navigateTo(context, MarkedPlaces(null));
                       }),
-                ),Text(dt.length.toString()),
+                ),Text(  locs[0].distance),
               ],
             ),
           );
