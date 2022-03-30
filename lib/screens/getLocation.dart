@@ -5,11 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/Shared/Components.dart';
+import 'package:park_locator/test.dart';
 import 'package:park_locator/widgets/GoogleSearch.dart';
 import 'package:search_map_location/search_map_location.dart';
 import 'package:provider/provider.dart';
 import 'package:search_map_location/utils/google_search/place.dart';
 
+import '../Model/LocationDetails.dart';
+import '../Shared/Constants.dart';
 import 'marked/MarkedPlaces.dart';
 
 
@@ -83,7 +86,13 @@ class _getLocationState extends State<getLocation> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: FloatingActionButton.extended(
-                            onPressed: (){navigateTo(context, MarkedPlaces(currentLocation));},
+                            onPressed: ()
+                              {
+                                setState(() {
+                                 // getDistanceAndTime(locs);
+                                });
+
+                              navigateTo(context, test());},
                             isExtended: true,
                             label: Text("    Find    ", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                             backgroundColor: Colors.red,

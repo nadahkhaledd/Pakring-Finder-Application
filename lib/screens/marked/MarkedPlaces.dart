@@ -5,8 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/Cubit/States.dart';
-import 'package:park_locator/Model/Location.dart';
-import 'package:provider/provider.dart';
 import '../../Cubit/cubit.dart';
 import '../../Model/DateTime.dart';
 import '../../Model/LocationDetails.dart';
@@ -14,24 +12,31 @@ import '../../Shared/Components.dart';
 import '../../Shared/Constants.dart';
 import '../direction_screen.dart';
 
-class MarkedPlaces extends StatelessWidget {
- @required Position currentLocation;
+
+
+class MarkedPlaces extends StatefulWidget {
+
+  @required Position currentLocation;
   MarkedPlaces(this.currentLocation);
+
   @override
+  State<MarkedPlaces> createState() => _MarkedPlacesState();
+}
 
-  Widget build(BuildContext context) {
-    //final currentLocation = Provider.of<Position>(context);
-
+class _MarkedPlacesState extends State<MarkedPlaces> {
+  @override
+  Widget  build(BuildContext context) {
     return BlocProvider(
-
         create: (BuildContext context) => parkingLocatorCubit(),
         child: BlocConsumer<parkingLocatorCubit, parkingLocatorSates>(
           listener: (context, state) {
           },
           builder: (context, state) {
+
             final Set<Marker> markers = parkingLocatorCubit.get(context).addMarkers(locs);
-            List<DT>dt=parkingLocatorCubit.get(context).getDistanceAndTime(locs);
-          return Scaffold(
+         //   parkingLocatorCubit.get(context).getDistanceAndTime(locs);
+
+            return Scaffold(
                 body: SafeArea(
               child: Container(
                 //color: Colors.grey[200],
@@ -44,8 +49,8 @@ class MarkedPlaces extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         child: GoogleMap(
                           markers: markers,
-                          initialCameraPosition: (currentLocation != null) ?  (CameraPosition(target:
-                          LatLng(currentLocation.latitude, currentLocation.longitude),zoom: 13))
+                          initialCameraPosition: (widget.currentLocation != null) ?  (CameraPosition(target:
+                          LatLng(widget.currentLocation.latitude, widget.currentLocation.longitude),zoom: 13))
                               : (CameraPosition(target: LatLng(30.0313, 31.2107), zoom:20.0)),
                           zoomGesturesEnabled: true,
                           zoomControlsEnabled: true,
@@ -102,8 +107,12 @@ class MarkedPlaces extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(20),
                                         ),
-                                        child: Text(
-                                         dt[index].distance,
+                                        child:dt.length==0?
+                                        CircularProgressIndicator(
+                                          color: Colors.red,
+                                        ):
+                                        Text(
+                                          parkingLocatorCubit.get(context).dt[index].distance,
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,
@@ -127,8 +136,9 @@ class MarkedPlaces extends StatelessWidget {
                                       ),
                                     )),
                           ),
+
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),

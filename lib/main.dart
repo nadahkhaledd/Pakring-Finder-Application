@@ -1,17 +1,13 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:park_locator/Network/Remote/Dio_helper.dart';
-import 'package:park_locator/screens/direction_screen.dart';
-import 'package:park_locator/screens/marked/MarkedPlaces.dart';
-import 'package:park_locator/test.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:park_locator/screens/getLocation.dart';
 import 'package:park_locator/services/geoLocator.dart';
 import 'package:provider/provider.dart';
 
 
-void main() {
+void main()  {
   runApp(MyApp());
 }
 
