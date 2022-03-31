@@ -24,27 +24,31 @@ class _DBState extends State<DB> {
 
   @override
   Widget build(BuildContext context) {
+    print('\n before return');
 
     return StreamBuilder(
       stream: db.child('Cameras').onValue,
         builder: (context, snapshot)
         {
+          print('\n\n inside builder');
           if(snapshot.hasData)
             {
               print('\n\nfirebaaaase\n\n');
               final all = Map<String, dynamic>.from(
-                  (snapshot.data as Event).snapshot.value);
+                  snapshot.data.snapshot.value);
               all.forEach((key, value) {
                 final nextLoc = Map<String, dynamic>.from(value);
+                print('\nfinaal :' );
+                print(nextLoc);
                 print('\n\nlatlat: ' + nextLoc['lat'].toString());
-                if(isInRadius(widget.source, nextLoc['lat'], nextLoc['long']))
-                  {
-                    nearest.add({'lat': nextLoc['lat'], 'long': nextLoc['long']});
-                  }
+
               });
             }
+          return Container(
+            child: CircularProgressIndicator(),
+          );
           printLocs(nearest);
-          return Container();
+
         }
     );
   }

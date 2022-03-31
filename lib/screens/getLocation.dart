@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/Shared/Components.dart';
-import 'package:park_locator/services/db.dart';
+import 'package:park_locator/services/DB.dart';
 import 'package:park_locator/test.dart';
 import 'package:park_locator/widgets/GoogleSearch.dart';
 import 'package:search_map_location/search_map_location.dart';
@@ -125,9 +125,8 @@ class _getLocationState extends State<getLocation> {
                                   getDistanceAndTime(locs);
                                 });
                                 finalLocation();
-                                DB(_coordinates);
                                 print('\nafter: ' + _coordinates.toString());
-
+                                navigateTo(context, DB(_coordinates));
                                 //navigateTo(context, MarkedPlaces(_coordinates));
                               },
                             isExtended: true,
