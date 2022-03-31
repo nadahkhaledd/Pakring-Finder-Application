@@ -126,7 +126,7 @@ class _getLocationState extends State<getLocation> {
                                 });
                                 finalLocation();
                                 print('\nafter: ' + _coordinates.toString());
-                                navigateTo(context, DB(_coordinates));
+                                getData(_coordinates);
                                 //navigateTo(context, MarkedPlaces(_coordinates));
                               },
                             isExtended: true,
