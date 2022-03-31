@@ -4,18 +4,21 @@ import 'dart:math';
 
 bool isInRadius(var source, var destinationLat, var destinationLong)
 {
-  var lat1 = pi * source.latitude / 180;
-  var lat2 = pi * destinationLat / 180;
-  var theta = source.longitude - destinationLong;
-  var radTheta = pi * theta / 180;
-  var distance = sin(lat1) * sin(lat2) + cos(lat1) * cos(lat2) * cos(radTheta);
+  double lat1 = source.latitude * pi/180;
+  double lat2 = destinationLat * pi/180;
+  double lon1 = source.longitude * pi/180;
+  double lon2 = destinationLong * pi/180;
 
-  if(distance > 1) distance = 1;
-  distance = acos(distance);
-  distance = distance * 180 / pi;
-  distance = distance * 60 * 1.1515 * 1.609344;
+  double lats = lat2 - lat1;
+  double longs = lon2 - lon1;
 
-  if( distance <= 0.95)
+  double formula = pow(sin(lats/2), 2) + cos(lat1) * cos(lat2) * pow(sin(longs/2), 2);
+
+  double c = 2 * asin(sqrt(formula));
+  double distance = c * 6371.0;  //distance in Kilometers
+
+
+  if( distance <= 3.0)
     return true;
   else
     return false;
