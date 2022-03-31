@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:math';
 
-bool isInRadius(var source, var destinationLat, var destinationLong)
+bool isInRadius(var sourceLat, var sourceLong, var destinationLat, var destinationLong)
 {
-  double lat1 = source.latitude * pi/180;
+  double lat1 = sourceLat * pi/180;
   double lat2 = destinationLat * pi/180;
-  double lon1 = source.longitude * pi/180;
+  double lon1 = sourceLong * pi/180;
   double lon2 = destinationLong * pi/180;
 
   double lats = lat2 - lat1;
@@ -18,16 +18,11 @@ bool isInRadius(var source, var destinationLat, var destinationLong)
 
 
   if( distance <= 3.0)
-    return true;
+    {
+      print('true');
+      return true;
+    }
+
   else
     return false;
 }
-
-// void printLocs(List locs)
-// {
-//   print('\n\nlength:' + locs.length.toString());
-//   for(int i=0; i<locs.length; i++)
-//     {
-//       print('lat:' + locs[i]['lat'].toString());
-//     }
-// }

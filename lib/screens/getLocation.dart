@@ -126,8 +126,8 @@ class _getLocationState extends State<getLocation> {
                                 });
                                 finalLocation();
                                 print('\nafter: ' + _coordinates.toString());
-                                getData(_coordinates);
-                                //navigateTo(context, MarkedPlaces(_coordinates));
+                                List nearest = getData(_coordinates);
+                                navigateTo(context, MarkedPlaces(_coordinates));
                               },
                             isExtended: true,
                             label: Text("    Find    ", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
