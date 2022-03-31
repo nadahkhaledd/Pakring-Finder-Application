@@ -17,6 +17,8 @@ import 'marked/MarkedPlaces.dart';
 
 
 class getLocation extends StatefulWidget{
+  var currentLocation;
+  getLocation(this.currentLocation);
   @override
   State<getLocation> createState() => _getLocationState();
 }
@@ -69,11 +71,8 @@ class _getLocationState extends State<getLocation> {
 
   @override
   Widget build(BuildContext context) {
-    final currentLocation = Provider.of<Position>(context);
-    // _position = (currentLocation != null) ?  (CameraPosition(target:
-    // LatLng(currentLocation.latitude, currentLocation.longitude),zoom: 13))
-    //     : (CameraPosition(target: LatLng(30.0313, 31.2107), zoom:20.0));
-    setCurrent(currentLocation);
+    //final currentLocation = Provider.of<Position>(context);
+    setCurrent(widget.currentLocation);
     _coordinates = _position.target;
     print('\n\ncurrent:' + _coordinates.latitude.toString() + ',' + _coordinates.longitude.toString());
 

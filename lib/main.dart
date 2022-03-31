@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:park_locator/screens/getLocation.dart';
 import 'package:park_locator/services/geoLocator.dart';
@@ -31,9 +32,10 @@ class MyApp extends StatelessWidget {
 class start extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final currentLocation = Provider.of<Position>(context);
     return SplashScreen(
       seconds: 5,
-      navigateAfterSeconds: new getLocation(),
+      navigateAfterSeconds: new getLocation(currentLocation),
       image: new Image.asset('assets/images/logo.PNG'),
       photoSize: 100.0,
       loaderColor: Colors.red,
