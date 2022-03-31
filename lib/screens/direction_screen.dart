@@ -99,7 +99,7 @@ class _searchState extends State<direction_screen> {
                     zoomControlsEnabled: true,
                     rotateGesturesEnabled: true,
                     myLocationButtonEnabled: true,
-                    myLocationEnabled: true,
+                    //myLocationEnabled: true,
                     padding: EdgeInsets.only(top: 200.0,),
                     polylines: Set<Polyline>.of(polylines.values),
 

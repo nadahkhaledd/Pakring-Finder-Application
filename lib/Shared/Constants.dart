@@ -7,6 +7,8 @@ import '../Model/DateTime.dart';
 import '../Model/LocationDetails.dart';
 import '../services/directions_repository.dart';
 
+var location;
+
 List<DT> dt= [];
 void getDistanceAndTime(
     List<LocationDetails> loc,
@@ -23,6 +25,22 @@ void getDistanceAndTime(
  // emit(parkingDTSates());
  // return dt;
 }
+void setSearchLocation (var coords) async
+{
+  location = coords;
+}
+
+LatLng getSearchLocation ()
+{
+  return location;
+}
+
+bool isThereLocation ()
+{
+  return location!=null;
+}
+
+
 
 //final List<DT> dt= [];
 /*

@@ -16,7 +16,7 @@ import '../direction_screen.dart';
 
 class MarkedPlaces extends StatefulWidget {
 
-  @required Position currentLocation;
+  @required var currentLocation;
   MarkedPlaces(this.currentLocation);
 
   @override

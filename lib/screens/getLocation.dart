@@ -23,6 +23,8 @@ class getLocation extends StatefulWidget{
 
 class _getLocationState extends State<getLocation> {
   GoogleMapController _mapController;
+  CameraPosition _position;
+  var _coordinates;
 
 
 
@@ -37,13 +39,43 @@ class _getLocationState extends State<getLocation> {
     super.dispose();
   }
 
+  void finalLocation()
+  {
+    if (isThereLocation())
+      {
+        setState(() {
+          _coordinates = getSearchLocation();
+        });
+      }
+  }
+
+  setCurrent(var current)
+  {
+    if(current!= null)
+      {
+        setState(() {
+          _position = CameraPosition(target: LatLng(current.latitude, current.longitude),zoom: 15.0);
+        });
+
+      }
+    else
+      {
+        setState(() {
+          _position = CameraPosition(target: LatLng(30.0313, 31.2107), zoom:15.0);
+        });
+      }
+  }
+
 
   @override
   Widget build(BuildContext context) {
     final currentLocation = Provider.of<Position>(context);
-    CameraPosition _position = (currentLocation != null) ?  (CameraPosition(target:
-    LatLng(currentLocation.latitude, currentLocation.longitude),zoom: 13))
-        : (CameraPosition(target: LatLng(30.0313, 31.2107), zoom:20.0));
+    // _position = (currentLocation != null) ?  (CameraPosition(target:
+    // LatLng(currentLocation.latitude, currentLocation.longitude),zoom: 13))
+    //     : (CameraPosition(target: LatLng(30.0313, 31.2107), zoom:20.0));
+    setCurrent(currentLocation);
+    _coordinates = _position.target;
+    print('\n\ncurrent:' + _coordinates.latitude.toString() + ',' + _coordinates.longitude.toString());
 
 
     return SafeArea(
@@ -64,13 +96,13 @@ class _getLocationState extends State<getLocation> {
                       zoomGesturesEnabled: true,
                       zoomControlsEnabled: true,
                       rotateGesturesEnabled: true,
-                      trafficEnabled: false,
                       myLocationButtonEnabled: true,
                       myLocationEnabled: true,
-                      padding: EdgeInsets.only(top: 470.0,),
+                      padding: EdgeInsets.only(top: 150.0,),
 
                       onMapCreated: (GoogleMapController controller) async{
                         _mapController = controller;
+                        print('\ncurrent before : ' + _coordinates.toString());
                       },
 
                     ),
@@ -79,6 +111,7 @@ class _getLocationState extends State<getLocation> {
                     padding: const EdgeInsets.all(8.0),
                     child: GoogleSearch(_mapController),
                   ),
+
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -92,8 +125,11 @@ class _getLocationState extends State<getLocation> {
                                 setState(() {
                                   getDistanceAndTime(locs);
                                 });
+                                finalLocation();
+                                print('\nafter: ' + _coordinates.toString());
 
-                              navigateTo(context, MarkedPlaces(currentLocation));},
+                                navigateTo(context, MarkedPlaces(_coordinates));
+                              },
                             isExtended: true,
                             label: Text("    Find    ", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                             backgroundColor: Colors.red,
