@@ -71,7 +71,6 @@ class _getLocationState extends State<getLocation> {
 
   @override
   Widget build(BuildContext context) {
-    //final currentLocation = Provider.of<Position>(context);
     setCurrent(widget.currentLocation);
     _coordinates = _position.target;
     print('\n\ncurrent:' + _coordinates.latitude.toString() + ',' + _coordinates.longitude.toString());
@@ -97,7 +96,7 @@ class _getLocationState extends State<getLocation> {
                       rotateGesturesEnabled: true,
                       myLocationButtonEnabled: true,
                       myLocationEnabled: true,
-                      padding: EdgeInsets.only(top: 150.0,),
+                      padding: EdgeInsets.only(top: 160.0,),
 
                       onMapCreated: (GoogleMapController controller) async{
                         _mapController = controller;
