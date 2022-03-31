@@ -13,12 +13,13 @@ import 'package:provider/provider.dart';
 
 Future<void> main()  async{
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  //await Firebase.initializeApp();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   final geoLocatorService = geoLocator();
+  final Future<FirebaseApp> _firebaseApp = Firebase.initializeApp();
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,14 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'parking locator',
-        home: start(),
+        home: FutureBuilder(
+          future: _firebaseApp,
+            builder: (context, snapshot)
+            {
+              return start();
+            }
+
+        ),
       ),
     );
   }

@@ -125,9 +125,10 @@ class _getLocationState extends State<getLocation> {
                                   getDistanceAndTime(locs);
                                 });
                                 finalLocation();
+                                DB(_coordinates);
                                 print('\nafter: ' + _coordinates.toString());
 
-                                navigateTo(context, MarkedPlaces(_coordinates));
+                                //navigateTo(context, MarkedPlaces(_coordinates));
                               },
                             isExtended: true,
                             label: Text("    Find    ", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
