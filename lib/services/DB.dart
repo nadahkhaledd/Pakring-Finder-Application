@@ -47,7 +47,7 @@ class _DBState extends State<DB> {
           return Container(
             child: CircularProgressIndicator(),
           );
-          printLocs(nearest);
+          //printLocs(nearest);
 
         }
     );
