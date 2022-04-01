@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "955666530777",
+    "firebase_url": "https://parkingfinder-589b5-default-rtdb.firebaseio.com",
+    "project_id": "parkingfinder-589b5",
+    "storage_bucket": "parkingfinder-589b5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:955666530777:android:af370e016f6eae1c4219c8",
+        "android_client_info": {
+          "package_name": "com.example.park_locator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "955666530777-j33jhlsci1hftbt0cqvo25oksvran607.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5oFk-f10TmULLEh3cH2o2pFgOOeg0-YU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "955666530777-j33jhlsci1hftbt0cqvo25oksvran607.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

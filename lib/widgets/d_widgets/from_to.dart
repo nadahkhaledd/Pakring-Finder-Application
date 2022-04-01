@@ -2,6 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 class from_to extends StatelessWidget
 {
+  final String source;
+  final String target;
+
+
+  const from_to({
+    @required this.source,
+    @required this.target,
+
+  });
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,7 +45,7 @@ class from_to extends StatelessWidget
                   child: TextField(
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      hintText: 'Your Location',
+                      hintText: source,
                     ),
                     autofocus: false,
                   ),
@@ -50,14 +59,17 @@ class from_to extends StatelessWidget
                   child: TextField(
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      hintText: 'Park Location',
+                      hintText: target,
                     ),
                     autofocus: false,
                   ),
                 ),
               )
             ],
-      ))])
+      )),
+
+          ])
+
     );
   }
 
