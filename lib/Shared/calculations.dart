@@ -15,8 +15,6 @@ bool isInRadius(var sourceLat, var sourceLong, var destinationLat, var destinati
 
   double c = 2 * asin(sqrt(formula));
   double distance = c * 6371.0;  //distance in Kilometers
-
-
   if( distance <= 3.0)
     {
       print('true');

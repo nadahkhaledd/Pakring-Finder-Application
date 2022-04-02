@@ -7,9 +7,9 @@ List getData(LatLng coords)
 {
   List nearestPlaces = [];
   final db = FirebaseDatabase.instance.reference();
-  db.child('Cameras').once().then((DataSnapshot snapshot) {
+  db.child('Cameras').once().then((DataSnapshot snapshot) async {
     List values = snapshot.value;
-    values.forEach((element) {
+     values.forEach((element) {
       if(element != null)
         if(isInRadius(coords.latitude, coords.longitude, double.parse(element['lat']), double.parse(element['long'])))
           {

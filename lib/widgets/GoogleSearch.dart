@@ -29,15 +29,17 @@ class _GoogleSearchState extends State<GoogleSearch> {
         iconColor: Colors.red,
         darkMode: true,
         country: 'EG',
+        onClearIconPress: (){
+          widget._coordinates = widget._coordinates;
+        },
         onSelected: (Place place ) async {
           final geolocation = await place.geolocation;
           var location = LatLng(geolocation?.coordinates?.latitude,geolocation?.coordinates?.longitude);
           widget._mapController.animateCamera(CameraUpdate.newCameraPosition(
-              CameraPosition(target: location, zoom: 18.0, bearing: -5.0)));
+              CameraPosition(target: location, zoom: 18.0)));
           setState(() {
             widget._coordinates = location;
             setSearchLocation(widget._coordinates);
-            print('\nfrom search: ' + widget._coordinates.toString());
           });
 
         },
