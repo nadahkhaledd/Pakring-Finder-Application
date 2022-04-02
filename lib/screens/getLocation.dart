@@ -35,13 +35,13 @@ class _getLocationState extends State<getLocation> {
     super.initState();
     getDistanceAndTime(locs);
   }
-
+/*
   @override
   void dispose() {
     _mapController.dispose();
     super.dispose();
   }
-
+*/
   void finalLocation()
   {
     if (isThereLocation())
@@ -120,14 +120,17 @@ class _getLocationState extends State<getLocation> {
                           padding: const EdgeInsets.all(8.0),
                           child: FloatingActionButton.extended(
                             onPressed: ()
-                              {
+                              async {
                                 setState(() {
                                   getDistanceAndTime(locs);
                                 });
                                 finalLocation();
                                 print('\nafter: ' + _coordinates.toString());
-                                List nearest = getData(_coordinates);
-                                navigateTo(context, MarkedPlaces(_coordinates));
+                                setIds();
+                                List nearest = await getData(_coordinates);
+                                //print(nearest);
+                                List snaps = await getSnaps(getIds());
+                                //navigateTo(context, MarkedPlaces(_coordinates));
                               },
                             isExtended: true,
                             label: Text("    Find    ", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
