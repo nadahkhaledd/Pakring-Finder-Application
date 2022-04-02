@@ -28,7 +28,7 @@ class _MarkedPlacesState extends State<MarkedPlaces> {
   Widget  build(BuildContext context) {
     return BlocProvider(
         create: (BuildContext context) => parkingLocatorCubit(),
-        child: BlocConsumer<parkingLocatorCubit, parkingLocatorSates>(
+        child: BlocConsumer<parkingLocatorCubit, parkingLocatorStates>(
           listener: (context, state) {
           },
           builder: (context, state) {

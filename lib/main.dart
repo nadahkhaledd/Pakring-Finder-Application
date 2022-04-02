@@ -4,7 +4,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:park_locator/Network/Remote/Dio_helper.dart';
 import 'package:park_locator/services/DB.dart';
+import 'package:park_locator/test.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:park_locator/screens/getLocation.dart';
 import 'package:park_locator/services/geoLocator.dart';
@@ -13,6 +15,7 @@ import 'package:provider/provider.dart';
 
 Future<void> main()  async{
   WidgetsFlutterBinding.ensureInitialized();
+  DioHelper.init();
   //await Firebase.initializeApp();
   runApp(MyApp());
 }
@@ -34,7 +37,7 @@ class MyApp extends StatelessWidget {
           future: _firebaseApp,
             builder: (context, snapshot)
             {
-              return start();
+              return test();
             }
 
         ),
