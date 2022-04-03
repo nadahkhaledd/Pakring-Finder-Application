@@ -4,6 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../Model/LocationDetails.dart';
+import '../Network/APIS.dart';
 import '../Shared/Components.dart';
 import '../Shared/Constants.dart';
 import '../services/DB.dart';
@@ -23,13 +24,6 @@ class _HomeState extends State<Home> {
     super.initState();
     getDistanceAndTime(locs);
   }
-
-  @override
-  void dispose() {
-    _mapController.dispose();
-    super.dispose();
-  }
-
   Future<void> finalLocation() {
     if (isThereLocation()) {
       setState(() {
@@ -103,13 +97,20 @@ class _HomeState extends State<Home> {
                   padding: const EdgeInsets.all(12.0),
                   child: FloatingActionButton.extended(
                     heroTag: 'run',
-                    onPressed: () {
+                    onPressed: ()
+                    async {
                       setState(() {
                         getDistanceAndTime(locs);
                       });
                       finalLocation();
-                      List nearest = getData(_coordinates);
-                      },
+                      print('\nafter: ' + _coordinates.toString());
+                      setIds();
+                      List nearest = await getData(_coordinates);
+                      //print(nearest);
+                      List snaps = await getSnaps(getIds());
+                      List newS= await GetSpots(snaps);
+                      //navigateTo(context, MarkedPlaces(_coordinates));
+                    },
                     isExtended: true,
                     label: Text("     Find     ", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
                     backgroundColor: Colors.red,

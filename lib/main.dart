@@ -4,7 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:park_locator/Network/Remote/Dio_helper.dart';
+import 'package:park_locator/Network/Dio_helper.dart';
 import 'package:park_locator/screens/Home.dart';
 import 'package:park_locator/services/DB.dart';
 import 'package:splashscreen/splashscreen.dart';

@@ -4,7 +4,7 @@ import 'package:park_locator/services/geoLocator.dart';
 
 class LocationDetails
 {
- @required final String capacity;
+  final String capacity;
   final String name;
    String distance;
    String time;

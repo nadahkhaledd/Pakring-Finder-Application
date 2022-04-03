@@ -47,6 +47,7 @@ Future<List> getSnaps (List nearestPlaces)async
         snaps.add(allData.elementAt(0));
       }
   });
+
   return snaps;
 
   

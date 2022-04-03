@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/Model/Location.dart';
-import 'package:park_locator/Network/Remote/Dio_helper.dart';
+import 'package:park_locator/Network/Dio_helper.dart';
 import 'package:park_locator/services/geoLocator.dart';
 import 'package:provider/provider.dart';
 import '../Model/DateTime.dart';

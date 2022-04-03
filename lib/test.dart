@@ -9,7 +9,7 @@ import 'package:search_map_location/utils/google_search/latlng.dart';
 import 'Cubit/States.dart';
 import 'Cubit/cubit.dart';
 import 'Model/LocationDetails.dart';
-import 'Network/Remote/Dio_helper.dart';
+import 'Network/Dio_helper.dart';
 import 'Network/endpoints.dart';
 import 'Shared/Constants.dart';
 
@@ -25,22 +25,6 @@ class test extends StatelessWidget {
 
   Widget build(BuildContext context) {
     String getCapacity;
-    Response response;
-    void getData({@required String url, @required String capacity}) async {
-
-      DioHelper.postData(url: FIND, data:{
-        "url": url,
-        "capacity": capacity,
-      })
-          .then((value) {
-        print("QQQQQQQQQQ"+value.data["spots"].toString());
-        getCapacity=value.data["spots"].toString();
-      }).catchError((error){
-        print("WWWWWWWWWW");
-        print(error.toString());
-      });
-    }
-
           return BlocProvider(
               create: (BuildContext context) => parkingLocatorCubit()..getData(url: "https://firebasestorage.googleapis.com/v0/b/parkingfinder-589b5.appspot.com/o/2ce42c9d1876a0c2dd0862a7bb8ef6db.jpg?alt=media&token=88278d5b-4bd2-4757-8ef8-797e094cbe71", capacity: "5"),
 
