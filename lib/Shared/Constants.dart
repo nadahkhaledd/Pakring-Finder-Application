@@ -41,6 +41,17 @@ bool isThereLocation ()
 }
 
 
+List getCamerasIDs(List cameras)
+{
+  List IDs = [];
+  cameras.forEach((element) {
+    IDs.add(element['id']);
+  });
+
+  return IDs;
+}
+
+
 
 //final List<DT> dt= [];
 /*

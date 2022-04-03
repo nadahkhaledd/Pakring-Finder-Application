@@ -6,9 +6,9 @@ class DioHelper {
   static init()///Object from Dio
   {
     dio = Dio(BaseOptions(
-      baseUrl: '164.92.174.146:80/find',
+      baseUrl:"http://164.92.174.146",
       receiveDataWhenStatusError: true,
-      headers: {}
+
     ));
   }
 
@@ -19,12 +19,16 @@ class DioHelper {
     return await dio.get(url, queryParameters: query);
   }
 
-
   static Future<Response> postData({
     @required String url,
-    Map<String,dynamic> query,
     @required Map<String,dynamic> data,
-})async{
-    return await dio.post(url,data: data,queryParameters: query);
+  //  Map<String, dynamic> query,
+  }) async {
+    dio.options.headers = {
+      "Content-Type": "application/json",
+    };
+    return await dio.post(url, data: data);
   }
+
 }
+
