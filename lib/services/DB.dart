@@ -6,40 +6,30 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 List ids=[];
 
-Future<List> getData (LatLng coords)async
+Future<List> getNearestCameras(LatLng coordinates)async
 {
   List nearestPlaces = [];
 
-  int id=-1;
   final db = await FirebaseDatabase.instance.reference();
   await db.child('Cameras').once().then((DataSnapshot snapshot) {
     List values = snapshot.value;
     values.forEach((element) {
-      id++;
       if(element != null)
-        if(isInRadius(coords.latitude, coords.longitude, double.parse(element['lat']), double.parse(element['long'])))
+        if(isInRadius(coordinates.latitude, coordinates.longitude, double.parse(element['lat']), double.parse(element['long'])))
           {
-            ids.add(id);
             LatLng location =  LatLng(double.parse(element['lat']), double.parse(element['long']));
-            nearestPlaces.add(location);
+            nearestPlaces.add({'id':element['id'], 'location': location, 'address': element['address']});
           }
     });
   });
   return nearestPlaces;
 }
-void setIds()
-{
-  ids=[];
-}
-List getIds()
-{
-  return ids;
-}
 
-Future<List> getSnaps (List nearestPlaces)async
+Future<List> getSnaps (List nearestPlacesIDs)async
 {
+  print('in snaps');
   List snaps =[];
-  await Future.forEach( nearestPlaces,(element) async {
+  await Future.forEach( nearestPlacesIDs,(element) async {
     final snapshot = await FirebaseFirestore.instance.collection("Snaps").where("Camera_ID", isEqualTo:element).orderBy("Date").get();
     final allData = snapshot.docs.map((doc) => doc.data()).toList();
      if (allData.length!=0)
@@ -49,6 +39,4 @@ Future<List> getSnaps (List nearestPlaces)async
   });
 
   return snaps;
-
-  
 }

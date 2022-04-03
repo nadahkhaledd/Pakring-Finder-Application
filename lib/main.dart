@@ -6,9 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:park_locator/Network/Dio_helper.dart';
 import 'package:park_locator/screens/Home.dart';
-import 'package:park_locator/services/DB.dart';
 import 'package:splashscreen/splashscreen.dart';
-import 'package:park_locator/screens/getLocation.dart';
 import 'package:park_locator/services/geoLocator.dart';
 import 'package:provider/provider.dart';
 

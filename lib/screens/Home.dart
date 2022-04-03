@@ -19,17 +19,29 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   GoogleMapController _mapController;
   LatLng _coordinates;
+  List nearestCameras, snaps, spots;
 
   void initState() {
     super.initState();
     getDistanceAndTime(locs);
   }
-  Future<void> finalLocation() {
+
+  void finalLocation() {
     if (isThereLocation()) {
       setState(() {
         _coordinates = getSearchLocation();
       });
     }
+  }
+
+
+  Future<void> setResults()
+  async {
+    finalLocation();
+    nearestCameras = await getNearestCameras(_coordinates);
+    List IDs = getCamerasIDs(nearestCameras);
+    snaps = await getSnaps(IDs);
+    spots = await GetSpots(snaps);
   }
 
   @override
@@ -81,6 +93,7 @@ class _HomeState extends State<Home> {
                             target: LatLng(currentLocation.latitude,
                                 currentLocation.longitude),
                             zoom: 16.0)));
+
                     setState(() {
                       _coordinates = LatLng(
                           currentLocation.latitude, currentLocation.longitude);
@@ -99,17 +112,15 @@ class _HomeState extends State<Home> {
                     heroTag: 'run',
                     onPressed: ()
                     async {
-                      setState(() {
-                        getDistanceAndTime(locs);
-                      });
-                      finalLocation();
-                      print('\nafter: ' + _coordinates.toString());
-                      setIds();
-                      List nearest = await getData(_coordinates);
-                      //print(nearest);
-                      List snaps = await getSnaps(getIds());
-                      List newS= await GetSpots(snaps);
-                      //navigateTo(context, MarkedPlaces(_coordinates));
+                      if(_coordinates != null)
+                        {
+                          setState(() {
+                            getDistanceAndTime(locs);
+                          });
+
+                          await setResults();
+                          //navigateTo(context, MarkedPlaces(_coordinates));
+                        }
                     },
                     isExtended: true,
                     label: Text("     Find     ", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
