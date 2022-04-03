@@ -29,10 +29,10 @@ Future<List> GetSpots(List snaps) async
   for(int i=0;i<snaps.length;i++)
     {
    //   print("WWWWWWWWWW"+snaps[i]["Path"]);
-      String url=snaps[i]["Path"];
+      String url=snaps[i]["Path"].toString();
           //"https://firebasestorage.googleapis.com/v0/b/parkingfinder-589b5.appspot.com/o/2ce42c9d1876a0c2dd0862a7bb8ef6db.jpg?alt=media&token=88278d5b-4bd2-4757-8ef8-797e094cbe71";
   //
-      String cap=snaps[i]["Capacity"];
+      String cap=snaps[i]["Capacity"].toString();
       //="5";
       //
       String spots = await getApiData(url:url, capacity:cap);
