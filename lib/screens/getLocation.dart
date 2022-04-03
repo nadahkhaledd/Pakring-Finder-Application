@@ -8,36 +8,40 @@ import 'package:park_locator/Shared/Components.dart';
 import 'package:park_locator/services/DB.dart';
 import 'package:park_locator/test.dart';
 import 'package:park_locator/widgets/GoogleSearch.dart';
+import 'package:search_map_location/search_map_location.dart';
 import 'package:provider/provider.dart';
+import 'package:search_map_location/utils/google_search/place.dart';
+
 import '../Model/LocationDetails.dart';
 import '../Shared/Constants.dart';
 import 'marked/MarkedPlaces.dart';
 
 
 class getLocation extends StatefulWidget{
-  // var currentLocation;
-  // getLocation(this.currentLocation);
+  var currentLocation;
+  getLocation(this.currentLocation);
   @override
   State<getLocation> createState() => _getLocationState();
 }
 
 class _getLocationState extends State<getLocation> {
-
   GoogleMapController _mapController;
   CameraPosition _position;
   var _coordinates;
+
+
 
   void initState() {
     super.initState();
     getDistanceAndTime(locs);
   }
-
+/*
   @override
   void dispose() {
     _mapController.dispose();
     super.dispose();
   }
-
+*/
   void finalLocation()
   {
     if (isThereLocation())
@@ -48,36 +52,29 @@ class _getLocationState extends State<getLocation> {
       }
   }
 
-  setCurrent(var current) async
+  setCurrent(var current)
   {
     if(current!= null)
-    {
-      print('success');
-      setState(() {
-        _position = CameraPosition(target: LatLng(current.latitude, current.longitude),zoom: 15.0);
-        _mapController.animateCamera(CameraUpdate.newCameraPosition(_position));
-      });
+      {
+        setState(() {
+          _position = CameraPosition(target: LatLng(current.latitude, current.longitude),zoom: 15.0);
+        });
 
-    }
+      }
     else
-    {
-      setState(() {
-        _position = CameraPosition(target: LatLng(30.0313, 31.2107), zoom:15.0);
-        _mapController.animateCamera(CameraUpdate.newCameraPosition(_position));
-      });
-    }
-
+      {
+        setState(() {
+          _position = CameraPosition(target: LatLng(30.0313, 31.2107), zoom:15.0);
+        });
+      }
   }
 
 
   @override
   Widget build(BuildContext context) {
-    final currentLocation = Provider.of<Position>(context);
-
-    setCurrent(currentLocation);
+    setCurrent(widget.currentLocation);
     _coordinates = _position.target;
-
-    //print('\n\ncurrent:' + _coordinates.latitude.toString() + ',' + _coordinates.longitude.toString());
+    print('\n\ncurrent:' + _coordinates.latitude.toString() + ',' + _coordinates.longitude.toString());
 
 
     return SafeArea(
@@ -100,13 +97,11 @@ class _getLocationState extends State<getLocation> {
                       rotateGesturesEnabled: true,
                       myLocationButtonEnabled: true,
                       myLocationEnabled: true,
-                      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*1/3,),
+                      padding: EdgeInsets.only(top: 160.0,),
 
                       onMapCreated: (GoogleMapController controller) async{
-                        setState(() {
-                          _mapController = controller;
-                        });
-
+                        _mapController = controller;
+                        print('\ncurrent before : ' + _coordinates.toString());
                       },
 
                     ),
@@ -122,21 +117,23 @@ class _getLocationState extends State<getLocation> {
                     children: [
                       Center(
                         child: Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: FloatingActionButton.extended(
                             onPressed: ()
-                              {
+                              async {
                                 setState(() {
                                   getDistanceAndTime(locs);
                                 });
                                 finalLocation();
-                                //print('\nafter: ' + _coordinates.toString());
-                                List nearest = getData(_coordinates);
-
-                                navigateTo(context, MarkedPlaces(_coordinates));
+                                print('\nafter: ' + _coordinates.toString());
+                                setIds();
+                                List nearest = await getData(_coordinates);
+                                //print(nearest);
+                                List snaps = await getSnaps(getIds());
+                                //navigateTo(context, MarkedPlaces(_coordinates));
                               },
                             isExtended: true,
-                            label: Text("     Find     ", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                            label: Text("    Find    ", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                             backgroundColor: Colors.red,
                           ),
                         ),
