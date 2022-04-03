@@ -109,9 +109,7 @@ class _HomeState extends State<Home> {
                       });
                       finalLocation();
                       List nearest = getData(_coordinates);
-
-                      //navigateTo(context, MarkedPlaces(_coordinates));
-                    },
+                      },
                     isExtended: true,
                     label: Text("     Find     ", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
                     backgroundColor: Colors.red,
