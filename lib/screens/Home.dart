@@ -19,11 +19,12 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   GoogleMapController _mapController;
   LatLng _coordinates;
-  List nearestCameras, snaps, spots;
+  List  snaps, nearestCameras;
+  List  <LocationDetails> data ;
 
   void initState() {
     super.initState();
-    getDistanceAndTime(locs);
+    //getDistanceAndTime(locs);
   }
 
   void finalLocation() {
@@ -41,7 +42,7 @@ class _HomeState extends State<Home> {
     nearestCameras = await getNearestCameras(_coordinates);
     List IDs = getCamerasIDs(nearestCameras);
     snaps = await getSnaps(IDs);
-    spots = await GetSpots(snaps);
+    data = await getFinalData(snaps,nearestCameras,_coordinates);
   }
 
   @override
@@ -114,17 +115,19 @@ class _HomeState extends State<Home> {
                     async {
                       if(_coordinates != null)
                         {
-                          setState(() {
-                            getDistanceAndTime(locs);
-                          });
-
                           await setResults();
-                          //navigateTo(context, MarkedPlaces(_coordinates));
+                          data==null? CircularProgressIndicator(
+
+                          ) :
+                          navigateTo(context, MarkedPlaces(currentLocation: _coordinates,data: data,));
                         }
                     },
                     isExtended: true,
-                    label: Text("     Find     ", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                    label: Text("   Find  ", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+
+                    ),
                     backgroundColor: Colors.red,
+
                   ),
                 ),
               ),

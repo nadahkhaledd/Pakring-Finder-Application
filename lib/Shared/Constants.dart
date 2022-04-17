@@ -1,30 +1,34 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:park_locator/Model/Location.dart';
-import '../Model/DateTime.dart';
 import '../Model/LocationDetails.dart';
+import '../Network/APIS.dart';
 import '../services/directions_repository.dart';
 
 var location;
 
-List<DT> dt= [];
-void getDistanceAndTime(
-    List<LocationDetails> loc,
+Future <String> getDistance(
+    LatLng loc,
+    LatLng current
     ) async {
 
-  for(int i=0;i<loc.length;i++)
-  {
     final directions = await DirectionsRepository()
-        .getDirections(origin: LatLng(30.0313, 31.2107),
-        destination:LatLng(loc[i].location.lat, loc[i].location.lng) );
-    DT dtt=new DT (directions.totalDistance,directions.totalDuration);
-    dt.add(dtt);
-  }
- // emit(parkingDTSates());
- // return dt;
+        .getDirections(origin:current,
+        destination:LatLng(loc.latitude, loc.longitude) );
+    return directions.totalDistance;
+
 }
+
+Future <String> getTime(
+    LatLng loc,
+    LatLng current
+    ) async {
+
+  final directions = await DirectionsRepository()
+      .getDirections(origin:current,
+      destination:LatLng(loc.latitude, loc.longitude) );
+  return directions.totalDuration;
+
+}
+
 void setSearchLocation (var coords) async
 {
   location = coords;
@@ -53,17 +57,40 @@ List getCamerasIDs(List cameras)
 
 
 
-//final List<DT> dt= [];
-/*
-void getDistanceAndTime(
-    List<LocationDetails> loc,
-    Location home,
-    ) async {
-  for(int i=0;i<loc.length;i++)
-  {
-    final directions = await DirectionsRepository()
-        .getDirections(origin: LatLng(home.lat, home.lng), destination:LatLng(loc[i].location.lat, loc[i].location.lng) );
-    DT dtt=new DT (directions.totalDistance,directions.totalDuration);
-    dt.add(dtt);
+Future<List<LocationDetails>> getFinalData(List snaps, List nearest,LatLng current) async {
+  List newSnaps = [];
+  List<LocationDetails> finalData = [];
+  if (snaps.length != 0) {
+    for (int i = 0; i < snaps.length; i++) {
+      String url = snaps[i]["Path"];
+      String cap = (snaps[i]["Capacity"]).toString();
+      String spots = await getApiData(url: url, capacity: cap);
+      if (spots != null) {
+        if (int.parse(spots) > 0) {
+          List x = getFData(snaps[i]["Camera_ID"], nearest);
+          LatLng loc = x[0]['location'];
+          String distance = await getDistance(loc,current);
+
+          String time = await getTime(loc,current);
+          LocationDetails details = new LocationDetails(
+              spots: spots.toString(),
+              name: x[0]['address'].toString(),
+              distance: distance.toString(),
+              time: time.toString(),
+              location: loc);
+          finalData.add(details);
+        }
+      }
+    }
   }
-}*/
+  return finalData;
+}
+
+List getFData(int id, List near) {
+  List x = [];
+  for (int i = 0; i < near.length; i++)
+    if (id == near[i]['id']) {
+      x.add(near[i]);
+      return x;
+    }
+}

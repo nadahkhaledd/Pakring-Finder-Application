@@ -12,7 +12,7 @@ class DioHelper {
     ));
   }
 
- static Future<Response> getData({
+  static Future<Response> getData({
     @required String url,
     @required Map<String,dynamic> query,
   }) async {
@@ -22,7 +22,7 @@ class DioHelper {
   static Future<Response> postData({
     @required String url,
     @required Map<String,dynamic> data,
-  //  Map<String, dynamic> query,
+    //  Map<String, dynamic> query,
   }) async {
     dio.options.headers = {
       "Content-Type": "application/json",
@@ -31,4 +31,3 @@ class DioHelper {
   }
 
 }
-
