@@ -116,9 +116,7 @@ class _HomeState extends State<Home> {
                       if(_coordinates != null)
                         {
                           await setResults();
-                          data==null? CircularProgressIndicator(
 
-                          ) :
                           navigateTo(context, MarkedPlaces(currentLocation: _coordinates,data: data,));
                         }
                     },
