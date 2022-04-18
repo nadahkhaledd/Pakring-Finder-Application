@@ -6,6 +6,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../Model/DateTime.dart';
 import '../../Model/LocationDetails.dart';
+import '../../Model/directionsDetails.dart';
 import '../../Shared/Components.dart';
 import '../../Shared/Constants.dart';
 import '../../Shared/Marker.dart';
@@ -26,6 +27,8 @@ class MarkedPlaces extends StatefulWidget {
 }
 
 class _MarkedPlacesState extends State<MarkedPlaces> {
+
+
 
   Widget build(BuildContext context) {
     Set<Marker> markers = addMarkers(widget.data);
@@ -122,8 +125,10 @@ class _MarkedPlacesState extends State<MarkedPlaces> {
                                   color: Colors.blue,
                                   size: 35,
                                 ),
-                                onPressed: () {
-                                  navigateTo(context, direction_screen());
+                                onPressed: () async {
+                                  var info = directionsDetails(LatLng(widget.currentLocation.latitude, widget.currentLocation.longitude), widget.data[index].location);
+                                  await info.create();
+                                  navigateTo(context, direction_screen(currentLocation: widget.currentLocation,info: info));
                                 },
                               ),
                             )),
@@ -137,3 +142,5 @@ class _MarkedPlacesState extends State<MarkedPlaces> {
     ));
   }
 }
+
+
