@@ -17,7 +17,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   GoogleMapController _mapController;
   LatLng _coordinates;
-  List  snaps, nearestCameras;
+  List  snaps, all, nearestCameras;
   List  <LocationDetails> data = [];
 
   // void initState() {
@@ -35,7 +35,8 @@ class _HomeState extends State<Home> {
 
   Future<void> setResults()
   async {
-    nearestCameras = await getNearestCameras(_coordinates);
+    all = await getAllCameras();
+    nearestCameras = await getNearestCameras(_coordinates, all);
     List IDs;
     setState(() {
       IDs = getCamerasIDs(nearestCameras);

@@ -1,4 +1,5 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:park_locator/Shared/calculations.dart';
 import '../Model/LocationDetails.dart';
 import '../Network/APIS.dart';
 import '../services/directions_repository.dart';
@@ -39,6 +40,21 @@ bool isThereLocation ()
 {
   return location!=null;
 }
+
+
+getNearestCameras(LatLng source, List cameras)
+{
+  List nearest = [];
+  cameras.forEach((element) {
+    if(isInRadius(source.latitude, source.longitude, element['location'].latitude, element['location'].longitude) == true)
+      {
+        nearest.add(element);
+      }
+  });
+
+  return nearest;
+}
+
 
 
 List getCamerasIDs(List cameras)
