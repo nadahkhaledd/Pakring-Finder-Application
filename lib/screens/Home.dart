@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
-
 import '../Model/LocationDetails.dart';
-import '../Network/APIS.dart';
 import '../Shared/Components.dart';
 import '../Shared/Constants.dart';
 import '../services/DB.dart';
@@ -22,10 +20,9 @@ class _HomeState extends State<Home> {
   List  snaps, nearestCameras;
   List  <LocationDetails> data = [];
 
-  void initState() {
-    super.initState();
-    //getDistanceAndTime(locs);
-  }
+  // void initState() {
+  //   super.initState();
+  // }
 
   void finalLocation() {
     if (isThereLocation()) {
@@ -36,23 +33,22 @@ class _HomeState extends State<Home> {
   }
 
 
-
+  Future<void> setResults()
+  async {
+    nearestCameras = await getNearestCameras(_coordinates);
+    List IDs;
+    setState(() {
+      IDs = getCamerasIDs(nearestCameras);
+    });
+    snaps = await getSnaps(IDs);
+    data = await getFinalData(snaps,nearestCameras,_coordinates);
+    nearestCameras.forEach((element) {print(element);});
+  }
 
   @override
   Widget build(BuildContext context) {
     final currentLocation = Provider.of<Position>(context);
 
-    Future<void> setResults()
-    async {
-        nearestCameras = await getNearestCameras(_coordinates);
-        List IDs;
-        setState(() {
-           IDs = getCamerasIDs(nearestCameras);
-        });
-        snaps = await getSnaps(IDs);
-        data = await getFinalData(snaps,nearestCameras,_coordinates);
-        nearestCameras.forEach((element) {print(element);});
-    }
 
     return SafeArea(
       child: Scaffold(
@@ -71,9 +67,6 @@ class _HomeState extends State<Home> {
                   rotateGesturesEnabled: true,
                   myLocationButtonEnabled: false,
                   myLocationEnabled: true,
-                  // padding: EdgeInsets.only(
-                  //   top: MediaQuery.of(context).size.height * 1 / 3,
-                  // ),
                   onMapCreated: (GoogleMapController controller) async {
                     _mapController = controller;
                   },

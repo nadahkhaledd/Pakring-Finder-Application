@@ -1,13 +1,8 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import '../../Model/DateTime.dart';
 import '../../Model/LocationDetails.dart';
 import '../../Shared/Components.dart';
-import '../../Shared/Constants.dart';
 import '../../Shared/Marker.dart';
 import '../direction_screen.dart';
 
