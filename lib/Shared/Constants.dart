@@ -3,7 +3,7 @@ import '../Model/LocationDetails.dart';
 import '../Network/APIS.dart';
 import '../services/directions_repository.dart';
 
-var location;
+var location = LatLng(30.0313, 31.2107);
 
 Future <String> getDistance(LatLng loc, LatLng current) async {
     final directions = await DirectionsRepository()

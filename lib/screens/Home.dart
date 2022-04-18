@@ -44,7 +44,6 @@ class _HomeState extends State<Home> {
 
     Future<void> setResults()
     async {
-        finalLocation();
         nearestCameras = await getNearestCameras(_coordinates);
         List IDs;
         setState(() {
@@ -122,6 +121,7 @@ class _HomeState extends State<Home> {
                     heroTag: 'run',
                     onPressed: ()
                     async {
+                      finalLocation();
                       if(_coordinates != null)
                         {
                           setState(() {
