@@ -11,7 +11,7 @@ class GoogleSearch extends StatefulWidget
 {
   var _coordinates;
   GoogleMapController _mapController;
-  GoogleSearch(this._mapController);
+  GoogleSearch( this._mapController);
   @override
   State<GoogleSearch> createState() => _GoogleSearchState();
 }

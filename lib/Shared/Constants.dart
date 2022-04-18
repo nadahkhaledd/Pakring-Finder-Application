@@ -5,11 +5,7 @@ import '../services/directions_repository.dart';
 
 var location;
 
-Future <String> getDistance(
-    LatLng loc,
-    LatLng current
-    ) async {
-
+Future <String> getDistance(LatLng loc, LatLng current) async {
     final directions = await DirectionsRepository()
         .getDirections(origin:current,
         destination:LatLng(loc.latitude, loc.longitude) );
@@ -56,8 +52,7 @@ List getCamerasIDs(List cameras)
 }
 
 
-
-Future<List<LocationDetails>> getFinalData(List snaps, List nearest,LatLng current) async {
+Future<List<LocationDetails>> getFinalData(List snaps,  List nearest,LatLng current) async {
   List newSnaps = [];
   List<LocationDetails> finalData = [];
   if (snaps.length != 0) {
@@ -67,7 +62,7 @@ Future<List<LocationDetails>> getFinalData(List snaps, List nearest,LatLng curre
       String spots = await getApiData(url: url, capacity: cap);
       if (spots != null) {
         if (int.parse(spots) > 0) {
-          List x = getFData(snaps[i]["Camera_ID"], nearest);
+          List x = await getFData(snaps[i]["Camera_ID"], nearest);
           LatLng loc = x[0]['location'];
           String distance = await getDistance(loc,current);
 
@@ -86,7 +81,9 @@ Future<List<LocationDetails>> getFinalData(List snaps, List nearest,LatLng curre
   return finalData;
 }
 
-List getFData(int id, List near) {
+
+
+Future<List> getFData(int id, List near) async{
   List x = [];
   for (int i = 0; i < near.length; i++)
     if (id == near[i]['id']) {

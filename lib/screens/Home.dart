@@ -20,7 +20,7 @@ class _HomeState extends State<Home> {
   GoogleMapController _mapController;
   LatLng _coordinates;
   List  snaps, nearestCameras;
-  List  <LocationDetails> data ;
+  List  <LocationDetails> data = [];
 
   void initState() {
     super.initState();
@@ -36,26 +36,35 @@ class _HomeState extends State<Home> {
   }
 
 
-  Future<void> setResults()
-  async {
-    finalLocation();
-    nearestCameras = await getNearestCameras(_coordinates);
-    List IDs = getCamerasIDs(nearestCameras);
-    snaps = await getSnaps(IDs);
-    data = await getFinalData(snaps,nearestCameras,_coordinates);
-  }
+
 
   @override
   Widget build(BuildContext context) {
     final currentLocation = Provider.of<Position>(context);
+
+    Future<void> setResults()
+    async {
+        finalLocation();
+        nearestCameras = await getNearestCameras(_coordinates);
+        List IDs;
+        setState(() {
+           IDs = getCamerasIDs(nearestCameras);
+        });
+        snaps = await getSnaps(IDs);
+        data = await getFinalData(snaps,nearestCameras,_coordinates);
+        nearestCameras.forEach((element) {print(element);});
+    }
 
     return SafeArea(
       child: Scaffold(
           body: Stack(
             children: [
                 GoogleMap(
-                  initialCameraPosition:
-                      (CameraPosition(target: LatLng(30.0313, 31.2107), zoom: 10.0)),
+                  initialCameraPosition:(currentLocation==null)?
+                      (CameraPosition(target: LatLng(30.0313, 31.2107), zoom: 10.0)): (CameraPosition(
+                      target: LatLng(currentLocation.latitude,
+                          currentLocation.longitude),
+                      zoom: 16.0)),
                   compassEnabled: true,
                   mapToolbarEnabled: true,
                   zoomGesturesEnabled: true,
@@ -74,7 +83,7 @@ class _HomeState extends State<Home> {
 
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: GoogleSearch(_mapController),
+                child: GoogleSearch( _mapController),
               ),
 
 
@@ -115,9 +124,12 @@ class _HomeState extends State<Home> {
                     async {
                       if(_coordinates != null)
                         {
+                          setState(() {
+
+                          });
                           await setResults();
 
-                          navigateTo(context, MarkedPlaces(currentLocation: _coordinates,data: data,));
+                          navigateTo(context,  MarkedPlaces(currentLocation: _coordinates,data: data,));
                         }
                     },
                     isExtended: true,
