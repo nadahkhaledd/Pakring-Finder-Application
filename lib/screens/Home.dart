@@ -70,7 +70,7 @@ class _HomeState extends State<Home> {
 
 
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(18.0),
                 child: GoogleSearch( _mapController),
               ),
 
