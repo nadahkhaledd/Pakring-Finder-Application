@@ -17,7 +17,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   GoogleMapController _mapController;
   LatLng _coordinates;
-  List  snaps, all, nearestCameras;
+  List  snaps, nearestCameras;
   List  <LocationDetails> data = [];
 
   // void initState() {
