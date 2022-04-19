@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/Shared/calculations.dart';
 import '../Model/LocationDetails.dart';
@@ -42,17 +44,18 @@ bool isThereLocation ()
 }
 
 
-getNearestCameras(LatLng source, List cameras)
+Future<List> getNearestCameras(LatLng source, List cameras) async
 {
-  List nearest = [];
-  cameras.forEach((element) {
-    if(isInRadius(source.latitude, source.longitude, element['location'].latitude, element['location'].longitude) == true)
-      {
-        nearest.add(element);
+List nearest=[] ;
+for(int i=0;i < cameras.length;i++)
+  {
+    bool x= await isInRadius(source, cameras[i]['location']);
+    if(x){
+        nearest.add(cameras[i]);
       }
-  });
 
-  return nearest;
+  }
+return nearest;
 }
 
 

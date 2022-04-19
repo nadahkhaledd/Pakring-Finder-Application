@@ -1,17 +1,13 @@
-import 'package:maps_toolkit/maps_toolkit.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/Shared/Constants.dart';
 import '../services/DistanceMatrix.dart';
 
-Future<bool> isInRadius(var sourceLat, var sourceLong, var destinationLat, var destinationLong)  async {
-  var result = await getDistanceMatrix(sourceLat, sourceLong, destinationLat, destinationLong);
-  var distance = result['distance'] * 1.60934;
+Future<bool> isInRadius(LatLng current, LatLng loc)  async {
 
-  // final distance = SphericalUtil.computeDistanceBetween(
-  //     LatLng(sourceLat, sourceLong), LatLng(destinationLat, destinationLong)) / 1000.0;
-
-  if( distance <= 3.5)
+  String distance = await getDistance(loc,current);
+  String d2=distance.substring(0,distance.length-3);
+  if( double.parse(d2) <= 3.5)
     {
-      print('distance:' +  distance.toString());
       return true;
     }
   else
