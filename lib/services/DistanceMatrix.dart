@@ -1,14 +1,18 @@
 import 'package:dio/dio.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 
+getDistanceMatrix(LatLng source, LatLng destination) async {
+  String GoogleAPIKey = 'AIzaSyANNie-WxuIW_ibDpFjNPO5fICFWFfEk3w';
 
-  getDistanceMatrix(double sourceLat, double sourceLong, double destLat, double destLong)
- async {
    Dio dio = new Dio();
-   Response response=await dio.get("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=$sourceLat,$sourceLong&destinations=$destLat,$destLong&key=AIzaSyANNie-WxuIW_ibDpFjNPO5fICFWFfEk3w");
-   String distance = response.data['rows'][0]['elements'][0]['distance']['text'];
-   List splitDistance = distance.split(' ');
-   var result = {'address': response.data['destination_addresses'], 'distance': double.parse(splitDistance[0])};
+   Response response=await dio.get("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&"
+       "origins=${source.latitude},${source.longitude}&destinations=${destination.latitude},${destination.longitude}&"
+       "key=$GoogleAPIKey");
+
+   String distanceList = response.data['rows'][0]['elements'][0]['distance']['text'];
+   String distance = distanceList.split(' ')[0];
+   var result = {'address': response.data['destination_addresses'], 'distance': double.parse(distance)};
 
    return result;
 }

@@ -38,7 +38,6 @@ class _HomeState extends State<Home> {
     List IDs = getCamerasIDs(nearestCameras);
     snaps = await getSnaps(IDs);
     data = await getFinalData(snaps,nearestCameras,_coordinates);
-    //nearestCameras.forEach((element) {print(element);});
   }
 
 

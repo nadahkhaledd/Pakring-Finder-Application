@@ -4,12 +4,13 @@ import '../services/DistanceMatrix.dart';
 
 Future<bool> isInRadius(LatLng current, LatLng destination)  async {
 
-  var result = await getDistanceMatrix(current.latitude, current.longitude, destination.latitude, destination.longitude);
-  var distance = result['distance'];
+  Map result = await getDistanceMatrix(current, destination);
+  double distance = result['distance'];
+
+
   if(distance <= 3.5)
-    {
       return true;
-    }
+
   else
     return false;
 }

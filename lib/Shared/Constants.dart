@@ -1,34 +1,27 @@
 import 'dart:async';
-
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:park_locator/Shared/calculations.dart';
 import '../Model/LocationDetails.dart';
 import '../Network/APIS.dart';
 import '../services/directions_repository.dart';
 
+
 var location = LatLng(30.0313, 31.2107);   ///default
 
-Future <String> getDistance(LatLng loc, LatLng current) async {
+Future <String> getDistance(LatLng destination, LatLng current) async {
     final directions = await DirectionsRepository()
         .getDirections(origin:current,
-        destination:LatLng(loc.latitude, loc.longitude) );
+        destination:LatLng(destination.latitude, destination.longitude) );
     return directions.totalDistance;
-
 }
 
-Future <String> getTime(
-    LatLng loc,
-    LatLng current
-    ) async {
-
+Future <String> getTime(LatLng destination, LatLng current) async {
   final directions = await DirectionsRepository()
       .getDirections(origin:current,
-      destination:LatLng(loc.latitude, loc.longitude) );
+      destination:LatLng(destination.latitude, destination.longitude) );
   return directions.totalDuration;
-
 }
 
-void setSearchLocation (var source) async
+void setSearchLocation (LatLng source) async
 {
   location = source;
 }
