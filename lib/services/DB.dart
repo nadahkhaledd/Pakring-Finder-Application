@@ -5,27 +5,28 @@ import 'package:park_locator/Shared/calculations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 
-Future<List> getAllCameras()
+Future<List> getNearestCameras(LatLng current)
 async {
-  List Cameras = [];
+  List values;
+  List nearest = [];
 
   final db = await FirebaseDatabase.instance.reference();
   await db.child('Cameras').once().then((DataSnapshot snapshot) async {
-    List values = await snapshot.value;
-    values.forEach( (element) async {
-      if(element != null)
+    values = await snapshot.value;});
+
+  for(var element in values)
+    {
+      if(element!=null)
         {
-          // var result =  isInRadius(coordinates.latitude, coordinates.longitude, double.parse(element['lat']), double.parse(element['long']));
-          // if(result)
-          // {
-             LatLng location =  LatLng(double.parse(element['lat']), double.parse(element['long']));
-            Cameras.add({'id':element['id'], 'location': location, 'address': element['address']});
-          //}
+          LatLng location = LatLng(double.parse(element['lat']), double.parse(element['long']));
+          bool condition = await isInRadius(current, location);
+          if(condition)
+            {
+              nearest.add({'id': element['id'], 'location': location, 'address': element['address']});
+            }
         }
     }
-    );
-  });
-  return  Cameras;
+  return nearest;
 }
 
 Future<List> getSnaps (List nearestPlacesIDs)async

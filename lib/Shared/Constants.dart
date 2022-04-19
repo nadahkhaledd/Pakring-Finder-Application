@@ -6,7 +6,7 @@ import '../Model/LocationDetails.dart';
 import '../Network/APIS.dart';
 import '../services/directions_repository.dart';
 
-var location = LatLng(30.0313, 31.2107);
+var location = LatLng(30.0313, 31.2107);   ///default
 
 Future <String> getDistance(LatLng loc, LatLng current) async {
     final directions = await DirectionsRepository()
@@ -28,9 +28,9 @@ Future <String> getTime(
 
 }
 
-void setSearchLocation (var coords) async
+void setSearchLocation (var source) async
 {
-  location = coords;
+  location = source;
 }
 
 LatLng getSearchLocation ()
@@ -42,22 +42,6 @@ bool isThereLocation ()
 {
   return location!=null;
 }
-
-
-Future<List> getNearestCameras(LatLng source, List cameras) async
-{
-List nearest=[] ;
-for(int i=0;i < cameras.length;i++)
-  {
-    bool x= await isInRadius(source, cameras[i]['location']);
-    if(x){
-        nearest.add(cameras[i]);
-      }
-
-  }
-return nearest;
-}
-
 
 
 List getCamerasIDs(List cameras)

@@ -32,19 +32,15 @@ class _HomeState extends State<Home> {
     }
   }
 
-
   Future<void> setResults()
   async {
-    all = await getAllCameras();
-    nearestCameras = await getNearestCameras(_coordinates, all);
-    List IDs;
-    setState(() {
-      IDs = getCamerasIDs(nearestCameras);
-    });
+    nearestCameras = await getNearestCameras(_coordinates);
+    List IDs = getCamerasIDs(nearestCameras);
     snaps = await getSnaps(IDs);
     data = await getFinalData(snaps,nearestCameras,_coordinates);
-    nearestCameras.forEach((element) {print(element);});
+    //nearestCameras.forEach((element) {print(element);});
   }
+
 
   @override
   Widget build(BuildContext context) {
