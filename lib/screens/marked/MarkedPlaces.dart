@@ -55,16 +55,23 @@ class _MarkedPlacesState extends State<MarkedPlaces> {
 
               Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: Text(
-                  "Nearby Places",
-                  style: TextStyle(
-                      fontSize: 20,
-                      //color: Colors.blue,
-                      fontWeight: FontWeight.bold),
+                child: Container(
+                  child: Text(
+                    "Nearby Places",
+                    style: TextStyle(
+                        fontSize: 20,
+                        //color: Colors.blue,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
 
-              Flexible(child: NearbyPlaces(widget.data)),
+              (widget.data.length!=0)? Flexible(child: NearbyPlaces(widget.data)):
+              Container(
+                alignment: Alignment.bottomCenter,
+                child: Text('\nNo nearby places with vacant spots found',
+                  style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 15),),
+              ),
             ],
             ),
         ));
