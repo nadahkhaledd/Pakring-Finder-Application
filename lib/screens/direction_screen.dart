@@ -24,6 +24,7 @@ class direction_screen extends StatefulWidget{
 
   direction_screen({this.currentLocation,this.info});
 
+
   @override
   State<direction_screen> createState() => _searchState();
 
@@ -36,6 +37,7 @@ class _searchState extends State<direction_screen> {
   @override
   Widget build(BuildContext context) {
     Set<Marker> markers = addMarkers2(widget.currentLocation,widget.info.getDestination());
+
     return Scaffold(
       body: Column(
         children: [
@@ -51,8 +53,8 @@ class _searchState extends State<direction_screen> {
             width: MediaQuery.of(context).size.width,
             child: GoogleMap(
               initialCameraPosition: (widget.currentLocation != null) ? (CameraPosition(target:
-              LatLng(widget.currentLocation.latitude,widget.currentLocation.longitude), zoom: 20.0,))
-                  : (CameraPosition(target: LatLng(30.0313, 31.2107), zoom: 9.0)),
+              LatLng(widget.currentLocation.latitude,widget.currentLocation.longitude), zoom: 15.0,))
+                  : (CameraPosition(target: LatLng(30.0313, 31.2107), zoom: 13.0)),
 
               zoomGesturesEnabled: true,
               zoomControlsEnabled: true,

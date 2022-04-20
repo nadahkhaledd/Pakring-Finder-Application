@@ -30,11 +30,11 @@ class _from_toState extends State<from_to> {
               children: [
                 Container(
 
-                  child:Icon(Icons.my_location,color:Colors.blue),
+                  child:Icon(Icons.location_on,color: Color(0xff2283ea))
                 ),
                  Container(
                     padding: const EdgeInsets.only(top:20.0,right: 0.0),
-                    child:Icon(Icons.location_on,color:Colors.blue),
+                    child:Icon(Icons.location_on,color:Colors.red),
                   ),
 
               ],
@@ -53,10 +53,9 @@ class _from_toState extends State<from_to> {
                     readOnly: true,
 
                     decoration: InputDecoration(
-                      border: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black38)),
+                      border: OutlineInputBorder(),
                       hintText: widget.source,
-
+                      labelText: "source"
                     ),
                     autofocus: false,
                   ),
@@ -70,9 +69,9 @@ class _from_toState extends State<from_to> {
                   child: TextField(
                     readOnly: true,
                     decoration: InputDecoration(
-                      border: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black38)),
-                      hintText: widget.target,
+                        border: OutlineInputBorder(),
+                        hintText: widget.target,
+                        labelText: "destination"
                     ),
                     autofocus: false,
                   ),
