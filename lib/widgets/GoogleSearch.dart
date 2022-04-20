@@ -11,7 +11,7 @@ class GoogleSearch extends StatefulWidget
 {
   var _coordinates;
   GoogleMapController _mapController;
-  GoogleSearch(this._mapController);
+  GoogleSearch( this._mapController);
   @override
   State<GoogleSearch> createState() => _GoogleSearchState();
 }
@@ -20,30 +20,27 @@ class _GoogleSearchState extends State<GoogleSearch> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SearchLocation(
-        apiKey: 'AIzaSyANNie-WxuIW_ibDpFjNPO5fICFWFfEk3w',
-        language: 'en',
-        placeholder: 'Search location',
-        iconColor: Colors.red,
-        darkMode: true,
-        country: 'EG',
-        onClearIconPress: (){
-          widget._coordinates = widget._coordinates;
-        },
-        onSelected: (Place place ) async {
-          final geolocation = await place.geolocation;
-          var location = LatLng(geolocation?.coordinates?.latitude,geolocation?.coordinates?.longitude);
-          widget._mapController.animateCamera(CameraUpdate.newCameraPosition(
-              CameraPosition(target: location, zoom: 18.0)));
-          setState(() {
-            widget._coordinates = location;
-            setSearchLocation(widget._coordinates);
-          });
+    return SearchLocation(
+      apiKey: 'AIzaSyANNie-WxuIW_ibDpFjNPO5fICFWFfEk3w',
+      language: 'en',
+      placeholder: 'Search location',
+      iconColor: Colors.red,
+      darkMode: true,
+      country: 'EG',
+      onClearIconPress: (){
+        widget._coordinates = widget._coordinates;
+      },
+      onSelected: (Place place ) async {
+        final geolocation = await place.geolocation;
+        var location = LatLng(geolocation?.coordinates?.latitude,geolocation?.coordinates?.longitude);
+        widget._mapController.animateCamera(CameraUpdate.newCameraPosition(
+            CameraPosition(target: location, zoom: 18.0)));
+        setState(() {
+          widget._coordinates = location;
+          setSearchLocation(widget._coordinates);
+        });
 
-        },
-      ),
+      },
     );
   }
 }
