@@ -68,7 +68,7 @@ class _MarkedPlacesState extends State<MarkedPlaces> {
                   ),
                 ),
               ),
-              (widget.data.length!=0)? Flexible(child: NearbyPlaces(widget.data)):
+              (widget.data.length!=0)? Flexible(child: NearbyPlaces(widget.data, widget.currentLocation)):
               Container(
                 alignment: Alignment.bottomCenter,
                 child: Text('\nNo nearby places with vacant spots found',

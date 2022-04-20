@@ -1,15 +1,17 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/Model/LocationDetails.dart';
-
+import '../Model/directionsDetails.dart';
 import '../Shared/Components.dart';
 import '../screens/direction_screen.dart';
 
 class NearbyPlaces extends StatelessWidget
 {
    List data;
-   NearbyPlaces(this.data);
+   LatLng source;
+   NearbyPlaces(this.data, this.source);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -61,10 +63,10 @@ class NearbyPlaces extends StatelessWidget
                   color: Colors.blue,
                   size: 35,
                 ),
-                onPressed: () {
-                  var info = directionsDetails(LatLng(widget.currentLocation.latitude, widget.currentLocation.longitude), widget.data[index].location);
-                                  await info.create();
-                                  navigateTo(context, direction_screen(currentLocation: widget.currentLocation,info: info));
+                onPressed: () async {
+                  var info = directionsDetails(source, data[index].location);
+                  await info.create();
+                  navigateTo(context, direction_screen(currentLocation: source,info: info));
                 },
               ),
             )),
