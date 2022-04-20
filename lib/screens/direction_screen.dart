@@ -8,7 +8,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/Model/LocationDetails.dart';
 import 'package:park_locator/Model/directionsDetails.dart';
 
-import 'package:park_locator/services/directionsModel.dart';
+import 'package:park_locator/Model/Directions.dart';
 import 'package:park_locator/services/directions_repository.dart';
 import 'package:park_locator/widgets/d_widgets/from_to.dart';
 import 'package:park_locator/widgets/d_widgets/time.dart';

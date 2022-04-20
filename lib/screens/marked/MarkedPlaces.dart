@@ -1,17 +1,12 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import '../../Model/DateTime.dart';
+import 'package:park_locator/widgets/NearbyPlaces.dart';
 import '../../Model/LocationDetails.dart';
 import '../../Model/directionsDetails.dart';
 import '../../Shared/Components.dart';
-import '../../Shared/Constants.dart';
 import '../../Shared/Marker.dart';
 import '../direction_screen.dart';
-
 
 
 class MarkedPlaces extends StatefulWidget {
@@ -35,10 +30,7 @@ class _MarkedPlacesState extends State<MarkedPlaces> {
 
     return Scaffold(
         body: SafeArea(
-      child: Container(
-        //color: Colors.grey[200],
-        child: Expanded(
-          child: Column(
+            child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
@@ -57,15 +49,16 @@ class _MarkedPlacesState extends State<MarkedPlaces> {
                   zoomControlsEnabled: true,
                   rotateGesturesEnabled: true,
                   myLocationButtonEnabled: true,
-                  // myLocationEnabled: true,
-                  padding: EdgeInsets.only(
-                    top: 270.0,
-                  ),
+                  //myLocationEnabled: true,
+                  // padding: EdgeInsets.only(
+                  //   top: 270.0,
+                  // ),
                 ),
               ),
+
               Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: Expanded(
+                child: Container(
                   child: Text(
                     "Nearby Places",
                     style: TextStyle(
@@ -75,71 +68,15 @@ class _MarkedPlacesState extends State<MarkedPlaces> {
                   ),
                 ),
               ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(30)),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ],
-                    ),
-                    child: ListView.builder(
-                        itemCount: widget.data.length,
-                        itemBuilder: (context, index) => ListTile(
-                              leading: Container(
-                                alignment: Alignment.center,
-                                height: heightResponsive(
-                                    height: 15, context: context),
-                                width:
-                                    widthResponsive(context: context, width: 8),
-                                decoration: BoxDecoration(
-                                  color: Colors.blue,
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Text(
-                                  widget.data[index].time,
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 15),
-                                        textAlign: TextAlign.center,
-                                      ),
-                              ),
-                              title: Text( widget.data[index].name,
-                                overflow:  TextOverflow.ellipsis,
-
-                              ),
-                              subtitle: Text( widget.data[index].spots + " Spots  "+  widget.data[index].distance),
-                              trailing: IconButton(
-                                icon: Icon(
-                                  Icons.directions,
-                                  color: Colors.blue,
-                                  size: 35,
-                                ),
-                                onPressed: () async {
-                                  var info = directionsDetails(LatLng(widget.currentLocation.latitude, widget.currentLocation.longitude), widget.data[index].location);
-                                  await info.create();
-                                  navigateTo(context, direction_screen(currentLocation: widget.currentLocation,info: info));
-                                },
-                              ),
-                            )),
-                  ),
-                ),
+              (widget.data.length!=0)? Flexible(child: NearbyPlaces(widget.data)):
+              Container(
+                alignment: Alignment.bottomCenter,
+                child: Text('\nNo nearby places with vacant spots found',
+                  style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 15),),
               ),
             ],
-          ),
-        ),
-      ),
-    ));
+            ),
+        ));
   }
 }
 

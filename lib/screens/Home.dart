@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
-
 import '../Model/LocationDetails.dart';
-import '../Network/APIS.dart';
 import '../Shared/Components.dart';
 import '../Shared/Constants.dart';
 import '../services/DB.dart';
@@ -20,12 +18,11 @@ class _HomeState extends State<Home> {
   GoogleMapController _mapController;
   LatLng _coordinates;
   List  snaps, nearestCameras;
-  List  <LocationDetails> data ;
+  List  <LocationDetails> data = [];
 
-  void initState() {
-    super.initState();
-    //getDistanceAndTime(locs);
-  }
+  // void initState() {
+  //   super.initState();
+  // }
 
   void finalLocation() {
     if (isThereLocation()) {
@@ -35,27 +32,30 @@ class _HomeState extends State<Home> {
     }
   }
 
-
   Future<void> setResults()
   async {
-    finalLocation();
     nearestCameras = await getNearestCameras(_coordinates);
     List IDs = getCamerasIDs(nearestCameras);
     snaps = await getSnaps(IDs);
     data = await getFinalData(snaps,nearestCameras,_coordinates);
   }
 
+
   @override
   Widget build(BuildContext context) {
     final currentLocation = Provider.of<Position>(context);
+
 
     return SafeArea(
       child: Scaffold(
           body: Stack(
             children: [
                 GoogleMap(
-                  initialCameraPosition:
-                      (CameraPosition(target: LatLng(30.0313, 31.2107), zoom: 10.0)),
+                  initialCameraPosition:(currentLocation==null)?
+                      (CameraPosition(target: LatLng(30.0313, 31.2107), zoom: 10.0)): (CameraPosition(
+                      target: LatLng(currentLocation.latitude,
+                          currentLocation.longitude),
+                      zoom: 16.0)),
                   compassEnabled: true,
                   mapToolbarEnabled: true,
                   zoomGesturesEnabled: true,
@@ -63,9 +63,6 @@ class _HomeState extends State<Home> {
                   rotateGesturesEnabled: true,
                   myLocationButtonEnabled: false,
                   myLocationEnabled: true,
-                  // padding: EdgeInsets.only(
-                  //   top: MediaQuery.of(context).size.height * 1 / 3,
-                  // ),
                   onMapCreated: (GoogleMapController controller) async {
                     _mapController = controller;
                   },
@@ -73,8 +70,8 @@ class _HomeState extends State<Home> {
 
 
               Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: GoogleSearch(_mapController),
+                padding: const EdgeInsets.all(18.0),
+                child: GoogleSearch( _mapController),
               ),
 
 
@@ -113,11 +110,15 @@ class _HomeState extends State<Home> {
                     heroTag: 'run',
                     onPressed: ()
                     async {
+                      finalLocation();
                       if(_coordinates != null)
                         {
+                          setState(() {
+
+                          });
                           await setResults();
 
-                          navigateTo(context, MarkedPlaces(currentLocation: _coordinates,data: data,));
+                          navigateTo(context,  MarkedPlaces(currentLocation: _coordinates,data: data,));
                         }
                     },
                     isExtended: true,
