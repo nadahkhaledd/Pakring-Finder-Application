@@ -22,28 +22,20 @@ class directionsDetails
       PolylinePoints polylinePoints;
       Map<PolylineId, Polyline> polylines = {};
       List<LatLng> polylineCoordinates = [];
-      directionsDetails(this.home, this.work){
-            _createPolylines( home.latitude, home.longitude, work.latitude, work.longitude);
-      }
-      String getMyLocation_name()
-      {
-          return myLocation_name;
-      }
-      String getDestination_name()
-      {
-        return destination_name;
-      }
-      String getduration()
-      {
-        return duration;
-      }
-      String getDistance()
-      {
-        return distance;
-      }
+      directionsDetails(this.home, this.work)  {}
+
       Map<PolylineId, Polyline> getPolylines()
       {
+
             return polylines;
+      }
+      Future<void> create()
+      async {
+            await _createPolylines( home.latitude, home.longitude, work.latitude, work.longitude);
+      }
+      LatLng getDestination()
+      {
+            return work;
       }
       //LatLng x = new LatLng(latitude, longitude);
 
@@ -59,6 +51,8 @@ class directionsDetails
       destination_name=directions.target;
       duration=directions.totalDuration;
       distance=directions.totalDistance;
+      print("{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{");
+      print(duration);
       polylinePoints = PolylinePoints();
       PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
       "AIzaSyANNie-WxuIW_ibDpFjNPO5fICFWFfEk3w", // Google Maps API Key

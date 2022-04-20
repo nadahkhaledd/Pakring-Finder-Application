@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/widgets/NearbyPlaces.dart';
 import '../../Model/LocationDetails.dart';
+import '../../Model/directionsDetails.dart';
 import '../../Shared/Components.dart';
 import '../../Shared/Marker.dart';
 import '../direction_screen.dart';
@@ -21,6 +22,8 @@ class MarkedPlaces extends StatefulWidget {
 }
 
 class _MarkedPlacesState extends State<MarkedPlaces> {
+
+
 
   Widget build(BuildContext context) {
     Set<Marker> markers = addMarkers(widget.data);
@@ -65,7 +68,6 @@ class _MarkedPlacesState extends State<MarkedPlaces> {
                   ),
                 ),
               ),
-
               (widget.data.length!=0)? Flexible(child: NearbyPlaces(widget.data)):
               Container(
                 alignment: Alignment.bottomCenter,
@@ -77,3 +79,5 @@ class _MarkedPlacesState extends State<MarkedPlaces> {
         ));
   }
 }
+
+
