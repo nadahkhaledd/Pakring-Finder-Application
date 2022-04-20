@@ -62,7 +62,9 @@ class NearbyPlaces extends StatelessWidget
                   size: 35,
                 ),
                 onPressed: () {
-                  navigateTo(context, direction_screen());
+                  var info = directionsDetails(LatLng(widget.currentLocation.latitude, widget.currentLocation.longitude), widget.data[index].location);
+                                  await info.create();
+                                  navigateTo(context, direction_screen(currentLocation: widget.currentLocation,info: info));
                 },
               ),
             )),
