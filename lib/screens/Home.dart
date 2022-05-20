@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
+
 import '../Model/LocationDetails.dart';
 import '../Shared/Components.dart';
 import '../Shared/Constants.dart';
@@ -20,6 +22,7 @@ class _HomeState extends State<Home> {
   List snaps, nearestCameras;
   List<LocationDetails> data = [];
   bool isLoading = false;
+
   void finalLocation() {
     if (isThereLocation()) {
       setState(() {
@@ -49,10 +52,7 @@ class _HomeState extends State<Home> {
 
     return SafeArea(
       child: Scaffold(
-          body:   isLoading == true ?
-          CircularProgressIndicator()
-              :
-          Stack(
+          body: Stack(
         children: [
           GoogleMap(
             initialCameraPosition: (currentLocation == null)
@@ -101,7 +101,6 @@ class _HomeState extends State<Home> {
               },
             ),
           ),
-
           Container(
             alignment: Alignment.bottomCenter,
             child: Padding(
@@ -111,13 +110,14 @@ class _HomeState extends State<Home> {
                 onPressed: () async {
                   finalLocation();
                   if (_coordinates != null) {
-                      await setResults();
+                    await setResults();
                     navigateTo(
                         context,
                         MarkedPlaces(
                           currentLocation: _coordinates,
                           data: data,
-                        ));}
+                        ));
+                  }
                 },
                 isExtended: true,
                 label: Text(
@@ -128,6 +128,33 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
+          Center(
+            child: isLoading == true ?
+            Container(
+              alignment: Alignment.center,
+              height: MediaQuery.of(context).size.height * 1/4,
+                width: MediaQuery.of(context).size.width * 2/3,
+                decoration: new BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(15.0)),
+            ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Center(child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("Processing Data...", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),),
+                    )),
+                    Center(child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CircularProgressIndicator(color: Colors.red),
+                    ))
+                  ],
+                )
+            ):
+            Center(),
+          )
         ],
       )),
     );
