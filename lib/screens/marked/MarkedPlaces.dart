@@ -24,7 +24,6 @@ class MarkedPlaces extends StatefulWidget {
 class _MarkedPlacesState extends State<MarkedPlaces> {
 
 
-
   Widget build(BuildContext context) {
     Set<Marker> markers = addMarkers(widget.data);
 
@@ -34,7 +33,7 @@ class _MarkedPlacesState extends State<MarkedPlaces> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: MediaQuery.of(context).size.height * 1.5 / 3,
+                height: MediaQuery.of(context).size.height * 2/3,
                 width: MediaQuery.of(context).size.width,
                 child: GoogleMap(
                   markers: markers,
