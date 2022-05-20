@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:park_locator/widgets/loadingIndicator.dart';
 import 'package:provider/provider.dart';
 
 import '../Model/LocationDetails.dart';
@@ -130,29 +131,7 @@ class _HomeState extends State<Home> {
           ),
           Center(
             child: isLoading == true ?
-            Container(
-              alignment: Alignment.center,
-              height: MediaQuery.of(context).size.height * 1/8,
-                width: MediaQuery.of(context).size.width * 2/3,
-                decoration: new BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                color: Colors.black45,
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-            ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Center(child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("Processing Data...", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),),
-                    )),
-                    Center(child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: CircularProgressIndicator(color: Colors.red),
-                    ))
-                  ],
-                )
-            ):
+            loadingIndicator(context, "Processing Data... "):
             Center(),
           )
         ],
