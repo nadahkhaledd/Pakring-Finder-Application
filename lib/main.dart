@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:park_locator/Network/Dio_helper.dart';
 import 'package:park_locator/screens/Home.dart';
+import 'package:park_locator/screens/splash.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:park_locator/services/geoLocator.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
           future: _firebaseApp,
             builder: (context, snapshot)
             {
-              return start();
+              return splash();
             }
 
         ),
@@ -41,23 +42,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-class start extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-    return SplashScreen(
-      seconds: 5,
-      navigateAfterSeconds: new Home(),
-      image: new Image.asset('assets/images/logo.PNG'),
-      photoSize: 100.0,
-      loaderColor: Colors.red,
-      backgroundColor: Colors.white,
-    );
-  }
-}
-
-
 
 
