@@ -33,8 +33,6 @@ class _HomeState extends State<Home> {
   }
 
   Future<void> setResults() async {
-    print("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
-
     setState(() {
       isLoading = true;
     });
@@ -73,10 +71,12 @@ class _HomeState extends State<Home> {
               _mapController = controller;
             },
           ),
+
           Padding(
             padding: const EdgeInsets.all(18.0),
             child: GoogleSearch(_mapController),
           ),
+
           Container(
             alignment: Alignment.centerRight,
             padding: const EdgeInsets.only(top: 120, left: 10, right: 10),
@@ -102,6 +102,7 @@ class _HomeState extends State<Home> {
               },
             ),
           ),
+
           Container(
             alignment: Alignment.bottomCenter,
             child: Padding(
@@ -129,10 +130,10 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
-          Center(
-            child: isLoading == true ?
-            loadingIndicator(context, "Processing Data... "):
-            Center(),
+
+          Center( child: isLoading == true ?
+            loadingIndicator(context, "Processing Data... ")
+                : Center(),
           )
         ],
       )),
