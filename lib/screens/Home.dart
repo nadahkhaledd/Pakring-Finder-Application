@@ -132,19 +132,19 @@ class _HomeState extends State<Home> {
             child: isLoading == true ?
             Container(
               alignment: Alignment.center,
-              height: MediaQuery.of(context).size.height * 1/4,
+              height: MediaQuery.of(context).size.height * 1/8,
                 width: MediaQuery.of(context).size.width * 2/3,
                 decoration: new BoxDecoration(
                   border: Border.all(color: Colors.grey),
-                color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                color: Colors.black45,
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
             ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Center(child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text("Processing Data...", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),),
+                      child: Text("Processing Data...", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),),
                     )),
                     Center(child: Padding(
                       padding: const EdgeInsets.all(8.0),
