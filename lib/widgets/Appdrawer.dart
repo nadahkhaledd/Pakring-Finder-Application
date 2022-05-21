@@ -74,11 +74,8 @@ Drawer Appdrawer(context) {
         ),
 
         Container(
-          padding: EdgeInsets.only(top: 350),
+          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/2.3),
           child: Column(
-            // mainAxisAlignment: MainAxisAlignment.end,
-            // crossAxisAlignment: CrossAxisAlignment.start,
-
             children: [
               Divider(
                 height: 1,
