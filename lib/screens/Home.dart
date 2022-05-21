@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:park_locator/widgets/Appdrawer.dart';
 import 'package:park_locator/widgets/loadingIndicator.dart';
 import 'package:provider/provider.dart';
 
@@ -51,15 +52,14 @@ class _HomeState extends State<Home> {
 
     return SafeArea(
       child: Scaffold(
+        drawer: Appdrawer(),
           body: Stack(
         children: [
           GoogleMap(
             initialCameraPosition: (currentLocation == null)
                 ? (CameraPosition(target: LatLng(30.0313, 31.2107), zoom: 10.0))
                 : (CameraPosition(
-                    target: LatLng(
-                        currentLocation.latitude, currentLocation.longitude),
-                    zoom: 16.0)),
+                    target: LatLng(currentLocation.latitude, currentLocation.longitude), zoom: 16.0)),
             compassEnabled: true,
             mapToolbarEnabled: true,
             zoomGesturesEnabled: true,
