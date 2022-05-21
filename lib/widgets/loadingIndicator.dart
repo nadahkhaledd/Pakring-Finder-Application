@@ -5,15 +5,15 @@ Container loadingIndicator(context, String text)
 {
   return Container(
       alignment: Alignment.center,
-      height: MediaQuery.of(context).size.height * 1/8,
+      height: MediaQuery.of(context).size.height * 1/10,
       width: MediaQuery.of(context).size.width * 2/3,
       decoration: new BoxDecoration(
         border: Border.all(color: Colors.grey),
         color: Colors.black45,
         borderRadius: BorderRadius.all(Radius.circular(10.0)),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Center(child: Padding(
             padding: const EdgeInsets.all(8.0),

@@ -20,7 +20,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   GoogleMapController _mapController;
-  LatLng _coordinates;
+  LatLng _coordinates = LatLng(30.0313, 31.2107);
   List snaps, nearestCameras;
   List<LocationDetails> data = [];
   bool isLoading = false;
@@ -56,10 +56,11 @@ class _HomeState extends State<Home> {
           body: Stack(
         children: [
           GoogleMap(
-            initialCameraPosition: (currentLocation == null)
-                ? (CameraPosition(target: LatLng(30.0313, 31.2107), zoom: 10.0))
-                : (CameraPosition(
-                    target: LatLng(currentLocation.latitude, currentLocation.longitude), zoom: 16.0)),
+            initialCameraPosition:(CameraPosition(target: LatLng(30.0313, 31.2107), zoom: 10.0)),
+            // initialCameraPosition: (currentLocation == null)
+            //     ? (CameraPosition(target: LatLng(30.0313, 31.2107), zoom: 10.0))
+            //     : (CameraPosition(
+            //         target: LatLng(currentLocation.latitude, currentLocation.longitude), zoom: 16.0)),
             compassEnabled: true,
             mapToolbarEnabled: true,
             zoomGesturesEnabled: true,

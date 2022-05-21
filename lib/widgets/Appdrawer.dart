@@ -53,10 +53,8 @@ Drawer Appdrawer(context) {
           leading: Icon(Icons.home_filled, color: Colors.blueGrey),
           title: Text('Home', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
           onTap: () {
-            navigateTo(context, Home());
           },
         ),
-
         ListTile(
           leading: Icon(Icons.bookmark, color: Colors.blueGrey),
           title: Text('Bookmarks', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
@@ -74,7 +72,7 @@ Drawer Appdrawer(context) {
         ),
 
         Container(
-          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/2.3),
+          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/3),
           child: Column(
             children: [
               Divider(

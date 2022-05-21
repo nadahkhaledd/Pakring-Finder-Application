@@ -9,7 +9,7 @@ import 'package:search_map_location/utils/google_search/place.dart';
 
 class GoogleSearch extends StatefulWidget
 {
-  var _coordinates;
+  var _coordinates = LatLng(30.0313, 31.2107);
   GoogleMapController _mapController;
   GoogleSearch( this._mapController);
   @override
