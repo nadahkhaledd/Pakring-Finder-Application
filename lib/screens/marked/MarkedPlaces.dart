@@ -71,7 +71,7 @@ class _MarkedPlacesState extends State<MarkedPlaces> {
               Container(
                 alignment: Alignment.bottomCenter,
                 child: Text('\nNo nearby places with vacant spots found',
-                  style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 15),),
+                  style: TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.bold, fontSize: 15),),
               ),
             ],
             ),

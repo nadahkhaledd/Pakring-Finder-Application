@@ -68,7 +68,7 @@ Drawer Appdrawer(context) {
             children: [
               Divider(
                 height: 1,
-                thickness: 1,
+                thickness: 2,
               ),
 
               ListTile(

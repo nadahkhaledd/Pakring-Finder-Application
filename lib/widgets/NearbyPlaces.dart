@@ -40,7 +40,7 @@ class NearbyPlaces extends StatelessWidget
                 width:
                 widthResponsive(context: context, width: 8),
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: Colors.blueGrey,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
@@ -60,7 +60,7 @@ class NearbyPlaces extends StatelessWidget
               trailing: IconButton(
                 icon: Icon(
                   Icons.directions,
-                  color: Colors.blue,
+                  color: Colors.blueGrey,
                   size: 35,
                 ),
                 onPressed: () async {

@@ -40,7 +40,7 @@ class _splashState extends State<splash> {
           Center(
             child: Padding(
               padding: const EdgeInsets.only(bottom: 100.0),
-              child: new Image.asset('assets/images/logo.PNG'),
+              child: new Image.asset('assets/images/logo.jpg'),
             )
           ),
 
@@ -49,7 +49,7 @@ class _splashState extends State<splash> {
             alignment: Alignment.bottomCenter,
             child: Center(
               child: LinearProgressIndicator(
-                color: Colors.red,
+                color: Colors.blueGrey,
                 backgroundColor: Colors.white,
               ),
             ),

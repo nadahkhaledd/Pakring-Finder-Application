@@ -86,7 +86,7 @@ class _HomeState extends State<Home> {
               mini: true,
               shape: BeveledRectangleBorder(),
               child:
-                  const Icon(Icons.location_searching, color: Colors.black54),
+                  const Icon(Icons.album_outlined, color: Colors.black54),
               onPressed: () {
                 _mapController.animateCamera(CameraUpdate.newCameraPosition(
                     CameraPosition(
@@ -126,7 +126,7 @@ class _HomeState extends State<Home> {
                   "  Find  ",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
-                backgroundColor: Colors.red,
+                backgroundColor: Colors.blueGrey,
               ),
             ),
           ),

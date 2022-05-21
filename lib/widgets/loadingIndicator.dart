@@ -21,7 +21,7 @@ Container loadingIndicator(context, String text)
           )),
           Center(child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: CircularProgressIndicator(color: Colors.red),
+            child: CircularProgressIndicator(color: Colors.blueGrey),
           ))
         ],
       )

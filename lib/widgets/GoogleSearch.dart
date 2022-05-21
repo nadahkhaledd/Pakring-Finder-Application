@@ -24,7 +24,7 @@ class _GoogleSearchState extends State<GoogleSearch> {
       apiKey: 'AIzaSyANNie-WxuIW_ibDpFjNPO5fICFWFfEk3w',
       language: 'en',
       placeholder: 'Search location',
-      iconColor: Colors.red,
+      iconColor: Colors.blueGrey,
       darkMode: true,
       country: 'EG',
       onClearIconPress: (){
