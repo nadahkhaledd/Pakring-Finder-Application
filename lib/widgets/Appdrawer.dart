@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:park_locator/Shared/Components.dart';
+import 'package:park_locator/screens/Home.dart';
 import 'package:park_locator/screens/side_menu_pages/bookmarksPage.dart';
 
 Drawer Appdrawer(context) {
@@ -49,6 +50,14 @@ Drawer Appdrawer(context) {
         ),
 
         ListTile(
+          leading: Icon(Icons.home_filled, color: Colors.blueGrey),
+          title: Text('Home', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
+          onTap: () {
+            navigateTo(context, Home());
+          },
+        ),
+
+        ListTile(
           leading: Icon(Icons.bookmark, color: Colors.blueGrey),
           title: Text('Bookmarks', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
           onTap: () {
@@ -65,7 +74,7 @@ Drawer Appdrawer(context) {
         ),
 
         Container(
-          padding: EdgeInsets.only(top: 395),
+          padding: EdgeInsets.only(top: 350),
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.end,
             // crossAxisAlignment: CrossAxisAlignment.start,
