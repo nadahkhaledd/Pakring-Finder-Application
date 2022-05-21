@@ -1,6 +1,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:park_locator/Shared/Components.dart';
+import 'package:park_locator/screens/side_menu_pages/bookmarksPage.dart';
 
 Drawer Appdrawer(context) {
 
@@ -49,6 +51,9 @@ Drawer Appdrawer(context) {
         ListTile(
           leading: Icon(Icons.bookmark, color: Colors.blueGrey),
           title: Text('Bookmarks', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
+          onTap: () {
+            navigateTo(context, bookmarksPage());
+          },
         ),
         ListTile(
           leading: Icon(Icons.access_time_outlined, color: Colors.blueGrey),
