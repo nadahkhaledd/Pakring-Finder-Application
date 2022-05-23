@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:park_locator/services/API/APIManager.dart';
 import 'package:park_locator/widgets/Appdrawer.dart';
 import 'package:park_locator/widgets/loadingIndicator.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +38,7 @@ class _HomeState extends State<Home> {
     setState(() {
       isLoading = true;
     });
-    nearestCameras = await getNearestCameras(_coordinates);
+    nearestCameras = await getCameras(_coordinates);
     List IDs = getCamerasIDs(nearestCameras);
     snaps = await getSnaps(IDs);
     data = await getFinalData(snaps, nearestCameras, _coordinates);
@@ -112,6 +113,7 @@ class _HomeState extends State<Home> {
                 heroTag: 'run',
                 onPressed: () async {
                   finalLocation();
+                  //await getBookmarks("FQMeDG5YNwsyUXbDX4Ww");
                   if (_coordinates != null) {
                     await setResults();
                     navigateTo(
