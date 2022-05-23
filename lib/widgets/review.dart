@@ -13,39 +13,56 @@ class review extends StatelessWidget
   review(this.data);
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius:
-          BorderRadius.vertical(top: Radius.circular(30)),
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
-            ),
-          ],
-        ),
-        child: ListView.separated(
-            itemCount: data.length,
-            separatorBuilder: (context, index) {
-              return Divider(
-                color: Colors.grey,
-              );
-            },
-            itemBuilder: (context, index) => ListTile(
+    return Container(
+      color: Colors.white,
+      child: Padding(
 
-              title: Text("hi this is good",
-                overflow:  TextOverflow.ellipsis,
+        padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
+        child: Container(
 
+          decoration: BoxDecoration(
+            borderRadius:
+            BorderRadius.vertical(top: Radius.circular(30)),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: Offset(0, 3), // changes position of shadow
               ),
-              subtitle: Text("by shahy"),
-              trailing: Text("20/10")
-            )),
+            ],
+          ),
+          child: ListView.separated(
+              itemCount: data.length,
+              separatorBuilder: (context, index) {
+                return Divider(
+                  color: Colors.blueGrey,
+                );
+              },
+              itemBuilder: (context, index) => ListTile(
 
+
+                title: Column(
+                  children: [
+                    Text("shahy",style: TextStyle(fontSize: 20,),),
+                    Text("hi this is good hi")
+
+
+                  ],
+                ),
+                subtitle: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(),
+                      child: Text("20/10/2000"),
+                    ),
+
+                  ],
+                ),
+              )),
+
+        ),
       ),
     );
   }

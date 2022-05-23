@@ -62,9 +62,12 @@ class _searchState extends State<direction_screen> {
           Container(
             height: MediaQuery.of(context).size.height*0.10,
             width: MediaQuery.of(context).size.width,
+            color: Colors.white,
             child: Padding(
               padding: const EdgeInsets.all(20.0),
+
               child: Container(
+
                 child: Text(
                   "Reviews",
                   style: TextStyle(
