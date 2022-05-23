@@ -33,7 +33,8 @@ Future<List> getBookmarks(String driverID) async
 {
   List<Bookmark> bookmarks= [];
   Dio dio = new Dio();
-  Response response =await dio.get(url+"Bookmark/get", queryParameters: {"driverID": driverID});
+  Response response =await dio.get(url+"get_user_bookmark?driverID=FQMeDG5YNwsyUXbDX4Ww");
+  print(response.data);
   for(var element in response.data)
   {
     if(element !=null)
@@ -44,3 +45,9 @@ Future<List> getBookmarks(String driverID) async
   return bookmarks;
 }
 
+Future<int> deleteBookmark(String id)
+async {
+  Dio dio = new Dio();
+  Response response = await dio.delete(url+"Bookmark/delete", data: {'id': id});
+  return response.statusCode;
+}

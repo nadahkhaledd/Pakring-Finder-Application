@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:park_locator/Model/DBModels/Bookmark.dart';
+import 'package:park_locator/Shared/Components.dart';
+import 'package:park_locator/screens/Home.dart';
 import 'package:park_locator/widgets/bookmarkItem.dart';
 
-class bookmarksPage extends StatelessWidget
+class bookmarksPage extends StatefulWidget
 {
   List<Bookmark> bookmarks;
   bookmarksPage(this.bookmarks);
 
   @override
+  State<bookmarksPage> createState() => _bookmarksPageState();
+}
+
+class _bookmarksPageState extends State<bookmarksPage> {
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+
           toolbarHeight: 70.0,
           shape: ContinuousRectangleBorder(
               borderRadius: BorderRadius.only(
@@ -23,14 +31,14 @@ class bookmarksPage extends StatelessWidget
         ),
 
         body: ListView.builder(
-          itemCount: bookmarks.length,
+          shrinkWrap: true,
+          itemCount: widget.bookmarks.length,
           itemBuilder: (context, index) => Padding(
             padding: const EdgeInsets.fromLTRB(15, 6, 15, 6),
-            child: bookmarkItem(bookmarks[index]),
+            child: bookmarkItem(context, widget.bookmarks[index]),
           ),
         ),
       ),
     );
   }
-
 }
