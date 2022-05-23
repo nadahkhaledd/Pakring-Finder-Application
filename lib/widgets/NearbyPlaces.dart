@@ -66,7 +66,7 @@ class NearbyPlaces extends StatelessWidget
                 onPressed: () async {
                   var info = directionsDetails(source, data[index].location);
                   await info.create();
-                  navigateTo(context, direction_screen(currentLocation: source,info: info));
+                  navigateTo(context, direction_screen(currentLocation: source,info: info,data: data,));
                 },
               ),
             )),
