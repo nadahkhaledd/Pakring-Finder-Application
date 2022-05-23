@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:park_locator/Model/DBModels/Bookmark.dart';
 import 'package:park_locator/Model/DBModels/Camera.dart';
 
 import '../../Shared/calculations.dart';
@@ -27,3 +28,19 @@ async {
   }
   return nearest;
 }
+
+Future<List> getBookmarks(String driverID) async
+{
+  List<Bookmark> bookmarks= [];
+  Dio dio = new Dio();
+  Response response =await dio.get(url+"Bookmark/get", queryParameters: {"driverID": driverID});
+  for(var element in response.data)
+  {
+    if(element !=null)
+    {
+      bookmarks.add(Bookmark.fromJson(element));
+    }
+  }
+  return bookmarks;
+}
+

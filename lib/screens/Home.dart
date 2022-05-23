@@ -113,6 +113,7 @@ class _HomeState extends State<Home> {
                 heroTag: 'run',
                 onPressed: () async {
                   finalLocation();
+                  //await getBookmarks("FQMeDG5YNwsyUXbDX4Ww");
                   if (_coordinates != null) {
                     await setResults();
                     navigateTo(
