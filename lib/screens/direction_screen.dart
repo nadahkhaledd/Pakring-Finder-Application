@@ -66,15 +66,32 @@ class _searchState extends State<direction_screen> {
             child: Padding(
               padding: const EdgeInsets.all(20.0),
 
-              child: Container(
+              child: Row(
+                children: [
+                  Padding(
+                    padding:const EdgeInsets.only(),
+                    child:  Text("Reviews", style: TextStyle(fontSize: 20, color: Colors.blueGrey, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding:const EdgeInsets.only(left: 130),
+                    child:  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.blueGrey, // background (button) color
+                        onPrimary: Colors.white,
+                        //side: BorderSide(color: Colors.black, width: 1),
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        padding: EdgeInsets.only(left: 15,right: 15),
+                      ),
+                      child: Text("Add Review"),
+                      onPressed: (){
+                        opendialog();
+                      },
+                    )
+                  )
 
-                child: Text(
-                  "Reviews",
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.blueGrey,
-                      fontWeight: FontWeight.bold),
-                ),
+                ],
               ),
             ),
           ),
@@ -88,6 +105,20 @@ class _searchState extends State<direction_screen> {
       ),
     );
 
-  }
 
+  }
+  Future opendialog() => showDialog(
+      context: context,
+      builder: (context)=>AlertDialog(
+        title: Text("Your review",style: TextStyle(color: Colors.blueGrey),),
+        content: TextField(
+          decoration: InputDecoration(
+              hintText: "type here"
+          ),
+        ),
+        actions: [
+          TextButton(onPressed: (){}, child: Text("Submit",style: TextStyle(color: Colors.blueGrey),))
+        ],
+      )
+  );
 }
