@@ -30,13 +30,25 @@ class _bookmarksPageState extends State<bookmarksPage> {
           centerTitle: true,
         ),
 
-        body: ListView.builder(
-          shrinkWrap: true,
-          itemCount: widget.bookmarks.length,
-          itemBuilder: (context, index) => Padding(
-            padding: const EdgeInsets.fromLTRB(15, 6, 15, 6),
-            child: bookmarkItem(context, widget.bookmarks[index]),
-          ),
+        body: Column(
+
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Divider(thickness: 1, height: 1),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: widget.bookmarks.length,
+                itemBuilder: (context, index) => Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 6, 15, 6),
+                  child: bookmarkItem(context, widget.bookmarks[index]),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

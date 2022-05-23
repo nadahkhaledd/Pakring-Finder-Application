@@ -29,12 +29,12 @@ async {
   return nearest;
 }
 
+
 Future<List> getBookmarks(String driverID) async
 {
   List<Bookmark> bookmarks= [];
   Dio dio = new Dio();
   Response response =await dio.get(url+"get_user_bookmark?driverID=FQMeDG5YNwsyUXbDX4Ww");
-  print(response.data);
   for(var element in response.data)
   {
     if(element !=null)

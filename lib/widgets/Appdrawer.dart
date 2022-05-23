@@ -60,7 +60,6 @@ Drawer Appdrawer(context) {
           title: Text('Bookmarks', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
           onTap: () async {
             List<Bookmark> bookmarks = await getBookmarks(driverID);
-            print(bookmarks.length);
             navigateTo(context, bookmarksPage(bookmarks));
           },
         ),
