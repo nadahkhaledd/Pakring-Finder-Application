@@ -43,23 +43,33 @@ class review extends StatelessWidget
               itemBuilder: (context, index) => ListTile(
 
 
-                title: Column(
-                  children: [
-                    Text("shahy",style: TextStyle(fontSize: 20,),),
-                    Text("hi this is good hi")
+                title:
 
-
-                  ],
-                ),
-                subtitle: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(),
-                      child: Text("20/10/2000"),
+                    Column(
+                      children: [
+                        Align(
+                            alignment: Alignment.topLeft,
+                            child:
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: Text("shahy",style: TextStyle(color: Colors.blueGrey,fontSize: 20,fontWeight: FontWeight.bold),),
+                            )),
+                        Align(
+                            alignment: Alignment.topLeft,
+                            child: Text("hello this is me",style: TextStyle(fontSize: 14,),)),
+                      ],
                     ),
 
-                  ],
-                ),
+
+                   // Text("hi this is good hi")
+
+
+
+
+                subtitle:
+               Align(
+                 alignment: Alignment.bottomRight,
+                   child: Text("20/10/2000")),
               )),
 
         ),

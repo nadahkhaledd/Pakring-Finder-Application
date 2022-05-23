@@ -72,7 +72,7 @@ class _searchState extends State<direction_screen> {
                   "Reviews",
                   style: TextStyle(
                       fontSize: 20,
-                      //color: Colors.blue,
+                      color: Colors.blueGrey,
                       fontWeight: FontWeight.bold),
                 ),
               ),
