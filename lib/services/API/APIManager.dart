@@ -4,10 +4,12 @@ import 'package:dio/dio.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/Model/DBModels/Bookmark.dart';
 import 'package:park_locator/Model/DBModels/Camera.dart';
+import 'package:park_locator/Model/DBModels/Review.dart';
 
 import '../../Shared/calculations.dart';
 
 String url = "http://164.92.174.146/";
+
 Future<List> getCameras(LatLng current)
 async {
   List<Camera> nearest= [];
@@ -43,6 +45,22 @@ Future<List> getBookmarks(String driverID) async
     }
   }
   return bookmarks;
+}
+Future<List> getReviews(String cameraID) async
+{
+  List<Review> review= [];
+  Dio dio = new Dio();
+  Response response =await dio.get(url+"show_street_reviews?cameraID="+cameraID);
+  //print(response.data);
+  for(var element in response.data)
+  {
+    if(element !=null)
+    {
+      //print(review);
+      review.add(Review.fromJson(element));
+    }
+  }
+  return review;
 }
 
 Future<int> deleteBookmark(String id)

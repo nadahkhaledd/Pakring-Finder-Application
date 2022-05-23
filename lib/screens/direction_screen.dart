@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:park_locator/Model/DBModels/Review.dart';
 import 'package:park_locator/Model/directionsDetails.dart';
 import 'package:park_locator/widgets/d_widgets/from_to.dart';
 import 'package:park_locator/widgets/d_widgets/time.dart';
@@ -12,8 +13,9 @@ import '../Shared/Marker.dart';
 class direction_screen extends StatefulWidget{
   @required var currentLocation;
   @required directionsDetails info;
-  @required List <LocationDetails> data;
-  direction_screen({this.currentLocation,this.info,this.data});
+  @required List <Review> review;
+
+  direction_screen({this.currentLocation,this.info,this.review});
 
 
   @override
@@ -95,10 +97,10 @@ class _searchState extends State<direction_screen> {
               ),
             ),
           ),
-          (widget.data.length!=0)? Flexible(child: review(widget.data)):
+          (widget.review.length!=0)? Flexible(child: review(widget.review)):
           Container(
             alignment: Alignment.bottomCenter,
-            child: Text('\nNo nearby places with vacant spots found',
+            child: Text('\nNo reviews',
               style: TextStyle(color: Colors.blueGrey, fontWeight: FontWeight.bold, fontSize: 15),),
           ),
         ],

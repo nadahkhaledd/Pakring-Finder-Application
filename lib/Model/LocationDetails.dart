@@ -9,9 +9,10 @@ class LocationDetails
    String name;
    String distance;
    String time;
+   String cameraID;
    LatLng location;
 
-  LocationDetails({this.spots, this.name, this.distance, this.time, this.location});
+  LocationDetails({this.spots, this.name, this.distance, this.time,this.cameraID, this.location});
 
 }
 

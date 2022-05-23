@@ -9,8 +9,8 @@ import '../screens/direction_screen.dart';
 
 class review extends StatelessWidget
 {
-  List data;
-  review(this.data);
+  List reviews;
+  review(this.reviews);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,7 +34,7 @@ class review extends StatelessWidget
             ],
           ),
           child: ListView.separated(
-              itemCount: data.length,
+              itemCount: reviews.length,
               separatorBuilder: (context, index) {
                 return Divider(
                   color: Colors.blueGrey,
@@ -52,11 +52,11 @@ class review extends StatelessWidget
                             child:
                             Padding(
                               padding: const EdgeInsets.only(bottom: 8.0),
-                              child: Text("shahy",style: TextStyle(color: Colors.blueGrey,fontSize: 20,fontWeight: FontWeight.bold),),
+                              child: Text(reviews[index].driverID,style: TextStyle(color: Colors.blueGrey,fontSize: 20,fontWeight: FontWeight.bold),),
                             )),
                         Align(
                             alignment: Alignment.topLeft,
-                            child: Text("hello this is me",style: TextStyle(fontSize: 14,),)),
+                            child: Text(reviews[index].content,style: TextStyle(fontSize: 14,),)),
                       ],
                     ),
 
@@ -69,7 +69,7 @@ class review extends StatelessWidget
                 subtitle:
                Align(
                  alignment: Alignment.bottomRight,
-                   child: Text("20/10/2000")),
+                   child: Text(reviews[index].date)),
               )),
 
         ),

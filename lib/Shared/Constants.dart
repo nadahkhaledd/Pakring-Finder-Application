@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:park_locator/Model/DBModels/Review.dart';
 import '../Model/DBModels/Camera.dart';
 import '../Model/LocationDetails.dart';
 import '../Network/APIS.dart';
@@ -68,6 +69,7 @@ Future<List<LocationDetails>> getFinalData(List snaps,  List<Camera> nearest,Lat
 
           String time = await getTime(loc,current);
           LocationDetails details = new LocationDetails(
+              cameraID: snaps[i]["Camera_ID"],
               spots: spots.toString(),
               name: x[0].getAddress.toString(),
               distance: distance.toString(),
@@ -91,3 +93,4 @@ Future<List> getFData(String id, List<Camera> near) async{
       return x;
     }
 }
+
