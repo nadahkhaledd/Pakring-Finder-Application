@@ -4,29 +4,29 @@ import 'package:park_locator/Shared/calculations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 
-Future<List> getNearestCameras(LatLng current)
-async {
-  List values;
-  List nearest = [];
-
-  final db = await FirebaseDatabase.instance.reference();
-  await db.child('Cameras').once().then((DataSnapshot snapshot) async {
-    values = await snapshot.value;});
-
-  for(var element in values)
-    {
-      if(element!=null)
-        {
-          LatLng location = LatLng(double.parse(element['lat']), double.parse(element['long']));
-          bool condition = await isInRadius(current, location);
-          if(condition)
-            {
-              nearest.add({'id': element['id'], 'location': location, 'address': element['address']});
-            }
-        }
-    }
-  return nearest;
-}
+// Future<List> getNearestCameras(LatLng current)
+// async {
+//   List values;
+//   List nearest = [];
+//
+//   final db = await FirebaseDatabase.instance.reference();
+//   await db.child('Cameras').once().then((DataSnapshot snapshot) async {
+//     values = await snapshot.value;});
+//
+//   for(var element in values)
+//     {
+//       if(element!=null)
+//         {
+//           LatLng location = LatLng(double.parse(element['lat']), double.parse(element['long']));
+//           bool condition = await isInRadius(current, location);
+//           if(condition)
+//             {
+//               nearest.add({'id': element['id'], 'location': location, 'address': element['address']});
+//             }
+//         }
+//     }
+//   return nearest;
+// }
 
 Future<List> getSnaps (List nearestPlacesIDs)async
 {
@@ -39,6 +39,5 @@ Future<List> getSnaps (List nearestPlacesIDs)async
         snaps.add(allData.elementAt(0));
       }
   });
-
   return snaps;
 }

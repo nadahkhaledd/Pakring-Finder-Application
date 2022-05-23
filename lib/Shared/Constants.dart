@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import '../Model/DBModels/Camera.dart';
 import '../Model/LocationDetails.dart';
 import '../Network/APIS.dart';
+import '../services/DistanceMatrix.dart';
 import '../services/directions_repository.dart';
 
 
@@ -10,15 +12,18 @@ var location = LatLng(30.0313, 31.2107);   ///default
 Future <String> getDistance(LatLng destination, LatLng current) async {
     final directions = await DirectionsRepository()
         .getDirections(origin:current,
-        destination:LatLng(destination.latitude, destination.longitude) );
+        destination:destination );
     return directions.totalDistance;
 }
 
 Future <String> getTime(LatLng destination, LatLng current) async {
-  final directions = await DirectionsRepository()
-      .getDirections(origin:current,
-      destination:LatLng(destination.latitude, destination.longitude) );
-  return directions.totalDuration;
+  if(current != null)
+    {
+      final directions = await DirectionsRepository()
+          .getDirections(origin:current,
+          destination:LatLng(destination.latitude, destination.longitude) );
+      return directions.totalDuration;
+    }
 }
 
 void setSearchLocation (LatLng source) async
@@ -37,18 +42,17 @@ bool isThereLocation ()
 }
 
 
-List getCamerasIDs(List cameras)
+List getCamerasIDs(List<Camera> cameras)
 {
   List IDs = [];
   cameras.forEach((element) {
-    IDs.add(element['id']);
+    IDs.add(element.getID);
   });
-
   return IDs;
 }
 
 
-Future<List<LocationDetails>> getFinalData(List snaps,  List nearest,LatLng current) async {
+Future<List<LocationDetails>> getFinalData(List snaps,  List<Camera> nearest,LatLng current) async {
   List newSnaps = [];
   List<LocationDetails> finalData = [];
   if (snaps.length != 0) {
@@ -58,14 +62,14 @@ Future<List<LocationDetails>> getFinalData(List snaps,  List nearest,LatLng curr
       String spots = await getApiData(url: url, capacity: cap);
       if (spots != null) {
         if (int.parse(spots) > 0) {
-          List x = await getFData(snaps[i]["Camera_ID"], nearest);
-          LatLng loc = x[0]['location'];
-          String distance = await getDistance(loc,current);
+          List<Camera> x = await getFData(snaps[i]["Camera_ID"], nearest);
+          LatLng loc = x[0].getLocation;
+          String distance = await getDistance(loc, current);
 
           String time = await getTime(loc,current);
           LocationDetails details = new LocationDetails(
               spots: spots.toString(),
-              name: x[0]['address'].toString(),
+              name: x[0].getAddress.toString(),
               distance: distance.toString(),
               time: time.toString(),
               location: loc);
@@ -79,10 +83,10 @@ Future<List<LocationDetails>> getFinalData(List snaps,  List nearest,LatLng curr
 
 
 
-Future<List> getFData(int id, List near) async{
-  List x = [];
+Future<List> getFData(String id, List<Camera> near) async{
+  List<Camera> x = [];
   for (int i = 0; i < near.length; i++)
-    if (id == near[i]['id']) {
+    if (id == near[i].getID) {
       x.add(near[i]);
       return x;
     }

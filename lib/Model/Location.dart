@@ -4,7 +4,15 @@ class Location{
 
   Location({this.lat, this.lng});
 
+  Map<String, Object> toJson() {
+    return {
+      'lat': lat,
+      'lng': lng,
+    };
+  }
 }
+
+
 
 class Geometry {
   final Location location;
