@@ -6,6 +6,7 @@ import 'package:park_locator/Model/LocationDetails.dart';
 import 'package:park_locator/Shared/Constants.dart';
 import 'package:park_locator/services/API/APIManager.dart';
 import '../Model/DBModels/Review.dart';
+import '../Model/DBModels/Owner.dart';
 import '../Model/directionsDetails.dart';
 import '../Shared/Components.dart';
 import '../screens/direction_screen.dart';
@@ -32,6 +33,22 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
       isLoading = false;
     });
     return review;
+  }
+  Future<List<String>> user(review) async {
+    List<String> users= [];
+    setState(() {
+      isLoading = true;
+    });
+    var user;
+    for(var element in review)
+    {
+        user=await getUserNameByID(element.driverID);
+        users.add(user);
+    }
+    setState(() {
+      isLoading = false;
+    });
+    return users;
   }
   @override
   Widget build(BuildContext context) {
@@ -91,7 +108,8 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
                       var info = directionsDetails(widget.source, widget.data[index].location);
                       await info.create();
                      var review=await reviews(widget.data[index].cameraID);
-                      navigateTo(context, direction_screen(currentLocation: widget.source,info: info,review: review,));
+                     var users=await user(review);
+                      navigateTo(context, direction_screen(currentLocation: widget.source,info: info,review: review,users: users));
                     },
                   ),
                 )),

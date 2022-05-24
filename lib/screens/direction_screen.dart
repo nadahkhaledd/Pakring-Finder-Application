@@ -6,6 +6,7 @@ import 'package:park_locator/Model/directionsDetails.dart';
 import 'package:park_locator/widgets/d_widgets/from_to.dart';
 import 'package:park_locator/widgets/d_widgets/time.dart';
 import 'package:park_locator/widgets/review.dart';
+import '../Model/DBModels/Owner.dart';
 import '../Model/LocationDetails.dart';
 import '../Shared/Marker.dart';
 
@@ -14,8 +15,9 @@ class direction_screen extends StatefulWidget{
   @required var currentLocation;
   @required directionsDetails info;
   @required List <Review> review;
+  @required List <String> users;
 
-  direction_screen({this.currentLocation,this.info,this.review});
+  direction_screen({this.currentLocation,this.info,this.review,this.users});
 
 
   @override
@@ -97,7 +99,7 @@ class _searchState extends State<direction_screen> {
               ),
             ),
           ),
-          (widget.review.length!=0)? Flexible(child: review(widget.review)):
+          (widget.review.length!=0)? Flexible(child: review(widget.review,widget.users)):
           Container(
             alignment: Alignment.bottomCenter,
             child: Text('\nNo reviews',

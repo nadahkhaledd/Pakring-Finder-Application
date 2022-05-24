@@ -1,10 +1,12 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/Model/DBModels/Bookmark.dart';
 import 'package:park_locator/Model/DBModels/Camera.dart';
 import 'package:park_locator/Model/DBModels/Review.dart';
+import 'package:park_locator/Model/DBModels/Owner.dart';
 
 import '../../Shared/calculations.dart';
 
@@ -61,6 +63,14 @@ Future<List> getReviews(String cameraID) async
     }
   }
   return review;
+}
+Future<String> getUserNameByID(String userID) async
+{
+  String user;
+  Dio dio = new Dio();
+  Response response =await dio.get(url+"get_by_id?id="+userID);
+  user=response.data['name'];
+  return user;
 }
 
 Future<int> deleteBookmark(String id)

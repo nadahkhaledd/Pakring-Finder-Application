@@ -10,7 +10,8 @@ import '../screens/direction_screen.dart';
 class review extends StatelessWidget
 {
   List reviews;
-  review(this.reviews);
+  List users;
+  review(this.reviews,this.users);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -52,7 +53,7 @@ class review extends StatelessWidget
                             child:
                             Padding(
                               padding: const EdgeInsets.only(bottom: 8.0),
-                              child: Text(reviews[index].driverID,style: TextStyle(color: Colors.blueGrey,fontSize: 20,fontWeight: FontWeight.bold),),
+                              child: Text(users[index],style: TextStyle(color: Colors.blueGrey,fontSize: 20,fontWeight: FontWeight.bold),),
                             )),
                         Align(
                             alignment: Alignment.topLeft,
