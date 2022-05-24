@@ -61,12 +61,6 @@ class review extends StatelessWidget
                       ],
                     ),
 
-
-                   // Text("hi this is good hi")
-
-
-
-
                 subtitle:
                Align(
                  alignment: Alignment.bottomRight,

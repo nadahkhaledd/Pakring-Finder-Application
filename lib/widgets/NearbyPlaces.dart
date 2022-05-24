@@ -109,7 +109,7 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
                       await info.create();
                      var review=await reviews(widget.data[index].cameraID);
                      var users=await user(review);
-                      navigateTo(context, direction_screen(currentLocation: widget.source,info: info,review: review,users: users));
+                      navigateTo(context, direction_screen(currentLocation: widget.source,info: info,review: review,users: users,cameraID:widget.data[index].cameraID));
                     },
                   ),
                 )),

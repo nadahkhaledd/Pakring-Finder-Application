@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/Model/DBModels/Review.dart';
 import 'package:park_locator/Model/directionsDetails.dart';
+import 'package:park_locator/services/API/APIManager.dart';
 import 'package:park_locator/widgets/d_widgets/from_to.dart';
 import 'package:park_locator/widgets/d_widgets/time.dart';
 import 'package:park_locator/widgets/review.dart';
@@ -16,8 +17,9 @@ class direction_screen extends StatefulWidget{
   @required directionsDetails info;
   @required List <Review> review;
   @required List <String> users;
+  @required String cameraID;
 
-  direction_screen({this.currentLocation,this.info,this.review,this.users});
+  direction_screen({this.currentLocation,this.info,this.review,this.users,this.cameraID});
 
 
   @override
@@ -27,10 +29,13 @@ class direction_screen extends StatefulWidget{
 }
 
 class _searchState extends State<direction_screen> {
-
+  String valueText;
+  //String cameraID;
+  String userID="C3Z4IWWv9bWZ2ZppBwyaXrdiwB43";
 
   @override
   Widget build(BuildContext context) {
+
     Set<Marker> markers = addMarkers2(widget.currentLocation,widget.info.getDestination());
 
     return Scaffold(
@@ -90,6 +95,8 @@ class _searchState extends State<direction_screen> {
                       ),
                       child: Text("Add Review"),
                       onPressed: (){
+
+
                         opendialog();
                       },
                     )
@@ -112,16 +119,27 @@ class _searchState extends State<direction_screen> {
 
   }
   Future opendialog() => showDialog(
+
       context: context,
       builder: (context)=>AlertDialog(
+
         title: Text("Your review",style: TextStyle(color: Colors.blueGrey),),
         content: TextField(
           decoration: InputDecoration(
               hintText: "type here"
           ),
+          onChanged: (value){
+              setState(() {
+               valueText = value;
+          });},
         ),
         actions: [
-          TextButton(onPressed: (){}, child: Text("Submit",style: TextStyle(color: Colors.blueGrey),))
+          TextButton(onPressed: (){
+
+            addReview(userID, widget.cameraID, valueText);
+            Navigator.pop(context);
+            print(valueText);
+          }, child: Text("Submit",style: TextStyle(color: Colors.blueGrey),))
         ],
       )
   );

@@ -79,3 +79,9 @@ async {
   Response response = await dio.delete(url+"Bookmark/delete", data: {'id': id});
   return response.statusCode;
 }
+Future<int> addReview(String driverID,String cameraID,String content)
+async {
+  Dio dio = new Dio();
+  Response response = await dio.post(url+"Review/add", data: {'driverID': driverID,'cameraID':cameraID,'content':content,'garageID':""});
+  return response.statusCode;
+}
