@@ -7,16 +7,16 @@ class from_to extends StatefulWidget
 {
   final String source;
   final String target;
-  final bool isBookmark;
-  final String bookmarkID;
-  final LatLng destination;
+  bool isBookmark;
+   String bookmarkID;
+  LatLng destination;
 
-  const from_to({
+  from_to({
     @required this.source,
     @required this.target,
     @required this.isBookmark,
-    this.bookmarkID,
-    this.destination
+    @required this.bookmarkID,
+    @required this.destination
 
 
   });
@@ -93,7 +93,7 @@ class _from_toState extends State<from_to> {
             alignment: Alignment.bottomRight,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: bookmarkButton( context, false, widget.bookmarkID, widget.destination, widget.target),
+              child: bookmarkButton( context, widget.isBookmark, widget.bookmarkID, widget.destination, widget.target),
             ),
           )
 

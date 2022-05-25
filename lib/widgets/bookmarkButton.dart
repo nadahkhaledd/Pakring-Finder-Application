@@ -20,21 +20,19 @@ FloatingActionButton bookmarkButton(context, bool isBookmark, String bookmarkID,
       if(isBookmark)
         {
           deleteBookmark(bookmarkID);
-          iconColor = Colors.blueGrey;
-          loadingIndicator(context, "Bookmark deleted", false);
+          //Dialog(child: Text('Bookmark deleted'));
+          //iconColor = Colors.blueGrey;
         }
       else
         {
           Bookmark bookmark = new Bookmark(name: destinationName, driverID: userID,
               location: Location(lat: destination.latitude, long: destination.longitude));
-          print(bookmark.driverID);
-          print(bookmark.name);
           var response = await addBookmark(bookmark);
           print(response);
           if (response == 200)
             {
               isBookmark = true;
-              loadingIndicator(context, "Added to bookmarks", false);
+              //loadingIndicator(context, "Added to bookmarks", false);
             }
 
         }

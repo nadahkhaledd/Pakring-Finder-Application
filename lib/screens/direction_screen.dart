@@ -10,6 +10,7 @@ import 'package:park_locator/widgets/d_widgets/time.dart';
 import 'package:park_locator/widgets/review.dart';
 import '../Model/DBModels/Owner.dart';
 import '../Model/LocationDetails.dart';
+import '../Shared/Constants.dart';
 import '../Shared/Marker.dart';
 
 
@@ -19,8 +20,10 @@ class direction_screen extends StatefulWidget{
   @required List <Review> review;
   @required List <String> users;
   @required String cameraID;
+  String bookmarkID;
+  bool ifBookmark;
 
-  direction_screen({this.currentLocation,this.info,this.review,this.users,this.cameraID});
+  direction_screen({this.currentLocation,this.info,this.review,this.users,this.cameraID, this.ifBookmark, this.bookmarkID});
 
 
 
@@ -35,31 +38,16 @@ class _searchState extends State<direction_screen> {
   String valueText;
   //String cameraID;
   String userID="UtxbOluLTzMTooCY01XD0vqAAUf2";
-  bool isBookmark;
-  String bookmarkID = '0';
 
-  Future<void> findBookmark()
-  async {
-    List<Bookmark> bookmarks = await getBookmarks("UtxbOluLTzMTooCY01XD0vqAAUf2");
-    bookmarks.forEach((element) {
-
-      if( element.location.lat == widget.info.getDestination().latitude &&
-          element.location.long == widget.info.getDestination().longitude)
-      {
-        setState(() {
-          isBookmark = true;
-          bookmarkID = element.id;
-        });
-      }
-      else
-        isBookmark = false;
-    });
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     Set<Marker> markers = addMarkers2(widget.currentLocation,widget.info.getDestination());
-    findBookmark();
+
 
     return Scaffold(
       body: Column(
@@ -69,7 +57,7 @@ class _searchState extends State<direction_screen> {
             width: MediaQuery.of(context).size.width,
            // color: Colors.black,
             child: from_to(source: widget.info.myLocation_name,target: widget.info.destination_name,
-              isBookmark: isBookmark, bookmarkID: bookmarkID, destination: widget.info.getDestination(),),
+              isBookmark: widget.ifBookmark, bookmarkID: widget.bookmarkID, destination: widget.info.getDestination(),),
           ),
           Container(
             //padding: const EdgeInsets.only(left: 0.0,top:140,right: 0.0),

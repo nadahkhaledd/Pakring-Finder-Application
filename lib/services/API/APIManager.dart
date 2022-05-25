@@ -50,10 +50,7 @@ Future<List> getBookmarks(String driverID) async
 
 Future<int> addBookmark(Bookmark bookmark)
 async {
-  Response response = await dio.post(url+"Bookmark/add", data:
-  {'driverID': bookmark.driverID, 'name': bookmark.name,
-  'location':{'lat': bookmark.location.lat.toString(), 'long': bookmark.location.long.toString()}});
-  print(response.statusMessage);
+  Response response = await dio.post(url+"Bookmark/add", data:bookmark.toJson());
   return response.statusCode;
 }
 

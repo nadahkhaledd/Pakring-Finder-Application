@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/Model/DBModels/Review.dart';
+import '../Model/DBModels/Bookmark.dart';
 import '../Model/DBModels/Camera.dart';
 import '../Model/LocationDetails.dart';
 import '../Network/APIS.dart';
+import '../services/API/APIManager.dart';
 import '../services/DistanceMatrix.dart';
 import '../services/directions_repository.dart';
 
@@ -50,6 +52,29 @@ List getCamerasIDs(List<Camera> cameras)
     IDs.add(element.getID);
   });
   return IDs;
+}
+
+Future<Map> findIfBookmark(String userid, LatLng destination)
+async {
+  String bookmarkID = '0';
+  bool yes;
+  List<Bookmark> bookmarks = await getBookmarks("UtxbOluLTzMTooCY01XD0vqAAUf2");
+  bookmarks.forEach((element) {
+
+    if( element.location.lat == destination.latitude &&
+        element.location.long == destination.longitude)
+    {
+      bookmarkID = element.id;
+      yes =true;
+    }
+    else
+      {
+        yes = false;
+      }
+
+  }
+  );
+  return {'id': bookmarkID, 'yes': yes};
 }
 
 
