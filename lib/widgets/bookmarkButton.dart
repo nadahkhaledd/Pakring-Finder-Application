@@ -19,7 +19,11 @@ FloatingActionButton bookmarkButton(context, bool isBookmark, String bookmarkID,
     async {
       if(isBookmark)
         {
-          deleteBookmark(bookmarkID);
+          var response = await deleteBookmark(bookmarkID);
+          if(response == 200)
+            {
+
+            }
           //Dialog(child: Text('Bookmark deleted'));
           //iconColor = Colors.blueGrey;
         }

@@ -44,10 +44,10 @@ Column bookmarkItem(context, Bookmark bookmark)
 
         ],
       ),
-      Divider(
-        thickness: 1,
-        height: 1,
-      ),
+      // Divider(
+      //   thickness: 1,
+      //   height: 1,
+      // ),
     ],
 
   );

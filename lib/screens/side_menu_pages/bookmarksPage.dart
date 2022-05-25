@@ -39,7 +39,12 @@ class _bookmarksPageState extends State<bookmarksPage> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
-              child: ListView.builder(
+              child: ListView.separated(
+                separatorBuilder: (context, index) {
+                  return Divider(
+                    color: Colors.blueGrey,
+                  );
+                },
                 shrinkWrap: true,
                 itemCount: widget.bookmarks.length,
                 itemBuilder: (context, index) => Padding(
