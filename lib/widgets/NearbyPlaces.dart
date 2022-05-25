@@ -24,16 +24,18 @@ class NearbyPlaces extends StatefulWidget
 
 class _NearbyPlacesState extends State<NearbyPlaces> {
   bool isLoading = false;
+
   Future<List<Review>> reviews(q) async {
     setState(() {
       isLoading = true;
     });
-    var review=await getReviews(q);
+    List<Review> review=await getReviews(q);
     setState(() {
       isLoading = false;
     });
     return review;
   }
+
   Future<List<String>> user(review) async {
     List<String> users= [];
     setState(() {
@@ -50,6 +52,8 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
     });
     return users;
   }
+
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -117,7 +121,7 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
         ),
           ),
           Center( child: isLoading == true ?
-          loadingIndicator(context, "loading")
+          loadingIndicator(context, "loading", true)
               : Center(),
           )
         ]

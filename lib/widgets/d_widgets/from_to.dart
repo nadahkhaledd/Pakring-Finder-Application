@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+import 'package:park_locator/Model/DBModels/Bookmark.dart';
+import 'package:park_locator/widgets/bookmarkButton.dart';
 class from_to extends StatefulWidget
 {
   final String source;
   final String target;
+  final bool isBookmark;
+  final String bookmarkID;
+  final LatLng destination;
 
   const from_to({
     @required this.source,
     @required this.target,
+    @required this.isBookmark,
+    this.bookmarkID,
+    this.destination
+
 
   });
 
@@ -79,6 +89,13 @@ class _from_toState extends State<from_to> {
               )
             ],
       )),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: bookmarkButton( context, false, widget.bookmarkID, widget.destination, widget.target),
+            ),
+          )
 
           ])
 

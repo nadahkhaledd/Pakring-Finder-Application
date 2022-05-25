@@ -135,7 +135,7 @@ class _HomeState extends State<Home> {
           ),
 
           Center( child: isLoading == true ?
-            loadingIndicator(context, "Processing Data... ")
+            loadingIndicator(context, "Processing Data... ", true)
                 : Center(),
           )
         ],

@@ -18,7 +18,6 @@ class Bookmark {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['driverID'] = this.driverID;
-    data['id'] = this.id;
     if (this.location != null) {
       data['location'] = this.location.toJson();
     }

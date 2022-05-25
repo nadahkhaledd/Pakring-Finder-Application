@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:park_locator/Model/DBModels/Bookmark.dart';
 import 'package:park_locator/Model/DBModels/Review.dart';
 import 'package:park_locator/Model/directionsDetails.dart';
 import 'package:park_locator/services/API/APIManager.dart';
@@ -22,6 +23,7 @@ class direction_screen extends StatefulWidget{
   direction_screen({this.currentLocation,this.info,this.review,this.users,this.cameraID});
 
 
+
   @override
   State<direction_screen> createState() => _searchState();
 
@@ -29,14 +31,35 @@ class direction_screen extends StatefulWidget{
 }
 
 class _searchState extends State<direction_screen> {
+
   String valueText;
   //String cameraID;
-  String userID="C3Z4IWWv9bWZ2ZppBwyaXrdiwB43";
+  String userID="UtxbOluLTzMTooCY01XD0vqAAUf2";
+  bool isBookmark;
+  String bookmarkID = '0';
+
+  Future<void> findBookmark()
+  async {
+    List<Bookmark> bookmarks = await getBookmarks("UtxbOluLTzMTooCY01XD0vqAAUf2");
+    bookmarks.forEach((element) {
+
+      if( element.location.lat == widget.info.getDestination().latitude &&
+          element.location.long == widget.info.getDestination().longitude)
+      {
+        setState(() {
+          isBookmark = true;
+          bookmarkID = element.id;
+        });
+      }
+      else
+        isBookmark = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-
     Set<Marker> markers = addMarkers2(widget.currentLocation,widget.info.getDestination());
+    findBookmark();
 
     return Scaffold(
       body: Column(
@@ -45,7 +68,8 @@ class _searchState extends State<direction_screen> {
             height: MediaQuery.of(context).size.height*0.22,
             width: MediaQuery.of(context).size.width,
            // color: Colors.black,
-            child: from_to(source: widget.info.myLocation_name,target: widget.info.destination_name,),
+            child: from_to(source: widget.info.myLocation_name,target: widget.info.destination_name,
+              isBookmark: isBookmark, bookmarkID: bookmarkID, destination: widget.info.getDestination(),),
           ),
           Container(
             //padding: const EdgeInsets.only(left: 0.0,top:140,right: 0.0),
@@ -76,6 +100,7 @@ class _searchState extends State<direction_screen> {
               padding: const EdgeInsets.all(20.0),
 
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
                     padding:const EdgeInsets.only(),

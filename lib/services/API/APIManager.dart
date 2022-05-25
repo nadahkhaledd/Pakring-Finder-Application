@@ -11,11 +11,11 @@ import 'package:park_locator/Model/DBModels/Owner.dart';
 import '../../Shared/calculations.dart';
 
 String url = "http://164.92.174.146/";
+Dio dio = new Dio();
 
 Future<List> getCameras(LatLng current)
 async {
   List<Camera> nearest= [];
-  Dio dio = new Dio();
   Response response=await dio.get(url+"Camera/get");
 
   for(var element in response.data)
@@ -37,8 +37,7 @@ async {
 Future<List> getBookmarks(String driverID) async
 {
   List<Bookmark> bookmarks= [];
-  Dio dio = new Dio();
-  Response response =await dio.get(url+"get_user_bookmark?driverID=FQMeDG5YNwsyUXbDX4Ww");
+  Response response =await dio.get(url+"get_user_bookmark?driverID=$driverID");
   for(var element in response.data)
   {
     if(element !=null)
@@ -48,10 +47,26 @@ Future<List> getBookmarks(String driverID) async
   }
   return bookmarks;
 }
+
+Future<int> addBookmark(Bookmark bookmark)
+async {
+  Response response = await dio.post(url+"Bookmark/add", data:
+  {'driverID': bookmark.driverID, 'name': bookmark.name,
+  'location':{'lat': bookmark.location.lat.toString(), 'long': bookmark.location.long.toString()}});
+  print(response.statusMessage);
+  return response.statusCode;
+}
+
+Future<int> deleteBookmark(String id)
+async {
+  Response response = await dio.delete(url+"Bookmark/delete", data: {'id': id});
+  return response.statusCode;
+}
+
+
 Future<List> getReviews(String cameraID) async
 {
   List<Review> review= [];
-  Dio dio = new Dio();
   Response response =await dio.get(url+"show_street_reviews?cameraID="+cameraID);
   //print(response.data);
   for(var element in response.data)
@@ -64,24 +79,21 @@ Future<List> getReviews(String cameraID) async
   }
   return review;
 }
+
+
 Future<String> getUserNameByID(String userID) async
 {
   String user;
-  Dio dio = new Dio();
+
   Response response =await dio.get(url+"get_by_id?id="+userID);
   user=response.data['name'];
   return user;
 }
 
-Future<int> deleteBookmark(String id)
-async {
-  Dio dio = new Dio();
-  Response response = await dio.delete(url+"Bookmark/delete", data: {'id': id});
-  return response.statusCode;
-}
+
+
 Future<int> addReview(String driverID,String cameraID,String content)
 async {
-  Dio dio = new Dio();
   Response response = await dio.post(url+"Review/add", data: {'driverID': driverID,'cameraID':cameraID,'content':content,'garageID':""});
   return response.statusCode;
 }

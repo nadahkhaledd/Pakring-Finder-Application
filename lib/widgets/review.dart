@@ -57,7 +57,7 @@ class review extends StatelessWidget
                             )),
                         Align(
                             alignment: Alignment.topLeft,
-                            child: Text(reviews[index].content,style: TextStyle(fontSize: 14,),)),
+                            child: Text(reviews[index].content,style: TextStyle(fontSize: 16,),)),
                       ],
                     ),
 

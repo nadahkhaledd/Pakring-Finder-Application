@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Container loadingIndicator(context, String text)
+Container loadingIndicator(context, String text, bool showIndicator)
 {
   return Container(
       alignment: Alignment.center,
@@ -19,10 +19,13 @@ Container loadingIndicator(context, String text)
             padding: const EdgeInsets.all(8.0),
             child: Text(text, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),),
           )),
-          Center(child: Padding(
+          Center(child: showIndicator?
+          Padding(
             padding: const EdgeInsets.all(8.0),
             child: CircularProgressIndicator(color: Colors.blueGrey),
-          ))
+          )
+              : Center()
+          )
         ],
       )
   );

@@ -59,7 +59,7 @@ Drawer Appdrawer(context) {
           leading: Icon(Icons.bookmark, color: Colors.blueGrey),
           title: Text('Bookmarks', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
           onTap: () async {
-            List<Bookmark> bookmarks = await getBookmarks(driverID);
+            List<Bookmark> bookmarks = await getBookmarks("UtxbOluLTzMTooCY01XD0vqAAUf2");
             navigateTo(context, bookmarksPage(bookmarks));
           },
         ),
