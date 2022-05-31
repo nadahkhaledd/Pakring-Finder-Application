@@ -46,6 +46,7 @@ class _HomeState extends State<Home> {
       isLoading = false;
     });
   }
+  GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +54,7 @@ class _HomeState extends State<Home> {
 
     return SafeArea(
       child: Scaffold(
+          key: _scaffoldState,
         drawer: Appdrawer(context),
           body: Stack(
         children: [
@@ -75,8 +77,27 @@ class _HomeState extends State<Home> {
           ),
 
           Padding(
-            padding: const EdgeInsets.all(18.0),
-            child: GoogleSearch(_mapController),
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.menu_open),
+                  color: Colors.blueGrey,
+                  enableFeedback: true,
+                  padding: const EdgeInsets.all(0.0),
+                  iconSize: 30,
+                  onPressed: ()
+                  {
+                    _scaffoldState.currentState.openDrawer();
+                  },
+                ),
+                Flexible(child: Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: GoogleSearch(_mapController),
+                ))
+              ],
+            ),
           ),
 
           Container(
