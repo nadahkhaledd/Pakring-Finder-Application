@@ -28,6 +28,17 @@ Column bookmarkItem(context, Bookmark bookmark)
             padding: const EdgeInsets.all(8.0),
             child: IconButton(
               autofocus: true,
+              icon: const Icon(Icons.directions, color: Colors.blueGrey),
+              onPressed: () async {
+
+              },
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+              autofocus: true,
               icon: const Icon(Icons.delete, color: Colors.blueGrey),
               onPressed: () async {
                 int code = await deleteBookmark(bookmark.id);
