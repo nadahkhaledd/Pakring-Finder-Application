@@ -48,12 +48,15 @@ Drawer Appdrawer(context) {
           ],
         )),
 
-        ListTile(
-          leading: Icon(Icons.home_filled, color: Colors.blueGrey),
-          title: Text('Home', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
-          onTap: () {
+        Container(
+          child: ListTile(
+            leading: Icon(Icons.home_filled, color: Colors.blueGrey),
+            title: Text('Home', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
+            autofocus: true,
+            onTap: () {
 
-          },
+            },
+          ),
         ),
         ListTile(
           leading: Icon(Icons.bookmark, color: Colors.blueGrey),
@@ -63,13 +66,7 @@ Drawer Appdrawer(context) {
             navigateTo(context, bookmarksPage(bookmarks));
           },
         ),
-        ListTile(
-          leading: Icon(Icons.access_time_outlined, color: Colors.blueGrey),
-          title: Text('Recent', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
-          onTap: ()  {
 
-          },
-        ),
         ListTile(
           leading: Icon(isLight ? Icons.light_mode : Icons.dark_mode, color: Colors.blueGrey),
           title: Text('Theme', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
