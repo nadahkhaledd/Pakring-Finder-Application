@@ -80,20 +80,32 @@ class _HomeState extends State<Home> {
 
           Padding(
             padding: const EdgeInsets.all(8.0),
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: IconButton(
+                icon: Icon(Icons.menu_open),
+                color: Colors.blueGrey,
+                enableFeedback: true,
+                padding: const EdgeInsets.all(0.0),
+                iconSize: 30,
+                onPressed: ()
+                {
+                  _scaffoldState.currentState.openDrawer();
+                },
+              ),
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                IconButton(
-                  icon: Icon(Icons.menu_open),
-                  color: Colors.blueGrey,
-                  enableFeedback: true,
-                  padding: const EdgeInsets.all(0.0),
-                  iconSize: 30,
-                  onPressed: ()
-                  {
-                    _scaffoldState.currentState.openDrawer();
-                  },
+                Container(
+                  width: MediaQuery.of(context).size.width* 1/8,
                 ),
+
                 Flexible(child: Padding(
                   padding: const EdgeInsets.only(top: 10.0),
                   child: GoogleSearch(_mapController),
@@ -132,28 +144,55 @@ class _HomeState extends State<Home> {
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.all(12.0),
-              child: FloatingActionButton.extended(
-                heroTag: 'run',
-                onPressed: () async {
-                  finalLocation();
-                  //await getBookmarks("FQMeDG5YNwsyUXbDX4Ww");
-                  if (_coordinates != null) {
-                    await setResults();
-                    navigateTo(
-                        context,
-                        MarkedPlaces(
-                          currentLocation: _coordinates,
-                          data: data,
-                        ));
-                  }
-                },
-                isExtended: true,
-                label: Text(
-                  "  Find  ",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-                backgroundColor: Colors.blueGrey,
-              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                //crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: FloatingActionButton.extended(
+                      heroTag: 'on-street',
+                      onPressed: () async {
+                        finalLocation();
+                        if (_coordinates != null) {
+                          await setResults();
+                          navigateTo(
+                              context,
+                              MarkedPlaces(
+                                currentLocation: _coordinates,
+                                data: data,
+                              ));
+                        }
+                      },
+                      isExtended: true,
+                      label: Text(
+                        "Find on-street",
+                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+                      ),
+                      backgroundColor: Colors.blueGrey,
+                    ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: FloatingActionButton.extended(
+                      heroTag: 'garages',
+                      onPressed: () async {
+                        finalLocation();
+                        if (_coordinates != null) {
+
+                        }
+                      },
+                      isExtended: true,
+                      label: Text(
+                        "Find garages",
+                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+                      ),
+                      backgroundColor: Colors.blueGrey,
+                    ),
+                  ),
+                ],
+              )
             ),
           ),
 
