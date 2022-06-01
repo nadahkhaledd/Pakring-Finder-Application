@@ -15,7 +15,7 @@ Dio dio = new Dio();
 
 Future<List> getCameras(LatLng current)
 async {
-  List<Camera> nearest= [];
+  List<Camera> nearestOnstreet= [];
   Response response=await dio.get(url+"Camera/get");
 
   for(var element in response.data)
@@ -26,12 +26,55 @@ async {
         bool condition = await isInRadius(current, location);
         if(condition)
         {
-          nearest.add(new Camera(id: element['id'], address: element['address'], location: location));
+          nearestOnstreet.add(new Camera(id: element['id'], address: element['address'], location: location));
         }
       }
   }
-  return nearest;
+  return nearestOnstreet;
 }
+
+ Future<List> getGarages(LatLng current)
+async {
+  List nearestGarages= [];
+  Response response=await dio.get(url+"Garage/get");
+
+  for(var element in response.data)
+  {
+    if(element !=null)
+    {
+      LatLng location = LatLng(double.parse(element['location']['lat']), double.parse(element['location']['long']));
+      bool condition = await isInRadius(current, location);
+      if(condition)
+      {
+        nearestGarages.add({'id': element['id'], 'location': location, 'address': element['address'], 'cameraIDs': element['cameraIDs']});
+      }
+    }
+  }
+  return nearestGarages;
+}
+
+Future<List> getGarageCameras(LatLng current)
+async {
+  List garages = await getGarages(current);
+  List garageCameras= [];
+  Response response;
+
+  for(var garage in garages)
+    {
+      List cameras = [];
+      for(String id in garage['cameraIDs'])
+        {
+          response=await dio.get(url+"GarageCamera/get?id=$id");
+          if(response.data != null)
+            cameras.add({'cameraID': id, 'cameraAddress': response.data['address']});
+        }
+      garageCameras.add({'garageID': garage['id'], 'garageAddress': garage['address'],
+        'location': garage['location'], 'cameras': cameras});
+    }
+  garageCameras.forEach((element) {print(element);});
+  return garageCameras;
+}
+
 
 
 Future<List> getBookmarks(String driverID) async

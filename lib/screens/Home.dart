@@ -22,7 +22,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   GoogleMapController _mapController;
   LatLng _coordinates = LatLng(30.0313, 31.2107);
-  List snaps, nearestCameras;
+  List snaps, nearestCameras, nearestGarages;
   List<LocationDetails> data = [];
   bool isLoading = false;
 
@@ -40,6 +40,8 @@ class _HomeState extends State<Home> {
     });
     nearestCameras = await getCameras(_coordinates);
     List IDs = getCamerasIDs(nearestCameras);
+    nearestGarages = await getGarageCameras(_coordinates);
+    List GaragesCamerasIDs = getGarageCamerasIDs(nearestGarages); /// here you take ids to get snaps @shahy
     snaps = await getSnaps(IDs);
     data = await getFinalData(snaps, nearestCameras, _coordinates);
     setState(() {

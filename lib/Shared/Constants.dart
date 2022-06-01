@@ -54,6 +54,15 @@ List getCamerasIDs(List<Camera> cameras)
   return IDs;
 }
 
+List getGarageCamerasIDs(List garages)
+{
+  List IDs = [];
+  garages.forEach((element) {
+    IDs.add(element['cameras']['cameraID']);
+  });
+  return IDs;
+}
+
 Future<Map> findIfBookmark(String userid, LatLng destination)
 async {
   String bookmarkID = '0';
