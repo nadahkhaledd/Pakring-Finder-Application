@@ -57,9 +57,11 @@ List getCamerasIDs(List<Camera> cameras)
 List getGarageCamerasIDs(List garages)
 {
   List IDs = [];
-  garages.forEach((element) {
-    IDs.add(element['cameras']['cameraID']);
-  });
+  for(var garage in garages)
+    {
+      for(var camera in garage['cameras'])
+        IDs.add(camera['cameraID']);
+    }
   return IDs;
 }
 
