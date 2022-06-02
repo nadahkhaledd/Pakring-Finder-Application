@@ -70,10 +70,6 @@ Future <userData> signupApi({
       value.data['number'].toString(),
       value.data['id'].toString(),
     );
-
-
-
-
   }).catchError((error){
     print(error);
   });
