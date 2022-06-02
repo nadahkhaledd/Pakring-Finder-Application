@@ -4,7 +4,8 @@ import 'package:park_locator/Model/DBModels/Review.dart';
 import '../Model/DBModels/Bookmark.dart';
 import '../Model/DBModels/Camera.dart';
 import '../Model/LocationDetails.dart';
-import '../Network/APIS.dart';
+import '../Network/API/BookMarkes.dart';
+import '../Network/API/StreetAPI.dart';
 import '../services/API/APIManager.dart';
 import '../services/DistanceMatrix.dart';
 import '../services/directions_repository.dart';
@@ -69,7 +70,7 @@ Future<Map> findIfBookmark(String userid, LatLng destination)
 async {
   String bookmarkID = '0';
   bool yes;
-  List<Bookmark> bookmarks = await getBookmarks("UtxbOluLTzMTooCY01XD0vqAAUf2");
+  List<Bookmark> bookmarks = await getBookmarks(driverID: "UtxbOluLTzMTooCY01XD0vqAAUf2");
   bookmarks.forEach((element) {
 
     if( element.location.lat == destination.latitude &&
@@ -96,7 +97,7 @@ Future<List<LocationDetails>> getFinalData(List snaps,  List<Camera> nearest,Lat
     for (int i = 0; i < snaps.length; i++) {
       String url = snaps[i]["Path"];
       String cap = (snaps[i]["Capacity"]).toString();
-      String spots = await getApiData(url: url, capacity: cap);
+      String spots = await getStreetData(url: url, capacity: cap);
       if (spots != null) {
         if (int.parse(spots) > 0) {
           List<Camera> x = await getFData(snaps[i]["Camera_ID"], nearest);

@@ -5,6 +5,7 @@ import 'package:park_locator/Shared/Components.dart';
 import 'package:park_locator/screens/side_menu_pages/bookmarksPage.dart';
 import 'package:park_locator/widgets/loadingIndicator.dart';
 
+import '../Network/API/BookMarkes.dart';
 import '../services/API/APIManager.dart';
 
 Column bookmarkItem(context, Bookmark bookmark)
@@ -44,7 +45,7 @@ Column bookmarkItem(context, Bookmark bookmark)
                 int code = await deleteBookmark(bookmark.id);
                 if(code == 200)
                 {
-                  List bookmarks = await getBookmarks(bookmark.driverID);
+                  List bookmarks = await getBookmarks(driverID: bookmark.driverID);
                    navigateTo(context, bookmarksPage(bookmarks));
                 }
                 else

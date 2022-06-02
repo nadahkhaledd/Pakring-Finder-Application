@@ -35,7 +35,7 @@ class _from_toState extends State<from_to> {
         children: [
           Container(
             padding: const EdgeInsets.only(top:45.0,right: 0.0),
-            width: 70,
+            width: 30,
             child: Column(
               children: [
                 Container(

@@ -10,6 +10,7 @@ import 'package:park_locator/widgets/d_widgets/time.dart';
 import 'package:park_locator/widgets/review.dart';
 import '../Model/DBModels/Owner.dart';
 import '../Model/LocationDetails.dart';
+import '../Network/API/Reviews.dart';
 import '../Shared/Constants.dart';
 import '../Shared/Marker.dart';
 
@@ -149,7 +150,7 @@ class _searchState extends State<direction_screen> {
         actions: [
           TextButton(onPressed: (){
 
-            addReview(userID, widget.cameraID, valueText);
+            addReview(driverID:userID,cameraID: widget.cameraID,content: valueText);
             Navigator.pop(context);
             print(valueText);
           }, child: Text("Submit",style: TextStyle(color: Colors.blueGrey),))

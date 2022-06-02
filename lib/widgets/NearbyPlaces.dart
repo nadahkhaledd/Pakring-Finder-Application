@@ -8,6 +8,7 @@ import 'package:park_locator/services/API/APIManager.dart';
 import '../Model/DBModels/Review.dart';
 import '../Model/DBModels/Owner.dart';
 import '../Model/directionsDetails.dart';
+import '../Network/API/UserAPi.dart';
 import '../Shared/Components.dart';
 import '../screens/direction_screen.dart';
 import 'loadingIndicator.dart';
@@ -44,7 +45,7 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
     var user;
     for(var element in review)
     {
-        user=await getUserNameByID(element.driverID);
+        user=await getUserNameByID(userID: element.driverID);
         users.add(user);
     }
     setState(() {

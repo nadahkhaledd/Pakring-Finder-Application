@@ -4,6 +4,7 @@ import 'package:park_locator/Shared/Components.dart';
 import 'package:park_locator/screens/side_menu_pages/bookmarksPage.dart';
 
 import '../Model/DBModels/Bookmark.dart';
+import '../Network/API/BookMarkes.dart';
 import '../services/API/APIManager.dart';
 
 Drawer Appdrawer(context) {
@@ -62,7 +63,7 @@ Drawer Appdrawer(context) {
           leading: Icon(Icons.bookmark, color: Colors.blueGrey),
           title: Text('Bookmarks', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
           onTap: () async {
-            List<Bookmark> bookmarks = await getBookmarks("UtxbOluLTzMTooCY01XD0vqAAUf2");
+            List<Bookmark> bookmarks = await getBookmarks(driverID: "UtxbOluLTzMTooCY01XD0vqAAUf2");
             navigateTo(context, bookmarksPage(bookmarks));
           },
         ),

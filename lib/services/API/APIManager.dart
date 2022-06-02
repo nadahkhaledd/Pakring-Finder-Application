@@ -78,7 +78,7 @@ async {
 
 
 
-Future<List> getBookmarks(String driverID) async
+Future<List> getBookmarks({@required String driverID}) async
 {
   List<Bookmark> bookmarks= [];
   Response response =await dio.get(url+"get_user_bookmark?driverID=$driverID");
@@ -90,12 +90,6 @@ Future<List> getBookmarks(String driverID) async
     }
   }
   return bookmarks;
-}
-
-Future<int> addBookmark(Bookmark bookmark)
-async {
-  Response response = await dio.post(url+"Bookmark/add", data:bookmark.toJson());
-  return response.statusCode;
 }
 
 Future<int> deleteBookmark(String id)
@@ -122,19 +116,4 @@ Future<List> getReviews(String cameraID) async
 }
 
 
-Future<String> getUserNameByID(String userID) async
-{
-  String user;
 
-  Response response =await dio.get(url+"get_by_id?id="+userID);
-  user=response.data['name'];
-  return user;
-}
-
-
-
-Future<int> addReview(String driverID,String cameraID,String content)
-async {
-  Response response = await dio.post(url+"Review/add", data: {'driverID': driverID,'cameraID':cameraID,'content':content,'garageID':""});
-  return response.statusCode;
-}
