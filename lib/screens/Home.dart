@@ -22,7 +22,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   GoogleMapController _mapController;
   LatLng _coordinates = LatLng(30.0313, 31.2107);
-  List snaps, nearestCameras, nearestGarages;
+  List snaps, nearestCameras, nearestGarages,GarageSnaps;
   List<LocationDetails> data = [];
   bool isLoading = false;
 
@@ -34,14 +34,25 @@ class _HomeState extends State<Home> {
     }
   }
 
-  Future<void> setResults() async {
+  Future<void> setResultsGarage() async {
+    setState(() {
+      isLoading = true;
+    });
+    nearestGarages = await getGarageCameras(_coordinates);
+    List GaragesCamerasIDs = getGarageCamerasIDs(nearestGarages);
+    GarageSnaps = await getSnapsgarage(GaragesCamerasIDs);
+    data = await getFinalData(snaps, nearestCameras, _coordinates);
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  Future<void> setResultsStreet() async {
     setState(() {
       isLoading = true;
     });
     nearestCameras = await getCameras(_coordinates);
     List IDs = getCamerasIDs(nearestCameras);
-    nearestGarages = await getGarageCameras(_coordinates);
-    List GaragesCamerasIDs = getGarageCamerasIDs(nearestGarages); /// here you take ids to get snaps @shahy
     snaps = await getSnaps(IDs);
     data = await getFinalData(snaps, nearestCameras, _coordinates);
     setState(() {
@@ -155,7 +166,7 @@ class _HomeState extends State<Home> {
                       onPressed: () async {
                         finalLocation();
                         if (_coordinates != null) {
-                          await setResults();
+                          await setResultsStreet();
                           navigateTo(
                               context,
                               MarkedPlaces(
