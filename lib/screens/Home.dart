@@ -41,7 +41,9 @@ class _HomeState extends State<Home> {
     nearestGarages = await getGarageCameras(_coordinates);
     List GaragesCamerasIDs = getGarageCamerasIDs(nearestGarages);
     GarageSnaps = await getSnapsgarage(GaragesCamerasIDs);
-    data = await getFinalData(snaps, nearestCameras, _coordinates);
+    print(GarageSnaps);
+    data = await getFinalDataGarages(GarageSnaps, _coordinates);
+    print(data[0].spots);
     setState(() {
       isLoading = false;
     });
@@ -190,6 +192,7 @@ class _HomeState extends State<Home> {
                       heroTag: 'garages',
                       onPressed: () async {
                         finalLocation();
+                        setResultsGarage();
                         if (_coordinates != null) {
 
                         }

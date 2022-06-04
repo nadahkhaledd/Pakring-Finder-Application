@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/Model/DBModels/Bookmark.dart';
 import 'package:park_locator/Model/DBModels/Camera.dart';
@@ -56,6 +57,7 @@ async {
 
 Future<List> getGarageCameras(LatLng current)
 async {
+
   List garages = await getGarages(current);
   List garageCameras= [];
   Response response;
@@ -75,7 +77,42 @@ async {
   garageCameras.forEach((element) {print(element);});
   return garageCameras;
 }
+Future<LatLng> getGarageCamerasLocation(String GarageCameraID)
+async {
+  LatLng location;
+  Response response=await dio.get(url+"GarageCamera/get?id="+GarageCameraID);
+  if(response.data !=null)
+  {
+    String GarageID = response.data["garage_id"];
+    Response response2=await dio.get(url+"Garage/get?id="+GarageID);
+    if (response2.data != null)
+    {
+      location = LatLng(response2.data['location']['lat'], response2.data['location']['long']);
+    }
+  }
+  return location;
+}
+Future<String> getGarageCamerasName(String GarageCameraID)
+async {
+  String name;
+  Response response=await dio.get(url+"GarageCamera/get?id="+GarageCameraID);
 
+  if(response.data !=null)
+  {
+    String GarageID = response.data["garage_id"];
+    Response response2=await dio.get(url+"Garage/get?id="+GarageID);
+      if (response2.data != null)
+      {
+         name = response2.data['address'];
+
+      }
+
+
+
+  }
+
+  return name;
+}
 
 
 Future<List> getBookmarks({@required String driverID}) async
