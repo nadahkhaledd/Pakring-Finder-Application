@@ -12,6 +12,7 @@ import '../Shared/Components.dart';
 import '../Shared/Constants.dart';
 import '../services/DB.dart';
 import '../widgets/GoogleSearch.dart';
+import 'marked/MarkedGarages.dart';
 import 'marked/MarkedPlaces.dart';
 
 class Home extends StatefulWidget {
@@ -41,7 +42,7 @@ class _HomeState extends State<Home> {
     nearestGarages = await getGarageCameras(_coordinates);
     List GaragesCamerasIDs = getGarageCamerasIDs(nearestGarages);
     GarageSnaps = await getSnapsgarage(GaragesCamerasIDs);
-    print(GarageSnaps);
+   // print(GarageSnaps);
     data = await getFinalDataGarages(GarageSnaps, _coordinates);
     print(data[0].spots);
     setState(() {
@@ -55,7 +56,7 @@ class _HomeState extends State<Home> {
     });
     nearestCameras = await getCameras(_coordinates);
     List IDs = getCamerasIDs(nearestCameras);
-    snaps = await getSnaps(IDs);
+    snaps = await getStreetSnaps(IDs);
     data = await getFinalData(snaps, nearestCameras, _coordinates);
     setState(() {
       isLoading = false;
@@ -192,9 +193,15 @@ class _HomeState extends State<Home> {
                       heroTag: 'garages',
                       onPressed: () async {
                         finalLocation();
-                        setResultsGarage();
-                        if (_coordinates != null) {
 
+                        if (_coordinates != null) {
+                            await setResultsGarage();
+                            navigateTo(
+                                context,
+                                markedGarages(
+                                  currentLocation: _coordinates,
+                                  data: data,
+                                ));
                         }
                       },
                       isExtended: true,

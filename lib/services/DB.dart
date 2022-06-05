@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-Future<List> getSnaps (List nearestPlacesIDs)async
+Future<List> getStreetSnaps (List nearestPlacesIDs)async
 {
   List snaps =[];
   await Future.forEach( nearestPlacesIDs,(element) async {

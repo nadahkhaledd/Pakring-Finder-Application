@@ -12,8 +12,5 @@ class AppProvider extends ChangeNotifier{
     currentUser = user;
     notifyListeners();
   }
-  currentLocation(geoLocator l){
-    geoLocatorService = l;
-    notifyListeners();
-  }
+
 }
