@@ -73,7 +73,7 @@ class splash extends StatelessWidget {
   Widget build(BuildContext context) {
     return SplashScreen(
       seconds: 5,
-      navigateAfterSeconds: new Home(),
+      navigateAfterSeconds: new signup(),
       image: new Image.asset('assets/images/logo.jpg'),
       photoSize: 100.0,
       loaderColor: Colors.blueGrey,
