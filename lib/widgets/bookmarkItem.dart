@@ -8,7 +8,7 @@ import 'package:park_locator/widgets/loadingIndicator.dart';
 import '../Network/API/BookMarkes.dart';
 import '../services/API/APIManager.dart';
 
-Column bookmarkItem(context, Bookmark bookmark)
+Column bookmarkItem(context, Bookmark bookmark, String token)
 {
   return Column(
     children: [
@@ -42,7 +42,7 @@ Column bookmarkItem(context, Bookmark bookmark)
               autofocus: true,
               icon: const Icon(Icons.delete, color: Colors.blueGrey),
               onPressed: () async {
-                int code = await deleteBookmark(bookmark.id);
+                int code = await deleteBookmark(bookmark.id, token);
                 if(code == 200)
                 {
                   List bookmarks = await getBookmarks(driverID: bookmark.driverID);

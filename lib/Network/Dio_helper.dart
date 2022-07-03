@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
+
+import '../Model/UserData.dart';
 
 class DioHelper {
   static Dio dio;
-
   static init()///Object from Dio
   {
     dio = Dio(BaseOptions(

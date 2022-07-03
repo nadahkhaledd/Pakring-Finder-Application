@@ -119,7 +119,7 @@ Future<List<LocationDetails>> getFinalData(List snaps,  List<Camera> nearest,Lat
   }
   return finalData;
 }
-Future<List<LocationDetails>> getFinalDataGarages(List GarageSnaps,LatLng current) async {
+Future<List<LocationDetails>> getFinalDataGarages(List GarageSnaps,LatLng current, String token) async {
   List<LocationDetails> finalData = [];
   if (GarageSnaps.length != 0) {
     for (int i = 0; i < GarageSnaps.length; i++) {
@@ -129,8 +129,8 @@ Future<List<LocationDetails>> getFinalDataGarages(List GarageSnaps,LatLng curren
       if (spots != null) {
         if (int.parse(spots) > 0) {
 
-          LatLng loc = await getGarageCamerasLocation(GarageSnaps[i]["GarageCameraID"]);
-          String name= await getGarageCamerasName(GarageSnaps[i]["GarageCameraID"]);
+          LatLng loc = await getGarageCamerasLocation(GarageSnaps[i]["GarageCameraID"], token);
+          String name= await getGarageCamerasName(GarageSnaps[i]["GarageCameraID"], token);
           String distance = await getDistance(loc, current);
 
           String time = await getTime(loc,current);

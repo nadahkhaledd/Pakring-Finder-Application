@@ -8,9 +8,9 @@ import '../endpoints.dart';
 Future<int> addReview(
     {@required String driverID,
     @required String cameraID,
-    @required String content}) async {
+    @required String content, String token}) async {
   Response response;
-  await DioHelper.postData(url: AddReview, data: {
+  await DioHelper.postData(url: AddReview, token: token, data: {
       'driverID': driverID,
       'cameraID': cameraID,
       'content': content,

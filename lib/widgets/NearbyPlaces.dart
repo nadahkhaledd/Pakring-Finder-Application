@@ -5,8 +5,10 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/Model/LocationDetails.dart';
 import 'package:park_locator/Shared/Constants.dart';
 import 'package:park_locator/services/API/APIManager.dart';
+import 'package:provider/provider.dart';
 import '../Model/DBModels/Review.dart';
 import '../Model/DBModels/Owner.dart';
+import '../Model/UserData.dart';
 import '../Model/directionsDetails.dart';
 import '../Network/API/UserAPi.dart';
 import '../Shared/Components.dart';
@@ -25,12 +27,14 @@ class NearbyPlaces extends StatefulWidget
 
 class _NearbyPlacesState extends State<NearbyPlaces> {
   bool isLoading = false;
+  String currentUserToken;
+
 
   Future<List<Review>> reviews(q) async {
     setState(() {
       isLoading = true;
     });
-    List<Review> review=await getReviews(q);
+    List<Review> review=await getReviews(q, currentUserToken);
     setState(() {
       isLoading = false;
     });
@@ -57,6 +61,8 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
 
   @override
   Widget build(BuildContext context) {
+    final  currentUser = Provider.of<userData>(context);
+
     return Stack(
         children:[
 
@@ -112,6 +118,7 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
                     onPressed: () async {
                       var info = directionsDetails(widget.source, widget.data[index].location);
                       await info.create();
+                      currentUserToken = currentUser.token;
                      var review=await reviews(widget.data[index].cameraID);
                      var users=await user(review);
                      Map ifBookmark = await findIfBookmark("UtxbOluLTzMTooCY01XD0vqAAUf2", info.getDestination());

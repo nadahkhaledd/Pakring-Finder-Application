@@ -8,6 +8,7 @@ import 'package:park_locator/widgets/loadingIndicator.dart';
 import 'package:provider/provider.dart';
 
 import '../Model/LocationDetails.dart';
+import '../Model/UserData.dart';
 import '../Shared/Components.dart';
 import '../Shared/Constants.dart';
 import '../services/DB.dart';
@@ -22,6 +23,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   GoogleMapController _mapController;
+  String currentUserToken;
   LatLng _coordinates = LatLng(30.0313, 31.2107);
   List snaps, nearestCameras, nearestGarages,GarageSnaps;
   List<LocationDetails> data = [];
@@ -39,11 +41,11 @@ class _HomeState extends State<Home> {
     setState(() {
       isLoading = true;
     });
-    nearestGarages = await getGarageCameras(_coordinates);
+    nearestGarages = await getGarageCameras(_coordinates, currentUserToken);
     List GaragesCamerasIDs = getGarageCamerasIDs(nearestGarages);
     GarageSnaps = await getSnapsgarage(GaragesCamerasIDs);
    // print(GarageSnaps);
-    data = await getFinalDataGarages(GarageSnaps, _coordinates);
+    data = await getFinalDataGarages(GarageSnaps, _coordinates, currentUserToken);
     print(data[0].spots);
     setState(() {
       isLoading = false;
@@ -54,7 +56,7 @@ class _HomeState extends State<Home> {
     setState(() {
       isLoading = true;
     });
-    nearestCameras = await getCameras(_coordinates);
+    nearestCameras = await getCameras(_coordinates, currentUserToken);
     List IDs = getCamerasIDs(nearestCameras);
     snaps = await getStreetSnaps(IDs);
     data = await getFinalData(snaps, nearestCameras, _coordinates);
@@ -67,6 +69,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final currentLocation = Provider.of<Position>(context);
+    final  currentUser = Provider.of<userData>(context);
+
 
     return SafeArea(
       child: Scaffold(
@@ -167,6 +171,7 @@ class _HomeState extends State<Home> {
                     child: FloatingActionButton.extended(
                       heroTag: 'on-street',
                       onPressed: () async {
+                        currentUserToken = currentUser.token;
                         finalLocation();
                         if (_coordinates != null) {
                           await setResultsStreet();
@@ -192,6 +197,7 @@ class _HomeState extends State<Home> {
                     child: FloatingActionButton.extended(
                       heroTag: 'garages',
                       onPressed: () async {
+                        currentUserToken = currentUser.token;
                         finalLocation();
 
                         if (_coordinates != null) {

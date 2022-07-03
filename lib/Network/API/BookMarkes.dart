@@ -6,9 +6,9 @@ import 'package:park_locator/Network/Dio_helper.dart';
 import '../../Model/DBModels/Bookmark.dart';
 import '../endpoints.dart';
 
-Future<int> addBookmark(Bookmark bookmark) async {
+Future<int> addBookmark(Bookmark bookmark, String token) async {
   Response response;
-  await DioHelper.postData(url: AddBookMark, data: bookmark.toJson())
+  await DioHelper.postData(url: AddBookMark, data: bookmark.toJson(), token: token)
       .then((value) {
         response=value;  })
       .catchError((onError) {response.statusCode;}

@@ -23,6 +23,7 @@ class direction_screen extends StatefulWidget{
   @required String cameraID;
   String bookmarkID;
   bool ifBookmark;
+  @required String token;
 
   direction_screen({this.currentLocation,this.info,this.review,this.users,this.cameraID, this.ifBookmark, this.bookmarkID});
 
@@ -58,7 +59,7 @@ class _searchState extends State<direction_screen> {
             width: MediaQuery.of(context).size.width,
            // color: Colors.black,
             child: from_to(source: widget.info.myLocation_name,target: widget.info.destination_name,
-              isBookmark: widget.ifBookmark, bookmarkID: widget.bookmarkID, destination: widget.info.getDestination(),),
+              isBookmark: widget.ifBookmark, bookmarkID: widget.bookmarkID, destination: widget.info.getDestination(), token: widget.token),
           ),
           Container(
             //padding: const EdgeInsets.only(left: 0.0,top:140,right: 0.0),

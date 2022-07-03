@@ -8,16 +8,17 @@ import 'package:park_locator/Model/DBModels/Bookmark.dart';
 import 'package:park_locator/Model/DBModels/Camera.dart';
 import 'package:park_locator/Model/DBModels/Review.dart';
 import 'package:park_locator/Model/DBModels/Owner.dart';
+import 'package:park_locator/Network/Dio_helper.dart';
 
 import '../../Shared/calculations.dart';
 
 String url = "http://164.92.174.146/";
 Dio dio = new Dio();
 
-Future<List> getCameras(LatLng current)
+Future<List> getCameras(LatLng current, String token)
 async {
   List<Camera> nearestOnstreet= [];
-  Response response=await dio.get(url+"Camera/get");
+  Response response=await DioHelper.getData(url: url+"Camera/get", token: token);
 
   for(var element in response.data)
   {
@@ -34,10 +35,10 @@ async {
   return nearestOnstreet;
 }
 
- Future<List> getGarages(LatLng current)
+ Future<List> getGarages(LatLng current, String token)
 async {
   List nearestGarages= [];
-  Response response=await dio.get(url+"Garage/get");
+  Response response=await DioHelper.getData(url: url+"Garage/get", token: token);
 
   for(var element in response.data)
   {
@@ -55,10 +56,10 @@ async {
   return nearestGarages;
 }
 
-Future<List> getGarageCameras(LatLng current)
+Future<List> getGarageCameras(LatLng current, String token)
 async {
 
-  List garages = await getGarages(current);
+  List garages = await getGarages(current, token);
   List garageCameras= [];
   Response response;
 
@@ -67,7 +68,7 @@ async {
       List cameras = [];
       for(String id in garage['cameraIDs'])
         {
-          response=await dio.get(url+"GarageCamera/get?id=$id");
+          response=await DioHelper.getData(url: url+"GarageCamera/get?id=$id", token: token);
           if(response.data != null)
             cameras.add({'cameraID': id, 'cameraAddress': response.data['address']});
         }
@@ -77,14 +78,14 @@ async {
   garageCameras.forEach((element) {print(element);});
   return garageCameras;
 }
-Future<LatLng> getGarageCamerasLocation(String GarageCameraID)
+Future<LatLng> getGarageCamerasLocation(String GarageCameraID, String token)
 async {
   LatLng location;
-  Response response=await dio.get(url+"GarageCamera/get?id="+GarageCameraID);
+  Response response=await DioHelper.getData(url: url+"GarageCamera/get?id="+GarageCameraID, token: token);
   if(response.data !=null)
   {
     String GarageID = response.data["garage_id"];
-    Response response2=await dio.get(url+"Garage/get?id="+GarageID);
+    Response response2=await DioHelper.getData(url: url+"Garage/get?id="+GarageID, token: token);
     if (response2.data != null)
     {
       location = LatLng(response2.data['location']['lat'], response2.data['location']['long']);
@@ -92,33 +93,29 @@ async {
   }
   return location;
 }
-Future<String> getGarageCamerasName(String GarageCameraID)
+Future<String> getGarageCamerasName(String GarageCameraID, String token)
 async {
   String name;
-  Response response=await dio.get(url+"GarageCamera/get?id="+GarageCameraID);
+  Response response=await DioHelper.getData(url: url+"GarageCamera/get?id="+GarageCameraID, token: token);
 
   if(response.data !=null)
   {
     String GarageID = response.data["garage_id"];
-    Response response2=await dio.get(url+"Garage/get?id="+GarageID);
+    Response response2=await DioHelper.getData(url: url+"Garage/get?id="+GarageID, token: token);
       if (response2.data != null)
       {
          name = response2.data['address'];
 
       }
-
-
-
   }
-
   return name;
 }
 
 
-Future<List> getBookmarks({@required String driverID}) async
+Future<List> getBookmarks({@required String driverID, String token}) async
 {
   List<Bookmark> bookmarks= [];
-  Response response =await dio.get(url+"get_user_bookmark?driverID=$driverID");
+  Response response =await DioHelper.getData(url: url+"get_user_bookmark?driverID=$driverID", token: token);
   for(var element in response.data)
   {
     if(element !=null)
@@ -129,23 +126,22 @@ Future<List> getBookmarks({@required String driverID}) async
   return bookmarks;
 }
 
-Future<int> deleteBookmark(String id)
+Future<int> deleteBookmark(String id, String token)
 async {
+  dio.options.headers = {"Authorization": 'Bearer $token'};
   Response response = await dio.delete(url+"Bookmark/delete", data: {'id': id});
   return response.statusCode;
 }
 
 
-Future<List> getReviews(String cameraID) async
+Future<List> getReviews(String cameraID, String token) async
 {
   List<Review> review= [];
-  Response response =await dio.get(url+"show_street_reviews?cameraID="+cameraID);
-  //print(response.data);
+  Response response =await DioHelper.getData(url: url+"show_street_reviews?cameraID="+cameraID, token: token);
   for(var element in response.data)
   {
     if(element !=null)
     {
-      //print(review);
       review.add(Review.fromJson(element));
     }
   }

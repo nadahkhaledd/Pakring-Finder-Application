@@ -6,10 +6,10 @@ import '../../Shared/pair.dart';
 import '../Dio_helper.dart';
 import '../endpoints.dart';
 
-Future<String> getUserNameByID({ @required String userID}) async
+Future<String> getUserNameByID({ @required String userID, String token}) async
 {
   String userName;
-  await DioHelper.getData(url: GetById, query: {
+  await DioHelper.getData(url: GetById, token: token,query: {
     'id':userID
   }).then((value) {
 
@@ -27,7 +27,6 @@ Future<userData> getUserById({@required String userID,@required String token}) a
   userData user;
   await DioHelper.getData(url: GetById, query: {"id":userID},token: token)
       .then((value) {
-        print("WWWWWWWWWWWWWWWWWWWWWWWWWWwwww");
     user = new userData(
       value.data['name'].toString(),
       value.data['email'].toString(),

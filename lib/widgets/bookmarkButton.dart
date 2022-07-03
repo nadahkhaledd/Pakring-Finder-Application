@@ -6,7 +6,7 @@ import 'package:park_locator/widgets/loadingIndicator.dart';
 
 import '../Network/API/BookMarkes.dart';
 
-FloatingActionButton bookmarkButton(context, bool isBookmark, String bookmarkID, LatLng destination, String destinationName)
+FloatingActionButton bookmarkButton(context, bool isBookmark, String bookmarkID, LatLng destination, String destinationName, String token)
 {
   String userID="UtxbOluLTzMTooCY01XD0vqAAUf2";
   Color iconColor =  isBookmark? Colors.yellow: Colors.blueGrey;
@@ -21,7 +21,7 @@ FloatingActionButton bookmarkButton(context, bool isBookmark, String bookmarkID,
     async {
       if(isBookmark)
         {
-          var response = await deleteBookmark(bookmarkID);
+          var response = await deleteBookmark(bookmarkID, token);
           if(response == 200)
             {
 
@@ -33,7 +33,7 @@ FloatingActionButton bookmarkButton(context, bool isBookmark, String bookmarkID,
         {
           Bookmark bookmark = new Bookmark(name: destinationName, driverID: userID,
               location: Location(lat: destination.latitude, long: destination.longitude));
-          var response = await addBookmark(bookmark);
+          var response = await addBookmark(bookmark, token);
           print(response);
           if (response == 200)
             {
