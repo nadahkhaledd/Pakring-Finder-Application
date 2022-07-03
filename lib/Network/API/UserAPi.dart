@@ -24,8 +24,9 @@ return userName;
 Future<userData> getUserById({@required String userID,@required String token}) async
 {
   userData user;
-  await DioHelper.getData(url: GetById, query: {'id':userID})
+  await DioHelper.getData(url: GetById, query: {"id":userID})
       .then((value) {
+        print("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
     user = new userData(
       value.data['name'].toString(),
       value.data['email'].toString(),
@@ -36,6 +37,7 @@ Future<userData> getUserById({@required String userID,@required String token}) a
   }).catchError((error){
     print(error);
   });
+  return user;
 }
 
 Future <Pair>loginApi({

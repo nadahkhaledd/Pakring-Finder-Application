@@ -109,8 +109,8 @@ class _loginState extends State<login> {
                             if(pair.token!="none")
                               {
                                 userData user=await getUserById(userID: pair.id,token: pair.token);
-                                provider.updateUser(user); navigateTo(context,(){});
-                                navigateTo(context, Home());
+                                provider.updateUser(user);
+                                navigateTo(provider, Home());
 
                               }
                             else

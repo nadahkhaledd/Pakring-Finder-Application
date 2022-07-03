@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +25,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return ChangeNotifierProvider(
+
+      //create: (context) async => await geoLocatorService.getCurrentLocation(),
       create: (context)=> AppProvider(),
+
+
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'parking locator',
@@ -37,10 +39,9 @@ class MyApp extends StatelessWidget {
             {
               return splash();
             }
+
         ),
       ),
     );
   }
 }
-
-
