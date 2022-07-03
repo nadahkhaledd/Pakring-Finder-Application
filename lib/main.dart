@@ -24,10 +24,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return ChangeNotifierProvider(
+    return MultiProvider(
 
-      //create: (context) async => await geoLocatorService.getCurrentLocation(),
-      create: (context)=> AppProvider(),
+      providers: [
+        ChangeNotifierProvider(create: (context)=> AppProvider() ),
+        FutureProvider(create:(context) async => await geoLocatorService.getCurrentLocation(),
+        lazy: false,
+        )
+      ],
 
 
       child: MaterialApp(

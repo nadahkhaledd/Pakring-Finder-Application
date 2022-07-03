@@ -7,7 +7,6 @@ import '../Model/UserData.dart';
 
 class AppProvider extends ChangeNotifier{
   userData currentUser;
-  geoLocator geoLocatorService;
   updateUser(userData user){
     currentUser = user;
     notifyListeners();

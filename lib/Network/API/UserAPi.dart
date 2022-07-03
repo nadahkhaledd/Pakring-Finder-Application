@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import '../../Model/UserData.dart';
@@ -24,9 +25,9 @@ return userName;
 Future<userData> getUserById({@required String userID,@required String token}) async
 {
   userData user;
-  await DioHelper.getData(url: GetById, query: {"id":userID})
+  await DioHelper.getData(url: GetById, query: {"id":userID},token: token)
       .then((value) {
-        print("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
+        print("WWWWWWWWWWWWWWWWWWWWWWWWWWwwww");
     user = new userData(
       value.data['name'].toString(),
       value.data['email'].toString(),
