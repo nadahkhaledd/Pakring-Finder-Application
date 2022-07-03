@@ -5,7 +5,9 @@ import 'package:provider/provider.dart';
 
 import '../../Model/UserData.dart';
 import '../../Shared/Components.dart';
+import '../../Shared/pair.dart';
 import '../../services/appprovider.dart';
+import '../Home.dart';
 
 class login extends StatefulWidget {
   @override
@@ -99,18 +101,39 @@ class _loginState extends State<login> {
                     Center(
                       child: ElevatedButton(
                         onPressed: () async {
-                          //  String email="nada123@gmail.com";
-                          //String pass= "nadahossam";
                           if (formKey.currentState.validate()) {
+                            Pair pair=  await loginApi(
+                                email: emailController.text,
+                                password:passwordController.text);
+
+                            if(pair.token!="none")
+                              {
+                                userData user=await getUserById(userID: pair.id,token: pair.token);
+                                provider.updateUser(user); navigateTo(context,(){});
+                                navigateTo(context, Home());
+
+                              }
+                            else
+                              {
+                                AlertDialog(
+
+                                  title:  Text("Failed to Log in", style: TextStyle(
+                                      color: Colors.red
+                                  ),),
+                                  content:  Text("Wrong Email or Password", style: TextStyle(
+                                      color: Colors.red
+                                  ),),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(context,'ok'),
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                );
+                              }
 
                           }
-                          print(email);
-                          userData  user =  await loginApi(
-                              email: emailController.text,
-                              password:passwordController.text);
-                          provider.updateUser(user);
-
-                          navigateTo(context,(){});
 
                         },
                         child: Text("Login"),

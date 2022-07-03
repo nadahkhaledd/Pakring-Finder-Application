@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../Model/UserData.dart';
+import '../../Shared/pair.dart';
 import '../Dio_helper.dart';
 import '../endpoints.dart';
 
@@ -20,40 +21,51 @@ Future<String> getUserNameByID({ @required String userID}) async
 return userName;
 }
 
-
-Future <userData>loginApi({
-  @required String email,
-  @required String password,
-}) async {
+Future<userData> getUserById({@required String userID,@required String token}) async
+{
   userData user;
-  await DioHelper.getData(url: LOGIN, query: {
-    'email':email,
-    'password':password
-  }
-
-  ).then((value) {
-    print(value.toString());
-    print("TRUEEEEEEEEEEEEEEE");
+  await DioHelper.getData(url: GetById, query: {'id':userID})
+      .then((value) {
     user = new userData(
       value.data['name'].toString(),
       value.data['email'].toString(),
       value.data['number'].toString(),
       value.data['id'].toString(),
+      token,
     );
+  }).catchError((error){
+    print(error);
+  });
+}
+
+Future <Pair>loginApi({
+  @required String email,
+  @required String password,
+}) async {
+  userData user;
+
+ Pair pair=new Pair('none','none');
+
+  await DioHelper.getData(url: LOGIN, query: {
+    'email':email,
+    'password':password
+  }
+  ).then((value) {
+    pair= Pair(value.data['id'].toString(), value.data['idToken'].toString());
 
   }).catchError((error){
     print(error);
   });
-  return user;
+  return pair;
 }
 
-Future <userData> signupApi({
+Future <String> signupApi({
   @required String email,
   @required String password,
   @required String name,
   @required String number,
 }) async {
-  userData user;
+  String returnValue;
 
   await DioHelper.postData(url: SIGNUP, data: {
     "email":email,
@@ -63,16 +75,13 @@ Future <userData> signupApi({
     "is_owner":"False",
   }
   ).then((value) {
-    print("EEEEEEEEEEEEEee");
-    user = new userData(
-      value.data['name'].toString(),
-      value.data['email'].toString(),
-      value.data['number'].toString(),
-      value.data['id'].toString(),
-    );
+    returnValue=value.data['value'].toString();
+
   }).catchError((error){
     print(error);
+    returnValue="Wrong format of email or phone number";
+  //  return returnValue;
   });
-  return user;
+  return returnValue;
 }
 

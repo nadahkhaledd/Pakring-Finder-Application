@@ -62,6 +62,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:park_locator/screens/user/signup.dart';
 import 'package:splashscreen/splashscreen.dart';
 
 import 'Home.dart';
@@ -72,7 +73,7 @@ class splash extends StatelessWidget {
   Widget build(BuildContext context) {
     return SplashScreen(
       seconds: 5,
-      navigateAfterSeconds: new Home(),
+      navigateAfterSeconds: new signup(),
       image: new Image.asset('assets/images/logo.jpg'),
       photoSize: 100.0,
       loaderColor: Colors.blueGrey,

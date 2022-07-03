@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:park_locator/screens/user/login.dart';
 
 
 import '../../Model/UserData.dart';
@@ -42,7 +43,7 @@ class _signupState extends State<signup> {
                 SizedBox(
                     height: heightResponsive(
                       context: context,
-                      height: 6,
+                      height: 8,
                     )),
                 Center(
                   child: Text(
@@ -126,26 +127,80 @@ class _signupState extends State<signup> {
                 ),
                 Center(
                   child: ElevatedButton(
+                    child: Text("Sign up"),
                     onPressed: () async {
                       String number = "+2" + phoneController.text;
 
                       if (formKey.currentState.validate()) {
-                        userData user;
-
-                        user = await signupApi(
+                        String returnValue;
+                        returnValue = await signupApi(
                             email: emailController.text,
                             password: passwordController.text,
                             name: firstNameController.text,
                             number: number);
-                        provider.updateUser(user);
+                        if (returnValue == "sign in successful") {
+                          showDialog(context: context,
+                              builder: (BuildContext context) =>
+                                  AlertDialog(
+                                    title:  Text("Success", style: TextStyle(
+                                      color: Colors.red
+                                    ),),
+                                    content:  Text(returnValue, style: TextStyle(
+                                        color: Colors.red
+                                    ),),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            navigateTo(context,login()),
+                                        child: const Text('Login'),
+                                      ),  TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(context,'Cancel'),
+                                        child: const Text('Cancel'),
+                                      ),
+                                    ],
+                                  ));
+                        }
+                        else {
+                          showDialog(context: context,
+                              builder: (BuildContext context) =>
+                                  AlertDialog(
 
-                        navigateTo(context, (){});
+                                        title:  Text("Failed to sign up", style: TextStyle(
+                                            color: Colors.red
+                                        ),),
+                                        content:  Text(returnValue, style: TextStyle(
+                                            color: Colors.red
+                                        ),),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(context,'ok'),
+                                        child: const Text('OK'),
+                                      ),
+                                    ],
+                                  ));
+                        }
                       }
-                    },
-                    child: Text("Sign up"),
+
+                    }
                   ),
                 ),
+              Row(
+                children:[
+                  Text("Already have account ? "),
+          TextButton(
+              onPressed:()
+              {
+                navigateTo(context, login());
+              }
+              , child:Text('Log in'),  ),
+                ]
+
+              ),
+
               ],
+
             ),
           ),
         ),
