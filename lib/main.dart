@@ -25,15 +25,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return MultiProvider(
+
       providers: [
-        ChangeNotifierProvider(
-          create: (context)=> AppProvider(),
-        ),
-        FutureProvider(
-          create: (context) async => await geoLocatorService.getCurrentLocation(),
-          lazy: false,
+        ChangeNotifierProvider(create: (context)=> AppProvider() ),
+        FutureProvider(create:(context) async => await geoLocatorService.getCurrentLocation(),
+        lazy: false,
         )
       ],
+
+
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'parking locator',

@@ -102,7 +102,8 @@ class _loginState extends State<login> {
                       child: ElevatedButton(
                         onPressed: () async {
                           if (formKey.currentState.validate()) {
-                            Pair pair=  await loginApi(
+                            Pair pair=  new Pair("none","none");
+                          pair=  await loginApi(
                                 email: emailController.text,
                                 password:passwordController.text);
 
@@ -110,7 +111,7 @@ class _loginState extends State<login> {
                               {
                                 userData user=await getUserById(userID: pair.id,token: pair.token);
                                 provider.updateUser(user);
-                                navigateTo(provider, Home());
+                                navigateTo(context, Home());
 
                               }
                             else
