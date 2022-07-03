@@ -21,7 +21,7 @@ class _GoogleSearchState extends State<GoogleSearch> {
   @override
   Widget build(BuildContext context) {
     return SearchLocation(
-      apiKey: 'AIzaSyANNie-WxuIW_ibDpFjNPO5fICFWFfEk3w',
+      apiKey: 'AIzaSyAs891Qkhr9DA8kkG0TORJjwWCSCRE3Ot8',
       language: 'en',
       placeholder: 'Search location',
       iconColor: Colors.blueGrey,
