@@ -35,22 +35,25 @@ class _bookmarkButtonState extends State<bookmarkButton> {
         mini: true,
         shape: BeveledRectangleBorder(),
         child: Icon(Icons.bookmark, color: iconColor,),
-        onPressed: _toggleBookmark,
+        onPressed: ()
+      async {
+        await _toggleBookmark();
+      },
     );
   }
 
   Future<void> _toggleBookmark()
   async {
-    print('in the method');
-
       if(bookmarkState)
       {
-        print('deleted');
         var response = await deleteBookmark(widget.bookmarkID, widget.user.token);
         if(response == 200)
         {
-          iconColor = Colors.blueGrey;
-          bookmarkState = false;
+          setState(() {
+            iconColor = Colors.blueGrey;
+            bookmarkState = false;
+          });
+
         }
       }
       else
@@ -60,8 +63,11 @@ class _bookmarkButtonState extends State<bookmarkButton> {
         var response = await addBookmark(bookmark, widget.user.token);
         if (response == 200)
         {
-          iconColor = Colors.yellow;
-          bookmarkState = true;
+          setState(() {
+            iconColor = Colors.yellow;
+            bookmarkState = true;
+          });
+
         }
       }
 

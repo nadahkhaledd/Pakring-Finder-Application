@@ -1,66 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:park_locator/Model/DBModels/Bookmark.dart';
-import 'package:park_locator/Shared/Components.dart';
-import 'package:park_locator/screens/side_menu_pages/bookmarksPage.dart';
-import 'package:park_locator/widgets/loadingIndicator.dart';
 
-import '../Network/API/BookMarkes.dart';
-import '../screens/Home.dart';
-import '../services/API/APIManager.dart';
 
-Column bookmarkItem(context, Bookmark bookmark)
+ListTile bookmarkItem(String bookmarkName)
 {
-  return Column(
-    children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Text(bookmark.name, style:
-              TextStyle(color: Colors.black87, fontWeight: FontWeight.w400, fontSize: 16),
-                  overflow:  TextOverflow.fade),
-            ),
-          ),
-
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: IconButton(
-          //     autofocus: true,
-          //     icon: const Icon(Icons.directions, color: Colors.blueGrey),
-          //     onPressed: () async {
-          //
-          //     },
-          //   ),
-          // ),
-
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: IconButton(
-          //     autofocus: true,
-          //     icon: const Icon(Icons.delete, color: Colors.blueGrey),
-          //     onPressed: () async {
-          //       int code = await deleteBookmark(bookmark.id, token);
-          //       if(code == 200)
-          //       {
-          //          navigateTo(context, Home());
-          //       }
-          //       else
-          //         print(code);
-          //     },
-          //   ),
-          // )
-
-        ],
-      ),
-      // Divider(
-      //   thickness: 1,
-      //   height: 1,
-      // ),
-    ],
-
+  return ListTile(
+    title: Text(bookmarkName, style:
+    TextStyle(color: Colors.black87, fontWeight: FontWeight.w400, fontSize: 16),
+        overflow:  TextOverflow.fade),
+    onTap: (){},
   );
 }

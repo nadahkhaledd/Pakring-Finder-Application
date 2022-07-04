@@ -31,7 +31,7 @@ Future <String> getTime(LatLng destination, LatLng current) async {
     }
 }
 
-enum SlidableAction{delete, goto, share}
+enum SlidableAction{delete, findnearby, share}
 
 void setSearchLocation (LatLng source) async
 {

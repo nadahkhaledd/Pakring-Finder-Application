@@ -63,17 +63,17 @@ class _bookmarksPageState extends State<bookmarksPage> {
                   actionPane: SlidableDrawerActionPane(),
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(15, 6, 15, 6),
-                    child: bookmarkItem(context, widget.bookmarks[index]),
+                    child: bookmarkItem(widget.bookmarks[index].name),
                   ),
 
                   actions: <Widget>[
                     IconSlideAction(
-                      caption: 'Go to',
+                      caption: 'find nearby',
                       color: Colors.blueGrey,
                       icon: Icons.directions,
                       onTap: ()
-                      {
-
+                      async {
+                        await onDismissed(index, SlidableAction.findnearby);
                       },
                     )
                   ],
@@ -84,7 +84,9 @@ class _bookmarksPageState extends State<bookmarksPage> {
                       color: Colors.green,
                       icon: Icons.share,
                       onTap: ()
-                      {
+                      async {
+                        await onDismissed(index, SlidableAction.share);
+
 
                       },
                     ),
@@ -108,16 +110,36 @@ class _bookmarksPageState extends State<bookmarksPage> {
     );
   }
 
-  void onDismissed(int index, SlidableAction action) async
+  Future<void> onDismissed(int index, SlidableAction action) async
   {
-    if(action == SlidableAction.delete)
+    String message;
+    switch(action)
     {
-      int code = await deleteBookmark(widget.bookmarks[index].id, provider.currentUser.token);
-      setState(()  {
-        if (code == 200)
-          widget.bookmarks.removeAt(index);
-      });
+      case SlidableAction.delete:
+        int code = await deleteBookmark(widget.bookmarks[index].id, provider.currentUser.token);
+        setState(()  {
+          if (code == 200)
+          {
+            widget.bookmarks.removeAt(index);
+            message = "bookmark deleted";
+          }
+        });
+        break;
+
+      case SlidableAction.findnearby:
+        message = "Success";
+        break;
+
+      case SlidableAction.share:
+        message = "bookmark shared";
+        break;
+
 
     }
+
+    final snackBar = SnackBar(
+        content:  Text(message));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
   }
 }
