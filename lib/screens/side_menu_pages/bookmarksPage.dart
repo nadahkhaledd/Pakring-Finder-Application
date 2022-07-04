@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:park_locator/Model/DBModels/Bookmark.dart';
 import 'package:park_locator/Shared/Components.dart';
 import 'package:park_locator/screens/Home.dart';
+import 'package:park_locator/services/appprovider.dart';
 import 'package:park_locator/widgets/bookmarkItem.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,8 @@ class bookmarksPage extends StatefulWidget
 class _bookmarksPageState extends State<bookmarksPage> {
   @override
   Widget build(BuildContext context) {
-    final  currentUser = Provider.of<userData>(context);
+    AppProvider provider;
+    provider = Provider.of<AppProvider>(context);
 
     return SafeArea(
       child: Scaffold(
@@ -54,7 +56,7 @@ class _bookmarksPageState extends State<bookmarksPage> {
                 itemCount: widget.bookmarks.length,
                 itemBuilder: (context, index) => Padding(
                   padding: const EdgeInsets.fromLTRB(15, 6, 15, 6),
-                  child: bookmarkItem(context, widget.bookmarks[index], currentUser.token),
+                  child: bookmarkItem(context, widget.bookmarks[index], provider.currentUser.token),
                 ),
               ),
             ),

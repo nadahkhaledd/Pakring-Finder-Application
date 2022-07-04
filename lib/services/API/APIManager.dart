@@ -112,10 +112,11 @@ async {
 }
 
 
-Future<List> getBookmarks({@required String driverID, String token}) async
+Future<List> getBookmarks( String driverID, String token) async
 {
   List<Bookmark> bookmarks= [];
   Response response =await DioHelper.getData(url: url+"get_user_bookmark?driverID=$driverID", token: token);
+  print(response.data);
   for(var element in response.data)
   {
     if(element !=null)

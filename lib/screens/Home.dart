@@ -12,6 +12,7 @@ import '../Model/UserData.dart';
 import '../Shared/Components.dart';
 import '../Shared/Constants.dart';
 import '../services/DB.dart';
+import '../services/appprovider.dart';
 import '../widgets/GoogleSearch.dart';
 import 'marked/MarkedGarages.dart';
 import 'marked/MarkedPlaces.dart';
@@ -23,6 +24,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   GoogleMapController _mapController;
+  AppProvider provider;
   String currentUserToken;
   LatLng _coordinates = LatLng(30.0313, 31.2107);
   List snaps, nearestCameras, nearestGarages,GarageSnaps;
@@ -69,7 +71,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final currentLocation = Provider.of<Position>(context);
-    final  currentUser = Provider.of<userData>(context);
+    provider = Provider.of<AppProvider>(context);
 
 
     return SafeArea(
@@ -171,7 +173,7 @@ class _HomeState extends State<Home> {
                     child: FloatingActionButton.extended(
                       heroTag: 'on-street',
                       onPressed: () async {
-                        currentUserToken = currentUser.token;
+                        currentUserToken = provider.currentUser.token;
                         finalLocation();
                         if (_coordinates != null) {
                           await setResultsStreet();
@@ -197,7 +199,7 @@ class _HomeState extends State<Home> {
                     child: FloatingActionButton.extended(
                       heroTag: 'garages',
                       onPressed: () async {
-                        currentUserToken = currentUser.token;
+                        currentUserToken = provider.currentUser.token;
                         finalLocation();
 
                         if (_coordinates != null) {

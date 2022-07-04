@@ -45,7 +45,7 @@ Column bookmarkItem(context, Bookmark bookmark, String token)
                 int code = await deleteBookmark(bookmark.id, token);
                 if(code == 200)
                 {
-                  List bookmarks = await getBookmarks(driverID: bookmark.driverID);
+                  List bookmarks = await getBookmarks(bookmark.driverID, token);
                    navigateTo(context, bookmarksPage(bookmarks));
                 }
                 else

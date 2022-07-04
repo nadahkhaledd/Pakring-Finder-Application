@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:park_locator/Shared/Components.dart';
 import 'package:park_locator/screens/side_menu_pages/bookmarksPage.dart';
+import 'package:park_locator/services/appprovider.dart';
+import 'package:provider/provider.dart';
 
 import '../Model/DBModels/Bookmark.dart';
 import '../Network/API/BookMarkes.dart';
@@ -11,6 +13,8 @@ Drawer Appdrawer(context) {
   String driverID;
 
   bool isLight = true;
+  AppProvider provider;
+  provider = Provider.of<AppProvider>(context);
 
   return Drawer(
     shape: const RoundedRectangleBorder(
@@ -63,7 +67,8 @@ Drawer Appdrawer(context) {
           leading: Icon(Icons.bookmark, color: Colors.blueGrey),
           title: Text('Bookmarks', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
           onTap: () async {
-            List<Bookmark> bookmarks = await getBookmarks(driverID: "UtxbOluLTzMTooCY01XD0vqAAUf2");
+            print(provider.currentUser.token);
+            List<Bookmark> bookmarks = await getBookmarks("UtxbOluLTzMTooCY01XD0vqAAUf2",  provider.currentUser.token);
             navigateTo(context, bookmarksPage(bookmarks));
           },
         ),

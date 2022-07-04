@@ -66,11 +66,11 @@ List getGarageCamerasIDs(List garages)
   return IDs;
 }
 
-Future<Map> findIfBookmark(String userid, LatLng destination)
+Future<Map> findIfBookmark(String userid, LatLng destination, String token)
 async {
   String bookmarkID = '0';
   bool yes;
-  List<Bookmark> bookmarks = await getBookmarks(driverID: "UtxbOluLTzMTooCY01XD0vqAAUf2");
+  List<Bookmark> bookmarks = await getBookmarks( "UtxbOluLTzMTooCY01XD0vqAAUf2",token);
   bookmarks.forEach((element) {
 
     if( element.location.lat == destination.latitude &&
