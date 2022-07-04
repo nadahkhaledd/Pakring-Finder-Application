@@ -44,6 +44,7 @@ class _bookmarkButtonState extends State<bookmarkButton> {
 
   Future<void> _toggleBookmark()
   async {
+    String message;
       if(bookmarkState)
       {
         var response = await deleteBookmark(widget.bookmarkID, widget.user.token);
@@ -52,7 +53,9 @@ class _bookmarkButtonState extends State<bookmarkButton> {
           setState(() {
             iconColor = Colors.blueGrey;
             bookmarkState = false;
+            message = "deleted from bookmarks";
           });
+
 
         }
       }
@@ -66,12 +69,14 @@ class _bookmarkButtonState extends State<bookmarkButton> {
           setState(() {
             iconColor = Colors.yellow;
             bookmarkState = true;
+            message = "added to bookmarks";
           });
 
         }
       }
-
-
+    final snackBar = SnackBar(
+        content:  Text(message));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
 
