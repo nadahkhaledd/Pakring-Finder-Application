@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../Model/DBModels/Bookmark.dart';
 import '../Network/API/BookMarkes.dart';
+import '../screens/Home.dart';
 import '../services/API/APIManager.dart';
 
 Drawer Appdrawer(context) {
@@ -58,7 +59,7 @@ Drawer Appdrawer(context) {
             title: Text('Home', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
             autofocus: true,
             onTap: () {
-
+              navigateTo(context, Home());
             },
           ),
         ),

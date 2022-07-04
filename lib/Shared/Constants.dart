@@ -12,7 +12,7 @@ import '../services/DistanceMatrix.dart';
 import '../services/directions_repository.dart';
 
 
-var location = LatLng(30.0313, 31.2107);   ///default
+LatLng location;   ///default
 
 Future <String> getDistance(LatLng destination, LatLng current) async {
     final directions = await DirectionsRepository()
@@ -33,11 +33,14 @@ Future <String> getTime(LatLng destination, LatLng current) async {
 
 void setSearchLocation (LatLng source) async
 {
+  print('setted');
   location = source;
 }
 
 LatLng getSearchLocation ()
 {
+  print('sentt location');
+  print(location);
   return location;
 }
 

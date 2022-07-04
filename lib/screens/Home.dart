@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -8,7 +10,6 @@ import 'package:park_locator/widgets/loadingIndicator.dart';
 import 'package:provider/provider.dart';
 
 import '../Model/LocationDetails.dart';
-import '../Model/UserData.dart';
 import '../Shared/Components.dart';
 import '../Shared/Constants.dart';
 import '../services/DB.dart';
@@ -24,6 +25,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   GoogleMapController _mapController;
+  Position currentLocation;
   AppProvider provider;
   String currentUserToken;
   LatLng _coordinates = LatLng(30.0313, 31.2107);
@@ -68,8 +70,9 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final currentLocation = Provider.of<Position>(context);
+    currentLocation = Provider.of<Position>(context);
     provider = Provider.of<AppProvider>(context);
+    Completer<GoogleMapController> _controller = Completer();
 
 
     return SafeArea(
@@ -79,11 +82,11 @@ class _HomeState extends State<Home> {
           body: Stack(
         children: [
           GoogleMap(
-            initialCameraPosition:(CameraPosition(target: LatLng(30.0313, 31.2107), zoom: 10.0)),
-            // initialCameraPosition: (currentLocation == null)
-            //     ? (CameraPosition(target: LatLng(30.0313, 31.2107), zoom: 10.0))
-            //     : (CameraPosition(
-            //         target: LatLng(currentLocation.latitude, currentLocation.longitude), zoom: 16.0)),
+            //initialCameraPosition:(CameraPosition(target: LatLng(30.0313, 31.2107), zoom: 10.0)),
+            initialCameraPosition: (currentLocation == null)
+                ? (CameraPosition(target: LatLng(30.0313, 31.2107), zoom: 10.0))
+                : (CameraPosition(
+                    target: LatLng(currentLocation.latitude, currentLocation.longitude), zoom: 16.0)),
             compassEnabled: true,
             mapToolbarEnabled: true,
             zoomGesturesEnabled: true,
@@ -92,7 +95,7 @@ class _HomeState extends State<Home> {
             myLocationButtonEnabled: false,
             myLocationEnabled: true,
             onMapCreated: (GoogleMapController controller) async {
-              _mapController = controller;
+              _controller.complete(controller);
             },
           ),
 
@@ -126,7 +129,7 @@ class _HomeState extends State<Home> {
 
                 Flexible(child: Padding(
                   padding: const EdgeInsets.only(top: 10.0),
-                  child: GoogleSearch(_mapController),
+                  child: GoogleSearch(context, _controller, currentLocation),
                 ))
               ],
             ),
@@ -142,8 +145,9 @@ class _HomeState extends State<Home> {
               shape: BeveledRectangleBorder(),
               child:
                   const Icon(Icons.album_outlined, color: Colors.black54),
-              onPressed: () {
-                _mapController.animateCamera(CameraUpdate.newCameraPosition(
+              onPressed: () async {
+                final GoogleMapController controller = await _controller.future;
+                controller.animateCamera(CameraUpdate.newCameraPosition(
                     CameraPosition(
                         target: LatLng(currentLocation.latitude,
                             currentLocation.longitude),

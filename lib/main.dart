@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/Network/Dio_helper.dart';
 import 'package:park_locator/screens/Home.dart';
 import 'package:park_locator/screens/splash.dart';
@@ -12,8 +11,8 @@ import 'package:provider/provider.dart';
 
 
 Future<void> main()  async{
-  WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 

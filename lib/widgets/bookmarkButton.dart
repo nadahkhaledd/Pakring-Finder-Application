@@ -34,7 +34,6 @@ FloatingActionButton bookmarkButton(context, bool isBookmark, String bookmarkID,
           Bookmark bookmark = new Bookmark(name: destinationName, driverID: user.id,
               location: Location(lat: destination.latitude, long: destination.longitude));
           var response = await addBookmark(bookmark, user.token);
-          print(response);
           if (response == 200)
             {
               isBookmark = true;
