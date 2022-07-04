@@ -6,9 +6,11 @@ import 'package:park_locator/Model/DBModels/Review.dart';
 import 'package:park_locator/Model/UserData.dart';
 import 'package:park_locator/Model/directionsDetails.dart';
 import 'package:park_locator/services/API/APIManager.dart';
+import 'package:park_locator/services/appprovider.dart';
 import 'package:park_locator/widgets/d_widgets/from_to.dart';
 import 'package:park_locator/widgets/d_widgets/time.dart';
 import 'package:park_locator/widgets/review.dart';
+import 'package:provider/provider.dart';
 import '../Model/DBModels/Owner.dart';
 import '../Model/LocationDetails.dart';
 import '../Network/API/Reviews.dart';
@@ -24,9 +26,8 @@ class direction_screen extends StatefulWidget{
   @required String cameraID;
   String bookmarkID;
   bool ifBookmark;
-  @required userData user;
 
-  direction_screen({this.currentLocation,this.info,this.review,this.users,this.cameraID, this.ifBookmark, this.bookmarkID, this.user});
+  direction_screen({this.currentLocation,this.info,this.review,this.users,this.cameraID, this.ifBookmark, this.bookmarkID});
 
 
 
@@ -39,7 +40,7 @@ class direction_screen extends StatefulWidget{
 class _searchState extends State<direction_screen> {
 
   String valueText;
-  //String cameraID;
+  AppProvider provider;
 
   @override
   void initState() {
@@ -48,6 +49,7 @@ class _searchState extends State<direction_screen> {
 
   @override
   Widget build(BuildContext context) {
+    provider = Provider.of<AppProvider>(context);
     Set<Marker> markers = addMarkers2(widget.currentLocation,widget.info.getDestination());
 
 
@@ -59,7 +61,7 @@ class _searchState extends State<direction_screen> {
             width: MediaQuery.of(context).size.width,
            // color: Colors.black,
             child: from_to(source: widget.info.myLocation_name,target: widget.info.destination_name,
-              isBookmark: widget.ifBookmark, bookmarkID: widget.bookmarkID, destination: widget.info.getDestination(), token: widget.user.token),
+              isBookmark: widget.ifBookmark, bookmarkID: widget.bookmarkID, destination: widget.info.getDestination()),
           ),
           Container(
             //padding: const EdgeInsets.only(left: 0.0,top:140,right: 0.0),
@@ -151,7 +153,7 @@ class _searchState extends State<direction_screen> {
         actions: [
           TextButton(onPressed: (){
 
-            addReview(user: widget.user,cameraID: widget.cameraID,content: valueText);
+            addReview(user: provider.currentUser,cameraID: widget.cameraID,content: valueText);
             Navigator.pop(context);
             print(valueText);
           }, child: Text("Submit",style: TextStyle(color: Colors.blueGrey),))

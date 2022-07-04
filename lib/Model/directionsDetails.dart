@@ -55,7 +55,7 @@ class directionsDetails
       print(duration);
       polylinePoints = PolylinePoints();
       PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      "AIzaSyANNie-WxuIW_ibDpFjNPO5fICFWFfEk3w", // Google Maps API Key
+      "AIzaSyAs891Qkhr9DA8kkG0TORJjwWCSCRE3Ot8", // Google Maps API Key
       PointLatLng(startLatitude, startLongitude),
       PointLatLng(destinationLatitude, destinationLongitude),
       travelMode: TravelMode.transit,

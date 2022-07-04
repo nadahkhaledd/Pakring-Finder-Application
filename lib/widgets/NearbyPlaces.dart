@@ -28,22 +28,24 @@ class NearbyPlaces extends StatefulWidget
 
 class _NearbyPlacesState extends State<NearbyPlaces> {
   bool isLoading = false;
-  String currentUserToken;
   AppProvider provider;
+  Map ifBookmark;
+  String bookmarkID;
+  bool bookmarkBool;
 
 
-  Future<List<Review>> reviews(q) async {
+  Future<List<Review>> reviews(q, String userToken) async {
     setState(() {
       isLoading = true;
     });
-    List<Review> review=await getReviews(q, currentUserToken);
+    List<Review> review=await getReviews(q, userToken);
     setState(() {
       isLoading = false;
     });
     return review;
   }
 
-  Future<List<String>> user(review) async {
+  Future<List<String>> user(review, String userToken) async {
     List<String> users= [];
     setState(() {
       isLoading = true;
@@ -51,7 +53,7 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
     var user;
     for(var element in review)
     {
-        user=await getUserNameByID(userID: element.driverID);
+        user=await getUserNameByID(userID: element.driverID, token: userToken);
         users.add(user);
     }
     setState(() {
@@ -64,6 +66,7 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
   @override
   Widget build(BuildContext context) {
     provider = Provider.of<AppProvider>(context);
+
 
     return Stack(
         children:[
@@ -120,14 +123,13 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
                     onPressed: () async {
                       var info = directionsDetails(widget.source, widget.data[index].location);
                       await info.create();
-                      //currentUserToken = provider.currentUser.token;
-                     var review=await reviews(widget.data[index].cameraID);
-                     var users=await user(review);
-                     Map ifBookmark = await findIfBookmark( info.getDestination(), provider.currentUser);
-                     String bookmarkID = ifBookmark['id'];
-                     bool isBookmark = ifBookmark['yes'];
+                     var review=await reviews(widget.data[index].cameraID, provider.currentUser.token);
+                     var users=await user(review, provider.currentUser.token);
+                     ifBookmark = await findIfBookmark( info.getDestination(), provider.currentUser);
+                     bookmarkID = ifBookmark['id'];
+                     bookmarkBool = ifBookmark['yes'];
                       navigateTo(context, direction_screen(currentLocation: widget.source,info: info,review: review,
-                          users: users,cameraID:widget.data[index].cameraID, ifBookmark: isBookmark, bookmarkID: bookmarkID,));
+                          users: users,cameraID:widget.data[index].cameraID, ifBookmark: bookmarkBool, bookmarkID: bookmarkID));
                     },
                   ),
                 )),

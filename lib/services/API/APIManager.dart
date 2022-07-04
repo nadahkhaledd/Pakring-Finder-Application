@@ -28,6 +28,7 @@ async {
         bool condition = await isInRadius(current, location);
         if(condition)
         {
+          print('yess');
           nearestOnstreet.add(new Camera(id: element['id'], address: element['address'], location: location));
         }
       }
@@ -44,11 +45,11 @@ async {
   {
     if(element !=null)
     {
-      //LatLng location = LatLng(double.parse(element['location']['lat']), double.parse(element['location']['long']));
-      LatLng location = LatLng(element['location']['lat'], element['location']['long']);
+      LatLng location = LatLng(double.parse(element['location']['lat']), double.parse(element['location']['long']));
       bool condition = await isInRadius(current, location);
       if(condition)
       {
+
         nearestGarages.add({'id': element['id'], 'location': location, 'address': element['address'], 'cameraIDs': element['cameraIDs']});
       }
     }

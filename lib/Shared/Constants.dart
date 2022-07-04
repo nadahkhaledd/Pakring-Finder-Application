@@ -22,11 +22,11 @@ Future <String> getDistance(LatLng destination, LatLng current) async {
 }
 
 Future <String> getTime(LatLng destination, LatLng current) async {
-  if(current != null)
+  if(current != null && destination != null)
     {
-      final directions = await DirectionsRepository()
-          .getDirections(origin:current,
-          destination:LatLng(destination.latitude, destination.longitude) );
+      DirectionsRepository directionRepo = new DirectionsRepository();
+      final directions = await directionRepo.getDirections(origin:current,
+          destination:destination);
       return directions.totalDuration;
     }
 }
@@ -70,7 +70,7 @@ List getGarageCamerasIDs(List garages)
 Future<Map> findIfBookmark(LatLng destination, userData user)
 async {
   String bookmarkID = '0';
-  bool yes;
+  bool yes = false;
   List<Bookmark> bookmarks = await getBookmarks( user.id,user.token);
   bookmarks.forEach((element) {
 
@@ -104,7 +104,6 @@ Future<List<LocationDetails>> getFinalData(List snaps,  List<Camera> nearest,Lat
           List<Camera> x = await getFData(snaps[i]["Camera_ID"], nearest);
           LatLng loc = x[0].getLocation;
           String distance = await getDistance(loc, current);
-
           String time = await getTime(loc,current);
           LocationDetails details = new LocationDetails(
               cameraID: snaps[i]["Camera_ID"],

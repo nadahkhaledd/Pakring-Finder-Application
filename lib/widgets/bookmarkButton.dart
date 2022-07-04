@@ -4,11 +4,11 @@ import 'package:park_locator/Model/DBModels/Bookmark.dart';
 import 'package:park_locator/services/API/APIManager.dart';
 import 'package:park_locator/widgets/loadingIndicator.dart';
 
+import '../Model/UserData.dart';
 import '../Network/API/BookMarkes.dart';
 
-FloatingActionButton bookmarkButton(context, bool isBookmark, String bookmarkID, LatLng destination, String destinationName, String token)
+FloatingActionButton bookmarkButton(context, bool isBookmark, String bookmarkID, LatLng destination, String destinationName, userData user)
 {
-  String userID="UtxbOluLTzMTooCY01XD0vqAAUf2";
   Color iconColor =  isBookmark? Colors.yellow: Colors.blueGrey;
   return FloatingActionButton(
     heroTag: 'bookmark',
@@ -21,7 +21,7 @@ FloatingActionButton bookmarkButton(context, bool isBookmark, String bookmarkID,
     async {
       if(isBookmark)
         {
-          var response = await deleteBookmark(bookmarkID, token);
+          var response = await deleteBookmark(bookmarkID, user.token);
           if(response == 200)
             {
 
@@ -31,9 +31,9 @@ FloatingActionButton bookmarkButton(context, bool isBookmark, String bookmarkID,
         }
       else
         {
-          Bookmark bookmark = new Bookmark(name: destinationName, driverID: userID,
+          Bookmark bookmark = new Bookmark(name: destinationName, driverID: user.id,
               location: Location(lat: destination.latitude, long: destination.longitude));
-          var response = await addBookmark(bookmark, token);
+          var response = await addBookmark(bookmark, user.token);
           print(response);
           if (response == 200)
             {

@@ -46,9 +46,7 @@ class _HomeState extends State<Home> {
     nearestGarages = await getGarageCameras(_coordinates, currentUserToken);
     List GaragesCamerasIDs = getGarageCamerasIDs(nearestGarages);
     GarageSnaps = await getSnapsgarage(GaragesCamerasIDs);
-   // print(GarageSnaps);
     data = await getFinalDataGarages(GarageSnaps, _coordinates, currentUserToken);
-    print(data[0].spots);
     setState(() {
       isLoading = false;
     });
