@@ -3,6 +3,7 @@ import 'package:park_locator/Model/DBModels/Bookmark.dart';
 import 'package:park_locator/Shared/Components.dart';
 import 'package:park_locator/screens/Home.dart';
 import 'package:park_locator/services/appprovider.dart';
+import 'package:park_locator/widgets/Appdrawer.dart';
 import 'package:park_locator/widgets/bookmarkItem.dart';
 import 'package:provider/provider.dart';
 
@@ -18,15 +19,16 @@ class bookmarksPage extends StatefulWidget
 }
 
 class _bookmarksPageState extends State<bookmarksPage> {
+  AppProvider provider;
   @override
   Widget build(BuildContext context) {
-    AppProvider provider;
+
     provider = Provider.of<AppProvider>(context);
 
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-
+          automaticallyImplyLeading: false,
           toolbarHeight: 70.0,
           shape: ContinuousRectangleBorder(
               borderRadius: BorderRadius.only(
@@ -36,9 +38,9 @@ class _bookmarksPageState extends State<bookmarksPage> {
           title: Text(" Bookmarks "),
           centerTitle: true,
         ),
+        //drawer: Appdrawer(context),
 
         body: Column(
-
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),

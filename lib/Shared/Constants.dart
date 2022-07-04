@@ -33,14 +33,12 @@ Future <String> getTime(LatLng destination, LatLng current) async {
 
 void setSearchLocation (LatLng source) async
 {
-  print('setted');
   location = source;
 }
 
 LatLng getSearchLocation ()
 {
-  print('sentt location');
-  print(location);
+
   return location;
 }
 

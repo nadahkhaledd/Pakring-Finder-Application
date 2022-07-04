@@ -28,7 +28,6 @@ async {
         bool condition = await isInRadius(current, location);
         if(condition)
         {
-          print('yess');
           nearestOnstreet.add(new Camera(id: element['id'], address: element['address'], location: location));
         }
       }
@@ -117,7 +116,6 @@ Future<List> getBookmarks( String driverID, String token) async
 {
   List<Bookmark> bookmarks= [];
   Response response =await DioHelper.getData(url: url+"get_user_bookmark?driverID=$driverID", token: token);
-  print(response.data);
   for(var element in response.data)
   {
     if(element !=null)

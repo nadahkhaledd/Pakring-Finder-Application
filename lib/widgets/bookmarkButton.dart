@@ -7,42 +7,65 @@ import 'package:park_locator/widgets/loadingIndicator.dart';
 import '../Model/UserData.dart';
 import '../Network/API/BookMarkes.dart';
 
-FloatingActionButton bookmarkButton(context, bool isBookmark, String bookmarkID, LatLng destination, String destinationName, userData user)
+class bookmarkButton extends StatefulWidget
 {
-  Color iconColor =  isBookmark? Colors.yellow: Colors.blueGrey;
-  return FloatingActionButton(
-    heroTag: 'bookmark',
-    backgroundColor: Colors.white,
-    mini: true,
-    shape: BeveledRectangleBorder(),
-    child: Icon(Icons.bookmark, color: iconColor,),
+  bool isBookmark;
+  String bookmarkID;
+  LatLng destination;
+  String destinationName;
+  userData user;
 
-    onPressed: ()
-    async {
-      if(isBookmark)
-        {
-          var response = await deleteBookmark(bookmarkID, user.token);
-          if(response == 200)
-            {
+  bookmarkButton(context, this.isBookmark, this.bookmarkID, this.destination, this.destinationName, this.user);
 
-            }
-          //Dialog(child: Text('Bookmark deleted'));
-          //iconColor = Colors.blueGrey;
-        }
-      else
-        {
-          Bookmark bookmark = new Bookmark(name: destinationName, driverID: user.id,
-              location: Location(lat: destination.latitude, long: destination.longitude));
-          var response = await addBookmark(bookmark, user.token);
-          if (response == 200)
-            {
-              isBookmark = true;
-              //loadingIndicator(context, "Added to bookmarks", false);
-            }
-
-        }
-
-    },
-
-  );
+  @override
+  State<bookmarkButton> createState() => _bookmarkButtonState();
 }
+
+class _bookmarkButtonState extends State<bookmarkButton> {
+  bool bookmarkState;
+  Color iconColor;
+  @override
+  Widget build(BuildContext context) {
+    bookmarkState = widget.isBookmark;
+    iconColor =  bookmarkState? Colors.yellow: Colors.blueGrey;
+    return FloatingActionButton
+      (
+        heroTag: 'bookmark',
+        backgroundColor: Colors.white,
+        mini: true,
+        shape: BeveledRectangleBorder(),
+        child: Icon(Icons.bookmark, color: iconColor,),
+        onPressed: _toggleBookmark,
+    );
+  }
+
+  Future<void> _toggleBookmark()
+  async {
+    print('in the method');
+
+      if(bookmarkState)
+      {
+        print('deleted');
+        var response = await deleteBookmark(widget.bookmarkID, widget.user.token);
+        if(response == 200)
+        {
+          iconColor = Colors.blueGrey;
+          bookmarkState = false;
+        }
+      }
+      else
+      {
+        Bookmark bookmark = new Bookmark(name: widget.destinationName, driverID: widget.user.id,
+            location: Location(lat: widget.destination.latitude, long: widget.destination.longitude));
+        var response = await addBookmark(bookmark, widget.user.token);
+        if (response == 200)
+        {
+          iconColor = Colors.yellow;
+          bookmarkState = true;
+        }
+      }
+
+
+  }
+}
+

@@ -126,8 +126,10 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
                      var review=await reviews(widget.data[index].cameraID, provider.currentUser.token);
                      var users=await user(review, provider.currentUser.token);
                      ifBookmark = await findIfBookmark( info.getDestination(), provider.currentUser);
-                     bookmarkID = ifBookmark['id'];
-                     bookmarkBool = ifBookmark['yes'];
+                     setState(() {
+                       bookmarkID = ifBookmark['id'];
+                       bookmarkBool = ifBookmark['yes'];
+                     });
                       navigateTo(context, direction_screen(currentLocation: widget.source,info: info,review: review,
                           users: users,cameraID:widget.data[index].cameraID, ifBookmark: bookmarkBool, bookmarkID: bookmarkID));
                     },

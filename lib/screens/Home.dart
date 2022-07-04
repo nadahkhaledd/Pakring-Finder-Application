@@ -24,7 +24,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  GoogleMapController _mapController;
+  //GoogleMapController _mapController;
   Position currentLocation;
   AppProvider provider;
   String currentUserToken;
