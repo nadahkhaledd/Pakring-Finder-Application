@@ -9,6 +9,8 @@ import 'package:park_locator/widgets/bookmarkItem.dart';
 import 'package:provider/provider.dart';
 
 import '../../Model/UserData.dart';
+import '../../Shared/Constants.dart';
+import '../../services/API/APIManager.dart';
 
 class bookmarksPage extends StatefulWidget
 {
@@ -61,7 +63,7 @@ class _bookmarksPageState extends State<bookmarksPage> {
                   actionPane: SlidableDrawerActionPane(),
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(15, 6, 15, 6),
-                    child: bookmarkItem(context, widget.bookmarks[index], provider.currentUser.token),
+                    child: bookmarkItem(context, widget.bookmarks[index]),
                   ),
 
                   actions: <Widget>[
@@ -91,7 +93,8 @@ class _bookmarksPageState extends State<bookmarksPage> {
                       color: Colors.redAccent,
                       icon: Icons.delete,
                       onTap: ()
-                      {
+                      async {
+                        await onDismissed(index, SlidableAction.delete);
 
                       },
                     )
@@ -103,5 +106,18 @@ class _bookmarksPageState extends State<bookmarksPage> {
         ),
       ),
     );
+  }
+
+  void onDismissed(int index, SlidableAction action) async
+  {
+    if(action == SlidableAction.delete)
+    {
+      int code = await deleteBookmark(widget.bookmarks[index].id, provider.currentUser.token);
+      setState(()  {
+        if (code == 200)
+          widget.bookmarks.removeAt(index);
+      });
+
+    }
   }
 }

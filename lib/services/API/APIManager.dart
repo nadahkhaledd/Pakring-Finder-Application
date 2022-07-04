@@ -129,7 +129,7 @@ Future<List> getBookmarks( String driverID, String token) async
 Future<int> deleteBookmark(String id, String token)
 async {
   dio.options.headers = {"Authorization": 'Bearer $token'};
-  Response response = await dio.delete(url+"Bookmark/delete", data: {'id': id});
+  Response response = await dio.delete(url+"Bookmark/delete?id=$id");
   return response.statusCode;
 }
 

@@ -9,7 +9,7 @@ import '../Network/API/BookMarkes.dart';
 import '../screens/Home.dart';
 import '../services/API/APIManager.dart';
 
-Column bookmarkItem(context, Bookmark bookmark, String token)
+Column bookmarkItem(context, Bookmark bookmark)
 {
   return Column(
     children: [
