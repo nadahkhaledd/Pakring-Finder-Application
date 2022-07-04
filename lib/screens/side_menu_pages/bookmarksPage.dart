@@ -110,6 +110,29 @@ class _bookmarksPageState extends State<bookmarksPage> {
     );
   }
 
+  Widget bookmarkListTile(String name) {
+    return Builder(
+      builder: (context) {
+        return ListTile(
+            title: Text(name, style:
+            TextStyle(color: Colors.black87, fontWeight: FontWeight.w400, fontSize: 16),
+                overflow:  TextOverflow.fade),
+            onTap: (){
+              final slidable = Slidable.of(context);
+              final isClosed = slidable.renderingMode == SlidableRenderingMode.none;
+
+              if(isClosed)
+                  slidable.open();
+
+              else
+                slidable.close();
+            },
+          );
+      }
+    );
+    }
+
+
   Future<void> onDismissed(int index, SlidableAction action) async
   {
     String message;
