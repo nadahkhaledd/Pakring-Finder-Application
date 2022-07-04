@@ -6,6 +6,7 @@ import 'package:park_locator/screens/side_menu_pages/bookmarksPage.dart';
 import 'package:park_locator/widgets/loadingIndicator.dart';
 
 import '../Network/API/BookMarkes.dart';
+import '../screens/Home.dart';
 import '../services/API/APIManager.dart';
 
 Column bookmarkItem(context, Bookmark bookmark, String token)
@@ -25,34 +26,33 @@ Column bookmarkItem(context, Bookmark bookmark, String token)
             ),
           ),
 
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: IconButton(
-              autofocus: true,
-              icon: const Icon(Icons.directions, color: Colors.blueGrey),
-              onPressed: () async {
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: IconButton(
+          //     autofocus: true,
+          //     icon: const Icon(Icons.directions, color: Colors.blueGrey),
+          //     onPressed: () async {
+          //
+          //     },
+          //   ),
+          // ),
 
-              },
-            ),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: IconButton(
-              autofocus: true,
-              icon: const Icon(Icons.delete, color: Colors.blueGrey),
-              onPressed: () async {
-                int code = await deleteBookmark(bookmark.id, token);
-                if(code == 200)
-                {
-                  List bookmarks = await getBookmarks(bookmark.driverID, token);
-                   navigateTo(context, bookmarksPage(bookmarks));
-                }
-                else
-                  print(code);
-              },
-            ),
-          )
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: IconButton(
+          //     autofocus: true,
+          //     icon: const Icon(Icons.delete, color: Colors.blueGrey),
+          //     onPressed: () async {
+          //       int code = await deleteBookmark(bookmark.id, token);
+          //       if(code == 200)
+          //       {
+          //          navigateTo(context, Home());
+          //       }
+          //       else
+          //         print(code);
+          //     },
+          //   ),
+          // )
 
         ],
       ),

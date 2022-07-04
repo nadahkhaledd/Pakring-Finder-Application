@@ -40,7 +40,7 @@ class _from_toState extends State<from_to> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Row(
               children: [
@@ -107,7 +107,7 @@ class _from_toState extends State<from_to> {
             Align(
               alignment: Alignment.bottomRight,
               child: Padding(
-                padding: const EdgeInsets.only(left: 8),
+                padding: const EdgeInsets.only(left: 10),
                 child: bookmarkButton( context, widget.isBookmark, widget.bookmarkID, widget.destination, widget.target, provider.currentUser),
               ),
             )
