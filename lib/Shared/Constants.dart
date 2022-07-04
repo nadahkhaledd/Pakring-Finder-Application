@@ -4,6 +4,7 @@ import 'package:park_locator/Model/DBModels/Review.dart';
 import '../Model/DBModels/Bookmark.dart';
 import '../Model/DBModels/Camera.dart';
 import '../Model/LocationDetails.dart';
+import '../Model/UserData.dart';
 import '../Network/API/BookMarkes.dart';
 import '../Network/API/StreetAPI.dart';
 import '../services/API/APIManager.dart';
@@ -66,11 +67,11 @@ List getGarageCamerasIDs(List garages)
   return IDs;
 }
 
-Future<Map> findIfBookmark(String userid, LatLng destination, String token)
+Future<Map> findIfBookmark(LatLng destination, userData user)
 async {
   String bookmarkID = '0';
   bool yes;
-  List<Bookmark> bookmarks = await getBookmarks( "UtxbOluLTzMTooCY01XD0vqAAUf2",token);
+  List<Bookmark> bookmarks = await getBookmarks( user.id,user.token);
   bookmarks.forEach((element) {
 
     if( element.location.lat == destination.latitude &&
@@ -90,14 +91,14 @@ async {
 }
 
 
-Future<List<LocationDetails>> getFinalData(List snaps,  List<Camera> nearest,LatLng current) async {
+Future<List<LocationDetails>> getFinalData(List snaps,  List<Camera> nearest,LatLng current, String token) async {
   List newSnaps = [];
   List<LocationDetails> finalData = [];
   if (snaps.length != 0) {
     for (int i = 0; i < snaps.length; i++) {
       String url = snaps[i]["Path"];
       String cap = (snaps[i]["Capacity"]).toString();
-      String spots = await getStreetData(url: url, capacity: cap);
+      String spots = await getStreetData(url:url, capacity: cap,token: token);
       if (spots != null) {
         if (int.parse(spots) > 0) {
           List<Camera> x = await getFData(snaps[i]["Camera_ID"], nearest);
@@ -125,7 +126,7 @@ Future<List<LocationDetails>> getFinalDataGarages(List GarageSnaps,LatLng curren
     for (int i = 0; i < GarageSnaps.length; i++) {
       String url = GarageSnaps[i]["Path"];
       String cap = (GarageSnaps[i]["Capacity"]).toString();
-      String spots = await getStreetData(url: url, capacity: cap);
+      String spots = await getStreetData(url: url, capacity: cap, token: token);
       if (spots != null) {
         if (int.parse(spots) > 0) {
 

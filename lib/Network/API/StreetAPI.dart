@@ -8,9 +8,9 @@ import '../Dio_helper.dart';
 import '../endpoints.dart';
 
 Future<String> getStreetData(
-    {@required String url, @required String capacity}) async {
+    {@required String url, @required String capacity, String token}) async {
   String getCapacity;
-  await DioHelper.postData(url: FIND, data: {
+  await DioHelper.postData(url: FIND, token: token, data: {
     "url": url,
     "capacity": capacity,
   }).then((value) {

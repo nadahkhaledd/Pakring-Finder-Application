@@ -10,7 +10,6 @@ import '../Network/API/BookMarkes.dart';
 import '../services/API/APIManager.dart';
 
 Drawer Appdrawer(context) {
-  String driverID;
 
   bool isLight = true;
   AppProvider provider;
@@ -31,13 +30,13 @@ Drawer Appdrawer(context) {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
-              child: Text("Nadah Khaled",
+              child: Text(provider.currentUser.name,
                   style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("nadahkhaledd@gmail.com",
+                Text(provider.currentUser.email,
                     style: TextStyle(fontSize: 15, color: Colors.blueGrey)),
                 PopupMenuButton(
                     icon: Icon(Icons.arrow_drop_down_outlined,
@@ -67,8 +66,7 @@ Drawer Appdrawer(context) {
           leading: Icon(Icons.bookmark, color: Colors.blueGrey),
           title: Text('Bookmarks', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
           onTap: () async {
-            print(provider.currentUser.token);
-            List<Bookmark> bookmarks = await getBookmarks("UtxbOluLTzMTooCY01XD0vqAAUf2",  provider.currentUser.token);
+            List<Bookmark> bookmarks = await getBookmarks(provider.currentUser.id,  provider.currentUser.token);
             navigateTo(context, bookmarksPage(bookmarks));
           },
         ),

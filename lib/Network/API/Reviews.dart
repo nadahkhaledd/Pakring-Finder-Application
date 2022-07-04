@@ -1,17 +1,18 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:park_locator/Model/UserData.dart';
 import 'package:park_locator/Network/Dio_helper.dart';
 
 import '../../Model/DBModels/Review.dart';
 import '../endpoints.dart';
 
 Future<int> addReview(
-    {@required String driverID,
+    {@required userData user,
     @required String cameraID,
-    @required String content, String token}) async {
+    @required String content}) async {
   Response response;
-  await DioHelper.postData(url: AddReview, token: token, data: {
-      'driverID': driverID,
+  await DioHelper.postData(url: AddReview, token: user.token, data: {
+      'driverID': user.id,
       'cameraID': cameraID,
       'content': content,
       'garageID': ""

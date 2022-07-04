@@ -120,10 +120,10 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
                     onPressed: () async {
                       var info = directionsDetails(widget.source, widget.data[index].location);
                       await info.create();
-                      currentUserToken = provider.currentUser.token;
+                      //currentUserToken = provider.currentUser.token;
                      var review=await reviews(widget.data[index].cameraID);
                      var users=await user(review);
-                     Map ifBookmark = await findIfBookmark("UtxbOluLTzMTooCY01XD0vqAAUf2", info.getDestination(), currentUserToken);
+                     Map ifBookmark = await findIfBookmark( info.getDestination(), provider.currentUser);
                      String bookmarkID = ifBookmark['id'];
                      bool isBookmark = ifBookmark['yes'];
                       navigateTo(context, direction_screen(currentLocation: widget.source,info: info,review: review,
