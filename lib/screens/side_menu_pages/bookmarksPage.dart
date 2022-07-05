@@ -5,7 +5,6 @@ import 'package:park_locator/Shared/Components.dart';
 import 'package:park_locator/screens/Home.dart';
 import 'package:park_locator/services/appprovider.dart';
 import 'package:park_locator/widgets/Appdrawer.dart';
-import 'package:park_locator/widgets/bookmarkItem.dart';
 import 'package:provider/provider.dart';
 
 import '../../Model/UserData.dart';
@@ -60,10 +59,22 @@ class _bookmarksPageState extends State<bookmarksPage> {
                 shrinkWrap: true,
                 itemCount: widget.bookmarks.length,
                 itemBuilder: (context, index) => Slidable(
+                  key: UniqueKey(),
+
+                  // dismissal: SlidableDismissal(
+                  //   child: SlidableDrawerDismissal(),
+                  // onDismissed: (type) async {
+                  //     final action = type == SlideActionType.primary?
+                  //         SlidableAction.findnearby: SlidableAction.delete;
+                  //     await onDismissed(index, action);
+                  // },),
+
+                  actionExtentRatio: 0.20,
                   actionPane: SlidableDrawerActionPane(),
+
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(15, 6, 15, 6),
-                    child: bookmarkItem(widget.bookmarks[index].name),
+                    child: bookmarkListTile(widget.bookmarks[index].name),
                   ),
 
                   actions: <Widget>[
@@ -86,8 +97,6 @@ class _bookmarksPageState extends State<bookmarksPage> {
                       onTap: ()
                       async {
                         await onDismissed(index, SlidableAction.share);
-
-
                       },
                     ),
                     IconSlideAction(
@@ -122,7 +131,7 @@ class _bookmarksPageState extends State<bookmarksPage> {
               final isClosed = slidable.renderingMode == SlidableRenderingMode.none;
 
               if(isClosed)
-                  slidable.open();
+                  slidable.open(actionType: SlideActionType.secondary);
 
               else
                 slidable.close();
@@ -156,12 +165,9 @@ class _bookmarksPageState extends State<bookmarksPage> {
       case SlidableAction.share:
         message = "bookmark shared";
         break;
-
-
     }
 
-    final snackBar = SnackBar(
-        content:  Text(message));
+    final snackBar = SnackBar(content:  Text(message));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
   }

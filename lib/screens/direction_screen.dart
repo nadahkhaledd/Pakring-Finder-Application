@@ -183,6 +183,8 @@ class _searchState extends State<direction_screen> {
 
             addReview(user: provider.currentUser,cameraID: widget.cameraID,content: valueText);
             Navigator.pop(context);
+            final snackBar = SnackBar(content:  Text("Review added"));
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
             print(valueText);
           }, child: Text("Submit",style: TextStyle(color: Colors.blueGrey),))
         ],

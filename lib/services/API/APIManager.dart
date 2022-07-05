@@ -48,7 +48,6 @@ async {
       bool condition = await isInRadius(current, location);
       if(condition)
       {
-
         nearestGarages.add({'id': element['id'], 'location': location, 'address': element['address'], 'cameraIDs': element['cameraIDs']});
       }
     }
@@ -62,7 +61,6 @@ async {
   List garages = await getGarages(current, token);
   List garageCameras= [];
   Response response;
-
   for(var garage in garages)
     {
       List cameras = [];
@@ -75,7 +73,6 @@ async {
       garageCameras.add({'garageID': garage['id'], 'garageAddress': garage['address'],
         'location': garage['location'], 'cameras': cameras});
     }
-  garageCameras.forEach((element) {print(element);});
   return garageCameras;
 }
 Future<LatLng> getGarageCamerasLocation(String GarageCameraID, String token)
