@@ -15,7 +15,7 @@ import 'package:provider/provider.dart';
 import '../Model/DBModels/Owner.dart';
 import '../Model/LocationDetails.dart';
 import '../Network/API/Reviews.dart';
-import '../Shared/Constants.dart';
+import '../Shared/Functions.dart';
 import '../Shared/Marker.dart';
 
 

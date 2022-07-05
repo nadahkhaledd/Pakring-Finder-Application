@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:park_locator/Network/API/UserAPi.dart';
+import 'package:park_locator/Shared/Constants.dart';
 import 'package:park_locator/screens/user/signup.dart';
+import 'package:park_locator/sharedPrefreance/chached.dart';
 import 'package:provider/provider.dart';
 
 import '../../Model/UserData.dart';
@@ -111,6 +113,7 @@ class _loginState extends State<login> {
                               {
                                 userData user=await getUserById(userID: pair.id,token: pair.token);
                                 provider.updateUser(user);
+                                 userPrefrance.setToken(pair.token);
                                 navigateTo(context, Home());
 
                               }
