@@ -100,18 +100,17 @@ class _HomeState extends State<Home> {
             },
           ),
 
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: IconButton(
-                icon: Icon(Icons.menu_open),
-                color: Colors.blueGrey,
-                enableFeedback: true,
-                padding: const EdgeInsets.all(0.0),
-                iconSize: 30,
-                onPressed: ()
-                {
+          Align(
+            alignment: Alignment.topLeft,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 19, left: 25, right: 25, bottom: 25),
+              child: FloatingActionButton(
+                heroTag: 'side-menu',
+                backgroundColor: Colors.blueGrey,
+                mini: true,
+                child:
+                const Icon(Icons.menu_open, color: Colors.white),
+                onPressed: ()  {
                   _scaffoldState.currentState.openDrawer();
                 },
               ),
@@ -133,7 +132,7 @@ class _HomeState extends State<Home> {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 19, left: 25, right: 25, bottom: 25),
                   child: FloatingActionButton(
-                    heroTag: 'voice',
+                    heroTag: 'search',
                     backgroundColor: Colors.blueGrey,
                     mini: true,
                     //shape: BeveledRectangleBorder(),
