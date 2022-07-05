@@ -103,13 +103,12 @@ class _HomeState extends State<Home> {
           Align(
             alignment: Alignment.topLeft,
             child: Padding(
-              padding: const EdgeInsets.only(top: 19, left: 25, right: 25, bottom: 25),
+              padding: const EdgeInsets.only(top: 19, left: 16, right: 25, bottom: 25),
               child: FloatingActionButton(
                 heroTag: 'side-menu',
                 backgroundColor: Colors.blueGrey,
                 mini: true,
-                child:
-                const Icon(Icons.menu_open, color: Colors.white),
+                child: const Icon(Icons.menu, color: Colors.white),
                 onPressed: ()  {
                   _scaffoldState.currentState.openDrawer();
                 },
@@ -120,11 +119,11 @@ class _HomeState extends State<Home> {
           isSearchUsed?Align(
             alignment: Alignment.topRight,
             child: Padding(
-              padding: const EdgeInsets.only(top: 8, left: 35, right: 8, bottom: 8),
-              child: Flexible(child: Padding(
+              padding: const EdgeInsets.only(top: 8, left: 40, right: 8, bottom: 8),
+              child: Padding(
                 padding: const EdgeInsets.only(top: 10, left: 30),
                 child: GoogleSearch(context, _controller, currentLocation),
-              )),
+              ),
             ),
           ):
               Align(
@@ -174,7 +173,7 @@ class _HomeState extends State<Home> {
             ),
           ),
 
-          Container(
+          Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.all(12.0),
@@ -186,6 +185,7 @@ class _HomeState extends State<Home> {
                     padding: const EdgeInsets.all(8.0),
                     child: FloatingActionButton.extended(
                       heroTag: 'on-street',
+                      //child: const Icon(Icons.garage, color: Colors.white),
                       onPressed: () async {
                         currentUserToken = provider.currentUser.token;
                         finalLocation();
@@ -212,6 +212,7 @@ class _HomeState extends State<Home> {
                     padding: const EdgeInsets.all(8.0),
                     child: FloatingActionButton.extended(
                       heroTag: 'garages',
+                      //child: const Icon(Icons.garage, color: Colors.white),
                       onPressed: () async {
                         currentUserToken = provider.currentUser.token;
                         finalLocation();
