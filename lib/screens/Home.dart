@@ -32,6 +32,7 @@ class _HomeState extends State<Home> {
   List snaps, nearestCameras, nearestGarages,GarageSnaps;
   List<LocationDetails> data = [];
   bool isLoading = false;
+  bool isSearchUsed = false;
 
   void finalLocation() {
     if (isThereLocation()) {
@@ -117,23 +118,35 @@ class _HomeState extends State<Home> {
             ),
           ),
 
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width* 1/8,
-                ),
-
-                Flexible(child: Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: GoogleSearch(context, _controller, currentLocation),
-                ))
-              ],
+          isSearchUsed?Align(
+            alignment: Alignment.topRight,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8, left: 35, right: 8, bottom: 8),
+              child: Flexible(child: Padding(
+                padding: const EdgeInsets.only(top: 10, left: 30),
+                child: GoogleSearch(context, _controller, currentLocation),
+              )),
             ),
-          ),
+          ):
+              Align(
+                alignment: Alignment.topRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 19, left: 25, right: 25, bottom: 25),
+                  child: FloatingActionButton(
+                    heroTag: 'voice',
+                    backgroundColor: Colors.blueGrey,
+                    mini: true,
+                    //shape: BeveledRectangleBorder(),
+                    child:
+                    const Icon(Icons.search, color: Colors.white),
+                    onPressed: () async {
+                      setState(() {
+                        isSearchUsed = true;
+                      });
+                    },
+                  ),
+                ),
+              ),
 
           Container(
             alignment: Alignment.centerRight,
