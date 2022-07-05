@@ -57,6 +57,7 @@ Future <Pair>loginApi({
 
   }).catchError((error){
     print(error);
+    pair=new Pair('none','none');
   });
   return pair;
 }
@@ -74,7 +75,7 @@ Future <String> signupApi({
     "password":password,
     "name":name,
     "number":number,
-    "is_owner":"False",
+    "is_owner":false,
   }
   ).then((value) {
     returnValue=value.data['value'].toString();
