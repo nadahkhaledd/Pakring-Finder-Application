@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Network/API/UserAPi.dart';
 import '../services/appprovider.dart';
+import '../widgets/loadingIndicator.dart';
 import 'Home.dart';
 
 class AuthContainer extends StatefulWidget {
@@ -22,15 +23,20 @@ class _AuthContainerState extends State<AuthContainer> {
 bool initial=true;
   AppProvider provider;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
+
     provider = Provider.of<AppProvider>(context);
+    userData user;
+
     if(initial)
-    {
+     {
       SharedPreferences.getInstance().then((sharedPrefValue) {
-        setState(() {
+        setState(()  {
           initial = false;
           token = sharedPrefValue.getString(Constants.ACCESS_TOKEN);
           id = sharedPrefValue.getString(Constants.ACCESS_ID);
+
 
         });
       });
@@ -44,18 +50,23 @@ bool initial=true;
       else
 
         {
-          userData user;
+          return FutureBuilder<userData>(
+              future:  getUserById(userID: id,token: token),
+              builder: (context, AsyncSnapshot<userData> snapshot) {
+                if (snapshot.hasData) {
+                  provider.updateUser(snapshot.requireData);
+                  return Home();
 
+                } else {
+                  return Scaffold(
+                    body:Center(child: loadingIndicator(context,"Loading",true)),
+                  );
 
-              setState(() {
-              getUserById(userID: id,token: token).then((value) {
-                user= value;
-                provider.updateUser(user);
-              }).catchError((onError){
-                print(onError);
-              });
-            });
-          return Home();
+                }
+              }
+
+          );
+
         }
 
     }
