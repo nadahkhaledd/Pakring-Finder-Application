@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/services/API/APIManager.dart';
@@ -245,11 +246,33 @@ class _HomeState extends State<Home> {
               padding: const EdgeInsets.only(top: 8, left: 40, right: 8, bottom: 8),
               child: Padding(
                 padding: const EdgeInsets.only(top: 10, left: 30),
-                child: GoogleSearch(context, _controller, currentLocation),
+                child: Slidable(
+                  key: Key('google search'),
+                  dismissal: SlidableDismissal(
+                      child: SlidableDrawerDismissal(),
+                    onDismissed: (type)  {
+                      setState(() {
+                        isSearchUsed = false;
+                      });
+                    },),
+                    actionPane: SlidableDrawerActionPane(),
+                    actions: <Widget>[
+                      IconSlideAction(
+                        color: Colors.transparent,
+                        icon: Icons.arrow_forward_ios,
+                        foregroundColor: Colors.blueGrey,
+                        onTap: ()
+                        {
+                          setState(() {
+                            isSearchUsed = false;
+                          });
+                        },
+                      )
+                    ],
+                    child: GoogleSearch(context, _controller, currentLocation)),
               ),
             ),
-          ):
-          Align(
+          ): Align(
             alignment: Alignment.topRight,
             child: Padding(
               padding: const EdgeInsets.only(top: 19, left: 25, right: 25, bottom: 25),
