@@ -5,6 +5,7 @@ import 'package:park_locator/Network/Dio_helper.dart';
 import 'package:park_locator/screens/Home.dart';
 import 'package:park_locator/screens/splash.dart';
 import 'package:park_locator/services/appprovider.dart';
+import 'package:park_locator/sharedPrefreance/chached.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:park_locator/services/geoLocator.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +14,7 @@ import 'package:provider/provider.dart';
 Future<void> main()  async{
   DioHelper.init();
   WidgetsFlutterBinding.ensureInitialized();
+  await userPrefrance.init();
   runApp(MyApp());
 }
 

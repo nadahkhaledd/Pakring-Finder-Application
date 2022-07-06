@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/Model/LocationDetails.dart';
-import 'package:park_locator/Shared/Constants.dart';
+import 'package:park_locator/Shared/Functions.dart';
 import 'package:park_locator/services/API/APIManager.dart';
 import 'package:park_locator/services/appprovider.dart';
 import 'package:provider/provider.dart';

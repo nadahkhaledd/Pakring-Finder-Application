@@ -31,7 +31,7 @@ Drawer Appdrawer(context) {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
-              child: Text(provider.currentUser.name,
+              child: Text(provider.currentUser. name,
                   style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
             ),
             Row(

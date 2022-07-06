@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 
 import '../Model/LocationDetails.dart';
 import '../Shared/Components.dart';
-import '../Shared/Constants.dart';
+import '../Shared/Functions.dart';
 import '../services/DB.dart';
 import '../services/appprovider.dart';
 import '../widgets/GoogleSearch.dart';

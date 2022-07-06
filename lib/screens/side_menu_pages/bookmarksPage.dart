@@ -8,7 +8,7 @@ import 'package:park_locator/widgets/Appdrawer.dart';
 import 'package:provider/provider.dart';
 
 import '../../Model/UserData.dart';
-import '../../Shared/Constants.dart';
+import '../../Shared/Functions.dart';
 import '../../services/API/APIManager.dart';
 
 class bookmarksPage extends StatefulWidget
