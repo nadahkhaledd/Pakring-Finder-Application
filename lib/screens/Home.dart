@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import '../Model/LocationDetails.dart';
 import '../Shared/Components.dart';
 import '../Shared/Constants.dart';
+import '../Shared/SpeechOperations.dart';
 import '../services/DB.dart';
 import '../services/appprovider.dart';
 import '../widgets/GoogleSearch.dart';
@@ -33,6 +34,7 @@ class _HomeState extends State<Home> {
   List<LocationDetails> data = [];
   bool isLoading = false;
   bool isSearchUsed = false;
+  String voiceQuery = '';
 
   void finalLocation() {
     if (isThereLocation()) {
@@ -66,6 +68,17 @@ class _HomeState extends State<Home> {
     setState(() {
       isLoading = false;
     });
+  }
+
+  toggleRecording()
+  {
+    SpeechOperations.toggleRecording(
+        onResult: (text) {
+          setState(() {
+            this.voiceQuery = text;
+          });
+        });
+    print(voiceQuery);
   }
   GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
 
@@ -116,36 +129,6 @@ class _HomeState extends State<Home> {
             ),
           ),
 
-          isSearchUsed?Align(
-            alignment: Alignment.topRight,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 8, left: 40, right: 8, bottom: 8),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 10, left: 30),
-                child: GoogleSearch(context, _controller, currentLocation),
-              ),
-            ),
-          ):
-              Align(
-                alignment: Alignment.topRight,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 19, left: 25, right: 25, bottom: 25),
-                  child: FloatingActionButton(
-                    heroTag: 'search',
-                    backgroundColor: Colors.blueGrey,
-                    mini: true,
-                    //shape: BeveledRectangleBorder(),
-                    child:
-                    const Icon(Icons.search, color: Colors.white),
-                    onPressed: () async {
-                      setState(() {
-                        isSearchUsed = true;
-                      });
-                    },
-                  ),
-                ),
-              ),
-
           Align(
             alignment: Alignment.topRight,
             child: Padding(
@@ -157,11 +140,7 @@ class _HomeState extends State<Home> {
                 //shape: BeveledRectangleBorder(),
                 child:
                 const Icon(Icons.mic, color: Colors.white),
-                onPressed: () async {
-                  setState(() {
-
-                  });
-                },
+                onPressed: toggleRecording,
               ),
             ),
           ),
@@ -257,6 +236,36 @@ class _HomeState extends State<Home> {
                   ),
                 ],
               )
+            ),
+          ),
+
+          isSearchUsed?Align(
+            alignment: Alignment.topRight,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8, left: 40, right: 8, bottom: 8),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10, left: 30),
+                child: GoogleSearch(context, _controller, currentLocation),
+              ),
+            ),
+          ):
+          Align(
+            alignment: Alignment.topRight,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 19, left: 25, right: 25, bottom: 25),
+              child: FloatingActionButton(
+                heroTag: 'search',
+                backgroundColor: Colors.blueGrey,
+                mini: true,
+                //shape: BeveledRectangleBorder(),
+                child:
+                const Icon(Icons.search, color: Colors.white),
+                onPressed: () async {
+                  setState(() {
+                    isSearchUsed = true;
+                  });
+                },
+              ),
             ),
           ),
 

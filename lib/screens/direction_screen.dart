@@ -1,19 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:park_locator/Model/DBModels/Bookmark.dart';
 import 'package:park_locator/Model/DBModels/Review.dart';
-import 'package:park_locator/Model/UserData.dart';
 import 'package:park_locator/Model/directionsDetails.dart';
-import 'package:park_locator/services/API/APIManager.dart';
 import 'package:park_locator/services/appprovider.dart';
 import 'package:park_locator/widgets/Appdrawer.dart';
 import 'package:park_locator/widgets/d_widgets/from_to.dart';
 import 'package:park_locator/widgets/d_widgets/time.dart';
 import 'package:park_locator/widgets/review.dart';
 import 'package:provider/provider.dart';
-import '../Model/DBModels/Owner.dart';
-import '../Model/LocationDetails.dart';
 import '../Network/API/Reviews.dart';
 import '../Shared/Constants.dart';
 import '../Shared/Marker.dart';
@@ -139,18 +134,16 @@ class _searchState extends State<direction_screen> {
               ],
             ),
 
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: IconButton(
-                  icon: Icon(Icons.menu_open),
-                  color: Colors.blueGrey,
-                  enableFeedback: true,
-                  padding: const EdgeInsets.all(0.0),
-                  iconSize: 30,
-                  onPressed: ()
-                  {
+            Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 19, left: 16, right: 25, bottom: 25),
+                child: FloatingActionButton(
+                  heroTag: 'side-menu',
+                  backgroundColor: Colors.blueGrey,
+                  mini: true,
+                  child: const Icon(Icons.menu, color: Colors.white),
+                  onPressed: ()  {
                     _scaffoldState.currentState.openDrawer();
                   },
                 ),

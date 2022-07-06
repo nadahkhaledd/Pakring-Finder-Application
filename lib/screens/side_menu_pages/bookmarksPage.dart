@@ -68,8 +68,6 @@ class _bookmarksPageState extends State<bookmarksPage> {
                   //         SlidableAction.findnearby: SlidableAction.delete;
                   //     await onDismissed(index, action);
                   // },),
-
-                  actionExtentRatio: 0.20,
                   actionPane: SlidableDrawerActionPane(),
 
                   child: Padding(
