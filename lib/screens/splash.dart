@@ -75,8 +75,8 @@ class splash extends StatelessWidget {
       seconds: 5,
       navigateAfterSeconds: new login(),
       image: new Image.asset('assets/images/logo.jpg'),
+      useLoader: false,
       photoSize: 100.0,
-      loaderColor: Colors.blueGrey,
       backgroundColor: Colors.white,
     );
   }

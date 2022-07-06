@@ -146,6 +146,26 @@ class _HomeState extends State<Home> {
                 ),
               ),
 
+          Align(
+            alignment: Alignment.topRight,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 75, left: 25, right: 25, bottom: 25),
+              child: FloatingActionButton(
+                heroTag: 'voice',
+                backgroundColor: Colors.blueGrey,
+                mini: true,
+                //shape: BeveledRectangleBorder(),
+                child:
+                const Icon(Icons.mic, color: Colors.white),
+                onPressed: () async {
+                  setState(() {
+
+                  });
+                },
+              ),
+            ),
+          ),
+
           Container(
             alignment: Alignment.centerRight,
             padding: const EdgeInsets.only(top: 120, left: 10, right: 10),
