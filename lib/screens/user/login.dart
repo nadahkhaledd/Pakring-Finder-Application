@@ -4,6 +4,7 @@ import 'package:park_locator/Shared/Constants.dart';
 import 'package:park_locator/screens/user/signup.dart';
 import 'package:park_locator/sharedPrefreance/chached.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Model/UserData.dart';
 import '../../Shared/Components.dart';
@@ -113,7 +114,10 @@ class _loginState extends State<login> {
                               {
                                 userData user=await getUserById(userID: pair.id,token: pair.token);
                                 provider.updateUser(user);
-                                 userPrefrance.setToken(pair.token);
+                                // userPrefrance.setToken(pair.token);
+                                 SharedPreferences pref= await SharedPreferences.getInstance();
+                                 pref.setString(Constants.ACCESS_TOKEN, pair.token);
+                                 pref.setString(Constants.ACCESS_ID, pair.id);
                                 navigateTo(context, Home());
 
                               }
