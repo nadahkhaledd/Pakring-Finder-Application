@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:park_locator/Model/DBModels/Bookmark.dart';
-import 'package:park_locator/Shared/Components.dart';
-import 'package:park_locator/screens/Home.dart';
 import 'package:park_locator/services/appprovider.dart';
 import 'package:park_locator/widgets/Appdrawer.dart';
 import 'package:provider/provider.dart';
-
-import '../../Model/UserData.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../Shared/Constants.dart';
 import '../../services/API/APIManager.dart';
 
@@ -158,6 +155,12 @@ class _bookmarksPageState extends State<bookmarksPage> {
 
       case SlidableAction.headTo:
         message = "directing to google maps...";
+        String url = widget.bookmarks[index].locationURL;
+        if (await canLaunch(url)) {
+          await launch(url);
+        } else {
+          throw 'Could not launch $url';
+        }
         break;
 
       case SlidableAction.share:
@@ -165,8 +168,10 @@ class _bookmarksPageState extends State<bookmarksPage> {
         break;
     }
 
-    final snackBar = SnackBar(content:  Text(message));
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    setState(() {
+      final snackBar = SnackBar(content:  Text(message));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    });
 
   }
 }

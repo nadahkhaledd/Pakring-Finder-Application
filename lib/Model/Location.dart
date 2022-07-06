@@ -1,21 +1,18 @@
-class Location{
-  final double lat;
-  final double lng;
+class Location {
+  double lat;
+  double long;
 
-  Location({this.lat, this.lng});
+  Location({this.lat, this.long});
 
-  Map<String, Object> toJson() {
-    return {
-      'lat': lat,
-      'lng': lng,
-    };
+  Location.fromJson(Map<String, dynamic> json) {
+    lat = double.parse(json['lat']);
+    long = double.parse(json['long']);
   }
-}
 
-
-
-class Geometry {
-  final Location location;
-
-  Geometry({this.location});
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['lat'] = this.lat.toString();
+    data['long'] = this.long.toString();
+    return data;
+  }
 }

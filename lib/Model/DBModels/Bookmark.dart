@@ -1,10 +1,13 @@
+import 'package:park_locator/Model/Location.dart';
+
 class Bookmark {
   String driverID;
   String id;
   Location location;
   String name;
+  String locationURL;
 
-  Bookmark({this.driverID, this.id, this.location, this.name});
+  Bookmark({this.driverID, this.id, this.location, this.name, this.locationURL});
 
   Bookmark.fromJson(Map<String, dynamic> json) {
     driverID = json['driverID'];
@@ -13,6 +16,7 @@ class Bookmark {
         ? new Location.fromJson(json['location'])
         : null;
     name = json['name'];
+    locationURL = json['locationURL'];
   }
 
   Map<String, dynamic> toJson() {
@@ -22,25 +26,8 @@ class Bookmark {
       data['location'] = this.location.toJson();
     }
     data['name'] = this.name;
+    data['locationURL'] = this.locationURL;
     return data;
   }
 }
 
-class Location {
-  double lat;
-  double long;
-
-  Location({this.lat, this.long});
-
-  Location.fromJson(Map<String, dynamic> json) {
-    lat = double.parse(json['lat']);
-    long = double.parse(json['long']);
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['lat'] = this.lat.toString();
-    data['long'] = this.long.toString();
-    return data;
-  }
-}
