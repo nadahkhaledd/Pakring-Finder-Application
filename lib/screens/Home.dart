@@ -111,6 +111,7 @@ class _HomeState extends State<Home> {
             myLocationEnabled: true,
             onMapCreated: (GoogleMapController controller) async {
               _controller.complete(controller);
+              //_mapController = controller;
             },
           ),
 
@@ -172,6 +173,42 @@ class _HomeState extends State<Home> {
               },
             ),
           ),
+
+          // Align(
+          //   alignment: Alignment.bottomCenter,
+          //   child: PopupMenuButton(
+          //       child: Padding(
+          //                   padding: const EdgeInsets.all(8.0),
+          //                   child: FloatingActionButton.extended(
+          //                     heroTag: 'find',
+          //                     isExtended: true,
+          //                     label: Text(
+          //                       " Find ",
+          //                       style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+          //                     ),
+          //                     backgroundColor: Colors.blueGrey,
+          //                   ),
+          //                 ),
+          //       itemBuilder: (context) => [
+          //         PopupMenuItem(
+          //             child: ListTile(
+          //               title: Text("on street"),
+          //               onTap: () async {
+          //                 currentUserToken = provider.currentUser.token;
+          //                 finalLocation();
+          //                 if (_coordinates != null) {
+          //                   await setResultsStreet();
+          //                   navigateTo(
+          //                       context,
+          //                       MarkedPlaces(
+          //                         currentLocation: _coordinates,
+          //                         data: data,
+          //                       ));
+          //                 }
+          //               }
+          //             ))
+          //       ]),
+          // ),
 
           Align(
             alignment: Alignment.bottomCenter,

@@ -73,6 +73,14 @@ Drawer Appdrawer(context) {
         ),
 
         ListTile(
+          leading: Icon(Icons.history, color: Colors.blueGrey),
+          title: Text('Recent', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
+          onTap: ()  {
+
+          },
+        ),
+
+        ListTile(
           leading: Icon(isLight ? Icons.light_mode : Icons.dark_mode, color: Colors.blueGrey),
           title: Text('Theme', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
           onTap: ()  {

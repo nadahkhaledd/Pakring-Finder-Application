@@ -65,7 +65,7 @@ class _bookmarksPageState extends State<bookmarksPage> {
                   //   child: SlidableDrawerDismissal(),
                   // onDismissed: (type) async {
                   //     final action = type == SlideActionType.primary?
-                  //         SlidableAction.findnearby: SlidableAction.delete;
+                  //         SlidableAction.headTo: SlidableAction.delete;
                   //     await onDismissed(index, action);
                   // },),
                   actionPane: SlidableDrawerActionPane(),
@@ -77,12 +77,12 @@ class _bookmarksPageState extends State<bookmarksPage> {
 
                   actions: <Widget>[
                     IconSlideAction(
-                      caption: 'find nearby',
+                      caption: 'Head to ',
                       color: Colors.blueGrey,
                       icon: Icons.directions,
                       onTap: ()
                       async {
-                        await onDismissed(index, SlidableAction.findnearby);
+                        await onDismissed(index, SlidableAction.headTo);
                       },
                     )
                   ],
@@ -151,17 +151,17 @@ class _bookmarksPageState extends State<bookmarksPage> {
           if (code == 200)
           {
             widget.bookmarks.removeAt(index);
-            message = "bookmark deleted";
+            message = "bookmark deleted successfully";
           }
         });
         break;
 
-      case SlidableAction.findnearby:
-        message = "Success";
+      case SlidableAction.headTo:
+        message = "directing to google maps...";
         break;
 
       case SlidableAction.share:
-        message = "bookmark shared";
+        message = "bookmark shared successfully";
         break;
     }
 

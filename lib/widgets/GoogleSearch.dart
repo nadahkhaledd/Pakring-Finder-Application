@@ -34,14 +34,12 @@ class _GoogleSearchState extends State<GoogleSearch> {
         widget._coordinates = widget._coordinates;
       },
       onSelected: (Place place )  async {
-        dynamic geolocation = await place.geolocation;
+        final geolocation = await place.geolocation;
         final GoogleMapController controller = await widget._controller.future;
-        setState(()  {
-
-        LatLng location = LatLng(geolocation?.coordinates?.latitude,geolocation?.coordinates?.longitude);
+        var location = LatLng(geolocation?.coordinates?.latitude,geolocation?.coordinates?.longitude);
         controller.animateCamera(CameraUpdate.newCameraPosition(
             CameraPosition(target: location, zoom: 18.0)));
-
+        setState(() {
           widget._coordinates = Position(latitude: location.latitude, longitude: location.longitude);
           setSearchLocation(location);
         });
