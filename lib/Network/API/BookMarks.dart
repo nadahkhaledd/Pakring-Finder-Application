@@ -14,6 +14,13 @@ Future<int> addBookmark(Bookmark bookmark, String token) async {
       .catchError((onError) {response.statusCode;}
   );
   return response.statusCode;
+}
 
-
+Future<int> clearDriverBookmarks(String id, String token)
+async {
+  Dio dio = new Dio();
+  String url = "http://164.92.174.146/";
+  dio.options.headers = {"Authorization": 'Bearer $token'};
+  Response response = await dio.delete(url+"clear_driver_bookmark?driverID=$id");
+  return response.statusCode;
 }

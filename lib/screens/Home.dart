@@ -65,7 +65,9 @@ class _HomeState extends State<Home> {
     });
     nearestCameras = await getCameras(_coordinates, currentUserToken);
     List IDs = getCamerasIDs(nearestCameras);
+    print(IDs.length);
     snaps = await getStreetSnaps(IDs);
+    print(snaps.length);
     data = await getFinalData(snaps, nearestCameras, _coordinates, currentUserToken);
     setState(() {
       isLoading = false;

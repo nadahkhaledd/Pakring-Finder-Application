@@ -1,14 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:park_locator/Network/API/Recents.dart';
 import 'package:park_locator/Shared/Components.dart';
 import 'package:park_locator/Shared/Constants.dart';
 import 'package:park_locator/screens/side_menu_pages/bookmarksPage.dart';
+import 'package:park_locator/screens/side_menu_pages/historyPage.dart';
 import 'package:park_locator/screens/user/login.dart';
 import 'package:park_locator/services/appprovider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Model/DBModels/Bookmark.dart';
+import '../Model/DBModels/Recent.dart';
 import '../Network/API/BookMarks.dart';
 import '../screens/Home.dart';
 import '../services/API/APIManager.dart';
@@ -78,8 +81,9 @@ Drawer Appdrawer(context) {
         ListTile(
           leading: Icon(Icons.history, color: Colors.blueGrey),
           title: Text('Recent', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
-          onTap: ()  {
-
+          onTap: ()  async{
+            Recent history = await getHistory(provider.currentUser.id, provider.currentUser.token);
+            navigateTo(context, historyPage(history));
           },
         ),
 
