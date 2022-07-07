@@ -59,16 +59,15 @@ Drawer Appdrawer(context) {
           ],
         )),
 
-        Container(
-          child: ListTile(
-            leading: Icon(Icons.home_filled, color: Colors.blueGrey),
-            title: Text('Home', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
-            autofocus: true,
-            onTap: () {
-              navigateTo(context, Home());
-            },
-          ),
+        ListTile(
+          leading: Icon(Icons.home_filled, color: Colors.blueGrey),
+          title: Text('Home', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
+          autofocus: true,
+          onTap: () {
+            navigateTo(context, Home());
+          },
         ),
+
         ListTile(
           leading: Icon(Icons.bookmark, color: Colors.blueGrey),
           title: Text('Bookmarks', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
@@ -95,26 +94,28 @@ Drawer Appdrawer(context) {
           },
         ),
 
-        Container(
-          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 2.6),
-          child: Column(
-            children: [
-              Divider(
-                height: 1,
-                thickness: 2,
+        Flexible(
+          child: Container(
+              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 2.7),
+              child: Column(
+                children: [
+                  Divider(
+                    height: 1,
+                    thickness: 2,
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.logout, color: Colors.blueGrey),
+                    title: Text('Logout', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
+                    onTap: ()  async{
+                      SharedPreferences prefs = await SharedPreferences.getInstance();
+                      prefs.remove(Constants.ACCESS_TOKEN);
+                      prefs.remove(Constants.ACCESS_ID);
+                          navigateTo(context, login());
+                    },
+                  ),
+                ],
               ),
-              ListTile(
-                leading: Icon(Icons.logout, color: Colors.blueGrey),
-                title: Text('Logout', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
-                onTap: ()  async{
-                  SharedPreferences prefs = await SharedPreferences.getInstance();
-                  prefs.remove(Constants.ACCESS_TOKEN);
-                  prefs.remove(Constants.ACCESS_ID);
-                      navigateTo(context, login());
-                },
-              ),
-            ],
-          ),
+            ),
         )
       ],
     ),
