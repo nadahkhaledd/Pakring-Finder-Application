@@ -27,8 +27,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  //GoogleMapController _mapController;
-  Position currentLocation;
+  GoogleMapController _mapController;
+  //Position currentLocation;
   AppProvider provider;
   String currentUserToken;
   LatLng _coordinates = LatLng(30.0313, 31.2107);
@@ -86,9 +86,9 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    currentLocation = Provider.of<Position>(context);
+    var currentLocation = Provider.of<Position>(context);
     provider = Provider.of<AppProvider>(context);
-    Completer<GoogleMapController> _controller = Completer();
+    //Completer<GoogleMapController> _controller = Completer();
 
 
     return SafeArea(
@@ -98,11 +98,11 @@ class _HomeState extends State<Home> {
           body: Stack(
         children: [
           GoogleMap(
-            //initialCameraPosition:(CameraPosition(target: LatLng(30.0313, 31.2107), zoom: 10.0)),
-            initialCameraPosition: (currentLocation == null)
-                ? (CameraPosition(target: LatLng(30.0313, 31.2107), zoom: 10.0))
-                : (CameraPosition(
-                    target: LatLng(currentLocation.latitude, currentLocation.longitude), zoom: 16.0)),
+            initialCameraPosition:(CameraPosition(target: LatLng(30.0313, 31.2107), zoom: 10.0)),
+            // initialCameraPosition: (currentLocation == null)
+            //     ? (CameraPosition(target: LatLng(30.0313, 31.2107), zoom: 10.0))
+            //     : (CameraPosition(
+            //         target: LatLng(currentLocation.latitude, currentLocation.longitude), zoom: 16.0)),
             compassEnabled: true,
             mapToolbarEnabled: true,
             zoomGesturesEnabled: true,
@@ -111,7 +111,8 @@ class _HomeState extends State<Home> {
             myLocationButtonEnabled: false,
             myLocationEnabled: true,
             onMapCreated: (GoogleMapController controller) async {
-              _controller.complete(controller);
+              //_controller.complete(controller);
+              _mapController = controller;
             },
           ),
 
@@ -158,8 +159,8 @@ class _HomeState extends State<Home> {
               child:
                   const Icon(Icons.album_outlined, color: Colors.black54),
               onPressed: () async {
-                final GoogleMapController controller = await _controller.future;
-                controller.animateCamera(CameraUpdate.newCameraPosition(
+                //final GoogleMapController controller = await _controller.future;
+                _mapController.animateCamera(CameraUpdate.newCameraPosition(
                     CameraPosition(
                         target: LatLng(currentLocation.latitude,
                             currentLocation.longitude),
@@ -174,41 +175,6 @@ class _HomeState extends State<Home> {
             ),
           ),
 
-          // Align(
-          //   alignment: Alignment.bottomCenter,
-          //   child: PopupMenuButton(
-          //       child: Padding(
-          //                   padding: const EdgeInsets.all(8.0),
-          //                   child: FloatingActionButton.extended(
-          //                     heroTag: 'find',
-          //                     isExtended: true,
-          //                     label: Text(
-          //                       " Find ",
-          //                       style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
-          //                     ),
-          //                     backgroundColor: Colors.blueGrey,
-          //                   ),
-          //                 ),
-          //       itemBuilder: (context) => [
-          //         PopupMenuItem(
-          //             child: ListTile(
-          //               title: Text("on street"),
-          //               onTap: () async {
-          //                 currentUserToken = provider.currentUser.token;
-          //                 finalLocation();
-          //                 if (_coordinates != null) {
-          //                   await setResultsStreet();
-          //                   navigateTo(
-          //                       context,
-          //                       MarkedPlaces(
-          //                         currentLocation: _coordinates,
-          //                         data: data,
-          //                       ));
-          //                 }
-          //               }
-          //             ))
-          //       ]),
-          // ),
 
           Align(
             alignment: Alignment.bottomCenter,
@@ -225,8 +191,11 @@ class _HomeState extends State<Home> {
                       //child: const Icon(Icons.garage, color: Colors.white),
                       onPressed: () async {
                         currentUserToken = provider.currentUser.token;
-                        finalLocation();
+                        setState(() {
+                          finalLocation();
+                        });
                         if (_coordinates != null) {
+                          print(_coordinates.latitude);
                           await setResultsStreet();
                           navigateTo(
                               context,
@@ -306,7 +275,7 @@ class _HomeState extends State<Home> {
                         },
                       )
                     ],
-                    child: GoogleSearch(context, _controller, currentLocation)),
+                    child: GoogleSearch(context, _mapController, _coordinates)),
               ),
             ),
           ): Align(

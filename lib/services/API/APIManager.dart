@@ -28,6 +28,7 @@ async {
         bool condition = await isInRadius(current, location);
         if(condition)
         {
+          print(element['address']);
           nearestOnstreet.add(new Camera(id: element['id'], address: element['address'], location: location));
         }
       }
