@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:park_locator/Model/UserData.dart';
 import 'package:park_locator/Shared/Constants.dart';
 import 'package:park_locator/screens/user/login.dart';
-import 'package:park_locator/sharedPrefreance/chached.dart';
+import 'package:park_locator/sharedPreference/chached.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

@@ -81,7 +81,7 @@ async {
   Response response=await DioHelper.getData(url: url+"GarageCamera/get?id="+GarageCameraID, token: token);
   if(response.data !=null)
   {
-    String GarageID = response.data["garage_id"];
+    String GarageID = response.data["garageID"];
     Response response2=await DioHelper.getData(url: url+"Garage/get?id="+GarageID, token: token);
     if (response2.data != null)
     {
@@ -97,7 +97,7 @@ async {
 
   if(response.data !=null)
   {
-    String GarageID = response.data["garage_id"];
+    String GarageID = response.data["garageID"];
     Response response2=await DioHelper.getData(url: url+"Garage/get?id="+GarageID, token: token);
       if (response2.data != null)
       {

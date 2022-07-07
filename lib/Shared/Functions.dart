@@ -5,7 +5,7 @@ import '../Model/DBModels/Bookmark.dart';
 import '../Model/DBModels/Camera.dart';
 import '../Model/LocationDetails.dart';
 import '../Model/UserData.dart';
-import '../Network/API/BookMarkes.dart';
+import '../Network/API/BookMarks.dart';
 import '../Network/API/StreetAPI.dart';
 import '../services/API/APIManager.dart';
 import '../services/DistanceMatrix.dart';
@@ -31,7 +31,7 @@ Future <String> getTime(LatLng destination, LatLng current) async {
     }
 }
 
-enum SlidableAction{delete, findnearby, share}
+enum SlidableAction{delete, headTo, share}
 
 void setSearchLocation (LatLng source) async
 {

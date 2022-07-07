@@ -5,7 +5,7 @@ import 'package:park_locator/Model/Location.dart';
 import 'package:park_locator/services/API/APIManager.dart';
 
 import '../Model/UserData.dart';
-import '../Network/API/BookMarkes.dart';
+import '../Network/API/BookMarks.dart';
 
 class bookmarkButton extends StatefulWidget
 {

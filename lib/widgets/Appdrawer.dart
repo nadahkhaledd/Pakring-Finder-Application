@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Model/DBModels/Bookmark.dart';
-import '../Network/API/BookMarkes.dart';
+import '../Network/API/BookMarks.dart';
 import '../screens/Home.dart';
 import '../services/API/APIManager.dart';
 

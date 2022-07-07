@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:park_locator/sharedPrefreance/chached.dart';
+import 'package:park_locator/sharedPreference/chached.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 

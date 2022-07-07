@@ -159,14 +159,17 @@ class _bookmarksPageState extends State<bookmarksPage> {
             widget.bookmarks.removeAt(index);
             message = "bookmark deleted successfully";
           }
+          else
+            message = "couldn't delete bookmark";
         });
         break;
 
       case SlidableAction.headTo:
-        message = "directing to google maps...";
         if (await canLaunch(url)) {
+          message = "directing to google maps...";
           await launch(url);
         } else {
+          message = "Could not launch url";
           throw 'Could not launch $url';
         }
         break;
