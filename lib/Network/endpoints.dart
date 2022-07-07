@@ -6,5 +6,6 @@ const GetUserBookMark="/get_user_bookmark";
 const AddBookMark="/Bookmark/add";
 const addRecent = "/Recent/add";
 const getRecent = "/Recent/get";
+const requestSnap = "/mocking_camera";
 const LOGIN='/log_in';
 const SIGNUP='/sign_up';

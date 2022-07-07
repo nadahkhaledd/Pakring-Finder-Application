@@ -8,6 +8,7 @@ import 'package:park_locator/Model/DBModels/Bookmark.dart';
 import 'package:park_locator/Model/DBModels/Camera.dart';
 import 'package:park_locator/Model/DBModels/Review.dart';
 import 'package:park_locator/Model/DBModels/Owner.dart';
+import 'package:park_locator/Network/API/requestSnaps.dart';
 import 'package:park_locator/Network/Dio_helper.dart';
 
 import '../../Shared/calculations.dart';
@@ -28,8 +29,13 @@ async {
         bool condition = await isInRadius(current, location);
         if(condition)
         {
-          print(element['address']);
-          nearestOnstreet.add(new Camera(id: element['id'], address: element['address'], location: location));
+          int code = 200;
+          /// mocking camera to take a snap
+          //int code = await takeSnap({'mock_garage':false, 'id': element['id']}, token);
+          if(code == 200)
+            {
+              nearestOnstreet.add(new Camera(id: element['id'], address: element['address'], location: location));
+            }
         }
       }
   }
@@ -49,7 +55,13 @@ async {
       bool condition = await isInRadius(current, location);
       if(condition)
       {
-        nearestGarages.add({'id': element['id'], 'location': location, 'address': element['address'], 'cameraIDs': element['cameraIDs']});
+        int code = 200;
+        /// mocking camera to take a snap
+        //int code = await takeSnap({'mock_garage':true, 'id': element['id']}, token);
+        if(code == 200)
+          {
+            nearestGarages.add({'id': element['id'], 'location': location, 'address': element['address'], 'cameraIDs': element['cameraIDs']});
+          }
       }
     }
   }
