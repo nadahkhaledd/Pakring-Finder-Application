@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:park_locator/Model/DBModels/Bookmark.dart';
-import 'package:park_locator/Shared/Components.dart';
-import 'package:park_locator/screens/Home.dart';
+import 'package:park_locator/Network/API/BookMarks.dart';
 import 'package:park_locator/services/appprovider.dart';
 import 'package:park_locator/widgets/Appdrawer.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../Shared/Constants.dart';
 import 'package:share_plus/share_plus.dart';
-
-import '../../Model/UserData.dart';
 import '../../Shared/Functions.dart';
 import '../../services/API/APIManager.dart';
 
@@ -33,6 +29,25 @@ class _bookmarksPageState extends State<bookmarksPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          actions: [
+            PopupMenuButton(
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                      child:Text('clear bookmarks'),
+                    onTap:() async {
+                    int status = await clearDriverBookmarks(widget.bookmarks[0].driverID, provider.currentUser.token);
+                    if(status == 200)
+                      {
+                        setState(() {
+                          widget.bookmarks.clear();
+                        });
+                        final snackBar = SnackBar(content:  Text('bookmarks removed'));
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
+                  },
+                  ),
+                ])
+          ],
           automaticallyImplyLeading: true,
           toolbarHeight: 70.0,
           shape: ContinuousRectangleBorder(

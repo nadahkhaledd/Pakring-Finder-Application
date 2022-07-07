@@ -9,6 +9,7 @@ import 'package:park_locator/widgets/Appdrawer.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
+import '../../Network/API/Recents.dart';
 import '../../Shared/Functions.dart';
 import '../../services/API/APIManager.dart';
 
@@ -31,6 +32,25 @@ class _historyPageState extends State<historyPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          actions: [
+            PopupMenuButton(
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    child:Text('clear history'),
+                    onTap:() async {
+                      int status = await clearHistory(widget.history.driverID, provider.currentUser.token);
+                      if(status == 200)
+                      {
+                        setState(() {
+                          widget.history.history.clear();
+                        });
+                        final snackBar = SnackBar(content:  Text('history cleared'));
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
+                    },
+                  ),
+                ])
+          ],
           automaticallyImplyLeading: true,
           toolbarHeight: 70.0,
           shape: ContinuousRectangleBorder(
