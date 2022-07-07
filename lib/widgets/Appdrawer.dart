@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:park_locator/Shared/Components.dart';
+import 'package:park_locator/Shared/Constants.dart';
 import 'package:park_locator/screens/side_menu_pages/bookmarksPage.dart';
+import 'package:park_locator/screens/user/login.dart';
 import 'package:park_locator/services/appprovider.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Model/DBModels/Bookmark.dart';
 import '../Network/API/BookMarkes.dart';
@@ -31,7 +34,7 @@ Drawer Appdrawer(context) {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
-              child: Text(provider.currentUser.name,
+              child: Text(provider.currentUser. name,
                   style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
             ),
             Row(
@@ -99,8 +102,11 @@ Drawer Appdrawer(context) {
               ListTile(
                 leading: Icon(Icons.logout, color: Colors.blueGrey),
                 title: Text('Logout', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
-                onTap: ()  {
-
+                onTap: ()  async{
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  prefs.remove(Constants.ACCESS_TOKEN);
+                  prefs.remove(Constants.ACCESS_ID);
+                      navigateTo(context, login());
                 },
               ),
             ],

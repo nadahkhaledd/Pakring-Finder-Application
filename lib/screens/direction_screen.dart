@@ -10,7 +10,7 @@ import 'package:park_locator/widgets/d_widgets/time.dart';
 import 'package:park_locator/widgets/review.dart';
 import 'package:provider/provider.dart';
 import '../Network/API/Reviews.dart';
-import '../Shared/Constants.dart';
+import '../Shared/Functions.dart';
 import '../Shared/Marker.dart';
 
 

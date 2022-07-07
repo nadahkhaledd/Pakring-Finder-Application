@@ -3,7 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../Model/Location.dart';
 import '../../Model/LocationDetails.dart';
-import '../../Shared/Constants.dart';
+import '../../Shared/Functions.dart';
 import '../Dio_helper.dart';
 import '../endpoints.dart';
 

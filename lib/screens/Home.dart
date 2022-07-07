@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 
 import '../Model/LocationDetails.dart';
 import '../Shared/Components.dart';
+import '../Shared/Functions.dart';
 import '../Shared/Constants.dart';
 import '../Shared/SpeechOperations.dart';
 import '../services/DB.dart';
@@ -111,7 +112,6 @@ class _HomeState extends State<Home> {
             myLocationEnabled: true,
             onMapCreated: (GoogleMapController controller) async {
               _controller.complete(controller);
-              //_mapController = controller;
             },
           ),
 

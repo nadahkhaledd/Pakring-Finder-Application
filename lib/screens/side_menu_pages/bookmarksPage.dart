@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:park_locator/Model/DBModels/Bookmark.dart';
+import 'package:park_locator/Shared/Components.dart';
+import 'package:park_locator/screens/Home.dart';
 import 'package:park_locator/services/appprovider.dart';
 import 'package:park_locator/widgets/Appdrawer.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../Shared/Constants.dart';
 import 'package:share_plus/share_plus.dart';
+
+import '../../Model/UserData.dart';
+import '../../Shared/Functions.dart';
 import '../../services/API/APIManager.dart';
 
 class bookmarksPage extends StatefulWidget
@@ -66,6 +71,8 @@ class _bookmarksPageState extends State<bookmarksPage> {
                   //         SlidableAction.headTo: SlidableAction.delete;
                   //     await onDismissed(index, action);
                   // },),
+
+                  actionExtentRatio: 0.20,
                   actionPane: SlidableDrawerActionPane(),
 
                   child: Padding(
