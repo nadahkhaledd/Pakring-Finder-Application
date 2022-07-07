@@ -99,17 +99,18 @@ Future<List<LocationDetails>> getFinalData(List snaps,  List<Camera> nearest,Lat
   List<LocationDetails> finalData = [];
   if (snaps.length != 0) {
     for (int i = 0; i < snaps.length; i++) {
-      String url = snaps[i]["Path"];
-      String cap = (snaps[i]["Capacity"]).toString();
+
+      String url = snaps[i].data["path"];
+      String cap = (snaps[i].data["capacity"]).toString();
       String spots = await getStreetData(url:url, capacity: cap,token: token);
       if (spots != null) {
         if (int.parse(spots) > 0) {
-          List<Camera> x = await getFData(snaps[i]["Camera_ID"], nearest);
+          List<Camera> x = await getFData(snaps[i].data["cameraID"], nearest);
           LatLng loc = x[0].getLocation;
           String distance = await getDistance(loc, current);
           String time = await getTime(loc,current);
           LocationDetails details = new LocationDetails(
-              cameraID: snaps[i]["Camera_ID"],
+              cameraID: snaps[i].data["cameraID"],
               spots: spots.toString(),
               name: x[0].getAddress.toString(),
               distance: distance.toString(),

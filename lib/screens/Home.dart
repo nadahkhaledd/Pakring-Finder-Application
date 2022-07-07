@@ -52,7 +52,7 @@ class _HomeState extends State<Home> {
     });
     nearestGarages = await getGarageCameras(_coordinates, currentUserToken);
     List GaragesCamerasIDs = getGarageCamerasIDs(nearestGarages);
-    GarageSnaps = await getSnapsgarage(GaragesCamerasIDs);
+    GarageSnaps = await getGarageSnaps(GaragesCamerasIDs,currentUserToken);
     data = await getFinalDataGarages(GarageSnaps, _coordinates, currentUserToken);
     setState(() {
       isLoading = false;
@@ -65,7 +65,7 @@ class _HomeState extends State<Home> {
     });
     nearestCameras = await getCameras(_coordinates, currentUserToken);
     List IDs = getCamerasIDs(nearestCameras);
-    snaps = await getStreetSnaps(IDs);
+    snaps = await getStreetSnaps(IDs,currentUserToken);
     data = await getFinalData(snaps, nearestCameras, _coordinates, currentUserToken);
     setState(() {
       isLoading = false;
