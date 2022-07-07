@@ -6,6 +6,7 @@ import 'package:park_locator/widgets/Appdrawer.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../Shared/Constants.dart';
+import 'package:share_plus/share_plus.dart';
 import '../../services/API/APIManager.dart';
 
 class bookmarksPage extends StatefulWidget
@@ -140,6 +141,7 @@ class _bookmarksPageState extends State<bookmarksPage> {
   Future<void> onDismissed(int index, SlidableAction action) async
   {
     String message;
+    String url = widget.bookmarks[index].locationURL;
     switch(action)
     {
       case SlidableAction.delete:
@@ -155,7 +157,6 @@ class _bookmarksPageState extends State<bookmarksPage> {
 
       case SlidableAction.headTo:
         message = "directing to google maps...";
-        String url = widget.bookmarks[index].locationURL;
         if (await canLaunch(url)) {
           await launch(url);
         } else {
@@ -164,14 +165,14 @@ class _bookmarksPageState extends State<bookmarksPage> {
         break;
 
       case SlidableAction.share:
+        final box = context.findRenderObject() as RenderBox;
+        await Share.share(url, sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
         message = "bookmark shared successfully";
         break;
     }
 
-    setState(() {
-      final snackBar = SnackBar(content:  Text(message));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    });
+    final snackBar = SnackBar(content:  Text(message));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
   }
 }
