@@ -127,19 +127,19 @@ Future<List<LocationDetails>> getFinalDataGarages(List GarageSnaps,LatLng curren
   List<LocationDetails> finalData = [];
   if (GarageSnaps.length != 0) {
     for (int i = 0; i < GarageSnaps.length; i++) {
-      String url = GarageSnaps[i]["Path"];
-      String cap = (GarageSnaps[i]["Capacity"]).toString();
+      String url = GarageSnaps[i].data["path"];
+      String cap = (GarageSnaps[i].data["capacity"]).toString();
       String spots = await getStreetData(url: url, capacity: cap, token: token);
       if (spots != null) {
         if (int.parse(spots) > 0) {
 
-          LatLng loc = await getGarageCamerasLocation(GarageSnaps[i]["GarageCameraID"], token);
-          String name= await getGarageCamerasName(GarageSnaps[i]["GarageCameraID"], token);
+          LatLng loc = await getGarageCamerasLocation(GarageSnaps[i].data["garageCameraID"], token);
+          String name= await getGarageCamerasName(GarageSnaps[i].data["garageCameraID"], token);
           String distance = await getDistance(loc, current);
 
           String time = await getTime(loc,current);
           LocationDetails details = new LocationDetails(
-              cameraID: GarageSnaps[i]["GarageCameraID"],
+              cameraID: GarageSnaps[i].data["garageCameraID"],
               spots: spots.toString(),
               name: name.toString(),
               distance: distance.toString(),

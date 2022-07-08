@@ -39,8 +39,6 @@ async {
 Future<List> getStreetSnaps(List nearestPlacesIDs,String token)
 async {
   List StreetSnaps= [];
-
-
   for(var id in nearestPlacesIDs)
   {
     if(id !=null)
@@ -54,16 +52,14 @@ async {
 
 Future<List> getGarageSnaps(List GaragesCamerasIDs,String token)
 async {
-  List<Snaps> GarageSnaps= [];
+  List GarageSnaps= [];
 
   for(var id in GaragesCamerasIDs)
   {
-
     if(id !=null)
     {
-      Response response=await DioHelper.getData(url: url+"Snaps/get?garageCameraID="+id, token: token);
-      GarageSnaps.add(response.data[0]);
-
+      Response response=await DioHelper.getData(url: url+"GarageSnaps/get?garagecameraID="+id, token: token);
+      GarageSnaps.add(response);
     }
   }
   return GarageSnaps;

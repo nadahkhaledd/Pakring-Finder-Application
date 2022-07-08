@@ -48,11 +48,17 @@ class _HomeState extends State<Home> {
 
   Future<void> setResultsGarage() async {
     setState(() {
-      isLoading = true;
+      isLoading = false;
     });
     nearestGarages = await getGarageCameras(_coordinates, currentUserToken);
+    print("----------------------------------------");
+    print(nearestGarages);
     List GaragesCamerasIDs = getGarageCamerasIDs(nearestGarages);
+    print("----------------------------------------");
+    print(GaragesCamerasIDs);
     GarageSnaps = await getGarageSnaps(GaragesCamerasIDs,currentUserToken);
+    print("----------------------------------------");
+    print(GarageSnaps);
     data = await getFinalDataGarages(GarageSnaps, _coordinates, currentUserToken);
     setState(() {
       isLoading = false;
