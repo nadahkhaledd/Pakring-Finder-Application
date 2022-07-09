@@ -6,3 +6,5 @@ const GetUserBookMark="/get_user_bookmark";
 const AddBookMark="/Bookmark/add";
 const LOGIN='/log_in';
 const SIGNUP='/sign_up';
+const getSnapsById='/Snaps/get?id=';
+const getGarageSnapsById='/GarageSnaps/get?garagecameraID=';

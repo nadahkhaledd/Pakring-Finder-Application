@@ -11,6 +11,7 @@ import 'package:park_locator/Model/DBModels/Owner.dart';
 import 'package:park_locator/Network/Dio_helper.dart';
 
 import '../../Model/DBModels/Snaps.dart';
+import '../../Network/endpoints.dart';
 import '../../Shared/calculations.dart';
 
 String url = "http://164.92.174.146/";
@@ -43,7 +44,7 @@ async {
   {
     if(id !=null)
     {
-      Response response=await DioHelper.getData(url: url+"Snaps/get?id="+id, token: token);
+      Response response=await DioHelper.getData(url: getSnapsById+id, token: token);
       StreetSnaps.add(response);
     }
   }
@@ -58,7 +59,7 @@ async {
   {
     if(id !=null)
     {
-      Response response=await DioHelper.getData(url: url+"GarageSnaps/get?garagecameraID="+id, token: token);
+      Response response=await DioHelper.getData(url: getGarageSnapsById+id, token: token);
       GarageSnaps.add(response);
     }
   }
