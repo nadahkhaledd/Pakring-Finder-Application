@@ -10,7 +10,6 @@ import 'package:park_locator/Model/DBModels/Review.dart';
 import 'package:park_locator/Model/DBModels/Owner.dart';
 import 'package:park_locator/Network/Dio_helper.dart';
 
-import '../../Model/DBModels/Snaps.dart';
 import '../../Network/endpoints.dart';
 import '../../Shared/calculations.dart';
 
