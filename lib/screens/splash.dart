@@ -62,19 +62,29 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:park_locator/Model/UserData.dart';
 import 'package:park_locator/screens/authContainer.dart';
 import 'package:park_locator/screens/user/login.dart';
+import 'package:provider/provider.dart';
 import 'package:splashscreen/splashscreen.dart';
 
+import '../services/appprovider.dart';
 import 'Home.dart';
 
-class splash extends StatelessWidget {
+class splash extends StatefulWidget {
+
+
+  @override
+  State<splash> createState() => _splashState();
+}
+
+class _splashState extends State<splash> {
 
   @override
   Widget build(BuildContext context) {
     return SplashScreen(
       seconds: 5,
-      navigateAfterSeconds: new AuthContainer(),
+      navigateAfterSeconds:AuthContainer(),
       image: new Image.asset('assets/images/logo.jpg'),
       photoSize: 100.0,
       loaderColor: Colors.blueGrey,

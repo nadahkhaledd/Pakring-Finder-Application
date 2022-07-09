@@ -98,7 +98,7 @@ Drawer Appdrawer(context) {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
                   prefs.remove(Constants.ACCESS_TOKEN);
                   prefs.remove(Constants.ACCESS_ID);
-                      navigateTo(context, login());
+                  navigateAndFinish(context, login());
                 },
               ),
             ],
