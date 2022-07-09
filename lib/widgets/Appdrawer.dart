@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:park_locator/Model/UserData.dart';
 import 'package:park_locator/Shared/Components.dart';
 import 'package:park_locator/Shared/Constants.dart';
+import 'package:park_locator/screens/side_menu_pages/EditInfoPage.dart';
 import 'package:park_locator/screens/side_menu_pages/bookmarksPage.dart';
+
 import 'package:park_locator/screens/user/login.dart';
 import 'package:park_locator/services/appprovider.dart';
 import 'package:provider/provider.dart';
@@ -49,6 +52,9 @@ Drawer Appdrawer(context) {
                           PopupMenuItem(
                               child: ListTile(
                             title: Text("Edit info"),
+                                onTap: (){
+                                  navigateTo(context, EditInfoPage());
+                                },
                           ))
                         ])
               ],
