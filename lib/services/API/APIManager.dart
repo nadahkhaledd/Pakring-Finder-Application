@@ -146,27 +146,6 @@ async {
 }
 
 
-Future<List> getBookmarks( String driverID, String token) async
-{
-  List<Bookmark> bookmarks= [];
-  Response response =await DioHelper.getData(url: url+"get_user_bookmark?driverID=$driverID", token: token);
-  for(var element in response.data)
-  {
-    if(element !=null)
-    {
-      bookmarks.add(Bookmark.fromJson(element));
-    }
-  }
-  return bookmarks;
-}
-
-Future<int> deleteBookmark(String id, String token)
-async {
-  dio.options.headers = {"Authorization": 'Bearer $token'};
-  Response response = await dio.delete(url+"Bookmark/delete?id=$id");
-  return response.statusCode;
-}
-
 Future<List> getReviews(String cameraID, String token) async
 {
   List<Review> review= [];

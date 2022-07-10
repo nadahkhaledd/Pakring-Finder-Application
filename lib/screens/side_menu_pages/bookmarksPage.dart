@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:park_locator/Model/DBModels/Bookmark.dart';
-import 'package:park_locator/Network/API/BookMarks.dart';
+import 'package:park_locator/Network/API/Bookmarks.dart';
 import 'package:park_locator/services/appprovider.dart';
 import 'package:park_locator/widgets/Appdrawer.dart';
 import 'package:provider/provider.dart';

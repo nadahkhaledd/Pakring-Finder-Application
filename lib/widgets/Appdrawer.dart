@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:park_locator/Network/API/Recents.dart';
-import 'package:park_locator/Model/UserData.dart';
 import 'package:park_locator/Shared/Components.dart';
 import 'package:park_locator/Shared/Constants.dart';
 import 'package:park_locator/screens/side_menu_pages/bookmarksPage.dart';
@@ -14,9 +13,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Model/DBModels/Bookmark.dart';
 import '../Model/DBModels/Recent.dart';
-import '../Network/API/BookMarks.dart';
+import '../Network/API/Bookmarks.dart';
 import '../screens/Home.dart';
-import '../services/API/APIManager.dart';
 
 Drawer Appdrawer(context) {
 

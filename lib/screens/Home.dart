@@ -14,8 +14,6 @@ import '../Model/LocationDetails.dart';
 import '../Shared/Components.dart';
 import '../Shared/Functions.dart';
 import '../Shared/Constants.dart';
-import '../Shared/SpeechOperations.dart';
-
 import '../services/appprovider.dart';
 import '../widgets/GoogleSearch.dart';
 import 'marked/MarkedGarages.dart';
@@ -72,16 +70,6 @@ class _HomeState extends State<Home> {
     });
   }
 
-  toggleRecording()
-  {
-    SpeechOperations.toggleRecording(
-        onResult: (text) {
-          setState(() {
-            this.voiceQuery = text;
-          });
-        });
-    print(voiceQuery);
-  }
   GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
 
   @override
@@ -128,22 +116,6 @@ class _HomeState extends State<Home> {
                 onPressed: ()  {
                   _scaffoldState.currentState.openDrawer();
                 },
-              ),
-            ),
-          ),
-
-          Align(
-            alignment: Alignment.topRight,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 75, left: 25, right: 25, bottom: 25),
-              child: FloatingActionButton(
-                heroTag: 'voice',
-                backgroundColor: Colors.blueGrey,
-                mini: true,
-                //shape: BeveledRectangleBorder(),
-                child:
-                const Icon(Icons.mic, color: Colors.white),
-                onPressed: toggleRecording,
               ),
             ),
           ),

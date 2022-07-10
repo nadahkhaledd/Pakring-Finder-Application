@@ -5,7 +5,7 @@ import '../Model/DBModels/Bookmark.dart';
 import '../Model/DBModels/Camera.dart';
 import '../Model/LocationDetails.dart';
 import '../Model/UserData.dart';
-import '../Network/API/BookMarks.dart';
+import '../Network/API/Bookmarks.dart';
 import '../Network/API/StreetAPI.dart';
 import '../services/API/APIManager.dart';
 import '../services/DistanceMatrix.dart';
