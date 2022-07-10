@@ -53,14 +53,10 @@ class _bookmarksPageState extends State<bookmarksPage> {
         ),
         drawer: Appdrawer(context),
 
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Divider(thickness: 1, height: 1),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
+        body: Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Flexible(
+            child: Container(
               child: ListView.separated(
                 separatorBuilder: (context, index) {
                   return Divider(
@@ -124,7 +120,7 @@ class _bookmarksPageState extends State<bookmarksPage> {
                 ),
               ),
             ),
-          ],
+          ),
         ),
       ),
     );

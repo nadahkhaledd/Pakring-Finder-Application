@@ -95,7 +95,7 @@ Future <String> signupApi({
     "password":password,
     "name":name,
     "number":number,
-    "is_owner":false,
+    "role": "driver"
   }
   ).then((value) {
     returnValue=value.data['value'].toString();

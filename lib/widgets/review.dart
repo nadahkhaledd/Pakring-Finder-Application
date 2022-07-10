@@ -42,10 +42,7 @@ class review extends StatelessWidget
                 );
               },
               itemBuilder: (context, index) => ListTile(
-
-
                 title:
-
                     Column(
                       children: [
                         Align(

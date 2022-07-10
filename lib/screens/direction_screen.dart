@@ -111,7 +111,7 @@ class _searchState extends State<direction_screen> {
                           ),
 
                           Padding(
-                              padding:const EdgeInsets.only(left: 130),
+                              padding:const EdgeInsets.only(left: 1),
                               child:  ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.blueGrey, // background (button) color
@@ -185,7 +185,7 @@ class _searchState extends State<direction_screen> {
             Align(
               alignment: Alignment.topLeft,
               child: Padding(
-                padding: const EdgeInsets.only(top: 10, left: 12, right: 25, bottom: 25),
+                padding: const EdgeInsets.only(top: 10, left: 9, right: 25, bottom: 25),
                 child: FloatingActionButton(
                   heroTag: 'side-menu',
                   backgroundColor: Colors.blueGrey,
