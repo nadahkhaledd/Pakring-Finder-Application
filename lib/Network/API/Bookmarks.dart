@@ -24,10 +24,14 @@ Future<List> getBookmarks( String driverID, String token) async
 }
 
 Future<String> checkUserBookmark(String driverID, Location location,String token) async {
-  String id;
-  Response response = await DioHelper.postData(url: "/get_location_bookmark",
-      data: {'driverID': driverID, 'location': location.toJson()}, token: token);
-  if(response.statusCode == 200)
+  String id = '0';
+  Response response;
+  bool ok=true;
+  response = await DioHelper.postData(url: "/get_location_bookmark",
+      data: {'driverID': driverID, 'location': location.toJson()}, token: token).then((value) => response= value).
+  catchError((onError){ok = false;});
+
+  if(ok == true)
     {
       if(response.data.length > 1)
         id =  Bookmark.fromJson(response.data).id;
