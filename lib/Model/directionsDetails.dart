@@ -16,7 +16,7 @@ class directionsDetails
       final LatLng home;
       final LatLng work;
       var myLocation_name="";
-      var destination_name="";
+      //var destination_name="";
       var duration="";
       var distance="";
       PolylinePoints polylinePoints;
@@ -48,11 +48,9 @@ class directionsDetails
       final directions = await DirectionsRepository()
           .getDirections(origin: home, destination: work);
       myLocation_name=directions.source;
-      destination_name=directions.target;
+      //destination_name=directions.target;
       duration=directions.totalDuration;
       distance=directions.totalDistance;
-      print("{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{");
-      print(duration);
       polylinePoints = PolylinePoints();
       PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
       "AIzaSyAs891Qkhr9DA8kkG0TORJjwWCSCRE3Ot8", // Google Maps API Key

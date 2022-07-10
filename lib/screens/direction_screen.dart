@@ -24,13 +24,14 @@ import '../Shared/Marker.dart';
 class direction_screen extends StatefulWidget{
   @required LatLng currentLocation;
   @required directionsDetails info;
+  @required String destinationName;
   @required List <Review> review;
   @required List <String> users;
   @required String cameraID;
   String bookmarkID;
   bool ifBookmark;
 
-  direction_screen({this.currentLocation,this.info,this.review,this.users,this.cameraID, this.ifBookmark, this.bookmarkID});
+  direction_screen({this.currentLocation,this.info, this.destinationName, this.review,this.users,this.cameraID, this.ifBookmark, this.bookmarkID});
 
 
 
@@ -69,7 +70,7 @@ class _searchState extends State<direction_screen> {
                   height: MediaQuery.of(context).size.height*0.22,
                   width: MediaQuery.of(context).size.width,
                   // color: Colors.black,
-                  child: from_to(source: widget.info.myLocation_name,target: widget.info.destination_name,
+                  child: from_to(source: widget.info.myLocation_name,target: widget.destinationName,
                       isBookmark: widget.ifBookmark, bookmarkID: widget.bookmarkID, destination: widget.info.getDestination()),
                 ),
                 Container(
@@ -160,7 +161,7 @@ class _searchState extends State<direction_screen> {
                   double srcLong = widget.currentLocation.longitude;
                   String message;
 
-                  recent recentData = new recent(address: widget.info.destination_name,
+                  recent recentData = new recent(address: widget.destinationName,
                       location: Location(lat: destLat, long: destLong),
                       locationURL: "http://www.google.com/maps/place/$destLat,$destLong");
                   var response = await addRecent({"driverID": provider.currentUser.id, "recent": recentData.toJson()}, provider.currentUser.token);

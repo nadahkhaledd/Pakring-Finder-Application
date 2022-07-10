@@ -35,8 +35,8 @@ class _bookmarksPageState extends State<bookmarksPage> {
                 itemBuilder: (context) => [
                   PopupMenuItem(
                       child:Text('clear bookmarks'),
-                    onTap:() async {
-                    await openDialog();
+                    onTap:() {
+                     openDialog();
                   },
                   ),
                 ])
@@ -193,37 +193,33 @@ class _bookmarksPageState extends State<bookmarksPage> {
 
   }
 
-  Future<void> openDialog()
-  {
-    return showDialog(
-        context: context,
-        builder: (context){
-          return AlertDialog(
-            title: Text("Do you want to remove all bookmarks?",style: TextStyle(color: Colors.blueGrey)),
-            actions: [
-              TextButton(
-                key: Key("yes"),
-                child: Text("Yes",style: TextStyle(color: Colors.blueGrey),),
-                  onPressed: () async {
-                    // int status = await clearDriverBookmarks(widget.bookmarks[0].driverID, provider.currentUser.token);
-                    // if(status == 200)
-                    // {
-                    //   setState(() {
-                    //     widget.bookmarks.clear();
-                    //   });
-                    //   final snackBar = SnackBar(content:  Text('bookmarks removed'));
-                    //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    // }
-                  }),
+  Future openDialog() => showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("Do you want to remove all bookmarks?",style: TextStyle(color: Colors.blueGrey)),
+        actions: [
+          TextButton(
+              key: Key("yes"),
+              child: Text("Yes",style: TextStyle(color: Colors.blueGrey),),
+              onPressed: () async {
+                // int status = await clearDriverBookmarks(widget.bookmarks[0].driverID, provider.currentUser.token);
+                // if(status == 200)
+                // {
+                //   setState(() {
+                //     widget.bookmarks.clear();
+                //   });
+                //   final snackBar = SnackBar(content:  Text('bookmarks removed'));
+                //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                // }
+              }),
 
-              TextButton(
-                  key: Key("no"),
-                  child: Text("No",style: TextStyle(color: Colors.blueGrey),),
-                  onPressed: (){
+          TextButton(
+              key: Key("no"),
+              child: Text("No",style: TextStyle(color: Colors.blueGrey),),
+              onPressed: (){
 
-                  }),
-            ],
-          );
-        });
-  }
+              }),
+        ],
+      )
+  );
 }

@@ -142,7 +142,8 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
                               bookmarkBool = false;
                             });
                           }
-                        navigateTo(context, direction_screen(currentLocation: widget.source,info: info,review: review,
+                        navigateTo(context, direction_screen(currentLocation: widget.source,info: info,
+                            destinationName: widget.data[index].name, review: review,
                             users: users,cameraID:widget.data[index].cameraID, ifBookmark: bookmarkBool, bookmarkID: bookmarkID));
                       },
                     ),

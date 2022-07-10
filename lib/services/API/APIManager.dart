@@ -16,7 +16,7 @@ Dio dio = new Dio();
 Future<List> getCameras(LatLng current, String token)
 async {
   List<Camera> nearestOnstreet= [];
-  Response response=await DioHelper.getData(url: url+"Camera/get", token: token);
+  Response response=await DioHelper.getData(url: "/Camera/get", token: token);
 
   for(var element in response.data)
   {
