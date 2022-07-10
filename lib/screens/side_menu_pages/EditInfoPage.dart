@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:park_locator/Model/UserData.dart';
 import 'package:provider/provider.dart';
 
 import '../../Network/API/UserAPi.dart';
@@ -131,7 +132,10 @@ class _EditInfoPageState extends State<EditInfoPage> {
                   child: FloatingActionButton.extended(
                     onPressed: (){
                       setState(() {
+                        userData newData = new userData(widget.name, widget.email, widget.number, provider.currentUser.id, provider.currentUser.token);
                         editUserInfo(provider.currentUser.token,provider.currentUser.id,widget.name,widget.email,widget.number,"",widget.password);
+                        provider.updateUser(newData);
+                        provider.notifyListeners();
                         _scaffoldState.currentState.openDrawer();
                         final snackBar = SnackBar(content:  Text("info updated"));
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
