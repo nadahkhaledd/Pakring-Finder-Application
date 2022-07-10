@@ -19,6 +19,8 @@ class EditInfoPage extends StatefulWidget{
 
 class _EditInfoPageState extends State<EditInfoPage> {
   AppProvider provider;
+  GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
+
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,7 @@ class _EditInfoPageState extends State<EditInfoPage> {
 
     return SafeArea(
       child: Scaffold(
+        key: _scaffoldState,
         appBar: AppBar(
           automaticallyImplyLeading: true,
           toolbarHeight: 70.0,
@@ -129,17 +132,10 @@ class _EditInfoPageState extends State<EditInfoPage> {
                     onPressed: (){
                       setState(() {
                         editUserInfo(provider.currentUser.token,provider.currentUser.id,widget.name,widget.email,widget.number,"",widget.password);
-
+                        _scaffoldState.currentState.openDrawer();
                         final snackBar = SnackBar(content:  Text("info updated"));
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       });
-                      // print(widget.name);
-                      // print(widget.email);
-                      // print(widget.number);
-                      // print(widget.password);
-                      //Navigator.pop(context);
-
-
                     },
                     label: Text(
                     "Save",

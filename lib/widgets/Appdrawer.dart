@@ -15,8 +15,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../Model/DBModels/Bookmark.dart';
 import '../Model/DBModels/Recent.dart';
 import '../Network/API/Bookmarks.dart';
-import '../Network/API/BookMarks.dart';
-import '../Network/API/UserAPi.dart';
 import '../screens/Home.dart';
 
 Drawer Appdrawer(context) {

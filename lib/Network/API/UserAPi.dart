@@ -21,6 +21,8 @@ Future<String> getUserNameByID({ @required String userID, String token}) async
 
 return userName;
 }
+
+
  editUserInfo(String token, @required String userID,@required String userName,@required String userEmail,@required String userNumber,@required String userOldPass,@required String userNewPass)async
 {
 

@@ -193,7 +193,7 @@ class _bookmarksPageState extends State<bookmarksPage> {
 
   }
 
-  Future openDialog()
+  Future<void> openDialog()
   {
     return showDialog(
         context: context,
