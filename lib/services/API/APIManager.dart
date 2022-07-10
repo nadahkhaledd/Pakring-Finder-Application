@@ -1,8 +1,4 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/Model/DBModels/Bookmark.dart';
 import 'package:park_locator/Model/DBModels/Camera.dart';
@@ -170,7 +166,6 @@ async {
   Response response = await dio.delete(url+"Bookmark/delete?id=$id");
   return response.statusCode;
 }
-
 
 Future<List> getReviews(String cameraID, String token) async
 {
