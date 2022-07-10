@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/Model/DBModels/Review.dart';
 import 'package:park_locator/Model/directionsDetails.dart';
+import 'package:park_locator/services/API/APIManager.dart';
 import 'package:park_locator/services/appprovider.dart';
 import 'package:park_locator/widgets/Appdrawer.dart';
 import 'package:park_locator/widgets/d_widgets/from_to.dart';
@@ -117,6 +120,7 @@ class _searchState extends State<direction_screen> {
 
 
                                 opendialog();
+                                print(widget.review);
                               },
                             )
                         )
@@ -172,13 +176,16 @@ class _searchState extends State<direction_screen> {
           });},
         ),
         actions: [
-          TextButton(onPressed: (){
+          TextButton(onPressed: () async {
 
-            addReview(user: provider.currentUser,cameraID: widget.cameraID,content: valueText);
+            await addReview(user: provider.currentUser,cameraID: widget.cameraID,content: valueText);
+            var x = await getReviews(widget.cameraID,provider.currentUser.token);
             Navigator.pop(context);
             final snackBar = SnackBar(content:  Text("Review added"));
+            setState(() {
+              widget.review=x;
+            });
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            print(valueText);
           }, child: Text("Submit",style: TextStyle(color: Colors.blueGrey),))
         ],
       )

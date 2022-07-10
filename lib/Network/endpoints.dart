@@ -1,5 +1,6 @@
 const FIND='/find';
 const GetById='/get_by_id';
+const updateUser='/update_user';
 const AddReview='/Review/add';
 const ShowStreetReview ="/show_street_reviews";
 const GetUserBookMark="/get_user_bookmark";
@@ -9,3 +10,5 @@ const getRecent = "/Recent/get";
 const requestSnap = "/mocking_camera";
 const LOGIN='/log_in';
 const SIGNUP='/sign_up';
+const getSnapsById='/Snaps/get?id=';
+const getGarageSnapsById='/GarageSnaps/get?garagecameraID=';

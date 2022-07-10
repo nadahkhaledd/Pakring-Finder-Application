@@ -11,6 +11,7 @@ import 'package:park_locator/Model/DBModels/Owner.dart';
 import 'package:park_locator/Network/API/requestSnaps.dart';
 import 'package:park_locator/Network/Dio_helper.dart';
 
+import '../../Network/endpoints.dart';
 import '../../Shared/calculations.dart';
 
 String url = "http://164.92.174.146/";
@@ -41,7 +42,34 @@ async {
   }
   return nearestOnstreet;
 }
+Future<List> getStreetSnaps(List nearestPlacesIDs,String token)
+async {
+  List StreetSnaps= [];
+  for(var id in nearestPlacesIDs)
+  {
+    if(id !=null)
+    {
+      Response response=await DioHelper.getData(url: getSnapsById+id, token: token);
+      StreetSnaps.add(response);
+    }
+  }
+  return StreetSnaps;
+}
 
+Future<List> getGarageSnaps(List GaragesCamerasIDs,String token)
+async {
+  List GarageSnaps= [];
+
+  for(var id in GaragesCamerasIDs)
+  {
+    if(id !=null)
+    {
+      Response response=await DioHelper.getData(url: getGarageSnapsById+id, token: token);
+      GarageSnaps.add(response);
+    }
+  }
+  return GarageSnaps;
+}
  Future<List> getGarages(LatLng current, String token)
 async {
   List nearestGarages= [];
@@ -108,7 +136,7 @@ async {
   String name;
   Response response=await DioHelper.getData(url: url+"GarageCamera/get?id="+GarageCameraID, token: token);
 
-  if(response.data !=null)
+  if(response.data != null)
   {
     String GarageID = response.data["garageID"];
     Response response2=await DioHelper.getData(url: url+"Garage/get?id="+GarageID, token: token);

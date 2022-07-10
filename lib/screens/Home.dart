@@ -15,7 +15,7 @@ import '../Shared/Components.dart';
 import '../Shared/Functions.dart';
 import '../Shared/Constants.dart';
 import '../Shared/SpeechOperations.dart';
-import '../services/DB.dart';
+
 import '../services/appprovider.dart';
 import '../widgets/GoogleSearch.dart';
 import 'marked/MarkedGarages.dart';
@@ -52,7 +52,7 @@ class _HomeState extends State<Home> {
     });
     nearestGarages = await getGarageCameras(_coordinates, currentUserToken);
     List GaragesCamerasIDs = getGarageCamerasIDs(nearestGarages);
-    GarageSnaps = await getSnapsgarage(GaragesCamerasIDs);
+    GarageSnaps = await getGarageSnaps(GaragesCamerasIDs,currentUserToken);
     data = await getFinalDataGarages(GarageSnaps, _coordinates, currentUserToken);
     setState(() {
       isLoading = false;
@@ -65,9 +65,7 @@ class _HomeState extends State<Home> {
     });
     nearestCameras = await getCameras(_coordinates, currentUserToken);
     List IDs = getCamerasIDs(nearestCameras);
-    print(IDs.length);
-    snaps = await getStreetSnaps(IDs);
-    print(snaps.length);
+    snaps = await getStreetSnaps(IDs,currentUserToken);
     data = await getFinalData(snaps, nearestCameras, _coordinates, currentUserToken);
     setState(() {
       isLoading = false;
