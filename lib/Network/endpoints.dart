@@ -1,5 +1,6 @@
 const FIND='/find';
 const GetById='/get_by_id';
+const updateUser='/update_user';
 const AddReview='/Review/add';
 const ShowStreetReview ="/show_street_reviews";
 const GetUserBookMark="/get_user_bookmark";

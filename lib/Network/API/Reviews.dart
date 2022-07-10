@@ -5,13 +5,13 @@ import 'package:park_locator/Network/Dio_helper.dart';
 
 import '../../Model/DBModels/Review.dart';
 import '../endpoints.dart';
-String url = "http://164.92.174.146/";
+
 Future<int> addReview(
     {@required userData user,
     @required String cameraID,
     @required String content}) async {
   Response response;
-  await DioHelper.postData(url:AddReview, token: user.token, data: {
+  await DioHelper.postData(url: AddReview, token: user.token, data: {
       'driverID': user.id,
       'cameraID': cameraID,
       'content': content,
