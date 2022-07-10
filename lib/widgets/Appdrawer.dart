@@ -4,7 +4,6 @@ import 'package:park_locator/Network/API/Recents.dart';
 import 'package:park_locator/Model/UserData.dart';
 import 'package:park_locator/Shared/Components.dart';
 import 'package:park_locator/Shared/Constants.dart';
-import 'package:park_locator/screens/side_menu_pages/EditInfoPage.dart';
 import 'package:park_locator/screens/side_menu_pages/bookmarksPage.dart';
 import 'package:park_locator/screens/side_menu_pages/historyPage.dart';
 
@@ -55,9 +54,6 @@ Drawer Appdrawer(context) {
                           PopupMenuItem(
                               child: ListTile(
                             title: Text("Edit info"),
-                                onTap: (){
-                                  navigateTo(context, EditInfoPage());
-                                },
                           ))
                         ])
               ],
@@ -73,7 +69,6 @@ Drawer Appdrawer(context) {
             navigateTo(context, Home());
           },
         ),
-
         ListTile(
           leading: Icon(Icons.bookmark, color: Colors.blueGrey),
           title: Text('Bookmarks', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
@@ -116,7 +111,7 @@ Drawer Appdrawer(context) {
                       SharedPreferences prefs = await SharedPreferences.getInstance();
                       prefs.remove(Constants.ACCESS_TOKEN);
                       prefs.remove(Constants.ACCESS_ID);
-                          navigateTo(context, login());
+                      navigateAndFinish(context, login());
                     },
                   ),
                 ],

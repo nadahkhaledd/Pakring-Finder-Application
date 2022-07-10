@@ -36,8 +36,6 @@ bool initial=true;
           initial = false;
           token = sharedPrefValue.getString(Constants.ACCESS_TOKEN);
           id = sharedPrefValue.getString(Constants.ACCESS_ID);
-
-
         });
       });
 

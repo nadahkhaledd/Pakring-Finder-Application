@@ -86,7 +86,6 @@ class _loginState extends State<login> {
                     defaultTextFormField(
                       isPassword: true,
                       context: context,
-                      //setState(() => controller.text = _fName);
                       controller: passwordController,
                       type: TextInputType.visiblePassword,
                       label: "password",
@@ -118,7 +117,7 @@ class _loginState extends State<login> {
                                  SharedPreferences pref= await SharedPreferences.getInstance();
                                  pref.setString(Constants.ACCESS_TOKEN, pair.token);
                                  pref.setString(Constants.ACCESS_ID, pair.id);
-                                navigateTo(context, Home());
+                                navigateAndFinish(context, Home());
 
                               }
                             else
