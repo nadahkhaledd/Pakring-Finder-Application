@@ -87,7 +87,6 @@ async {
       {
         yes = false;
       }
-
   }
   );
   return {'id': bookmarkID, 'yes': yes};

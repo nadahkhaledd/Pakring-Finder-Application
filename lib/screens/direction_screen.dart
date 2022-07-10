@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/Model/DBModels/Review.dart';
+import 'package:park_locator/Model/Location.dart';
 import 'package:park_locator/Model/directionsDetails.dart';
 import 'package:park_locator/services/API/APIManager.dart';
 import 'package:park_locator/services/appprovider.dart';
@@ -12,6 +13,8 @@ import 'package:park_locator/widgets/d_widgets/from_to.dart';
 import 'package:park_locator/widgets/d_widgets/time.dart';
 import 'package:park_locator/widgets/review.dart';
 import 'package:provider/provider.dart';
+import '../Model/DBModels/Recent.dart';
+import '../Network/API/Recents.dart';
 import '../Network/API/Reviews.dart';
 import '../Shared/Functions.dart';
 import '../Shared/Marker.dart';
@@ -90,42 +93,41 @@ class _searchState extends State<direction_screen> {
                   ),
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height*0.10,
+                  //height: MediaQuery.of(context).size.height*0.10,
                   width: MediaQuery.of(context).size.width,
                   color: Colors.white,
                   child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding:const EdgeInsets.only(),
-                          child:  Text("Reviews", style: TextStyle(fontSize: 20, color: Colors.blueGrey, fontWeight: FontWeight.bold),
+                    padding: const EdgeInsets.only(left: 20, right: 20, top: 3, bottom: 3),
+                    child: Flexible(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding:const EdgeInsets.only(),
+                            child:  Text("Reviews", style: TextStyle(fontSize: 20, color: Colors.blueGrey, fontWeight: FontWeight.bold),
+                            ),
                           ),
-                        ),
-                        Padding(
-                            padding:const EdgeInsets.only(left: 130),
-                            child:  ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.blueGrey, // background (button) color
-                                onPrimary: Colors.white,
-                                //side: BorderSide(color: Colors.black, width: 1),
-                                elevation: 10,
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                                padding: EdgeInsets.only(left: 15,right: 15),
-                              ),
-                              child: Text("Add Review"),
-                              onPressed: (){
 
+                          Padding(
+                              padding:const EdgeInsets.only(left: 130),
+                              child:  ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.blueGrey, // background (button) color
+                                  onPrimary: Colors.white,
+                                  //side: BorderSide(color: Colors.black, width: 1),
+                                  elevation: 10,
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                  padding: EdgeInsets.only(left: 15,right: 15),
+                                ),
+                                child: Text("Add Review"),
+                                onPressed: (){
+                                  opendialog();
+                                },
+                              )
+                          )
 
-                                opendialog();
-                                print(widget.review);
-                              },
-                            )
-                        )
-
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -138,10 +140,37 @@ class _searchState extends State<direction_screen> {
               ],
             ),
 
+            Padding(
+                padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.30),
+            child: Center(
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.red, // background (button) color
+                  onPrimary: Colors.white,
+                  elevation: 10,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                  //padding: EdgeInsets.only(left: 10,right: 10),
+                ),
+                child: Text("Start", style: TextStyle(fontWeight: FontWeight.bold),),
+                onPressed: ()async {
+                  var lat = widget.info.getDestination().latitude;
+                  var long = widget.info.getDestination().longitude;
+                  recent recentData = new recent(address: widget.info.destination_name,
+                      location: Location(lat: lat, long: long),
+                      locationURL: "http://www.google.com/maps/place/$lat,$long");
+                  var response = await addRecent({"driverID": provider.currentUser.id, "recent": recentData.toJson()}, provider.currentUser.token);
+                  if (response == 200)
+                    {
+
+                    }
+                },
+              ),
+            ),),
+
             Align(
               alignment: Alignment.topLeft,
               child: Padding(
-                padding: const EdgeInsets.only(top: 19, left: 16, right: 25, bottom: 25),
+                padding: const EdgeInsets.only(top: 10, left: 12, right: 25, bottom: 25),
                 child: FloatingActionButton(
                   heroTag: 'side-menu',
                   backgroundColor: Colors.blueGrey,

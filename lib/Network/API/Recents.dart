@@ -3,9 +3,9 @@ import 'package:park_locator/Model/DBModels/Recent.dart';
 import '../Dio_helper.dart';
 import '../endpoints.dart';
 
-Future<int> addRecent(Map recent, String token) async {
+Future<int> addRecent(var recent, String token) async {
   Response response;
-  await DioHelper.postData(url: AddBookMark, data: recent, token: token)
+  await DioHelper.postData(url: AddRecent, data: recent, token: token)
       .then((value) {
     response=value;  })
       .catchError((onError) {response.statusCode;}

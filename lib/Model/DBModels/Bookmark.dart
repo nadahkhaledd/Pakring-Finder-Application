@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:park_locator/Model/Location.dart';
 
 class Bookmark {
@@ -7,7 +8,7 @@ class Bookmark {
   String name;
   String locationURL;
 
-  Bookmark({this.driverID, this.id, this.location, this.name, this.locationURL});
+  Bookmark({@required this.driverID, this.id, @required this.location, @required this.name, @required this.locationURL});
 
   Bookmark.fromJson(Map<String, dynamic> json) {
     driverID = json['driverID'];

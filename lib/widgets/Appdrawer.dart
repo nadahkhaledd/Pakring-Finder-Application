@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:park_locator/Network/API/Recents.dart';
 import 'package:park_locator/Shared/Components.dart';
 import 'package:park_locator/Shared/Constants.dart';
+import 'package:park_locator/screens/side_menu_pages/EditInfoPage.dart';
 import 'package:park_locator/screens/side_menu_pages/bookmarksPage.dart';
 import 'package:park_locator/screens/side_menu_pages/historyPage.dart';
 
@@ -18,7 +19,6 @@ import '../screens/Home.dart';
 
 Drawer Appdrawer(context) {
 
-  bool isLight = true;
   AppProvider provider;
   provider = Provider.of<AppProvider>(context);
 
@@ -31,6 +31,9 @@ Drawer Appdrawer(context) {
     child: Column(
       children: <Widget>[
         DrawerHeader(
+          decoration: BoxDecoration(
+            color: Colors.blueGrey
+          ),
             child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,20 +41,23 @@ Drawer Appdrawer(context) {
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
               child: Text(provider.currentUser. name,
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white)),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(provider.currentUser.email,
-                    style: TextStyle(fontSize: 15, color: Colors.blueGrey)),
+                    style: TextStyle(fontSize: 15, color: Colors.white)),
                 PopupMenuButton(
                     icon: Icon(Icons.arrow_drop_down_outlined,
-                        color: Colors.blueGrey),
+                        color: Colors.white),
                     itemBuilder: (context) => [
                           PopupMenuItem(
                               child: ListTile(
                             title: Text("Edit info"),
+                                onTap: (){
+                                  navigateTo(context, EditInfoPage());
+                                },
                           ))
                         ])
               ],
@@ -85,13 +91,6 @@ Drawer Appdrawer(context) {
           },
         ),
 
-        ListTile(
-          leading: Icon(isLight ? Icons.light_mode : Icons.dark_mode, color: Colors.blueGrey),
-          title: Text('Theme', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
-          onTap: ()  {
-
-          },
-        ),
 
         Flexible(
           child: Container(
@@ -104,7 +103,7 @@ Drawer Appdrawer(context) {
                   ),
                   ListTile(
                     leading: Icon(Icons.logout, color: Colors.blueGrey),
-                    title: Text('Logout', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
+                    title: Text('Logout', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
                     onTap: ()  async{
                       SharedPreferences prefs = await SharedPreferences.getInstance();
                       prefs.remove(Constants.ACCESS_TOKEN);

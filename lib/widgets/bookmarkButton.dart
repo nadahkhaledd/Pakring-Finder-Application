@@ -55,14 +55,15 @@ class _bookmarkButtonState extends State<bookmarkButton> {
             bookmarkState = false;
             message = "deleted from bookmarks";
           });
-
-
         }
       }
       else
       {
+        var lat = widget.destination.latitude;
+        var long = widget.destination.longitude;
         Bookmark bookmark = new Bookmark(name: widget.destinationName, driverID: widget.user.id,
-            location: Location(lat: widget.destination.latitude, long: widget.destination.longitude));
+            location: Location(lat: lat, long: long),
+            locationURL: "http://www.google.com/maps/place/$lat,$long");
         var response = await addBookmark(bookmark, widget.user.token);
         if (response == 200)
         {

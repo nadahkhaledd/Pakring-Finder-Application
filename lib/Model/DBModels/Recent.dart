@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:park_locator/Model/Location.dart';
 
 class Recent {
@@ -24,6 +25,8 @@ class recent {
   String locationURL;
   Location location;
 
+  recent({@required this.address, @required this.location, @required this.locationURL});
+
   recent.fromJson(Map<String, dynamic> json) {
     address = json['address'];
     locationURL = json['locationURL'];
@@ -32,8 +35,8 @@ class recent {
         : null;
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+  Map<dynamic, dynamic> toJson() {
+    final Map<dynamic, dynamic> data = new Map<dynamic, dynamic>();
     data['address'] = this.address;
     data['locationURL'] = this.locationURL;
     if (this.location != null) {

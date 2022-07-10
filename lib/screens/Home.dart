@@ -13,7 +13,6 @@ import 'package:provider/provider.dart';
 import '../Model/LocationDetails.dart';
 import '../Shared/Components.dart';
 import '../Shared/Functions.dart';
-import '../Shared/Constants.dart';
 import '../services/appprovider.dart';
 import '../widgets/GoogleSearch.dart';
 import 'marked/MarkedGarages.dart';
