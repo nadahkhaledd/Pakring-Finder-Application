@@ -15,6 +15,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../Model/DBModels/Bookmark.dart';
 import '../Model/DBModels/Recent.dart';
 import '../Network/API/Bookmarks.dart';
+import '../Network/API/BookMarks.dart';
+import '../Network/API/UserAPi.dart';
 import '../screens/Home.dart';
 
 Drawer Appdrawer(context) {
@@ -56,7 +58,7 @@ Drawer Appdrawer(context) {
                               child: ListTile(
                             title: Text("Edit info"),
                                 onTap: (){
-                                  navigateTo(context, EditInfoPage());
+                                  navigateTo(context, EditInfoPage(provider.currentUser.name,provider.currentUser.email,provider.currentUser.number));
                                 },
                           ))
                         ])

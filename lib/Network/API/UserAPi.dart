@@ -21,6 +21,24 @@ Future<String> getUserNameByID({ @required String userID, String token}) async
 
 return userName;
 }
+ editUserInfo(String token, @required String userID,@required String userName,@required String userEmail,@required String userNumber,@required String userOldPass,@required String userNewPass)async
+{
+
+  await DioHelper.putData(url: updateUser,token: token, data: {
+    "id":userID,
+    "name":userName,
+    "email":userEmail,
+    "number":userNumber,
+    "old_password":userOldPass,
+    "new_password":userNewPass,
+  }).then((value) {
+    print(value);
+  }).catchError((error){
+    print(error);
+  });
+
+
+}
 
 Future<userData> getUserById({@required String userID,@required String token}) async
 {
