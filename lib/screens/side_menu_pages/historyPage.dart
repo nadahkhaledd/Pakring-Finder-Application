@@ -27,6 +27,8 @@ class _historyPageState extends State<historyPage> {
   @override
   Widget build(BuildContext context) {
 
+    widget.history.history = widget.history.history.reversed.toList();
+
     provider = Provider.of<AppProvider>(context);
 
     return SafeArea(
@@ -38,15 +40,7 @@ class _historyPageState extends State<historyPage> {
                   PopupMenuItem(
                     child:Text('clear history'),
                     onTap:() async {
-                      int status = await clearHistory(widget.history.driverID, provider.currentUser.token);
-                      if(status == 200)
-                      {
-                        setState(() {
-                          widget.history.history.clear();
-                        });
-                        final snackBar = SnackBar(content:  Text('history cleared'));
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      }
+                      openDialog();
                     },
                   ),
                 ])
@@ -149,6 +143,40 @@ class _historyPageState extends State<historyPage> {
           );
         }
     );
+  }
+
+  openDialog()
+  {
+    return showDialog(
+        context: context,
+        builder: (context){
+          return AlertDialog(
+            title: Text("Do you want to clear history?",style: TextStyle(color: Colors.blueGrey)),
+            actions: [
+              TextButton(
+                  key: Key("yes"),
+                  child: Text("Yes",style: TextStyle(color: Colors.blueGrey),),
+                  onPressed: () async {
+                    // int status = await clearHistory(widget.history.driverID, provider.currentUser.token);
+                    // if(status == 200)
+                    // {
+                    //   setState(() {
+                    //     widget.history.history.clear();
+                    //   });
+                    //   final snackBar = SnackBar(content:  Text('history cleared'));
+                    //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    // }
+                  }),
+
+              TextButton(
+                  key: Key("no"),
+                  child: Text("No",style: TextStyle(color: Colors.blueGrey),),
+                  onPressed: (){
+
+                  }),
+            ],
+          );
+        });
   }
 
 

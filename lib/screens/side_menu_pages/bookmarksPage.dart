@@ -7,6 +7,7 @@ import 'package:park_locator/widgets/Appdrawer.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../../Shared/Functions.dart';
 import '../../services/API/APIManager.dart';
 
@@ -35,15 +36,7 @@ class _bookmarksPageState extends State<bookmarksPage> {
                   PopupMenuItem(
                       child:Text('clear bookmarks'),
                     onTap:() async {
-                    int status = await clearDriverBookmarks(widget.bookmarks[0].driverID, provider.currentUser.token);
-                    if(status == 200)
-                      {
-                        setState(() {
-                          widget.bookmarks.clear();
-                        });
-                        final snackBar = SnackBar(content:  Text('bookmarks removed'));
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      }
+                    await openDialog();
                   },
                   ),
                 ])
@@ -159,7 +152,6 @@ class _bookmarksPageState extends State<bookmarksPage> {
     );
     }
 
-
   Future<void> onDismissed(int index, SlidableAction action) async
   {
     String message;
@@ -180,9 +172,9 @@ class _bookmarksPageState extends State<bookmarksPage> {
         break;
 
       case SlidableAction.headTo:
-        if (await canLaunch(url)) {
+        if (await canLaunchUrlString(url)) {
           message = "directing to google maps...";
-          await launch(url);
+          await launchUrlString(url);
         } else {
           message = "Could not launch url";
           throw 'Could not launch $url';
@@ -199,5 +191,39 @@ class _bookmarksPageState extends State<bookmarksPage> {
     final snackBar = SnackBar(content:  Text(message));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
+  }
+
+  Future openDialog()
+  {
+    return showDialog(
+        context: context,
+        builder: (context){
+          return AlertDialog(
+            title: Text("Do you want to remove all bookmarks?",style: TextStyle(color: Colors.blueGrey)),
+            actions: [
+              TextButton(
+                key: Key("yes"),
+                child: Text("Yes",style: TextStyle(color: Colors.blueGrey),),
+                  onPressed: () async {
+                    // int status = await clearDriverBookmarks(widget.bookmarks[0].driverID, provider.currentUser.token);
+                    // if(status == 200)
+                    // {
+                    //   setState(() {
+                    //     widget.bookmarks.clear();
+                    //   });
+                    //   final snackBar = SnackBar(content:  Text('bookmarks removed'));
+                    //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    // }
+                  }),
+
+              TextButton(
+                  key: Key("no"),
+                  child: Text("No",style: TextStyle(color: Colors.blueGrey),),
+                  onPressed: (){
+
+                  }),
+            ],
+          );
+        });
   }
 }

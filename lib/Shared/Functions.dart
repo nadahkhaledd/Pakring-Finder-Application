@@ -3,6 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/Model/DBModels/Review.dart';
 import '../Model/DBModels/Bookmark.dart';
 import '../Model/DBModels/Camera.dart';
+import '../Model/Location.dart';
 import '../Model/LocationDetails.dart';
 import '../Model/UserData.dart';
 import '../Network/API/Bookmarks.dart';
@@ -69,29 +70,6 @@ List getGarageCamerasIDs(List garages)
     }
   return IDs;
 }
-
-Future<Map> findIfBookmark(LatLng destination, userData user)
-async {
-  String bookmarkID = '0';
-  bool yes = false;
-  List<Bookmark> bookmarks = await getBookmarks( user.id,user.token);
-  bookmarks.forEach((element) {
-
-    if( element.location.lat == destination.latitude &&
-        element.location.long == destination.longitude)
-    {
-      bookmarkID = element.id;
-      yes =true;
-    }
-    else
-      {
-        yes = false;
-      }
-  }
-  );
-  return {'id': bookmarkID, 'yes': yes};
-}
-
 
 Future<List<LocationDetails>> getFinalData(List snaps,  List<Camera> nearest,LatLng current, String token) async {
   List newSnaps = [];

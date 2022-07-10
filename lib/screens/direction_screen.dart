@@ -10,9 +10,10 @@ import 'package:park_locator/services/API/APIManager.dart';
 import 'package:park_locator/services/appprovider.dart';
 import 'package:park_locator/widgets/Appdrawer.dart';
 import 'package:park_locator/widgets/d_widgets/from_to.dart';
-import 'package:park_locator/widgets/d_widgets/time.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:park_locator/widgets/review.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../Model/DBModels/Recent.dart';
 import '../Network/API/Recents.dart';
 import '../Network/API/Reviews.dart';
@@ -21,7 +22,7 @@ import '../Shared/Marker.dart';
 
 
 class direction_screen extends StatefulWidget{
-  @required var currentLocation;
+  @required LatLng currentLocation;
   @required directionsDetails info;
   @required List <Review> review;
   @required List <String> users;
@@ -153,16 +154,29 @@ class _searchState extends State<direction_screen> {
                 ),
                 child: Text("Start", style: TextStyle(fontWeight: FontWeight.bold),),
                 onPressed: ()async {
-                  var lat = widget.info.getDestination().latitude;
-                  var long = widget.info.getDestination().longitude;
+                  double destLat = widget.info.getDestination().latitude;
+                  double destLong = widget.info.getDestination().longitude;
+                  double srcLat = widget.currentLocation.latitude;
+                  double srcLong = widget.currentLocation.longitude;
+                  String message;
+
                   recent recentData = new recent(address: widget.info.destination_name,
-                      location: Location(lat: lat, long: long),
-                      locationURL: "http://www.google.com/maps/place/$lat,$long");
+                      location: Location(lat: destLat, long: destLong),
+                      locationURL: "http://www.google.com/maps/place/$destLat,$destLong");
                   var response = await addRecent({"driverID": provider.currentUser.id, "recent": recentData.toJson()}, provider.currentUser.token);
                   if (response == 200)
                     {
-
+                      url = "https://www.google.com/maps/dir/?api=1&origin=$srcLat,$srcLong&destination=$destLat,$destLong";
+                      if (await canLaunchUrlString(url)) {
+                        message = "directing to google maps...";
+                        await launchUrlString(url);
+                      } else {
+                        message = "Could not launch url";
+                        throw 'Could not launch $url';
+                      }
                     }
+                  final snackBar = SnackBar(content:  Text(message));
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 },
               ),
             ),),

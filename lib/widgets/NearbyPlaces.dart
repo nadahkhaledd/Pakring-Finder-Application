@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/Model/LocationDetails.dart';
+import 'package:park_locator/Network/API/Bookmarks.dart';
 import 'package:park_locator/Shared/Functions.dart';
 import 'package:park_locator/services/API/APIManager.dart';
 import 'package:park_locator/services/appprovider.dart';
 import 'package:provider/provider.dart';
+import '../Model/DBModels/Bookmark.dart';
 import '../Model/DBModels/Review.dart';
 import '../Model/DBModels/Owner.dart';
+import '../Model/Location.dart';
 import '../Model/UserData.dart';
 import '../Model/directionsDetails.dart';
 import '../Network/API/UserAPi.dart';
@@ -28,7 +31,6 @@ class NearbyPlaces extends StatefulWidget
 class _NearbyPlacesState extends State<NearbyPlaces> {
   bool isLoading = false;
   AppProvider provider;
-  Map ifBookmark;
   String bookmarkID;
   bool bookmarkBool;
 
@@ -123,11 +125,23 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
                         await info.create();
                        var review=await reviews(widget.data[index].cameraID, provider.currentUser.token);
                        var users=await user(review, provider.currentUser.token);
-                       ifBookmark = await findIfBookmark( info.getDestination(), provider.currentUser);
-                       setState(() {
-                         bookmarkID = ifBookmark['id'];
-                         bookmarkBool = ifBookmark['yes'];
-                       });
+                        //ifBookmark = await findIfBookmark( info.getDestination(), provider.currentUser);
+                        String id = await checkUserBookmark(provider.currentUser.id,
+                            Location(lat: info.getDestination().latitude, long: info.getDestination().longitude), provider.currentUser.token);
+                        if(id != '0')
+                          {
+                            setState(() {
+                              bookmarkID = id;
+                              bookmarkBool = true;
+                            });
+                          }
+                        else
+                          {
+                            setState(() {
+                              bookmarkID = '0';
+                              bookmarkBool = false;
+                            });
+                          }
                         navigateTo(context, direction_screen(currentLocation: widget.source,info: info,review: review,
                             users: users,cameraID:widget.data[index].cameraID, ifBookmark: bookmarkBool, bookmarkID: bookmarkID));
                       },
