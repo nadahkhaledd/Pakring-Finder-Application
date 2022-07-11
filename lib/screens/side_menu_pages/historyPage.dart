@@ -27,7 +27,8 @@ class _historyPageState extends State<historyPage> {
   @override
   Widget build(BuildContext context) {
 
-    widget.history.history = widget.history.history.reversed.toList();
+    if(widget.history.history != null)
+      widget.history.history = widget.history.history.reversed.toList();
 
     provider = Provider.of<AppProvider>(context);
 
