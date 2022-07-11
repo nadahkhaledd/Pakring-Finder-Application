@@ -19,6 +19,7 @@ import '../Network/API/Recents.dart';
 import '../Network/API/Reviews.dart';
 import '../Shared/Functions.dart';
 import '../Shared/Marker.dart';
+import '../widgets/bookmarkButton.dart';
 
 
 class direction_screen extends StatefulWidget{
@@ -64,35 +65,38 @@ class _searchState extends State<direction_screen> {
         drawer: Appdrawer(context),
         body: Stack(
           children: [
+
             Column(
               children: [
                 Container(
-                  height: MediaQuery.of(context).size.height*0.22,
+                  height: MediaQuery.of(context).size.height*0.2,
                   width: MediaQuery.of(context).size.width,
                   // color: Colors.black,
                   child: from_to(source: widget.info.myLocation_name,target: widget.destinationName,
                       isBookmark: widget.ifBookmark, bookmarkID: widget.bookmarkID, destination: widget.info.getDestination()),
                 ),
                 Container(
+
                   //padding: const EdgeInsets.only(left: 0.0,top:140,right: 0.0),
                   height: MediaQuery.of(context).size.height*0.40,
                   width: MediaQuery.of(context).size.width,
-                  child: GoogleMap(
-                    initialCameraPosition: (widget.currentLocation != null) ? (CameraPosition(target:
-                    LatLng(widget.currentLocation.latitude,widget.currentLocation.longitude), zoom: 15.0,))
-                        : (CameraPosition(target: LatLng(30.0313, 31.2107), zoom: 13.0)),
+                  child:
+                      GoogleMap(
+                        initialCameraPosition: (widget.currentLocation != null) ? (CameraPosition(target:
+                        LatLng(widget.currentLocation.latitude,widget.currentLocation.longitude), zoom: 15.0,))
+                            : (CameraPosition(target: LatLng(30.0313, 31.2107), zoom: 13.0)),
 
-                    zoomGesturesEnabled: true,
-                    zoomControlsEnabled: true,
-                    rotateGesturesEnabled: true,
-                    myLocationButtonEnabled: true,
-                    //myLocationEnabled: true,
-                    padding: EdgeInsets.only(top: 200.0,),
-                    polylines: Set<Polyline>.of(widget.info.getPolylines().values),
-                    markers:markers ,
+                        zoomGesturesEnabled: true,
+                        zoomControlsEnabled: true,
+                        rotateGesturesEnabled: true,
+                        myLocationButtonEnabled: true,
+                        //myLocationEnabled: true,
+                        padding: EdgeInsets.only(top: 200.0,),
+                        polylines: Set<Polyline>.of(widget.info.getPolylines().values),
+                        markers:markers ,
 
 
-                  ),
+                      ),
                 ),
                 Container(
                   //height: MediaQuery.of(context).size.height*0.10,
@@ -143,7 +147,7 @@ class _searchState extends State<direction_screen> {
             ),
 
             Padding(
-                padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.30),
+                padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.25),
             child: Center(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -195,6 +199,13 @@ class _searchState extends State<direction_screen> {
                     _scaffoldState.currentState.openDrawer();
                   },
                 ),
+              ),
+            ),
+            Align(
+              alignment: Alignment(0.95,-0.5),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: bookmarkButton( context, widget.ifBookmark, widget.bookmarkID, widget.info.getDestination(), widget.destinationName, provider.currentUser),
               ),
             ),
           ],

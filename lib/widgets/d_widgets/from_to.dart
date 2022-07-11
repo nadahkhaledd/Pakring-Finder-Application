@@ -38,14 +38,14 @@ class _from_toState extends State<from_to> {
     return Container(
       color: Colors.white,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(4.0),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.only(top:45.0,right: 0.0),
+                  padding: const EdgeInsets.only(top:30.0,right: 0.0),
                   width: 30,
                   child: Column(
                     children: [
@@ -54,7 +54,7 @@ class _from_toState extends State<from_to> {
                           child:Icon(Icons.location_on,color: Color(0xff2283ea))
                       ),
                       Container(
-                        padding: const EdgeInsets.only(top:20.0,right: 0.0),
+                        padding: const EdgeInsets.only(top:25.0,right: 0.0),
                         child:Icon(Icons.location_on,color:Colors.red),
                       ),
 
@@ -64,7 +64,7 @@ class _from_toState extends State<from_to> {
                 ),
 
                 Padding(
-                    padding: const EdgeInsets.only(top:35.0,right: 0.0),
+                    padding: const EdgeInsets.only(top:20.0,right: 0.0),
                     child:Column(
                       children: [
                         Container(
@@ -84,7 +84,7 @@ class _from_toState extends State<from_to> {
                         )
                         ,
                         Padding(
-                          padding: const EdgeInsets.only(left: 0,top:5.0),
+                          padding: const EdgeInsets.only(left: 0,top:12.0),
                           child: Container(
                             height: MediaQuery.of(context).size.height*(0.2)*0.3,
                             width:MediaQuery.of(context).size.width*0.7,
@@ -104,13 +104,7 @@ class _from_toState extends State<from_to> {
               ],
             ),
 
-            Align(
-              alignment: Alignment.bottomRight,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: bookmarkButton( context, widget.isBookmark, widget.bookmarkID, widget.destination, widget.target, provider.currentUser),
-              ),
-            )
+
 
             ]),
       )

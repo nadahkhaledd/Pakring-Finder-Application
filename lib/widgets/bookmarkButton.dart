@@ -27,11 +27,11 @@ class _bookmarkButtonState extends State<bookmarkButton> {
   @override
   Widget build(BuildContext context) {
     bookmarkState = widget.isBookmark;
-    iconColor =  bookmarkState? Colors.yellow: Colors.blueGrey;
+    iconColor =  bookmarkState? Colors.yellow: Colors.white;
     return FloatingActionButton
       (
         heroTag: 'bookmark',
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.blueGrey,
         mini: true,
         shape: BeveledRectangleBorder(),
         child: Icon(Icons.bookmark, color: iconColor,),
