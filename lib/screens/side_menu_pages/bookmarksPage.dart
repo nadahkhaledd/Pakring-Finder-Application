@@ -40,11 +40,24 @@ class _bookmarksPageState extends State<bookmarksPage> {
                           const Duration(seconds: 0),
                               () => showDialog(
                             context: context,
-                            builder: (context) => const AlertDialog(
+                            builder: (context) =>  AlertDialog(
                               title: Text('Delete '),
                               actions:   [
                                 TextButton(
+                                  onPressed: ()  async {
+                                    int status = await clearDriverBookmarks(widget.bookmarks[0].driverID, provider.currentUser.token);
+                                    if(status == 200)
+                                    {
+                                      setState(() {
+                                        widget.bookmarks.clear();
+                                      });
+                                      final snackBar = SnackBar(content:  Text('bookmarks removed'));
+                                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                    }
 
+                                     Navigator.pop(context,'delete');
+
+                                  },
                                   child: const Text('delete'),
 
                                 ),
