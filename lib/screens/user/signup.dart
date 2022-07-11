@@ -49,7 +49,7 @@ class _signupState extends State<signup> {
                   child: Text(
                     "Sign-Up",
                     style: TextStyle(
-                        color: Colors.blue,
+                        color: Colors.blueGrey,
                         fontSize: 40,
                         fontWeight: FontWeight.bold),
                   ),
@@ -68,6 +68,8 @@ class _signupState extends State<signup> {
                   messageValidate: "name cant be empty",
                   prefixIcon: const Icon(
                     Icons.edit,
+                    color: Colors.blueGrey,
+
                   ),
                 ),
                 SizedBox(
@@ -84,6 +86,7 @@ class _signupState extends State<signup> {
                   messageValidate: "error",
                   prefixIcon: const Icon(
                     Icons.phone,
+                    color: Colors.blueGrey,
                   ),
                 ),
                 SizedBox(
@@ -95,6 +98,7 @@ class _signupState extends State<signup> {
                 defaultTextFormField(
                   prefixIcon: const Icon(
                     Icons.email,
+                    color: Colors.blueGrey,
                   ),
                   context: context,
                   controller: emailController,
@@ -117,6 +121,7 @@ class _signupState extends State<signup> {
                   messageValidate: "can't be less than 6 char",
                   prefixIcon: const Icon(
                     Icons.password,
+                    color: Colors.blueGrey,
                   ),
                 ),
                 SizedBox(
@@ -127,7 +132,8 @@ class _signupState extends State<signup> {
                 ),
                 Center(
                   child: ElevatedButton(
-                    child: Text("Sign up"),
+                    style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
+                    child: Text("Sign up",),
                     onPressed: () async {
                       String number = "+2" + phoneController.text;
 
@@ -142,21 +148,17 @@ class _signupState extends State<signup> {
                           showDialog(context: context,
                               builder: (BuildContext context) =>
                                   AlertDialog(
-                                    title:  Text("Success", style: TextStyle(
-                                      color: Colors.red
-                                    ),),
-                                    content:  Text(returnValue, style: TextStyle(
-                                        color: Colors.red
-                                    ),),
+                                    title:  Text("Success",style: TextStyle(color:Colors.blueGrey),),
+                                    content:  Text(returnValue,style: TextStyle(color:Colors.blueGrey),),
                                     actions: [
                                       TextButton(
                                         onPressed: () =>
                                             navigateTo(context,login()),
-                                        child: const Text('Login'),
+                                        child: const Text('Login',style: TextStyle(color:Colors.black),),
                                       ),  TextButton(
                                         onPressed: () =>
                                             Navigator.pop(context,'Cancel'),
-                                        child: const Text('Cancel'),
+                                        child: const Text('Cancel',style: TextStyle(color:Colors.black),),
                                       ),
                                     ],
                                   ));
@@ -194,7 +196,7 @@ class _signupState extends State<signup> {
               {
                 navigateTo(context, login());
               }
-              , child:Text('Log in'),  ),
+              , child:Text('Log in',style: TextStyle(color:Colors.blueGrey),),  ),
                 ]
 
               ),
