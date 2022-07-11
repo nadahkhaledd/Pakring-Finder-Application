@@ -112,7 +112,27 @@ class _bookmarksPageState extends State<bookmarksPage> {
                       icon: Icons.delete,
                       onTap: ()
                       async {
-                        await onDismissed(index, SlidableAction.delete);
+                        showDialog(context: context, builder: (BuildContext context)=>AlertDialog(
+                          content:  Text("Are you sure", style: TextStyle(
+                              color: Colors.red
+                          ),),
+                          actions: [
+                            TextButton(
+                              onPressed: ()
+                             async {
+                                await onDismissed(index, SlidableAction.delete);
+                                Navigator.pop(context,'Cancel');
+                              },
+                              child: const Text('delete'),
+
+                            ),
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.pop(context,'Cancel'),
+                              child: const Text('Cancel'),
+                            ),
+                          ],
+                        ));
 
                       },
                     )
@@ -159,6 +179,7 @@ class _bookmarksPageState extends State<bookmarksPage> {
         setState(()  {
           if (code == 200)
           {
+
             widget.bookmarks.removeAt(index);
             message = "bookmark deleted successfully";
           }
@@ -219,3 +240,27 @@ class _bookmarksPageState extends State<bookmarksPage> {
       )
   );
 }
+/*
+ showDialog(context: context,
+              builder: (BuildContext context)=>AlertDialog(
+                content:  Text("Are you sure", style: TextStyle(
+                    color: Colors.red
+                ),),
+                actions: [
+                  TextButton(
+                    onPressed: ()
+              {
+
+              },
+              child: const Text('delete'),
+
+          ),
+                  TextButton(
+                    onPressed: () =>
+                        Navigator.pop(context,'Cancel'),
+                    child: const Text('Cancel'),
+                  ),
+                ],
+              ));
+
+ */
