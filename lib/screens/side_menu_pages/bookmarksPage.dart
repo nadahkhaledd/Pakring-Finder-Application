@@ -9,7 +9,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '../../Shared/Functions.dart';
-import '../../services/API/APIManager.dart';
 
 class bookmarksPage extends StatefulWidget
 {

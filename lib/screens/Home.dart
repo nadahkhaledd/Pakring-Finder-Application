@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:park_locator/services/API/APIManager.dart';
 import 'package:park_locator/widgets/Appdrawer.dart';
 import 'package:park_locator/widgets/loadingIndicator.dart';
 import 'package:provider/provider.dart';
 
 import '../Model/LocationDetails.dart';
+import '../Network/API/Camera.dart';
+import '../Network/API/Garages.dart';
+import '../Network/API/Snaps.dart';
 import '../Shared/Components.dart';
 import '../Shared/Functions.dart';
 import '../services/appprovider.dart';

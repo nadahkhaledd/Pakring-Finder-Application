@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/Model/DBModels/Bookmark.dart';
 import 'package:park_locator/Model/Location.dart';
-import 'package:park_locator/services/API/APIManager.dart';
 
 import '../Model/UserData.dart';
 import '../Network/API/Bookmarks.dart';

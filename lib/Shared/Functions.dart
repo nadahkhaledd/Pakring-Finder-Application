@@ -7,8 +7,8 @@ import '../Model/Location.dart';
 import '../Model/LocationDetails.dart';
 import '../Model/UserData.dart';
 import '../Network/API/Bookmarks.dart';
+import '../Network/API/Garages.dart';
 import '../Network/API/StreetAPI.dart';
-import '../services/API/APIManager.dart';
 import '../services/DistanceMatrix.dart';
 import '../services/directions_repository.dart';
 

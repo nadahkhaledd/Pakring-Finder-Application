@@ -23,32 +23,22 @@ Future<int> addReview(
       response=error;
     });
 
-
-
- /* Response response = await dio.post(url + "Review/add", data: {
-    'driverID': driverID,
-    'cameraID': cameraID,
-    'content': content,
-    'garageID': ""
-  });*/
   return response.statusCode;
 }
 
-// Future<List> getReviews({@required String cameraID}) async
-// {
-//   List<Review> review= [];
-//   await DioHelper.getData(url: ShowStreetReview, query: {
-//
-//   })
-//   Response response =await dio.get(url+"show_street_reviews?cameraID="+cameraID);
-//   //print(response.data);
-//   for(var element in response.data)
-//   {
-//     if(element !=null)
-//     {
-//       //print(review);
-//       review.add(Review.fromJson(element));
-//     }
-//   }
-//   return review;
-// }
+Future<List> getReviews(String cameraID, String token) async
+{
+  List<Review> review= [];
+  Response response =await DioHelper.getData(url: getReview+"?cameraID="+cameraID, token: token);
+  for(var element in response.data)
+  {
+    if(element !=null)
+    {
+      review.add(Review.fromJson(element));
+    }
+  }
+  return review;
+}
+
+
+
