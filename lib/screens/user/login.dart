@@ -55,7 +55,7 @@ class _loginState extends State<login> {
                       child: Text(
                         "Login",
                         style: TextStyle(
-                            color: Colors.blue,
+                            color: Colors.blueGrey,
                             fontSize: 40,
                             fontWeight: FontWeight.bold),
                       ),
@@ -68,7 +68,7 @@ class _loginState extends State<login> {
                     ),
                     defaultTextFormField(
                       prefixIcon: const Icon(
-                        Icons.email,
+                        Icons.email, color: Colors.blueGrey,
                       ),
                       context: context,
                       controller: emailController,
@@ -91,7 +91,7 @@ class _loginState extends State<login> {
                       label: "password",
                       messageValidate: "can't be less than 6 char",
                       prefixIcon: const Icon(
-                        Icons.password,
+                        Icons.password, color: Colors.blueGrey,
                       ),
                     ),
                     SizedBox(
@@ -102,6 +102,7 @@ class _loginState extends State<login> {
                     ),
                     Center(
                       child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
                         onPressed: () async {
                           if (formKey.currentState.validate()) {
                             Pair pair=  new Pair("none","none");
@@ -161,7 +162,7 @@ class _loginState extends State<login> {
                           onPressed: () {
                             navigateTo(context, signup());
                           },
-                          child: Text('Sign-up'))
+                          child: Text('Sign-up', style: TextStyle(color: Colors.blueGrey),))
                     ])
                   ],
                 ),
