@@ -16,12 +16,12 @@ Future<int> addRecent(var recent, String token) async {
 Future<Recent> getHistory(String driverID, String token) async
 {
   Recent history= new Recent(driverID: driverID, history: []);
-  bool ok = true;
+  bool success = true;
   Response response;
   response =await DioHelper.getData(url: getRecent+'?id=$driverID', token: token).then((value) => response = value).
-  catchError((onError){ok = false;});
+  catchError((onError){success = false;});
 
-    if(ok == true && response.data !=null)
+    if(success == true && response.data !=null)
     {
       history = Recent.fromJson(response.data);
     }
