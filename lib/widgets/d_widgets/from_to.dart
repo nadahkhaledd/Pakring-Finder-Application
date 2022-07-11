@@ -51,10 +51,10 @@ class _from_toState extends State<from_to> {
                     children: [
                       Container(
 
-                          child:Icon(Icons.location_on,color: Color(0xff2283ea))
+                          child:Icon(Icons.album_outlined,color: Color(0xff2283ea))
                       ),
                       Container(
-                        padding: const EdgeInsets.only(top:25.0,right: 0.0),
+                        padding: const EdgeInsets.only(top:30.0,right: 0.0),
                         child:Icon(Icons.location_on,color:Colors.red),
                       ),
 

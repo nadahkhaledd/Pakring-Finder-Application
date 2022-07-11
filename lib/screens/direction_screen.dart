@@ -69,7 +69,7 @@ class _searchState extends State<direction_screen> {
             Column(
               children: [
                 Container(
-                  height: MediaQuery.of(context).size.height*0.2,
+                  height: MediaQuery.of(context).size.height*0.18,
                   width: MediaQuery.of(context).size.width,
                   // color: Colors.black,
                   child: from_to(source: widget.info.myLocation_name,target: widget.destinationName,
@@ -78,7 +78,7 @@ class _searchState extends State<direction_screen> {
                 Container(
 
                   //padding: const EdgeInsets.only(left: 0.0,top:140,right: 0.0),
-                  height: MediaQuery.of(context).size.height*0.40,
+                  height: MediaQuery.of(context).size.height*0.42,
                   width: MediaQuery.of(context).size.width,
                   child:
                       GoogleMap(
@@ -147,7 +147,7 @@ class _searchState extends State<direction_screen> {
             ),
 
             Padding(
-                padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.25),
+                padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.22),
             child: Center(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -202,9 +202,9 @@ class _searchState extends State<direction_screen> {
               ),
             ),
             Align(
-              alignment: Alignment(0.95,-0.5),
+              alignment: Alignment(0.96,-0.65),
               child: Padding(
-                padding: const EdgeInsets.only(left: 10),
+                padding: const EdgeInsets.only(left: 9),
                 child: bookmarkButton( context, widget.ifBookmark, widget.bookmarkID, widget.info.getDestination(), widget.destinationName, provider.currentUser),
               ),
             ),

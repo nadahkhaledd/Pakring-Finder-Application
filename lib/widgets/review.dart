@@ -41,28 +41,28 @@ class review extends StatelessWidget
                   color: Colors.blueGrey,
                 );
               },
-              itemBuilder: (context, index) => ListTile(
-                title:
-                    Column(
-                      children: [
-                        Align(
-                            alignment: Alignment.topLeft,
-                            child:
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0),
-                              child: Text(users[index],style: TextStyle(color: Colors.blueGrey,fontSize: 20,fontWeight: FontWeight.bold),),
-                            )),
-                        Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(reviews[index].content,style: TextStyle(fontSize: 16,),)),
-                      ],
-                    ),
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.only(right: 10, left: 10, top: 5, bottom: 3),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Align(
+                        alignment: Alignment.topLeft,
+                        child:
+                        Text(users[index],style: TextStyle(color: Colors.blueGrey,fontSize: 17,fontWeight: FontWeight.bold),)),
+                    Align(
+                        alignment: Alignment.topLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8, top: 4),
+                          child: Text(reviews[index].content,style: TextStyle(fontSize: 15,), overflow: TextOverflow.fade),
+                        )),
 
-                subtitle:
-               Align(
-                 alignment: Alignment.bottomRight,
-                   child: Text(reviews[index].date)),
-              )),
+                    Align(
+                        alignment: Alignment.bottomRight,
+                        child: Text(reviews[index].date, style: TextStyle(color: Colors.grey, fontSize: 14))),
+                  ],
+                ),
+              ),),
 
         ),
       ),
