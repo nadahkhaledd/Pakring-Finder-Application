@@ -24,6 +24,7 @@ class bookmarkButton extends StatefulWidget
 class _bookmarkButtonState extends State<bookmarkButton> {
   bool bookmarkState;
   Color iconColor;
+
   @override
   Widget build(BuildContext context) {
     bookmarkState = widget.isBookmark;
@@ -36,48 +37,81 @@ class _bookmarkButtonState extends State<bookmarkButton> {
         shape: BeveledRectangleBorder(),
         child: Icon(Icons.bookmark, color: iconColor,),
         onPressed: ()
-      async {
-        await _toggleBookmark();
-      },
+        async {
+          String message;
+          if(bookmarkState)
+          {
+            var response = await deleteBookmark(widget.bookmarkID, widget.user.token);
+            if(response == 200)
+            {
+              setState(() {
+                iconColor = Colors.blueGrey;
+                bookmarkState = false;
+                message = "deleted from bookmarks";
+              });
+            }
+          }
+          else
+          {
+            var lat = widget.destination.latitude;
+            var long = widget.destination.longitude;
+            Bookmark bookmark = new Bookmark(name: widget.destinationName, driverID: widget.user.id,
+                location: Location(lat: lat, long: long),
+                locationURL: "http://www.google.com/maps/place/$lat,$long");
+            var response = await addBookmark(bookmark, widget.user.token);
+            if (response == 200)
+            {
+              setState(() {
+                iconColor = Colors.yellow;
+                bookmarkState = true;
+                message = "added to bookmarks";
+              });
+
+            }
+          }
+          final snackBar = SnackBar(
+              content:  Text(message));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
     );
   }
 
-  Future<void> _toggleBookmark()
-  async {
-    String message;
-      if(bookmarkState)
-      {
-        var response = await deleteBookmark(widget.bookmarkID, widget.user.token);
-        if(response == 200)
-        {
-          setState(() {
-            iconColor = Colors.blueGrey;
-            bookmarkState = false;
-            message = "deleted from bookmarks";
-          });
-        }
-      }
-      else
-      {
-        var lat = widget.destination.latitude;
-        var long = widget.destination.longitude;
-        Bookmark bookmark = new Bookmark(name: widget.destinationName, driverID: widget.user.id,
-            location: Location(lat: lat, long: long),
-            locationURL: "http://www.google.com/maps/place/$lat,$long");
-        var response = await addBookmark(bookmark, widget.user.token);
-        if (response == 200)
-        {
-          setState(() {
-            iconColor = Colors.yellow;
-            bookmarkState = true;
-            message = "added to bookmarks";
-          });
-
-        }
-      }
-    final snackBar = SnackBar(
-        content:  Text(message));
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  }
+  // Future<void> _toggleBookmark()
+  // async {
+  //   String message;
+  //     if(bookmarkState)
+  //     {
+  //       var response = await deleteBookmark(widget.bookmarkID, widget.user.token);
+  //       if(response == 200)
+  //       {
+  //         setState(() {
+  //           iconColor = Colors.blueGrey;
+  //           bookmarkState = false;
+  //           message = "deleted from bookmarks";
+  //         });
+  //       }
+  //     }
+  //     else
+  //     {
+  //       var lat = widget.destination.latitude;
+  //       var long = widget.destination.longitude;
+  //       Bookmark bookmark = new Bookmark(name: widget.destinationName, driverID: widget.user.id,
+  //           location: Location(lat: lat, long: long),
+  //           locationURL: "http://www.google.com/maps/place/$lat,$long");
+  //       var response = await addBookmark(bookmark, widget.user.token);
+  //       if (response == 200)
+  //       {
+  //         setState(() {
+  //           iconColor = Colors.yellow;
+  //           bookmarkState = true;
+  //           message = "added to bookmarks";
+  //         });
+  //
+  //       }
+  //     }
+  //   final snackBar = SnackBar(
+  //       content:  Text(message));
+  //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  // }
 }
 

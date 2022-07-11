@@ -34,8 +34,6 @@ class direction_screen extends StatefulWidget{
 
   direction_screen({this.currentLocation,this.info, this.destinationName, this.review,this.users,this.cameraID, this.ifBookmark, this.bookmarkID});
 
-
-
   @override
   State<direction_screen> createState() => _searchState();
 
@@ -58,7 +56,6 @@ class _searchState extends State<direction_screen> {
     provider = Provider.of<AppProvider>(context);
     Set<Marker> markers = addMarkers2(widget.currentLocation,widget.info.getDestination());
 
-
     return SafeArea(
       child: Scaffold(
         key: _scaffoldState,
@@ -73,7 +70,7 @@ class _searchState extends State<direction_screen> {
                   width: MediaQuery.of(context).size.width,
                   // color: Colors.black,
                   child: from_to(source: widget.info.myLocation_name,target: widget.destinationName,
-                      isBookmark: widget.ifBookmark, bookmarkID: widget.bookmarkID, destination: widget.info.getDestination()),
+                       destination: widget.info.getDestination()),
                 ),
                 Container(
 

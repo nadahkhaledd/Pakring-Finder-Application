@@ -12,15 +12,11 @@ class from_to extends StatefulWidget
 {
   final String source;
   final String target;
-  bool isBookmark;
-   String bookmarkID;
   LatLng destination;
 
   from_to({
     @required this.source,
     @required this.target,
-    @required this.isBookmark,
-    @required this.bookmarkID,
     @required this.destination,
   });
 
@@ -103,8 +99,6 @@ class _from_toState extends State<from_to> {
                     )),
               ],
             ),
-
-
 
             ]),
       )
