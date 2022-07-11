@@ -86,9 +86,9 @@ class _splashState extends State<splash> {
       seconds: 5,
       navigateAfterSeconds:AuthContainer(),
       image: new Image.asset('assets/images/logo.jpg'),
-      useLoader: false,
       photoSize: 100.0,
       backgroundColor: Colors.white,
+      loaderColor: Colors.blueGrey,
     );
   }
 }

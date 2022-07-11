@@ -36,7 +36,34 @@ class _bookmarksPageState extends State<bookmarksPage> {
                   PopupMenuItem(
                       child:Text('clear bookmarks'),
                     onTap:() {
-                     openDialog();
+                      showDialog(context: context, builder: (BuildContext context)=>AlertDialog(
+                        content:  Text("Do you want to remove all bookmarks?", style: TextStyle(color: Colors.blueGrey)),
+                        actions: [
+                          TextButton(
+                            key: Key("yes"),
+                            child: Text("Yes",style: TextStyle(color: Colors.black),),
+                            onPressed: ()
+                            async {
+                              int status = await clearDriverBookmarks(widget.bookmarks[0].driverID, provider.currentUser.token);
+                              if(status == 200)
+                              {
+                                setState(() {
+                                  widget.bookmarks.clear();
+                                });
+                                final snackBar = SnackBar(content:  Text('bookmarks removed'));
+                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                              }
+                              Navigator.pop(context,'Cancel');
+                            },
+                          ),
+                          TextButton(
+                            key: Key("no"),
+                            child: Text("No",style: TextStyle(color: Colors.black)),
+                            onPressed: () =>
+                                Navigator.pop(context,'Cancel'),
+                          ),
+                        ],
+                      ));
                   },
                   ),
                 ])
@@ -67,14 +94,6 @@ class _bookmarksPageState extends State<bookmarksPage> {
                 itemCount: widget.bookmarks.length,
                 itemBuilder: (context, index) => Slidable(
                   key: UniqueKey(),
-
-                  // dismissal: SlidableDismissal(
-                  //   child: SlidableDrawerDismissal(),
-                  // onDismissed: (type) async {
-                  //     final action = type == SlideActionType.primary?
-                  //         SlidableAction.headTo: SlidableAction.delete;
-                  //     await onDismissed(index, action);
-                  // },),
 
                   actionExtentRatio: 0.20,
                   actionPane: SlidableDrawerActionPane(),
@@ -113,27 +132,25 @@ class _bookmarksPageState extends State<bookmarksPage> {
                       onTap: ()
                       async {
                         showDialog(context: context, builder: (BuildContext context)=>AlertDialog(
-                          content:  Text("Are you sure", style: TextStyle(
-                              color: Colors.red
-                          ),),
+                          content:  Text("Do you want to delete bookmark?", style: TextStyle(color: Colors.blueGrey)),
                           actions: [
                             TextButton(
+                              key: Key("yes"),
+                              child: Text("Yes",style: TextStyle(color: Colors.black),),
                               onPressed: ()
                              async {
                                 await onDismissed(index, SlidableAction.delete);
                                 Navigator.pop(context,'Cancel');
                               },
-                              child: const Text('delete'),
-
                             ),
                             TextButton(
+                              key: Key("no"),
+                              child: Text("No",style: TextStyle(color: Colors.black)),
                               onPressed: () =>
                                   Navigator.pop(context,'Cancel'),
-                              child: const Text('Cancel'),
                             ),
                           ],
                         ));
-
                       },
                     )
                   ],
