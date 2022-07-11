@@ -34,38 +34,26 @@ class _bookmarksPageState extends State<bookmarksPage> {
             PopupMenuButton(
                 itemBuilder: (context) => [
                   PopupMenuItem(
-                      child:Text('clear bookmarks'),
-                    onTap:() {
-                      showDialog(context: context, builder: (BuildContext context)=>AlertDialog(
-                        content:  Text("Do you want to remove all bookmarks?", style: TextStyle(color: Colors.blueGrey)),
-                        actions: [
-                          TextButton(
-                            key: Key("yes"),
-                            child: Text("Yes",style: TextStyle(color: Colors.black),),
-                            onPressed: ()
-                            async {
-                              int status = await clearDriverBookmarks(widget.bookmarks[0].driverID, provider.currentUser.token);
-                              if(status == 200)
-                              {
-                                setState(() {
-                                  widget.bookmarks.clear();
-                                });
-                                final snackBar = SnackBar(content:  Text('bookmarks removed'));
-                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                              }
-                              Navigator.pop(context,'Cancel');
-                            },
-                          ),
-                          TextButton(
-                            key: Key("no"),
-                            child: Text("No",style: TextStyle(color: Colors.black)),
-                            onPressed: () =>
-                                Navigator.pop(context,'Cancel'),
-                          ),
-                        ],
-                      ));
-                  },
-                  ),
+                    child: const Text('Delete all bookmarks'),
+                    onTap: () {
+                      Future.delayed(
+                          const Duration(seconds: 0),
+                              () => showDialog(
+                            context: context,
+                            builder: (context) => const AlertDialog(
+                              title: Text('Delete '),
+                              actions:   [
+                                TextButton(
+
+                                  child: const Text('delete'),
+
+                                ),
+
+                              ],
+                            ),
+                          ));
+                    },
+                  )
                 ])
           ],
           automaticallyImplyLeading: true,
