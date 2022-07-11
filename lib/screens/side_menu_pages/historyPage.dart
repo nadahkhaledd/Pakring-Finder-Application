@@ -40,8 +40,41 @@ class _historyPageState extends State<historyPage> {
                 itemBuilder: (context) => [
                   PopupMenuItem(
                     child:Text('clear history'),
-                    onTap:() async {
-                      openDialog();
+                    onTap:()  {
+                      Future.delayed(
+                          const Duration(seconds: 0),
+                              () => showDialog(
+                            context: context,
+                            builder: (context) =>  AlertDialog(
+                              title: Text('Do you want to clear history? ', style: TextStyle(color: Colors.blueGrey)),
+                              actions:   [
+                                TextButton(
+                                  key: Key("yes"),
+                                  child: Text("Yes",style: TextStyle(color: Colors.black)),
+                                  onPressed: ()  async {
+                                    int status = await clearHistory(widget.history.driverID, provider.currentUser.token);
+                                    if(status == 200)
+                                    {
+                                      setState(() {
+                                        widget.history.history.clear();
+                                      });
+                                      final snackBar = SnackBar(content:  Text('bookmarks removed'));
+                                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                    }
+                                    Navigator.pop(context,'delete');
+                                  },
+                                ),
+
+                                TextButton(
+                                  key: Key("no"),
+                                  child: Text("No",style: TextStyle(color: Colors.black)),
+                                  onPressed: () =>
+                                      Navigator.pop(context,'Cancel'),
+                                ),
+
+                              ],
+                            ),
+                          ));
                     },
                   ),
                 ])
@@ -72,15 +105,6 @@ class _historyPageState extends State<historyPage> {
                 itemCount: widget.history.history.length,
                 itemBuilder: (context, index) => Slidable(
                   key: UniqueKey(),
-
-                  // dismissal: SlidableDismissal(
-                  //   child: SlidableDrawerDismissal(),
-                  // onDismissed: (type) async {
-                  //     final action = type == SlideActionType.primary?
-                  //         SlidableAction.headTo: SlidableAction.share;
-                  //     await onDismissed(index, action);
-                  // },),
-
                   actionExtentRatio: 0.20,
                   actionPane: SlidableDrawerActionPane(),
 
@@ -140,40 +164,6 @@ class _historyPageState extends State<historyPage> {
           );
         }
     );
-  }
-
-  openDialog()
-  {
-    return showDialog(
-        context: context,
-        builder: (context){
-          return AlertDialog(
-            title: Text("Do you want to clear history?",style: TextStyle(color: Colors.blueGrey)),
-            actions: [
-              TextButton(
-                  key: Key("yes"),
-                  child: Text("Yes",style: TextStyle(color: Colors.blueGrey),),
-                  onPressed: () async {
-                    // int status = await clearHistory(widget.history.driverID, provider.currentUser.token);
-                    // if(status == 200)
-                    // {
-                    //   setState(() {
-                    //     widget.history.history.clear();
-                    //   });
-                    //   final snackBar = SnackBar(content:  Text('history cleared'));
-                    //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    // }
-                  }),
-
-              TextButton(
-                  key: Key("no"),
-                  child: Text("No",style: TextStyle(color: Colors.blueGrey),),
-                  onPressed: (){
-
-                  }),
-            ],
-          );
-        });
   }
 
 

@@ -41,9 +41,11 @@ class _bookmarksPageState extends State<bookmarksPage> {
                               () => showDialog(
                             context: context,
                             builder: (context) =>  AlertDialog(
-                              title: Text('Delete '),
+                              title: Text('Do you want to delete all bookmarks? ', style: TextStyle(color: Colors.blueGrey)),
                               actions:   [
                                 TextButton(
+                                  key: Key("yes"),
+                                  child: Text("Yes",style: TextStyle(color: Colors.black)),
                                   onPressed: ()  async {
                                     int status = await clearDriverBookmarks(widget.bookmarks[0].driverID, provider.currentUser.token);
                                     if(status == 200)
@@ -54,12 +56,15 @@ class _bookmarksPageState extends State<bookmarksPage> {
                                       final snackBar = SnackBar(content:  Text('bookmarks removed'));
                                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                     }
-
                                      Navigator.pop(context,'delete');
-
                                   },
-                                  child: const Text('delete'),
+                                ),
 
+                                TextButton(
+                                  key: Key("no"),
+                                  child: Text("No",style: TextStyle(color: Colors.black)),
+                                  onPressed: () =>
+                                      Navigator.pop(context,'Cancel'),
                                 ),
 
                               ],
@@ -228,57 +233,4 @@ class _bookmarksPageState extends State<bookmarksPage> {
 
   }
 
-  Future openDialog() => showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text("Do you want to remove all bookmarks?",style: TextStyle(color: Colors.blueGrey)),
-        actions: [
-          TextButton(
-              key: Key("yes"),
-              child: Text("Yes",style: TextStyle(color: Colors.blueGrey),),
-              onPressed: () async {
-                // int status = await clearDriverBookmarks(widget.bookmarks[0].driverID, provider.currentUser.token);
-                // if(status == 200)
-                // {
-                //   setState(() {
-                //     widget.bookmarks.clear();
-                //   });
-                //   final snackBar = SnackBar(content:  Text('bookmarks removed'));
-                //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                // }
-              }),
-
-          TextButton(
-              key: Key("no"),
-              child: Text("No",style: TextStyle(color: Colors.blueGrey),),
-              onPressed: (){
-
-              }),
-        ],
-      )
-  );
 }
-/*
- showDialog(context: context,
-              builder: (BuildContext context)=>AlertDialog(
-                content:  Text("Are you sure", style: TextStyle(
-                    color: Colors.red
-                ),),
-                actions: [
-                  TextButton(
-                    onPressed: ()
-              {
-
-              },
-              child: const Text('delete'),
-
-          ),
-                  TextButton(
-                    onPressed: () =>
-                        Navigator.pop(context,'Cancel'),
-                    child: const Text('Cancel'),
-                  ),
-                ],
-              ));
-
- */
