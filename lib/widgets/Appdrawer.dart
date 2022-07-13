@@ -70,7 +70,7 @@ Drawer Appdrawer(context) {
           title: Text('Home', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
           autofocus: true,
           onTap: () {
-            navigateTo(context, Home());
+            navigateAndFinish(context, Home());
           },
         ),
         ListTile(

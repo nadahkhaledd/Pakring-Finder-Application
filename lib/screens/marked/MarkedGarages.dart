@@ -70,6 +70,7 @@ class _markedGaragesState extends State<markedGarages> {
                       ? Flexible(
                       child: NearbyPlaces(widget.data, widget.currentLocation))
                       : Align(
+
                     alignment: Alignment.bottomCenter,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
