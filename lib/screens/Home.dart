@@ -31,8 +31,7 @@ class _HomeState extends State<Home> {
   AppProvider provider;
   String currentUserToken;
   LatLng _coordinates = LatLng(30.0313, 31.2107);
-  List snaps, nearestCameras, nearestGarages,GarageSnaps;
-  List<LocationDetails> data = [];
+  List snaps, nearestCameras, nearestGarages,GarageSnaps,data,data2;
   bool isLoading = false;
   bool isSearchUsed = false;
   String voiceQuery = '';
@@ -53,7 +52,9 @@ class _HomeState extends State<Home> {
     List GaragesCamerasIDs = getGarageCamerasIDs(nearestGarages);
     GarageSnaps = await getGarageSnaps(GaragesCamerasIDs,currentUserToken);
     data = await getFinalDataGarages(nearestGarages,GarageSnaps, _coordinates, currentUserToken);
+    data2 = await getFinalDataGarages2(data,_coordinates);
     print("--------------------------------------------------");
+    print(data2.length);
     setState(() {
       isLoading = false;
     });
@@ -203,7 +204,7 @@ class _HomeState extends State<Home> {
                                 context,
                                 markedGarages(
                                   currentLocation: _coordinates,
-                                  data: data,
+                                  data: data2,
                                 ));
                         }
                       },

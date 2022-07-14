@@ -6,6 +6,7 @@ import 'package:park_locator/Model/LocationDetails.dart';
 import 'package:park_locator/Network/API/Bookmarks.dart';
 import 'package:park_locator/Shared/Functions.dart';
 import 'package:park_locator/services/appprovider.dart';
+import 'package:park_locator/widgets/d_widgets/ListOfCameras.dart';
 import 'package:provider/provider.dart';
 import '../Model/DBModels/Bookmark.dart';
 import '../Model/DBModels/Review.dart';
@@ -66,11 +67,9 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
     return users;
   }
 
-
   @override
   Widget build(BuildContext context) {
     provider = Provider.of<AppProvider>(context);
-
 
     return Stack(
           children:[
@@ -91,6 +90,7 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
                 ],
               ),
               child: ListView.builder(
+
                   itemCount: widget.data.length,
                   itemBuilder: (context, index) => ListTile(
                     leading: Container(
@@ -117,12 +117,12 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
 
                       overflow:  TextOverflow.ellipsis,
 
-                    ): Text(widget.data[index].name + "["+widget.data[index].address+"]",
+                    ): Text(widget.data[index].name ,
 
                       overflow:  TextOverflow.ellipsis,
 
                     ) ,
-                    subtitle: Text(widget.data[index].spots + " Spots  "+  widget.data[index].distance),
+                    subtitle: Text(widget.data[index].cameraIDs),
                     trailing: IconButton(
                       icon: Icon(
                         Icons.directions,
@@ -167,6 +167,7 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
                           }
                         },
                     ),
+
                   )),
 
           ),
