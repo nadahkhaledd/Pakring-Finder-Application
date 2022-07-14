@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:park_locator/Model/LocationDetails.dart';
@@ -22,7 +24,8 @@ class NearbyPlaces extends StatefulWidget
 {
    List data;
    LatLng source;
-   NearbyPlaces(this.data, this.source);
+   bool isStreet;
+   NearbyPlaces(this.data, this.source,this.isStreet);
 
   @override
   State<NearbyPlaces> createState() => _NearbyPlacesState();
@@ -109,10 +112,16 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    title: Text(widget.data[index].name,
+
+                    title: widget.isStreet?  Text(widget.data[index].name,
+
                       overflow:  TextOverflow.ellipsis,
 
-                    ),
+                    ): Text(widget.data[index].name,
+
+                      overflow:  TextOverflow.ellipsis,
+
+                    ) ,
                     subtitle: Text(widget.data[index].spots + " Spots  "+  widget.data[index].distance),
                     trailing: IconButton(
                       icon: Icon(
@@ -142,10 +151,21 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
                               bookmarkBool = false;
                             });
                           }
-                        navigateTo(context, direction_screen(currentLocation: widget.source,info: info,
-                            destinationName: widget.data[index].name, review: review,
-                            users: users,cameraID:widget.data[index].cameraID, ifBookmark: bookmarkBool, bookmarkID: bookmarkID));
-                      },
+                        if (widget.isStreet==true)
+                          {
+                            navigateTo(context, direction_screen(currentLocation: widget.source,info: info,
+                                destinationName: widget.data[index].name, review: review,
+                                users: users,cameraID:widget.data[index].cameraID,garageID:null, ifBookmark: bookmarkBool, bookmarkID: bookmarkID,isStreet:widget.isStreet));
+                          }
+                        else
+                          {
+
+                            navigateTo(context, direction_screen(currentLocation: widget.source,info: info,
+                                destinationName: widget.data[index].name, review: review,
+                                users: users,cameraID:widget.data[index].cameraID,garageID:widget.data[index].garageID, ifBookmark: bookmarkBool, bookmarkID: bookmarkID,isStreet:widget.isStreet));
+
+                          }
+                        },
                     ),
                   )),
 

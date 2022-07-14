@@ -17,6 +17,7 @@ import '../Model/DBModels/Recent.dart';
 import '../Network/API/Bookmarks.dart';
 import '../Network/API/Recents.dart';
 import '../Network/API/Reviews.dart';
+import '../Network/API/UserAPi.dart';
 import '../Shared/Functions.dart';
 import '../Shared/Marker.dart';
 import '../widgets/bookmarkButton.dart';
@@ -29,10 +30,12 @@ class direction_screen extends StatefulWidget{
   @required List <Review> review;
   @required List <String> users;
   @required String cameraID;
+  @required bool isStreet;
+  @required String garageID;
   String bookmarkID;
   bool ifBookmark;
 
-  direction_screen({this.currentLocation,this.info, this.destinationName, this.review,this.users,this.cameraID, this.ifBookmark, this.bookmarkID});
+  direction_screen({this.currentLocation,this.info, this.destinationName, this.review,this.users,this.cameraID, this.ifBookmark, this.bookmarkID,this.isStreet, this.garageID});
 
   @override
   State<direction_screen> createState() => _searchState();
@@ -229,13 +232,20 @@ class _searchState extends State<direction_screen> {
         ),
         actions: [
           TextButton(onPressed: () async {
-
-            await addReview(user: provider.currentUser,cameraID: widget.cameraID,content: valueText);
+            if (widget.isStreet==true)
+              {
+                await addStreetReview(user: provider.currentUser,cameraID: widget.cameraID,content: valueText);
+              }
+            else
+            {
+              await addGarageReview(user: provider.currentUser,cameraID: widget.cameraID,content: valueText,garageID:widget.garageID);
+              }
             var x = await getReviews(widget.cameraID,provider.currentUser.token);
             Navigator.pop(context);
             final snackBar = SnackBar(content:  Text("Review added"));
             setState(() {
               widget.review=x;
+              widget.users.add(provider.currentUser.name);
             });
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
           }, child: Text("Submit",style: TextStyle(color: Colors.blueGrey),))

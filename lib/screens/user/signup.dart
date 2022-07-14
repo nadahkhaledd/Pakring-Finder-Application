@@ -144,7 +144,7 @@ class _signupState extends State<signup> {
                             password: passwordController.text,
                             name: firstNameController.text,
                             number: number);
-                        if (returnValue == "sign in successful") {
+                        if (returnValue == "Sign Up Successful") {
                           showDialog(context: context,
                               builder: (BuildContext context) =>
                                   AlertDialog(

@@ -85,5 +85,16 @@ async {
   }
   return name;
 }
+Future<String> getGarageID(String GarageCameraID, String token)
+async {
+  String garageID;
+  Response response=await DioHelper.getData(url: getGarageCameraById+GarageCameraID, token: token);
+
+  if(response.data != null)
+  {
+    garageID = response.data["garageID"];
+  }
+  return garageID;
+}
 
 

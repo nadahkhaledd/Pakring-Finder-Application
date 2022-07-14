@@ -68,7 +68,7 @@ class _markedGaragesState extends State<markedGarages> {
                   ),
                   (widget.data.length != 0)
                       ? Flexible(
-                      child: NearbyPlaces(widget.data, widget.currentLocation))
+                      child: NearbyPlaces(widget.data, widget.currentLocation,false))
                       : Align(
 
                     alignment: Alignment.bottomCenter,

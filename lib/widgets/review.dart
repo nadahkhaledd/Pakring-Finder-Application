@@ -44,14 +44,7 @@ class review extends StatelessWidget
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.only(right: 10, left: 10, top: 5, bottom: 3),
                 child: Container(
-                  padding:EdgeInsets.all(5) ,
-                  decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 1,
-                    color:Colors.blueGrey
-                  ),
-                    borderRadius: BorderRadius.circular(15)
-                ),
+                  padding:EdgeInsets.all(15) ,
                   child: Column(
 
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,

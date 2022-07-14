@@ -73,7 +73,7 @@ class _MarkedPlacesState extends State<MarkedPlaces> {
                       ),
                     ),
                   ),
-                  (widget.data.length!=0)? Flexible(child: NearbyPlaces(widget.data, widget.currentLocation)):
+                  (widget.data.length!=0)? Flexible(child: NearbyPlaces(widget.data, widget.currentLocation,true)):
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Padding(
