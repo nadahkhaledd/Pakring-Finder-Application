@@ -5,14 +5,14 @@ class Review
   String cameraID;
   String content;
   String date;
-  String driverID;
+  String driverName;
   String garageID;
   String id;
 
 
 
   Review.fromJson(Map<String, dynamic> json) {
-    driverID = json['driverID'];
+    driverName = json['driverID']['name'];
     id = json['id'];
     garageID = json['garageID'];
     date = json['date'];
@@ -20,18 +20,9 @@ class Review
     cameraID = json['cameraID'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['driverID'] = this.driverID;
-    data['garageID'] = this.garageID;
-    data['date'] = this.date;
-    data['id'] = this.id;
-    data['content']=this.content;
-    data['cameraID']=this.cameraID;
-    return data;
-  }
 
-  Review({ this.id,  this.cameraID, this.content, this.date, this.driverID, this.garageID});
+
+  Review({ this.id,  this.cameraID, this.content, this.date, this.driverName, this.garageID});
 
 }
 

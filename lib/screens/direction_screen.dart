@@ -137,7 +137,7 @@ class _searchState extends State<direction_screen> {
                     ),
                   ),
                 ),
-                (widget.review.length!=0)? Flexible(child: review(widget.review,widget.users)):
+                (widget.review.length!=0)? Flexible(child: review(widget.review)):
                 Container(
                   alignment: Alignment.bottomCenter,
                   child: Text('\nNo reviews',
@@ -232,20 +232,24 @@ class _searchState extends State<direction_screen> {
         ),
         actions: [
           TextButton(onPressed: () async {
+            var x;
             if (widget.isStreet==true)
               {
                 await addStreetReview(user: provider.currentUser,cameraID: widget.cameraID,content: valueText);
+                 x = await getStreetReviews(widget.cameraID,provider.currentUser.token);
               }
             else
             {
-              await addGarageReview(user: provider.currentUser,cameraID: widget.cameraID,content: valueText,garageID:widget.garageID);
+
+               await addGarageReview(user: provider.currentUser,content: valueText,garageID:widget.garageID);
+               x = await getGarageReviews(widget.garageID,provider.currentUser.token);
               }
-            var x = await getReviews(widget.cameraID,provider.currentUser.token);
+
             Navigator.pop(context);
             final snackBar = SnackBar(content:  Text("Review added"));
             setState(() {
               widget.review=x;
-              widget.users.add(provider.currentUser.name);
+
             });
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
           }, child: Text("Submit",style: TextStyle(color: Colors.blueGrey),))

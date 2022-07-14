@@ -117,8 +117,6 @@ Future<List> getFinalDataGarages2(List nearest,LatLng current) async {
         }
       if (found==true)
         {
-          // nearest2.add({'garageID': nearest[i]['garageID'], 'garageAddress':  nearest[i]['garageAddress'],
-          //   'location': nearest[i]['location'], 'cameras': cameras});
           String distance = await getDistance(nearest[i]['location'], current);
           String time = await getTime(nearest[i]['location'],current);
           LocationDetails details = new LocationDetails(
@@ -157,23 +155,6 @@ Future<List> getFinalDataGarages(List nearest,List GarageSnaps,LatLng current, S
                 }
 
             }
-         // garages.add(await setGarages(GarageSnaps[i].data["garageCameraID"],nearest));
-         //  LatLng loc = await getGarageCamerasLocation(GarageSnaps[i].data["garageCameraID"], token);
-         //  String name= await getGarageCamerasName(GarageSnaps[i].data["garageCameraID"], token);
-         //  String garageID= await getGarageID(GarageSnaps[i].data["garageCameraID"], token);
-         //  String garageCameraAddress= await getGarageCamerasAddress(GarageSnaps[i].data["garageCameraID"], token);
-         //  String distance = await getDistance(loc, current);
-         //  String time = await getTime(loc,current);
-         //  LocationDetails details = new LocationDetails(
-         //      cameraID: GarageSnaps[i].data["garageCameraID"],
-         //      garageID:garageID,
-         //      spots: spots.toString(),
-         //      name: name.toString(),
-         //      distance: distance.toString(),
-         //      time: time.toString(),
-         //      address:garageCameraAddress,
-         //      location: loc);
-         //  finalData.add(details);
         }
       }
 

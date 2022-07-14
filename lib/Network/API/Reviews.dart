@@ -27,13 +27,11 @@ Future<int> addStreetReview(
 }
 Future<int> addGarageReview(
     {@required userData user,
-      @required String cameraID,
       @required String content,
       @required String garageID}) async {
   Response response;
   await DioHelper.postData(url: AddReview, token: user.token, data: {
     'driverID': user.id,
-    'cameraID': cameraID,
     'content': content,
     'garageID': garageID
   }).then((value) {
@@ -46,7 +44,7 @@ Future<int> addGarageReview(
   return response.statusCode;
 }
 
-Future<List> getReviews(String cameraID, String token) async
+Future<List> getStreetReviews(String cameraID, String token) async
 {
   List<Review> review= [];
   Response response =await DioHelper.getData(url: getReview+"?cameraID="+cameraID, token: token);
@@ -59,6 +57,18 @@ Future<List> getReviews(String cameraID, String token) async
   }
   return review;
 }
-
+Future<List> getGarageReviews(String garageID, String token) async
+{
+  List<Review> review= [];
+  Response response =await DioHelper.getData(url: getGarageReview+"?garageID="+garageID, token: token);
+  for(var element in response.data)
+  {
+    if(element !=null)
+    {
+      review.add(Review.fromJson(element));
+    }
+  }
+  return review;
+}
 
 

@@ -59,29 +59,22 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
     setState(() {
       isLoading = true;
     });
-    List<Review> review=await getReviews(q, userToken);
+    List<Review> review;
+    if (widget.isStreet==true)
+      {
+       review =await getStreetReviews(q, userToken);
+      }
+    else
+      {
+        review=await getGarageReviews(q, userToken);
+      }
     setState(() {
       isLoading = false;
     });
     return review;
   }
 
-  Future<List<String>> user(review, String userToken) async {
-    List<String> users= [];
-    setState(() {
-      isLoading = true;
-    });
-    var user;
-    for(var element in review)
-    {
-        user=await getUserNameByID(userID: element.driverID, token: userToken);
-        users.add(user);
-    }
-    setState(() {
-      isLoading = false;
-    });
-    return users;
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +124,7 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
                         ),
                       ),
 
-                      title: Text(widget.data[index].name, overflow:  TextOverflow.ellipsis),
+                      title: Text(widget.data[index].name+"\n"+widget.data[index].distance, overflow:  TextOverflow.ellipsis),
                       subtitle: Text(sub),
                       trailing: IconButton(
                         icon: Icon(
@@ -142,8 +135,7 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
                         onPressed: () async {
                           var info = directionsDetails(widget.source, widget.data[index].location);
                           await info.create();
-                          var review=await reviews(widget.data[index].cameraID, provider.currentUser.token);
-                          var users=await user(review, provider.currentUser.token);
+
                           String id = await checkUserBookmark(provider.currentUser.id,
                               Location(lat: info.getDestination().latitude, long: info.getDestination().longitude), provider.currentUser.token);
                           if(id != '0')
@@ -162,16 +154,17 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
                           }
                           if (widget.isStreet==true)
                           {
+                            var review=await reviews(widget.data[index].cameraID, provider.currentUser.token);
                             navigateTo(context, direction_screen(currentLocation: widget.source,info: info,
                                 destinationName: widget.data[index].name, review: review,
-                                users: users,cameraID:widget.data[index].cameraID,garageID:null, ifBookmark: bookmarkBool, bookmarkID: bookmarkID,isStreet:widget.isStreet));
+                                cameraID:widget.data[index].cameraID,garageID:null, ifBookmark: bookmarkBool, bookmarkID: bookmarkID,isStreet:widget.isStreet));
                           }
                           else
                           {
-
+                            var review=await reviews(widget.data[index].garageID, provider.currentUser.token);
                             navigateTo(context, direction_screen(currentLocation: widget.source,info: info,
                                 destinationName: widget.data[index].name, review: review,
-                                users: users,cameraID:widget.data[index].cameraID,garageID:widget.data[index].garageID, ifBookmark: bookmarkBool, bookmarkID: bookmarkID,isStreet:widget.isStreet));
+                               cameraID:widget.data[index].cameraID,garageID:widget.data[index].garageID, ifBookmark: bookmarkBool, bookmarkID: bookmarkID,isStreet:widget.isStreet));
 
                           }
                         },

@@ -3,6 +3,7 @@ const GetById='/get_by_id';
 const updateUser='/update_user';
 const AddReview='/Review/add';
 const getReview='/show_street_reviews';
+const getGarageReview='/show_garage_reviews';
 const getGarage='/Garage/get';
 const getGarageById='/Garage/get?id=';
 const getCamera='/Camera/get';
