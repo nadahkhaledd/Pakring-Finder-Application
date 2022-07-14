@@ -6,7 +6,6 @@ import 'package:park_locator/Model/LocationDetails.dart';
 import 'package:park_locator/Network/API/Bookmarks.dart';
 import 'package:park_locator/Shared/Functions.dart';
 import 'package:park_locator/services/appprovider.dart';
-import 'package:park_locator/widgets/d_widgets/ListOfCameras.dart';
 import 'package:provider/provider.dart';
 import '../Model/DBModels/Bookmark.dart';
 import '../Model/DBModels/Review.dart';
@@ -37,6 +36,23 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
   AppProvider provider;
   String bookmarkID;
   bool bookmarkBool;
+  
+  String setDetails(int index)
+  {
+    String details = '';
+    if(widget.isStreet)
+    {
+        details = widget.data[index].spots + " spots  " + widget.data[index].distance;
+    }
+    else
+      {
+          for( var camera in widget.data[index].cameraIDs)
+          {
+            details += camera['cameraAddress'] + '\t\t ' + camera['spot'].toString() + ' spots\n';
+          }
+      }
+    return details;
+  }
 
 
   Future<List<Review>> reviews(q, String userToken) async {
@@ -92,72 +108,65 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
               child: ListView.builder(
 
                   itemCount: widget.data.length,
-                  itemBuilder: (context, index) => ListTile(
-                    leading: Container(
-                      alignment: Alignment.center,
-                      height: heightResponsive(
-                          height: 15, context: context),
-                      width:
-                      widthResponsive(context: context, width: 8),
-                      decoration: BoxDecoration(
-                        color: Colors.blueGrey,
-                        borderRadius: BorderRadius.circular(20),
+                  itemBuilder: (context, index) {
+                    String sub = setDetails(index);
+                    return ListTile(
+                      leading: Container(
+                        alignment: Alignment.center,
+                        height: heightResponsive(
+                            height: 15, context: context),
+                        width:
+                        widthResponsive(context: context, width: 8),
+                        decoration: BoxDecoration(
+                          color: Colors.blueGrey,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Text(
+                          widget.data[index].time,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
-                      child: Text(
-                        widget.data[index].time,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
 
-                    title: widget.isStreet?  Text(widget.data[index].name,
-
-                      overflow:  TextOverflow.ellipsis,
-
-                    ): Text(widget.data[index].name ,
-
-                      overflow:  TextOverflow.ellipsis,
-
-                    ) ,
-                    subtitle: Text(widget.data[index].cameraIDs),
-                    trailing: IconButton(
-                      icon: Icon(
-                        Icons.directions,
-                        color: Colors.blueGrey,
-                        size: 35,
-                      ),
-                      onPressed: () async {
-                        var info = directionsDetails(widget.source, widget.data[index].location);
-                        await info.create();
-                       var review=await reviews(widget.data[index].cameraID, provider.currentUser.token);
-                       var users=await user(review, provider.currentUser.token);
-                        //ifBookmark = await findIfBookmark( info.getDestination(), provider.currentUser);
-                        String id = await checkUserBookmark(provider.currentUser.id,
-                            Location(lat: info.getDestination().latitude, long: info.getDestination().longitude), provider.currentUser.token);
-                        if(id != '0')
+                      title: Text(widget.data[index].name, overflow:  TextOverflow.ellipsis),
+                      subtitle: Text(sub),
+                      trailing: IconButton(
+                        icon: Icon(
+                          Icons.directions,
+                          color: Colors.blueGrey,
+                          size: 35,
+                        ),
+                        onPressed: () async {
+                          var info = directionsDetails(widget.source, widget.data[index].location);
+                          await info.create();
+                          var review=await reviews(widget.data[index].cameraID, provider.currentUser.token);
+                          var users=await user(review, provider.currentUser.token);
+                          String id = await checkUserBookmark(provider.currentUser.id,
+                              Location(lat: info.getDestination().latitude, long: info.getDestination().longitude), provider.currentUser.token);
+                          if(id != '0')
                           {
                             setState(() {
                               bookmarkID = id;
                               bookmarkBool = true;
                             });
                           }
-                        else
+                          else
                           {
                             setState(() {
                               bookmarkID = '0';
                               bookmarkBool = false;
                             });
                           }
-                        if (widget.isStreet==true)
+                          if (widget.isStreet==true)
                           {
                             navigateTo(context, direction_screen(currentLocation: widget.source,info: info,
                                 destinationName: widget.data[index].name, review: review,
                                 users: users,cameraID:widget.data[index].cameraID,garageID:null, ifBookmark: bookmarkBool, bookmarkID: bookmarkID,isStreet:widget.isStreet));
                           }
-                        else
+                          else
                           {
 
                             navigateTo(context, direction_screen(currentLocation: widget.source,info: info,
@@ -166,9 +175,11 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
 
                           }
                         },
-                    ),
+                      ),
 
-                  )),
+                    );
+                  }
+              ),
 
           ),
             ),

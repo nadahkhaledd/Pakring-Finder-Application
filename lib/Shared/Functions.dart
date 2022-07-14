@@ -108,7 +108,6 @@ Future<List> getFinalDataGarages2(List nearest,LatLng current) async {
     {
       for(int j=0;j<nearest[i]['cameras'].length;j++)
         {
-          print(nearest[i]['cameras'][j]['spot'].runtimeType);
           if(nearest[i]['cameras'][j]['spot']>0)
             {
               found=true;
@@ -130,14 +129,12 @@ Future<List> getFinalDataGarages2(List nearest,LatLng current) async {
            time: time.toString(),
            location: nearest[i]['location']
           );
-          print("uuuuuuuuuuuuuuuuuuuuuuuuu");
-          print(details.cameraIDs);
           nearest2.add(details);
         }
     }
-  print(nearest2);
   return nearest2;
 }
+
 Future<List> getFinalDataGarages(List nearest,List GarageSnaps,LatLng current, String token) async {
   List<LocationDetails> finalData = [];
   List garages=[];
@@ -146,7 +143,6 @@ Future<List> getFinalDataGarages(List nearest,List GarageSnaps,LatLng current, S
       String url = GarageSnaps[i].data["path"];
       String cap = (GarageSnaps[i].data["capacity"]).toString();
       String spots = await getStreetData(url: url, capacity: cap, token: token);
-      print("-------------------------------------------");
 
       if (spots != null) {
         if (int.parse(spots) > 0) {
