@@ -46,7 +46,7 @@ async {
     {
       response=await DioHelper.getData(url: getGarageCameraById+id, token: token);
       if(response.data != null)
-        cameras.add({'cameraID': id, 'cameraAddress': response.data['address']});
+        cameras.add({'cameraID': id, 'cameraAddress': response.data['address'],'spot':0});
     }
     garageCameras.add({'garageID': garage['id'], 'garageAddress': garage['address'],
       'location': garage['location'], 'cameras': cameras});
@@ -84,6 +84,17 @@ async {
     }
   }
   return name;
+}
+Future<String> getGarageCamerasAddress(String GarageCameraID, String token)
+async {
+  String address;
+  Response response=await DioHelper.getData(url: getGarageCameraById+GarageCameraID, token: token);
+
+  if(response.data != null)
+  {
+    address=response.data["address"];
+  }
+  return address;
 }
 Future<String> getGarageID(String GarageCameraID, String token)
 async {

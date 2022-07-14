@@ -117,7 +117,7 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
 
                       overflow:  TextOverflow.ellipsis,
 
-                    ): Text(widget.data[index].name,
+                    ): Text(widget.data[index].name + "["+widget.data[index].address+"]",
 
                       overflow:  TextOverflow.ellipsis,
 

@@ -12,8 +12,9 @@ class LocationDetails
    String cameraID;
    LatLng location;
    String garageID;
+   String address;
 
-  LocationDetails({this.spots, this.name, this.distance, this.time,this.cameraID, this.location, this.garageID});
+  LocationDetails({this.spots, this.name, this.distance, this.time,this.cameraID, this.location, this.garageID, this.address});
 
 }
 
