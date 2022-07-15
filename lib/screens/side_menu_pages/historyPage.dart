@@ -153,19 +153,10 @@ class _historyPageState extends State<historyPage> {
           child: Card(
             child: Padding(
                 padding: const EdgeInsets.all(9.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 6),
-                      child: Text(name, style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w400, fontSize: 16),
-                          overflow:  TextOverflow.fade),
-                    ),
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 15)
-                    )
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 6),
+                  child: Text(name, style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w400, fontSize: 16),
+                      overflow:  TextOverflow.fade),
                 )
             ),
           ),
