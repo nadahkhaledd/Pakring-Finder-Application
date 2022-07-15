@@ -1,8 +1,6 @@
 import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:park_locator/Model/LocationDetails.dart';
 import 'package:park_locator/Network/API/Bookmarks.dart';
 import 'package:park_locator/Shared/Functions.dart';
 import 'package:park_locator/services/appprovider.dart';

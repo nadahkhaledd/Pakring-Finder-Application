@@ -92,7 +92,8 @@ class _bookmarksPageState extends State<bookmarksPage> {
               child: ListView.separated(
                 separatorBuilder: (context, index) {
                   return Divider(
-                    color: Colors.blueGrey,
+                    color: Colors.transparent,
+                    height: MediaQuery.of(context).size.height* 1/96,
                   );
                 },
                 shrinkWrap: true,
@@ -105,20 +106,8 @@ class _bookmarksPageState extends State<bookmarksPage> {
 
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(15, 6, 15, 6),
-                    child: bookmarkListTile(widget.bookmarks[index].name),
+                    child: bookmarkItem(widget.bookmarks[index].name)
                   ),
-
-                  actions: <Widget>[
-                    IconSlideAction(
-                      caption: 'Head to ',
-                      color: Colors.blueGrey,
-                      icon: Icons.directions,
-                      onTap: ()
-                      async {
-                        await onDismissed(index, SlidableAction.headTo);
-                      },
-                    )
-                  ],
 
                   secondaryActions: <Widget>[
                     IconSlideAction(
@@ -128,6 +117,15 @@ class _bookmarksPageState extends State<bookmarksPage> {
                       onTap: ()
                       async {
                         await onDismissed(index, SlidableAction.share);
+                      },
+                    ),
+                    IconSlideAction(
+                      caption: 'Head to ',
+                      color: Colors.blueGrey,
+                      icon: Icons.directions,
+                      onTap: ()
+                      async {
+                        await onDismissed(index, SlidableAction.headTo);
                       },
                     ),
                     IconSlideAction(
@@ -167,27 +165,46 @@ class _bookmarksPageState extends State<bookmarksPage> {
       ),
     );
   }
-
-  Widget bookmarkListTile(String name) {
-    return Builder(
-      builder: (context) {
-        return ListTile(
-            title: Text(name, style:
-            TextStyle(color: Colors.black87, fontWeight: FontWeight.w400, fontSize: 16),
-                overflow:  TextOverflow.fade),
+    
+    Widget bookmarkItem(String name)
+    {
+      return Builder(
+        builder: (context){
+          return GestureDetector(
+            child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(9.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 6),
+                        child: Text(name, style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w400, fontSize: 16),
+                            overflow:  TextOverflow.fade),
+                      ),
+                      Align(
+                          alignment: Alignment.bottomRight,
+                          child: Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 15)
+                      )
+                    ],
+                  )
+                ),
+            ),
             onTap: (){
               final slidable = Slidable.of(context);
               final isClosed = slidable.renderingMode == SlidableRenderingMode.none;
 
               if(isClosed)
-                  slidable.open(actionType: SlideActionType.secondary);
+                slidable.open(actionType: SlideActionType.secondary);
 
               else
                 slidable.close();
             },
+            
           );
-      }
-    );
+        },
+      );
+          
     }
 
   Future<void> onDismissed(int index, SlidableAction action) async

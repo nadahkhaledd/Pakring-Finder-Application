@@ -98,7 +98,8 @@ class _historyPageState extends State<historyPage> {
               child: ListView.separated(
                 separatorBuilder: (context, index) {
                   return Divider(
-                    color: Colors.blueGrey,
+                    color: Colors.transparent,
+                    height: MediaQuery.of(context).size.height* 1/96,
                   );
                 },
                 shrinkWrap: true,
@@ -110,7 +111,7 @@ class _historyPageState extends State<historyPage> {
 
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(15, 6, 15, 6),
-                    child: historyListTile(widget.history.history[index].address),
+                    child: historyItem(widget.history.history[index].address),
 
                   ),
 
@@ -144,26 +145,45 @@ class _historyPageState extends State<historyPage> {
     );
   }
 
-  Widget historyListTile(String name) {
+  Widget historyItem(String name)
+  {
     return Builder(
-        builder: (context) {
-          return ListTile(
-            title: Text(name, style:
-            TextStyle(color: Colors.black87, fontWeight: FontWeight.w400, fontSize: 16),
-                overflow:  TextOverflow.fade),
-            onTap: (){
-              final slidable = Slidable.of(context);
-              final isClosed = slidable.renderingMode == SlidableRenderingMode.none;
+      builder: (context){
+        return GestureDetector(
+          child: Card(
+            child: Padding(
+                padding: const EdgeInsets.all(9.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 6),
+                      child: Text(name, style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w400, fontSize: 16),
+                          overflow:  TextOverflow.fade),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 15)
+                    )
+                  ],
+                )
+            ),
+          ),
+          onTap: (){
+            final slidable = Slidable.of(context);
+            final isClosed = slidable.renderingMode == SlidableRenderingMode.none;
 
-              if(isClosed)
-                slidable.open(actionType: SlideActionType.secondary);
+            if(isClosed)
+              slidable.open(actionType: SlideActionType.secondary);
 
-              else
-                slidable.close();
-            },
-          );
-        }
+            else
+              slidable.close();
+          },
+
+        );
+      },
     );
+
   }
 
 
