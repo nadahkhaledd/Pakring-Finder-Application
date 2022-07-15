@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:park_locator/Model/DBModels/Bookmark.dart';
 import 'package:park_locator/Model/DBModels/Recent.dart';
-import 'package:park_locator/Shared/Components.dart';
-import 'package:park_locator/screens/Home.dart';
 import 'package:park_locator/services/appprovider.dart';
 import 'package:park_locator/widgets/Appdrawer.dart';
 import 'package:provider/provider.dart';
