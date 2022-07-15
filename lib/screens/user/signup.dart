@@ -18,13 +18,12 @@ class _signupState extends State<signup> {
   var formKey = GlobalKey<FormState>();
 
   var firstNameController = TextEditingController();
-
   var phoneController = TextEditingController();
-
   var emailController = TextEditingController();
-
   var passwordController = TextEditingController();
   AppProvider provider;
+
+  bool _isObscure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +112,7 @@ class _signupState extends State<signup> {
                   ),
                 ),
                 defaultTextFormField(
-                  isPassword: true,
+                  isPassword: _isObscure,
                   context: context,
                   controller: passwordController,
                   type: TextInputType.visiblePassword,
@@ -123,6 +122,12 @@ class _signupState extends State<signup> {
                     Icons.password,
                     color: Colors.blueGrey,
                   ),
+                    suffixIcon: Icon(_isObscure ? Icons.visibility : Icons.visibility_off, color: Colors.blueGrey,),
+                    onPressSuffixIcon: (){
+                      setState(() {
+                        _isObscure = !_isObscure;
+                      });
+                    }
                 ),
                 SizedBox(
                   height: heightResponsive(

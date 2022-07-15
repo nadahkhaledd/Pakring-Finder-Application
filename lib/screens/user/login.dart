@@ -21,12 +21,11 @@ class _loginState extends State<login> {
   var formKey = GlobalKey<FormState>();
 
   var firstNameController = TextEditingController();
-
   var phoneController = TextEditingController();
-
   var emailController = TextEditingController();
-
   var passwordController = TextEditingController();
+
+  bool _isObscure = true;
 
   String email;
   AppProvider provider;
@@ -84,7 +83,7 @@ class _loginState extends State<login> {
                       ),
                     ),
                     defaultTextFormField(
-                      isPassword: true,
+                      isPassword: _isObscure,
                       context: context,
                       controller: passwordController,
                       type: TextInputType.visiblePassword,
@@ -93,6 +92,12 @@ class _loginState extends State<login> {
                       prefixIcon: const Icon(
                         Icons.password, color: Colors.blueGrey,
                       ),
+                      suffixIcon: Icon(_isObscure ? Icons.visibility : Icons.visibility_off, color: Colors.blueGrey,),
+                      onPressSuffixIcon: (){
+                        setState(() {
+                          _isObscure = !_isObscure;
+                        });
+                      }
                     ),
                     SizedBox(
                       height: heightResponsive(

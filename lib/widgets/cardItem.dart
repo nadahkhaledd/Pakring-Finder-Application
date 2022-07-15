@@ -8,7 +8,7 @@ Widget cardItem(context, String name)
       return GestureDetector(
         child: Card(
           child: Padding(
-              padding: const EdgeInsets.all(9.0),
+              padding: const EdgeInsets.all(10),
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 6),
                 child: Text(name, style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w400, fontSize: 16),
