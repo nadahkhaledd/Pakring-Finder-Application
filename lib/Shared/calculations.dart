@@ -6,7 +6,6 @@ Future<bool> isInRadius(LatLng current, LatLng destination)  async {
   Map result = await getDistanceMatrix(current, destination);
   double distance = result['distance'];
 
-
   if(distance <= 1.5)
       return true;
 

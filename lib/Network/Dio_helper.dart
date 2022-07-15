@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
+
+import '../Model/UserData.dart';
 
 class DioHelper {
   static Dio dio;
@@ -14,20 +17,53 @@ class DioHelper {
 
   static Future<Response> getData({
     @required String url,
-    @required Map<String,dynamic> query,
-  }) async {
-    return await dio.get(url, queryParameters: query);
-  }
-
-  static Future<Response> postData({
-    @required String url,
-    @required Map<String,dynamic> data,
-    //  Map<String, dynamic> query,
+    String token,
+    Map<String, dynamic> query,
   }) async {
     dio.options.headers = {
       "Content-Type": "application/json",
+      if (token != null) "Authorization": 'Bearer $token',
     };
-    return await dio.post(url, data: data);
+    return await dio.get(
+      url,
+      queryParameters: query,
+    );
   }
+  static Future<Response> putData({
+    @required String url,
+    String token,
+    @required Map<String, dynamic> data,
+    Map<String, dynamic> query,
+  }) async {
+    dio.options.headers = {
+      "Content-Type": "application/json",
+      if (token != null) "Authorization": 'Bearer $token',
+    };
+    return await dio.put(
+      url,
+      queryParameters: query,
+      data: data,
+    );
+  }
+
+
+
+  static Future<Response> postData({
+    @required String url,
+    String token,
+    @required Map<String, dynamic> data,
+    Map<String, dynamic> query,
+  }) async {
+    dio.options.headers = {
+      "Content-Type": "application/json",
+      if (token != null) "Authorization": 'Bearer $token',
+    };
+    return await dio.post(
+      url,
+      queryParameters: query,
+      data: data,
+    );
+  }
+
 
 }
