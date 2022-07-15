@@ -11,6 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../Network/API/Recents.dart';
 import '../../Shared/Functions.dart';
+import '../../widgets/cardItem.dart';
 
 
 class historyPage extends StatefulWidget
@@ -111,7 +112,7 @@ class _historyPageState extends State<historyPage> {
 
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(15, 6, 15, 6),
-                    child: historyItem(widget.history.history[index].address),
+                    child: cardItem(context, widget.history.history[index].address),
 
                   ),
 
@@ -145,37 +146,37 @@ class _historyPageState extends State<historyPage> {
     );
   }
 
-  Widget historyItem(String name)
-  {
-    return Builder(
-      builder: (context){
-        return GestureDetector(
-          child: Card(
-            child: Padding(
-                padding: const EdgeInsets.all(9.0),
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 6),
-                  child: Text(name, style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w400, fontSize: 16),
-                      overflow:  TextOverflow.fade),
-                )
-            ),
-          ),
-          onTap: (){
-            final slidable = Slidable.of(context);
-            final isClosed = slidable.renderingMode == SlidableRenderingMode.none;
-
-            if(isClosed)
-              slidable.open(actionType: SlideActionType.secondary);
-
-            else
-              slidable.close();
-          },
-
-        );
-      },
-    );
-
-  }
+  // Widget historyItem(String name)
+  // {
+  //   return Builder(
+  //     builder: (context){
+  //       return GestureDetector(
+  //         child: Card(
+  //           child: Padding(
+  //               padding: const EdgeInsets.all(9.0),
+  //               child: Padding(
+  //                 padding: const EdgeInsets.only(bottom: 6),
+  //                 child: Text(name, style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w400, fontSize: 16),
+  //                     overflow:  TextOverflow.fade),
+  //               )
+  //           ),
+  //         ),
+  //         onTap: (){
+  //           final slidable = Slidable.of(context);
+  //           final isClosed = slidable.renderingMode == SlidableRenderingMode.none;
+  //
+  //           if(isClosed)
+  //             slidable.open(actionType: SlideActionType.secondary);
+  //
+  //           else
+  //             slidable.close();
+  //         },
+  //
+  //       );
+  //     },
+  //   );
+  //
+  // }
 
 
   Future<void> onDismissed(int index, SlidableAction action) async

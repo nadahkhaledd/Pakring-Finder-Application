@@ -9,6 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '../../Shared/Functions.dart';
+import '../../widgets/cardItem.dart';
 
 class bookmarksPage extends StatefulWidget
 {
@@ -106,7 +107,7 @@ class _bookmarksPageState extends State<bookmarksPage> {
 
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(15, 6, 15, 6),
-                    child: bookmarkItem(widget.bookmarks[index].name)
+                    child: cardItem(context, widget.bookmarks[index].name),
                   ),
 
                   secondaryActions: <Widget>[
@@ -165,38 +166,6 @@ class _bookmarksPageState extends State<bookmarksPage> {
       ),
     );
   }
-    
-    Widget bookmarkItem(String name)
-    {
-      return Builder(
-        builder: (context){
-          return GestureDetector(
-            child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(9.0),
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 6),
-                    child: Text(name, style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w400, fontSize: 16),
-                        overflow:  TextOverflow.fade),
-                  )
-                ),
-            ),
-            onTap: (){
-              final slidable = Slidable.of(context);
-              final isClosed = slidable.renderingMode == SlidableRenderingMode.none;
-
-              if(isClosed)
-                slidable.open(actionType: SlideActionType.secondary);
-
-              else
-                slidable.close();
-            },
-            
-          );
-        },
-      );
-          
-    }
 
   Future<void> onDismissed(int index, SlidableAction action) async
   {
