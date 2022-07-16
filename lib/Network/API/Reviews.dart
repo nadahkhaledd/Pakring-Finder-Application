@@ -14,8 +14,7 @@ Future<int> addStreetReview(
   await DioHelper.postData(url: AddReview, token: user.token, data: {
       'driverID': user.id,
       'cameraID': cameraID,
-      'content': content,
-      'garageID': ""
+      'content': content
     }).then((value) {
      response=value;
   }).catchError((error){
