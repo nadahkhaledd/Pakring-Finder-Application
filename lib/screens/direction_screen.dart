@@ -61,6 +61,7 @@ class _searchState extends State<direction_screen> {
 
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         key: _scaffoldState,
         drawer: Appdrawer(context),
         body: Stack(

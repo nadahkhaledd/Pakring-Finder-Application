@@ -28,6 +28,7 @@ class _bookmarksPageState extends State<bookmarksPage> {
 
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           actions: [
             PopupMenuButton(
@@ -87,7 +88,6 @@ class _bookmarksPageState extends State<bookmarksPage> {
 
         body: Padding(
           padding: const EdgeInsets.only(top: 8.0),
-          child: Flexible(
             child: Container(
               child: ListView.separated(
                 separatorBuilder: (context, index) {
@@ -162,7 +162,6 @@ class _bookmarksPageState extends State<bookmarksPage> {
             ),
           ),
         ),
-      ),
     );
   }
 

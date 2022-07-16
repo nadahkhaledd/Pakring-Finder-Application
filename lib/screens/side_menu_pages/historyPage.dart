@@ -32,6 +32,7 @@ class _historyPageState extends State<historyPage> {
 
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           actions: [
             PopupMenuButton(
@@ -91,7 +92,6 @@ class _historyPageState extends State<historyPage> {
 
         body: Padding(
           padding: const EdgeInsets.only(top: 8.0),
-          child: Flexible(
             child: Container(
               child: ListView.separated(
                 separatorBuilder: (context, index) {
@@ -139,7 +139,6 @@ class _historyPageState extends State<historyPage> {
             ),
           ),
         ),
-      ),
     );
   }
 

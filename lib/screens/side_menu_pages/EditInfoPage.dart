@@ -34,6 +34,7 @@ class _EditInfoPageState extends State<EditInfoPage> {
 
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         key: _scaffoldState,
         appBar: AppBar(
           automaticallyImplyLeading: true,

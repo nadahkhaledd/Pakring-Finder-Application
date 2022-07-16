@@ -42,7 +42,7 @@ class _from_toState extends State<from_to> {
               children: [
                 Container(
                   padding: const EdgeInsets.only(top:30.0,right: 0.0),
-                  width: 30,
+                  width: MediaQuery.of(context).size.width*0.1,
                   child: Column(
                     children: [
                       Container(
